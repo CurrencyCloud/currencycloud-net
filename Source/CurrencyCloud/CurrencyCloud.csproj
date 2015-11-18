@@ -63,6 +63,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Utils\StringExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

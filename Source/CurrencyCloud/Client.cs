@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using System.Dynamic;
 using CurrencyCloud.Entity;
 using Newtonsoft.Json;
+using CurrencyCloud.Utils;
 
 namespace CurrencyCloud
 {
@@ -21,52 +22,10 @@ namespace CurrencyCloud
         private string apiKey;
         private HttpClient httpClient;
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="environment"></param>
-        /// <param name="loginId"></param>
-        /// <param name="apiKey"></param>
-        /// <returns>Authentication token</returns>
-        public async Task<string> InitializeAsync(Environment environment, string loginId, string apiKey)
-        {
-            this.environment = environment;
-            this.loginId = loginId;
-            this.apiKey = apiKey;
-
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(environment.Url);
-
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.login_id = loginId;
-            paramsObj.api_key = apiKey;
-
-            HttpResponseMessage res = await httpClient.PostAsync("/v2/authenticate/api" + paramsObj.ToQueryString(), null);
-            if (res.IsSuccessStatusCode)
-            {
-                string resString = await res.Content.ReadAsStringAsync();
-                var resObjectSchema = new
-                {
-                    auth_token = ""
-                };
-                var resObject = JsonConvert.DeserializeAnonymousType(resString, resObjectSchema);
-
-                var token = resObject.auth_token;
-
-                httpClient.DefaultRequestHeaders.Add("X-Auth-Token", token);
-
-                return token;
-            }
-            else
-            {
-                throw await ApiExceptionFactory.Create(res);
-            }
-        }
-
-        public async Task<T> RequestAsync<T>(string path, HttpMethod method, ParamsObject paramsObj = null)
+        private async Task<T> RequestAsync<T>(string path, HttpMethod method, ParamsObject paramsObj = null)
         {
             string requestUri = path;
-            if(paramsObj != null)
+            if (paramsObj != null)
             {
                 requestUri += paramsObj.ToQueryString();
             }
@@ -75,32 +34,70 @@ namespace CurrencyCloud
             if (res.IsSuccessStatusCode)
             {
                 string resString = await res.Content.ReadAsStringAsync();
-                T resObject = JsonConvert.DeserializeObject<T>(resString);
 
-                return resObject;
+                return JsonConvert.DeserializeObject<T>(resString);
             }
             else
             {
-                throw await ApiExceptionFactory.Create(res);
+                throw await ApiExceptionFactory.FromHttpResponse(res);
             }
         }
 
-        public async Task CloseAsync()
+        private Task RequestAsync(string path, HttpMethod method, ParamsObject paramsObj = null)
         {
-            HttpResponseMessage res = await httpClient.PostAsync("/v2/authenticate/close_session", null);
-            if (res.IsSuccessStatusCode)
-            {
-                environment = null;
-                loginId = null;
-                apiKey = null;
-
-                httpClient.Dispose();
-            }
-            else
-            {
-                throw await ApiExceptionFactory.Create(res);
-            }
+            return RequestAsync<object>(path, method, paramsObj);
         }
+
+        #region Authentication
+
+        /// <summary>
+        /// Generates an authentication token for the API user.
+        /// </summary>
+        /// <param name="environment">Environment to run against</param>
+        /// <param name="loginId">Login id of the API user</param>
+        /// <param name="apiKey">API key of the API user</param>
+        /// <returns>Authentication token</returns>
+        /// <exception cref="CurrencyCloud.Exception.ApiException"/>
+        public async Task<string> LoginAsync(Environment environment, string loginId, string apiKey)
+        {
+            this.environment = environment;
+            this.loginId = loginId;
+            this.apiKey = apiKey;
+
+            httpClient = new HttpClient();
+            httpClient.BaseAddress = new Uri(environment.Url);
+
+            dynamic credentials = new
+            {
+                LoginId = loginId,
+                ApiKey = apiKey
+            };
+            dynamic paramsObj = new ParamsObject(credentials);
+
+            JObject res = await RequestAsync("/v2/authenticate/api", HttpMethod.Post, paramsObj);
+
+            var token = res["auth_token"].Value<string>();
+            httpClient.DefaultRequestHeaders.Add("X-Auth-Token", token);
+
+            return token;
+        }
+
+        /// <summary>
+        /// Closes current session.
+        /// </summary>
+        /// <returns></returns>
+        public async Task LogoutAsync()
+        {
+            await RequestAsync("/v2/authenticate/api", HttpMethod.Post);
+
+            environment = null;
+            loginId = null;
+            apiKey = null;
+
+            httpClient.Dispose();
+        }
+
+        #endregion
 
         #region Accounts
 
@@ -111,13 +108,13 @@ namespace CurrencyCloud
         /// <param name="legalEntityType"></param>
         /// <param name="optional"></param>
         /// <returns></returns>
-        public async Task<Account> CreateAccountAsync(string accountName, string legalEntityType, ParamsObject optional)
+        public async Task<Account> CreateAccountAsync(string accountName, string legalEntityType, dynamic optional)
         {
-            dynamic parameters = optional; //todo clone
-            parameters.account_name = accountName;
-            parameters.legal_entity_type = legalEntityType;
+            dynamic paramsObj = new ParamsObject(optional);
+            paramsObj.AccountName = accountName;
+            paramsObj.LegalEntityType = legalEntityType;
 
-            return await RequestAsync<Account>("/v2/accounts/create", HttpMethod.Post, parameters);
+            return await RequestAsync<Account>("/v2/accounts/create", HttpMethod.Post, paramsObj);
         }
 
         /// <summary>
@@ -131,6 +128,78 @@ namespace CurrencyCloud
 
         #endregion
 
+        #region Balances
+        #endregion
+
+        #region Beneficiaries
+        #endregion
+
+        #region Contacts
+        #endregion
+
+        #region Conversions
+        #endregion
+
+        #region Payers
+        #endregion
+
+        #region Payments
+        #endregion
+
+        #region Rates
+        #endregion
+
+        #region Reference
+        #endregion
+
+        #region Settlements
+        #endregion
+
+        #region Transactions
+        #endregion
+    }
+
+    internal class ParamsObject : DynamicObject
+    {
+        private Dictionary<string, object> storage;
+
+        public ParamsObject()
+        {
+            storage = new Dictionary<string, object>();
+        }
+
+        public ParamsObject(dynamic obj) : this()
+        {
+            var props = obj.GetType().GetProperties();
+            foreach (var prop in props)
+            {
+                string key = prop.Name;
+                object value = prop.GetValue(obj);
+
+                storage.Add(key.ToSnakeCase(), value);
+            }
+        }
+
+        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        {
+            var key = binder.Name.ToSnakeCase();
+
+            return storage.TryGetValue(key, out result);
+        }
+
+        public override bool TrySetMember(SetMemberBinder binder, object value)
+        {
+            var key = binder.Name.ToSnakeCase();
+
+            storage[key] = value;
+
+            return true;
+        }
+
+        public string ToQueryString()
+        {
+            return "?" + string.Join("&", storage.Select(param => param.Key + "=" + param.Value.ToString()));
+        }
     }
 
     internal static class ApiExceptionFactory
@@ -139,7 +208,7 @@ namespace CurrencyCloud
         {
             var query = requestMessage.RequestUri.Query;
 
-            var parameters = HttpUtility.ParseQueryString(query);
+            var parameters = HttpUtility.ParseQueryString(query); //todo pascalize
             var verb = requestMessage.Method.Method;
             var url = requestMessage.RequestUri.OriginalString;
 
@@ -179,7 +248,7 @@ namespace CurrencyCloud
             return null;
         }
 
-        public static async Task<ApiException> Create(HttpResponseMessage res)
+        public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
         {
             var request = CreateRequest(res.RequestMessage);
             var response = CreateResponse(res.StatusCode, res.Headers);
@@ -202,36 +271,6 @@ namespace CurrencyCloud
                 default:
                     return new UndefinedException(request, response, errors);
             }
-        }
-    }
-
-    /// <summary>
-    /// Represents dynamic parameters object.
-    /// </summary>
-    public class ParamsObject : DynamicObject
-    {
-        private Dictionary<string, object> storage = new Dictionary<string, object>();
-
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            return storage.TryGetValue(binder.Name, out result);
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            storage[binder.Name] = value;
-
-            return true;
-        }
-
-        //public ParamsObject Clone()
-        //{
-        //    return new Dictionary<string, object>(storage);
-        //}
-
-        public string ToQueryString()
-        {
-            return "?" + string.Join("&", storage.Select(param => HttpUtility.UrlEncode(param.Key) + "=" + param.Value));
         }
     }
 

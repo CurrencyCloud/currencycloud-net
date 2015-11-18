@@ -12,29 +12,29 @@ namespace CurrencyCloud.Tests.EndPoint
         [TestFixtureSetUp]
         protected void Setup()
         {
-            var task = client.InitializeAsync(Mocks.Credentials.Environment, Mocks.Credentials.LoginId, Mocks.Credentials.APIkey);
+            var credentials = Mocks.Credentials;
+
+            var task = client.LoginAsync(credentials.Environment, credentials.LoginId, credentials.APIkey);
             Task.WaitAll(task);
         }
 
         [TestFixtureTearDown]
         protected void TearDown()
         {
-            var task = client.CloseAsync();
+            var task = client.LogoutAsync();
             Task.WaitAll(task);
         }
 
         [Test]
-        public async void Creates()
+        public async void Create()
         {
-            dynamic optional = new ParamsObject();
-            optional.status = "enabled";
-            optional.city = "London";
+            var account1 = Mocks.Account1;
 
-            Account created = await client.CreateAccountAsync("Vive", "company", optional);
+            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
         }
 
         [Test]
-        public async void GetsCurrent()
+        public async void GetCurrent()
         {
             Account current = await client.GetCurrentAccountAsync();
             Assert.IsNotNull(current);
