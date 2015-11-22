@@ -1,24 +1,93 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+using System.Text;
 
 namespace CurrencyCloud.Exception
 {
     /// <summary>
-    /// 
+    /// Represents errors that occur when making API calls.
     /// </summary>
     public class ApiException : System.Exception
     {
         private readonly string yamlString;
 
+        private string CreateYamlString()
+        {
+            StringBuilder yamlBuilder = new StringBuilder();
+
+            yamlBuilder.AppendLine(GetType().Name);
+            yamlBuilder.AppendLine("---");
+
+            yamlBuilder.AppendFormat("Platform: {0}", Platform);
+            yamlBuilder.AppendLine();
+
+            yamlBuilder.AppendLine("Request:");
+            yamlBuilder.Append("  Parameters:");
+            if (Request.Parameters.Count == 0)
+            {
+                yamlBuilder.Append(" {}");
+            }
+            else
+            {
+                foreach (var parameter in Request.Parameters)
+                {
+                    yamlBuilder.AppendLine();
+                    yamlBuilder.AppendFormat("    {0}: {1}", parameter.Key, parameter.Value);
+                }
+            }
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  Verb: {0}", Request.Verb);
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  Url: {0}", Request.Url);
+            yamlBuilder.AppendLine();
+
+            yamlBuilder.AppendLine("Response:");
+            yamlBuilder.AppendFormat("  StatusCode: {0}", Response.StatusCode);
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  Date: {0}", Response.Date.ToUniversalTime().ToString("r"));
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  RequestId: {0}", Response.RequestId);
+            yamlBuilder.AppendLine();
+
+            yamlBuilder.Append("Errors:");
+            foreach (var error in Errors)
+            {
+                foreach (var errorMessage in error.ErrorMessages)
+                {
+                    yamlBuilder.AppendLine();
+                    yamlBuilder.AppendFormat("- Field: {0}", error.Field);
+                    yamlBuilder.AppendLine();
+                    yamlBuilder.AppendFormat("  Code: {0}", errorMessage.Code);
+                    yamlBuilder.AppendLine();
+                    yamlBuilder.AppendFormat("  Message: {0}", errorMessage.Message);
+                    yamlBuilder.AppendLine();
+                    yamlBuilder.Append("  Params:");
+                    if (errorMessage.Params.Count == 0)
+                    {
+                        yamlBuilder.Append(" {}");
+                    }
+                    else
+                    {
+                        foreach (var param in errorMessage.Params)
+                        {
+                            yamlBuilder.AppendLine();
+                            yamlBuilder.AppendFormat("    {0}: {1}", param.Key, param.Value);
+                        }
+                    }
+                }
+            }
+
+            return yamlBuilder.ToString();
+        }
+
         protected ApiException(Request request, Response response, List<Error> errors)
         {
-            Platform = "";
+            Platform = Environment.Platform.Version;
             Request = request;
             Response = response;
             Errors = errors;
 
-            yamlString = "";
+            yamlString = CreateYamlString();
         }
 
         public readonly string Platform;
@@ -26,78 +95,57 @@ namespace CurrencyCloud.Exception
         public readonly Response Response;
         public readonly List<Error> Errors;
 
-        public override string ToString()
+        public string ToYamlString()
         {
             return yamlString;
         }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class BadRequestException : ApiException
     {
         public BadRequestException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class AuthenticationException : ApiException
     {
         public AuthenticationException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class ForbiddenException : ApiException
     {
         public ForbiddenException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class NotFoundException : ApiException
     {
         public NotFoundException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class TooManyRequestsException : ApiException
     {
         public TooManyRequestsException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class InternalApplicationException : ApiException
     {
         public InternalApplicationException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
     public class UndefinedException : ApiException
     {
         public UndefinedException(Request request, Response response, List<Error> errors) : base(request, response, errors) { }
     }
 
     /// <summary>
-    /// 
+    /// Represents request parameters of the HTTP call that caused API exception.
     /// </summary>
     public class Request
     {
-        public readonly NameValueCollection Parameters;
+        public readonly Dictionary<string, string> Parameters;
         public readonly string Verb;
         public readonly string Url;
 
-        public Request(NameValueCollection parameters, string verb, string url)
+        public Request(Dictionary<string, string> parameters, string verb, string url)
         {
             Parameters = parameters;
             Verb = verb;
@@ -106,7 +154,7 @@ namespace CurrencyCloud.Exception
     }
 
     /// <summary>
-    /// 
+    /// Represents response parameters of the HTTP call that caused API exception.
     /// </summary>
     public class Response
     {
@@ -123,21 +171,34 @@ namespace CurrencyCloud.Exception
     }
 
     /// <summary>
-    /// 
+    /// Represents API error.
     /// </summary>
     public class Error
     {
         public readonly string Field;
-        public readonly string Code;
-        public readonly string Message;
-        public readonly NameValueCollection Params;
+        public readonly List<ErrorMessage> ErrorMessages;
 
-        public Error(string field, string code, string message, NameValueCollection @params)
+        public Error(string field, List<ErrorMessage> errorMessages)
         {
             Field = field;
-            Code = code;
-            Message = message;
-            Params = @params;
+            ErrorMessages = errorMessages;
+        }
+
+        /// <summary>
+        /// Represents API error message.
+        /// </summary>
+        public class ErrorMessage
+        {
+            public readonly string Code;
+            public readonly string Message;
+            public readonly Dictionary<string, object> Params;
+
+            public ErrorMessage(string code, string message, Dictionary<string, object> @params)
+            {
+                Code = code;
+                Message = message;
+                Params = @params;
+            }
         }
     }
 }

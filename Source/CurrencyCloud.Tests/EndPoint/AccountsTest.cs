@@ -14,7 +14,7 @@ namespace CurrencyCloud.Tests.EndPoint
         {
             var credentials = Mocks.Credentials;
 
-            var task = client.LoginAsync(credentials.Environment, credentials.LoginId, credentials.APIkey);
+            var task = client.LoginAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
             Task.WaitAll(task);
         }
 

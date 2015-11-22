@@ -56,5 +56,7 @@ namespace CurrencyCloud.Entity
 
         [DataMember(Name = "short_reference")]
         public string ShortReference { get; internal set; }
+
+        internal Account() { }
     }
 }

@@ -5,24 +5,26 @@ namespace CurrencyCloud.Tests
     [TestFixture]
     public class ClientTest
     {
-        Client client;
+        Client client = new Client();
 
-        [SetUp]
+        [TestFixtureSetUp]
         protected void Setup()
         {
-            client = new Client();
+
         }
 
-        [TearDown]
+        [TestFixtureTearDown]
         protected void TearDown()
         {
 
         }
 
         [Test]
-        public async void Initializes()
+        public async void Login()
         {
-            var token = await client.InitializeAsync(Mocks.Credentials.Environment, Mocks.Credentials.LoginId, Mocks.Credentials.APIkey);
+            var credentials = Mocks.Credentials;
+
+            var token = await client.LoginAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
             Assert.IsNotEmpty(token);
         }
     }

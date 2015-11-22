@@ -11,13 +11,14 @@ using Newtonsoft.Json.Linq;
 using System.Dynamic;
 using CurrencyCloud.Entity;
 using Newtonsoft.Json;
-using CurrencyCloud.Utils;
+using CurrencyCloud.Extensions;
+using CurrencyCloud.Environment;
 
 namespace CurrencyCloud
 {
     public class Client
     {
-        private Environment environment;
+        private ApiServer apiServer;
         private string loginId;
         private string apiKey;
         private HttpClient httpClient;
@@ -53,19 +54,19 @@ namespace CurrencyCloud
         /// <summary>
         /// Generates an authentication token for the API user.
         /// </summary>
-        /// <param name="environment">Environment to run against</param>
+        /// <param name="apiServer">API server to make requests against</param>
         /// <param name="loginId">Login id of the API user</param>
         /// <param name="apiKey">API key of the API user</param>
         /// <returns>Authentication token</returns>
         /// <exception cref="CurrencyCloud.Exception.ApiException"/>
-        public async Task<string> LoginAsync(Environment environment, string loginId, string apiKey)
+        public async Task<string> LoginAsync(ApiServer apiServer, string loginId, string apiKey)
         {
-            this.environment = environment;
+            this.apiServer = apiServer;
             this.loginId = loginId;
             this.apiKey = apiKey;
 
             httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(environment.Url);
+            httpClient.BaseAddress = new Uri(apiServer.Url);
 
             dynamic credentials = new
             {
@@ -90,7 +91,7 @@ namespace CurrencyCloud
         {
             await RequestAsync("/v2/authenticate/api", HttpMethod.Post);
 
-            environment = null;
+            apiServer = null;
             loginId = null;
             apiKey = null;
 
@@ -207,8 +208,9 @@ namespace CurrencyCloud
         private static Request CreateRequest(HttpRequestMessage requestMessage)
         {
             var query = requestMessage.RequestUri.Query;
+            var queryParams = HttpUtility.ParseQueryString(query);
 
-            var parameters = HttpUtility.ParseQueryString(query); //todo pascalize
+            var parameters = queryParams.Cast<string>().ToDictionary(key => key.ToPascalCase(), value => queryParams[value]);
             var verb = requestMessage.Method.Method;
             var url = requestMessage.RequestUri.OriginalString;
 
@@ -242,10 +244,21 @@ namespace CurrencyCloud
         private static async Task<List<Error>> CreateErrors(HttpContent content)
         {
             string errorString = await content.ReadAsStringAsync();
-            JObject errorObject = JObject.Parse(errorString);
-            //((JObject)errorObject)["error_messages"]
 
-            return null;
+            JObject errorObject = JObject.Parse(errorString);
+
+            var errors = from JProperty error in errorObject["error_messages"]
+            select new Error(error.Name,
+                            (from errorMessage in error.Value
+                             select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
+                                                           errorMessage["message"].Value<string>(),
+                                                           (from JProperty param in errorMessage["params"]
+                                                            select new KeyValuePair<string, object>(param.Name.ToPascalCase(), (param.Value as JValue).Value))
+                                                           .ToDictionary(x => x.Key, x => x.Value)))
+                            .ToList()
+            );
+
+            return errors.ToList();
         }
 
         public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
@@ -273,21 +286,4 @@ namespace CurrencyCloud
             }
         }
     }
-
-    /// <summary>
-    /// Represents environment to run API calls against.
-    /// </summary>
-    public class Environment
-    {
-        private Environment(string url)
-        {
-            Url = url;
-        }
-
-        public readonly string Url;
-
-        public static readonly Environment Demo = new Environment("https://devapi.thecurrencycloud.com");
-        public static readonly Environment Production = new Environment("https://api.thecurrencycloud.com");
-        public static readonly Environment UAT = new Environment("https://api-uat1.ccycloud.com");
-    } 
 }
