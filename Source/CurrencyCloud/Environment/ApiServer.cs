@@ -15,5 +15,6 @@
         public static readonly ApiServer Demo = new ApiServer("https://devapi.thecurrencycloud.com");
         public static readonly ApiServer Production = new ApiServer("https://api.thecurrencycloud.com");
         public static readonly ApiServer UAT = new ApiServer("https://api-uat1.ccycloud.com");
+        public static readonly ApiServer Mock = new ApiServer("http://localhost:5555/");
     }
 }

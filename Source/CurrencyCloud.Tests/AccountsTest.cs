@@ -1,6 +1,6 @@
-﻿using CurrencyCloud.Entity;
-using NUnit.Framework;
-using System.Threading.Tasks;
+﻿using NUnit.Framework;
+using CurrencyCloud.Entity;
+using CurrencyCloud.Tests.Mock.Data;
 
 namespace CurrencyCloud.Tests.EndPoint
 {
@@ -10,25 +10,23 @@ namespace CurrencyCloud.Tests.EndPoint
         Client client = new Client();
 
         [TestFixtureSetUp]
-        protected void Setup()
+        public async void SetUp()
         {
-            var credentials = Mocks.Credentials;
+            var credentials = Authentication.Credentials;
 
-            var task = client.LoginAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
-            Task.WaitAll(task);
+            await client.LoginAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
         }
 
         [TestFixtureTearDown]
-        protected void TearDown()
+        public async void TearDown()
         {
-            var task = client.LogoutAsync();
-            Task.WaitAll(task);
+            await client.LogoutAsync();
         }
 
         [Test]
         public async void Create()
         {
-            var account1 = Mocks.Account1;
+            var account1 = Accounts.Account1;
 
             Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
         }

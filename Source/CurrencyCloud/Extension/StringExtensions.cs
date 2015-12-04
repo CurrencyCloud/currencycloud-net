@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace CurrencyCloud.Extensions
+namespace CurrencyCloud.Extension
 {
     public static class StringExtensions
     {
@@ -16,7 +16,6 @@ namespace CurrencyCloud.Extensions
             }
 
             string pascal = Regex.Replace(source, "[_]([a-z0-9])", match => match.Value.Substring(1).ToUpper());
-
             pascal = char.ToUpper(pascal[0]) + pascal.Substring(1);
 
             return pascal;

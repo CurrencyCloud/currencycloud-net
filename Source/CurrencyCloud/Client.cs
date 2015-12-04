@@ -11,7 +11,7 @@ using Newtonsoft.Json.Linq;
 using System.Dynamic;
 using CurrencyCloud.Entity;
 using Newtonsoft.Json;
-using CurrencyCloud.Extensions;
+using CurrencyCloud.Extension;
 using CurrencyCloud.Environment;
 
 namespace CurrencyCloud
@@ -25,6 +25,11 @@ namespace CurrencyCloud
 
         private async Task<T> RequestAsync<T>(string path, HttpMethod method, ParamsObject paramsObj = null)
         {
+            if(httpClient == null)
+            {
+                throw new InvalidOperationException("Client is not logged in.");
+            }
+
             string requestUri = path;
             if (paramsObj != null)
             {
@@ -89,13 +94,14 @@ namespace CurrencyCloud
         /// <returns></returns>
         public async Task LogoutAsync()
         {
-            await RequestAsync("/v2/authenticate/api", HttpMethod.Post);
+            await RequestAsync("/v2/authenticate/close_session", HttpMethod.Post);
 
             apiServer = null;
             loginId = null;
             apiKey = null;
 
             httpClient.Dispose();
+            httpClient = null;
         }
 
         #endregion
@@ -248,7 +254,7 @@ namespace CurrencyCloud
             JObject errorObject = JObject.Parse(errorString);
 
             var errors = from JProperty error in errorObject["error_messages"]
-            select new Error(error.Name,
+                         select new Error(error.Name,
                             (from errorMessage in error.Value
                              select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
                                                            errorMessage["message"].Value<string>(),
