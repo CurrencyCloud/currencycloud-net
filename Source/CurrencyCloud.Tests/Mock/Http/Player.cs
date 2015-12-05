@@ -26,7 +26,7 @@ namespace CurrencyCloud.Tests.Mock.Http
         public void Start(string baseUrl)
         {
             listener = new HttpListener();
-            listener.Prefixes.Add(baseUrl);
+            listener.Prefixes.Add(baseUrl.EndsWith("/") ? baseUrl : baseUrl + "/");
             listener.Start();
 
             while (listener.IsListening)
@@ -55,7 +55,7 @@ namespace CurrencyCloud.Tests.Mock.Http
                     }
                     if (!isMatchingRequest)
                     {
-                        throw new InvalidOperationException("Request not found among recordings.");
+                        throw new InvalidOperationException("Request is not recorded.");
                     }
 
                     response.StatusCode = recording.response.status;

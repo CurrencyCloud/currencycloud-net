@@ -52,7 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticationTest.cs" />
+    <Compile Include="ClientTest.cs" />
     <Compile Include="AccountsTest.cs" />
     <Compile Include="Mock\Data\Accounts.cs" />
     <Compile Include="Mock\Data\Authentication.cs" />
@@ -60,7 +60,8 @@
     <Compile Include="Mock\Http\Player.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Mock\Http\Recordings\Authentication.json" />
+    <None Include="Mock\Http\Recordings\Accounts.json" />
+    <None Include="Mock\Http\Recordings\Client.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

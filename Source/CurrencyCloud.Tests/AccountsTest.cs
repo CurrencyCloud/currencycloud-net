@@ -1,8 +1,10 @@
-﻿using NUnit.Framework;
+﻿using System.Threading.Tasks;
+using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
+using CurrencyCloud.Entity.Page;
 
-namespace CurrencyCloud.Tests.EndPoint
+namespace CurrencyCloud.Tests
 {
     [TestFixture]
     class AccountsTest
@@ -10,17 +12,21 @@ namespace CurrencyCloud.Tests.EndPoint
         Client client = new Client();
 
         [TestFixtureSetUp]
-        public async void SetUp()
+        public void SetUp()
         {
             var credentials = Authentication.Credentials;
 
-            await client.LoginAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            var task = client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+
+            Task.WaitAll(task);
         }
 
         [TestFixtureTearDown]
-        public async void TearDown()
+        public void TearDown()
         {
-            await client.LogoutAsync();
+            var task = client.CloseAsync();
+
+            Task.WaitAll(task);
         }
 
         [Test]
@@ -37,5 +43,19 @@ namespace CurrencyCloud.Tests.EndPoint
             Account current = await client.GetCurrentAccountAsync();
             Assert.IsNotNull(current);
         }
+
+        [Test]
+        public async void Find()
+        {
+            Account current = await client.GetCurrentAccountAsync();
+            AccountsPage accounts = await client.FindAccountsAsync(new
+            {
+                AccountName = current.AccountName,
+                Order = "created_at",
+                OrderAscDesc = "desc",
+                PerPage = 5
+            });
+        }
+
     }
 }

@@ -1,0 +1,116 @@
+﻿[
+  {
+    "name": "",
+    "request": {
+      "method": "POST",
+      "path": "/v2/authenticate/api",
+      "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007469756093752"
+      },
+      "body": {
+        "auth_token": "034d23d24490718e8766853e14d480b7"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "v2/authenticate/close_session",
+      "headers": {
+        "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007472633409851"
+      },
+      "body": {
+      }
+    }
+  },
+
+  {
+    "request": {
+      "method": "POST",
+      "path": "/v2/authenticate/api",
+      "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007469756093752"
+      },
+      "body": {
+        "auth_token": "034d23d24490718e8766853e14d480b7"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "v2/authenticate/close_session",
+      "headers": {
+	    "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007472633409851"
+      },
+      "body": {
+      }
+    }
+  },
+
+  {
+    "request": {
+      "method": "POST",
+      "path": "/v2/authenticate/api",
+      "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007469756093752"
+      },
+      "body": {
+        "auth_token": "034d23d24490718e8766853e14d480b7"
+      }
+    }
+  },
+  {
+    "request": {
+      "method": "POST",
+      "path": "v2/authenticate/close_session",
+      "headers": {
+        "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+      }
+    },
+    "response": {
+      "status": 200,
+      "headers": {
+        "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+        "Content-Type": "application/json;charset=utf-8",
+        "X-Request-Id": "2910007472633409851"
+      },
+      "body": {
+      }
+    }
+  }
+]

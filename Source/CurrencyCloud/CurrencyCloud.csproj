@@ -47,13 +47,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Entity\Page\TransactionsPage.cs" />
+    <Compile Include="Entity\Page\SettlementsPage.cs" />
+    <Compile Include="Entity\SettlementEntry.cs" />
+    <Compile Include="Entity\SettlementAccount.cs" />
+    <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Balance.cs" />
+    <Compile Include="Entity\List\BeneficiaryDetailsList.cs" />
+    <Compile Include="Entity\List\ConversionDatesList.cs" />
+    <Compile Include="Entity\List\CurrenciesList.cs" />
+    <Compile Include="Entity\List\PaymentDatesList.cs" />
+    <Compile Include="Entity\List\RatesList.cs" />
+    <Compile Include="Entity\List\SettlementAccountsList.cs" />
+    <Compile Include="Entity\Page\PaymentsPage.cs" />
+    <Compile Include="Entity\Page\ConversionsPage.cs" />
+    <Compile Include="Entity\Page\ContactsPage.cs" />
+    <Compile Include="Entity\Page\BeneficiariesPage.cs" />
+    <Compile Include="Entity\Page\AccountsPage.cs" />
+    <Compile Include="Entity\Page\BalancesPage.cs" />
     <Compile Include="Entity\Beneficiary.cs" />
     <Compile Include="Entity\Contact.cs" />
     <Compile Include="Entity\Conversion.cs" />
+    <Compile Include="Entity\Page\Pagination.cs" />
     <Compile Include="Entity\Payer.cs" />
     <Compile Include="Entity\Payment.cs" />
+    <Compile Include="Entity\Rate.cs" />
     <Compile Include="Entity\Settlement.cs" />
     <Compile Include="Entity\Transaction.cs" />
     <Compile Include="Environment\ApiServer.cs" />
