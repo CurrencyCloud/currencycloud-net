@@ -1,20 +1,13 @@
-﻿using System;
-using System.Runtime.Serialization;
-
-namespace CurrencyCloud.Entity
+﻿namespace CurrencyCloud.Entity
 {
-    [DataContract]
-    public class Currency
+    public class Currency : Entity
     {
-        [DataMember(Name = "code")]
-        public string Code { get; internal set; }
-
-        [DataMember(Name = "decimal_places")]
-        public int DecimalPlaces { get; internal set; }
-
-        [DataMember(Name = "name")]
-        public string Name { get; internal set; }
-
         internal Currency() { }
+
+        public string Code { get; set; }
+
+        public int DecimalPlaces { get; set; }
+
+        public string Name { get; set; }
     }
 }

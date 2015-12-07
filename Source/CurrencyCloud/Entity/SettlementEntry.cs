@@ -1,16 +1,11 @@
-﻿using System.Runtime.Serialization;
-
-namespace CurrencyCloud.Entity
+﻿namespace CurrencyCloud.Entity
 {
-    [DataContract]
-    public class SettlementEntry
+    public class SettlementEntry : Entity
     {
-        [DataMember(Name = "send_amount")]
-        public decimal SendAmount { get; internal set; }
-
-        [DataMember(Name = "receive_amount")]
-        public decimal ReceiveAmount { get; internal set; }
-
         internal SettlementEntry() { }
+
+        public decimal SendAmount { get; set; }
+
+        public decimal ReceiveAmount { get; set; }
     }
 }

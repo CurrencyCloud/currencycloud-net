@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
-using CurrencyCloud.Entity.Page;
+using CurrencyCloud.Entity.Pagination;
 
 namespace CurrencyCloud.Tests
 {
@@ -48,7 +48,7 @@ namespace CurrencyCloud.Tests
         public async void Find()
         {
             Account current = await client.GetCurrentAccountAsync();
-            AccountsPage accounts = await client.FindAccountsAsync(new
+            PaginatedAccounts accounts = await client.FindAccountsAsync(new
             {
                 AccountName = current.AccountName,
                 Order = "created_at",

@@ -1,54 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
 
 namespace CurrencyCloud.Entity
 {
-    [DataContract]
-    public class Payer
+    public class Payer : Entity
     {
-        [DataMember(Name = "id")]
-        public string Id { get; internal set; }
-
-        [DataMember(Name = "legal_entity_type")]
-        public string LegalEntityType { get; internal set; }
-
-        [DataMember(Name = "company_name")]
-        public string CompanyName { get; internal set; }
-
-        [DataMember(Name = "first_name")]
-        public string FirstName { get; internal set; }
-
-        [DataMember(Name = "last_name")]
-        public string LastName { get; internal set; }
-
-        [DataMember(Name = "address")]
-        public List<string> Address { get; internal set; }
-
-        [DataMember(Name = "city")]
-        public string City { get; internal set; }
-
-        [DataMember(Name = "state_or_province")]
-        public string StateOrProvince { get; internal set; }
-
-        [DataMember(Name = "identification_type")]
-        public string IdentificationType { get; internal set; }
-
-        [DataMember(Name = "identification_value")]
-        public string IdentificationValue { get; internal set; }
-
-        [DataMember(Name = "postcode")]
-        public string Postcode { get; internal set; }
-
-        [DataMember(Name = "date_of_birth")]
-        public DateTime DateOfBirth { get; internal set; }
-
-        [DataMember(Name = "created_at")]
-        public DateTime CreatedAt { get; internal set; }
-
-        [DataMember(Name = "updated_at")]
-        public DateTime UpdatedAt { get; internal set; }
-
         internal Payer() { }
+
+        public string Id { get; set; }
+
+        public string LegalEntityType { get; set; }
+
+        public string CompanyName { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public List<string> Address { get; set; }
+
+        public string City { get; set; }
+
+        public string StateOrProvince { get; set; }
+
+        public string IdentificationType { get; set; }
+
+        public string IdentificationValue { get; set; }
+
+        public string Postcode { get; set; }
+
+        public DateTime DateOfBirth { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
     }
 }

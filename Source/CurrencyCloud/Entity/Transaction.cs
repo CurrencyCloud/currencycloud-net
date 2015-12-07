@@ -1,62 +1,43 @@
 ﻿using System;
-using System.Runtime.Serialization;
 
 namespace CurrencyCloud.Entity
 {
-    [DataContract]
-    public class Transaction
+    public class Transaction : Entity
     {
-        [DataMember(Name = "id")]
-        public string Id { get; internal set; }
-
-        [DataMember(Name = "balance_id")]
-        public string BalanceId { get; internal set; }
-
-        [DataMember(Name = "account_id")]
-        public string AccountId { get; internal set; }
-
-        [DataMember(Name = "currency")]
-        public string Currency { get; internal set; }
-
-        [DataMember(Name = "amount")]
-        public decimal Amount { get; internal set; }
-
-        [DataMember(Name = "balance_amount")]
-        public decimal BalanceAmount { get; internal set; }
-
-        [DataMember(Name = "type")]
-        public string Type { get; internal set; }
-
-        [DataMember(Name = "action")]
-        public string Action { get; internal set; }
-
-        [DataMember(Name = "related_entity_type")]
-        public string RelatedEntityType { get; internal set; }
-
-        [DataMember(Name = "related_entity_id")]
-        public string RelatedEntityId { get; internal set; }
-
-        [DataMember(Name = "related_entity_short_reference")]
-        public string RelatedEntityShortReference { get; internal set; }
-
-        [DataMember(Name = "status")]
-        public string Status { get; internal set; }
-
-        [DataMember(Name = "reason")]
-        public string Reason { get; internal set; }
-
-        [DataMember(Name = "settles_at")]
-        public DateTime SettlesAt { get; internal set; }
-
-        [DataMember(Name = "created_at")]
-        public DateTime CreatedAt { get; internal set; }
-
-        [DataMember(Name = "updated_at")]
-        public DateTime UpdatedAt { get; internal set; }
-
-        [DataMember(Name = "completed_at")]
-        public DateTime CompletedAt{ get; internal set; }
-
         internal Transaction() { }
+
+        public string Id { get; set; }
+
+        public string BalanceId { get; set; }
+
+        public string AccountId { get; set; }
+
+        public string Currency { get; set; }
+
+        public decimal Amount { get; set; }
+
+        public decimal BalanceAmount { get; set; }
+
+        public string Type { get; set; }
+
+        public string Action { get; set; }
+
+        public string RelatedEntityType { get; set; }
+
+        public string RelatedEntityId { get; set; }
+
+        public string RelatedEntityShortReference { get; set; }
+
+        public string Status { get; set; }
+
+        public string Reason { get; set; }
+
+        public DateTime SettlesAt { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public DateTime CompletedAt{ get; set; }
     }
 }

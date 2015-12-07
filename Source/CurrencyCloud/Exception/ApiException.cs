@@ -191,9 +191,9 @@ namespace CurrencyCloud.Exception
         {
             public readonly string Code;
             public readonly string Message;
-            public readonly Dictionary<string, object> Params;
+            public readonly Dictionary<string, string> Params;
 
-            public ErrorMessage(string code, string message, Dictionary<string, object> @params)
+            public ErrorMessage(string code, string message, Dictionary<string, string> @params)
             {
                 Code = code;
                 Message = message;

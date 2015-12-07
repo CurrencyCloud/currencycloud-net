@@ -7,13 +7,15 @@ using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Dynamic;
+using System.Reflection;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Extension;
 using CurrencyCloud.Exception;
 using CurrencyCloud.Environment;
-using CurrencyCloud.Entity.Page;
+using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Entity.List;
 
 namespace CurrencyCloud
@@ -23,14 +25,36 @@ namespace CurrencyCloud
     /// </summary>
     public class Client
     {
-        private ApiServer apiServer;
-        private string loginId;
-        private string apiKey;
         private HttpClient httpClient;
+        private dynamic credentials;
 
-        private async Task<T> RequestAsync<T>(string path, HttpMethod method, ParamsObject paramsObj = null)
+        #region Request
+
+        private async Task<string> AuthorizeAsync()
         {
-            if(httpClient == null)
+            string requestUri = string.Format("/v2/authenticate/api?login_id={0}&api_key={1}", credentials.LoginId, credentials.ApiKey);
+
+            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, requestUri));
+            if (res.IsSuccessStatusCode)
+            {
+                string resString = await res.Content.ReadAsStringAsync();
+                JObject resObject = JObject.Parse(resString);
+
+                var token = resObject["auth_token"].Value<string>();
+                httpClient.DefaultRequestHeaders.Remove("X-Auth-Token");
+                httpClient.DefaultRequestHeaders.Add("X-Auth-Token", token);
+
+                return token;
+            }
+            else
+            {
+                throw await ApiExceptionFactory.FromHttpResponse(res);
+            }
+        }
+
+        private async Task<TResult> RequestAsync<TResult>(string path, HttpMethod method, ParamsObject paramsObj = null)
+        {
+            if (httpClient == null)
             {
                 throw new InvalidOperationException("Client is not initialized.");
             }
@@ -41,16 +65,45 @@ namespace CurrencyCloud
                 requestUri += "?" + paramsObj.ToQueryString();
             }
 
-            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(method, requestUri));
-            if (res.IsSuccessStatusCode)
+            Func<Task<TResult>> requestAsyncDelegate = async () => 
             {
-                string resString = await res.Content.ReadAsStringAsync();
+                HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(method, requestUri));
+                if (res.IsSuccessStatusCode)
+                {
+                    string resString = await res.Content.ReadAsStringAsync();
 
-                return JsonConvert.DeserializeObject<T>(resString);
-            }
-            else
+                    var serializerSettings = new JsonSerializerSettings()
+                    {
+                        NullValueHandling = NullValueHandling.Ignore,
+                        ContractResolver = new PascalContractResolver()
+                    };
+
+                    return JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
+                }
+                else
+                {
+                    throw await ApiExceptionFactory.FromHttpResponse(res);
+                }
+            };
+
+            for (int attempts = 0;; attempts++)
             {
-                throw await ApiExceptionFactory.FromHttpResponse(res);
+                try
+                {
+                    if (attempts > 0)
+                    {
+                        await AuthorizeAsync();
+                    }
+
+                    return await requestAsyncDelegate();
+                }
+                catch (AuthenticationException)
+                {
+                    if (attempts == 3)
+                    {
+                        throw;
+                    }
+                }
             }
         }
 
@@ -58,6 +111,8 @@ namespace CurrencyCloud
         {
             return RequestAsync<object>(path, method, paramsObj);
         }
+
+        #endregion
 
         #region Initialization
 
@@ -71,23 +126,14 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
-            this.apiServer = apiServer;
-            this.loginId = loginId;
-            this.apiKey = apiKey;
-
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(apiServer.Url);
 
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.LoginId = loginId;
-            paramsObj.ApiKey = apiKey;
+            credentials = new ParamsObject();
+            credentials.LoginId = loginId;
+            credentials.ApiKey = apiKey;
 
-            JObject res = await RequestAsync("/v2/authenticate/api", HttpMethod.Post, paramsObj);
-
-            var token = res["auth_token"].Value<string>();
-            httpClient.DefaultRequestHeaders.Add("X-Auth-Token", token);
-
-            return token;
+            return await AuthorizeAsync();
         }
 
         /// <summary>
@@ -98,14 +144,18 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task CloseAsync()
         {
-            await RequestAsync("/v2/authenticate/close_session", HttpMethod.Post);
+            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
+            if (res.IsSuccessStatusCode)
+            {
+                credentials = null;
 
-            apiServer = null;
-            loginId = null;
-            apiKey = null;
-
-            httpClient.Dispose();
-            httpClient = null;
+                httpClient.Dispose();
+                httpClient = null;
+            }
+            else
+            {
+                throw await ApiExceptionFactory.FromHttpResponse(res);
+            }
         }
 
         #endregion
@@ -179,7 +229,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found accounts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<AccountsPage> FindAccountsAsync(dynamic optional = null)
+        public async Task<PaginatedAccounts> FindAccountsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -187,7 +237,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<AccountsPage>("/v2/accounts/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedAccounts>("/v2/accounts/find", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -231,7 +281,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found balances, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<BalancesPage> FindBalancesAsync(dynamic optional = null)
+        public async Task<PaginatedBalances> FindBalancesAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -239,7 +289,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<BalancesPage>("/v2/balances/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedBalances>("/v2/balances/find", HttpMethod.Get, paramsObj);
         }
 
         #endregion
@@ -341,7 +391,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found beneficiaries, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<BeneficiariesPage> FindBeneficiariesAsync(dynamic optional = null)
+        public async Task<PaginatedBeneficiaries> FindBeneficiariesAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -349,7 +399,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<BeneficiariesPage>("/v2/beneficiaries/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedBeneficiaries>("/v2/beneficiaries/find", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -463,7 +513,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found contacts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ContactsPage> FindContactsAsync(dynamic optional = null)
+        public async Task<PaginatedContacts> FindContactsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -471,7 +521,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<ContactsPage>("/v2/contacts/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedContacts>("/v2/contacts/find", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -545,7 +595,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found conversions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionsPage> FindConversionsAsync(dynamic optional = null)
+        public async Task<PaginatedConversions> FindConversionsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -553,7 +603,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<ConversionsPage>("/v2/conversions/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedConversions>("/v2/conversions/find", HttpMethod.Get, paramsObj);
         }
 
         #endregion
@@ -656,7 +706,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns  the list of the found payments, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentsPage> FindPaymentsAsync(dynamic optional = null)
+        public async Task<PaginatedPayments> FindPaymentsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -664,7 +714,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<PaymentsPage>("/v2/payments/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedPayments>("/v2/payments/find", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -701,7 +751,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested rate.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Balance> GetRateAsync(string buyCurrency, string sellCurrency, string fixedSide, int amount, dynamic optional = null)
+        public async Task<Rate> GetRateAsync(string buyCurrency, string sellCurrency, string fixedSide, int amount, dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             paramsObj.BuyCurrency = buyCurrency;
@@ -713,7 +763,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<Balance>("/v2/rates/detailed", HttpMethod.Get, paramsObj);
+            return await RequestAsync<Rate>("/v2/rates/detailed", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -875,7 +925,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns  the list of the found settlements, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<SettlementsPage> FindSettlementsAsync(dynamic optional = null)
+        public async Task<PaginatedSettlements> FindSettlementsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -883,7 +933,7 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<SettlementsPage>("/v2/settlements/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedSettlements>("/v2/settlements/find", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -1015,7 +1065,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found transactions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<TransactionsPage> FindTransactionsAsync(dynamic optional = null)
+        public async Task<PaginatedTransactions> FindTransactionsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -1023,10 +1073,94 @@ namespace CurrencyCloud
                 paramsObj.Add(optional);
             }
 
-            return await RequestAsync<TransactionsPage>("/v2/transactions/find", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaginatedTransactions>("/v2/transactions/find", HttpMethod.Get, paramsObj);
         }
 
         #endregion
+    }
+
+    internal static class ApiExceptionFactory
+    {
+        private static Request CreateRequest(HttpRequestMessage requestMessage)
+        {
+            var query = requestMessage.RequestUri.Query;
+            var queryParams = HttpUtility.ParseQueryString(query);
+
+            var parameters = queryParams.Cast<string>().ToDictionary(key => key.ToPascalCase(), value => queryParams[value]);
+            var verb = requestMessage.Method.Method;
+            var url = requestMessage.RequestUri.OriginalString;
+
+            if (!string.IsNullOrEmpty(query))
+            {
+                url = url.Replace(query, string.Empty);
+            }
+
+            return new Request(parameters, verb, url);
+        }
+
+        private static Response CreateResponse(HttpStatusCode statusCode, HttpResponseHeaders responseHeaders)
+        {
+            IEnumerable<string> values;
+
+            string requestId = string.Empty;
+            if (responseHeaders.TryGetValues("X-Request-Id", out values))
+            {
+                requestId = values.First();
+            }
+
+            DateTime date = DateTime.MinValue;
+            if (responseHeaders.TryGetValues("Date", out values))
+            {
+                DateTime.TryParse(values.First(), out date);
+            }
+
+            return new Response((int)statusCode, date, requestId);
+        }
+
+        private static async Task<List<Error>> CreateErrors(HttpContent content)
+        {
+            string errorString = await content.ReadAsStringAsync();
+
+            JObject errorObject = JObject.Parse(errorString);
+
+            var errors = from JProperty error in errorObject["error_messages"]
+                         select new Error(error.Name,
+                            (from errorMessage in error.Value
+                             select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
+                                                           errorMessage["message"].Value<string>(),
+                                                           (from JProperty param in errorMessage["params"]
+                                                            select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
+                                                           .ToDictionary(x => x.Key, x => x.Value)))
+                            .ToList()
+            );
+
+            return errors.ToList();
+        }
+
+        public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
+        {
+            var request = CreateRequest(res.RequestMessage);
+            var response = CreateResponse(res.StatusCode, res.Headers);
+            var errors = await CreateErrors(res.Content);
+
+            switch (response.StatusCode)
+            {
+                case 400:
+                    return new BadRequestException(request, response, errors);
+                case 401:
+                    return new AuthenticationException(request, response, errors);
+                case 403:
+                    return new ForbiddenException(request, response, errors);
+                case 404:
+                    return new NotFoundException(request, response, errors);
+                case 429:
+                    return new TooManyRequestsException(request, response, errors);
+                case 500:
+                    return new InternalApplicationException(request, response, errors);
+                default:
+                    return new UndefinedException(request, response, errors);
+            }
+        }
     }
 
     internal class ParamsObject : DynamicObject
@@ -1076,91 +1210,84 @@ namespace CurrencyCloud
 
         public string ToQueryString()
         {
-            return string.Join("&", storage.Select(param => param.Key + "=" + param.Value.ToString()));
+            return string.Join("&", storage.Select(param => 
+            {
+                string key = param.Key;
+
+                string value = param.Value.ToString();
+                if(param.Value is bool)
+                {
+                    value = value.ToLower();
+                }
+
+                return key + "=" + value;
+            }));
         }
     }
 
-    internal static class ApiExceptionFactory
+    internal class PascalContractResolver : DefaultContractResolver
     {
-        private static Request CreateRequest(HttpRequestMessage requestMessage)
+        protected override JsonDictionaryContract CreateDictionaryContract(Type objectType)
         {
-            var query = requestMessage.RequestUri.Query;
-            var queryParams = HttpUtility.ParseQueryString(query);
+            JsonDictionaryContract contract = base.CreateDictionaryContract(objectType);
 
-            var parameters = queryParams.Cast<string>().ToDictionary(key => key.ToPascalCase(), value => queryParams[value]);
-            var verb = requestMessage.Method.Method;
-            var url = requestMessage.RequestUri.OriginalString;
-
-            if(!string.IsNullOrEmpty(query))
+            if(objectType.GenericTypeArguments[0] == typeof(string))
             {
-                url = url.Replace(query, string.Empty);
+                contract.Converter = new PascalDictionaryConverter();
             }
 
-            return new Request(parameters, verb, url);
+            return contract;
         }
 
-        private static Response CreateResponse(HttpStatusCode statusCode, HttpResponseHeaders responseHeaders)
+        protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
         {
-            IEnumerable<string> values;
+            JsonProperty property = base.CreateProperty(member, memberSerialization);
+            property.PropertyName = property.PropertyName.ToSnakeCase();
 
-            string requestId = string.Empty;
-            if (responseHeaders.TryGetValues("X-Request-Id", out values))
-            {
-                requestId = values.First();
-            }
+            return property;
+        }
+    }
 
-            DateTime date = DateTime.MinValue;
-            if (responseHeaders.TryGetValues("Date", out values))
-            {
-                DateTime.TryParse(values.First(), out date);
-            }
-
-            return new Response((int)statusCode, date, requestId);
+    internal class PascalDictionaryConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            throw new NotImplementedException();
         }
 
-        private static async Task<List<Error>> CreateErrors(HttpContent content)
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            string errorString = await content.ReadAsStringAsync();
+            if (reader.TokenType == JsonToken.Null)
+            {
+                return null;
+            }
 
-            JObject errorObject = JObject.Parse(errorString);
+            JObject obj = JObject.Load(reader);
+            JsonReader objReader = obj.CreateReader();
 
-            var errors = from JProperty error in errorObject["error_messages"]
-                         select new Error(error.Name,
-                            (from errorMessage in error.Value
-                             select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
-                                                           errorMessage["message"].Value<string>(),
-                                                           (from JProperty param in errorMessage["params"]
-                                                            select new KeyValuePair<string, object>(param.Name.ToPascalCase(), (param.Value as JValue).Value))
-                                                           .ToDictionary(x => x.Key, x => x.Value)))
-                            .ToList()
-            );
+            objReader.Culture = reader.Culture;
+            objReader.DateFormatString = reader.DateFormatString;
+            objReader.DateParseHandling = reader.DateParseHandling;
+            objReader.DateTimeZoneHandling = reader.DateTimeZoneHandling;
+            objReader.FloatParseHandling = reader.FloatParseHandling;
+            objReader.SupportMultipleContent = reader.SupportMultipleContent;
 
-            return errors.ToList();
+            dynamic src = Activator.CreateInstance(objectType);
+            dynamic res = Activator.CreateInstance(objectType);
+
+            serializer.Populate(objReader, src);
+
+            foreach (var prop in src)
+            {
+                res.Add((prop.Key as string).ToPascalCase(), prop.Value);
+            }
+
+            return res;
         }
 
-        public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var request = CreateRequest(res.RequestMessage);
-            var response = CreateResponse(res.StatusCode, res.Headers);
-            var errors = await CreateErrors(res.Content);
-
-            switch (response.StatusCode)
-            {
-                case 400:
-                    return new BadRequestException(request, response, errors);
-                case 401:
-                    return new AuthenticationException(request, response, errors);
-                case 403:
-                    return new ForbiddenException(request, response, errors);
-                case 404:
-                    return new NotFoundException(request, response, errors);
-                case 429:
-                    return new TooManyRequestsException(request, response, errors);
-                case 500:
-                    return new InternalApplicationException(request, response, errors);
-                default:
-                    return new UndefinedException(request, response, errors);
-            }
+            throw new NotImplementedException();
         }
     }
 }

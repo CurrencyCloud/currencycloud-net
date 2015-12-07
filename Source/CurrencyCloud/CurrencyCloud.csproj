@@ -47,8 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
-    <Compile Include="Entity\Page\TransactionsPage.cs" />
-    <Compile Include="Entity\Page\SettlementsPage.cs" />
+    <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
+    <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />
     <Compile Include="Entity\SettlementAccount.cs" />
     <Compile Include="Entity\Currency.cs" />
@@ -60,16 +61,16 @@
     <Compile Include="Entity\List\PaymentDatesList.cs" />
     <Compile Include="Entity\List\RatesList.cs" />
     <Compile Include="Entity\List\SettlementAccountsList.cs" />
-    <Compile Include="Entity\Page\PaymentsPage.cs" />
-    <Compile Include="Entity\Page\ConversionsPage.cs" />
-    <Compile Include="Entity\Page\ContactsPage.cs" />
-    <Compile Include="Entity\Page\BeneficiariesPage.cs" />
-    <Compile Include="Entity\Page\AccountsPage.cs" />
-    <Compile Include="Entity\Page\BalancesPage.cs" />
+    <Compile Include="Entity\Pagination\PaginatedPayments.cs" />
+    <Compile Include="Entity\Pagination\PaginatedConversions.cs" />
+    <Compile Include="Entity\Pagination\PaginatedContacts.cs" />
+    <Compile Include="Entity\Pagination\PaginatedBeneficiaries.cs" />
+    <Compile Include="Entity\Pagination\PaginatedAccounts.cs" />
+    <Compile Include="Entity\Pagination\PaginatedBalances.cs" />
     <Compile Include="Entity\Beneficiary.cs" />
     <Compile Include="Entity\Contact.cs" />
     <Compile Include="Entity\Conversion.cs" />
-    <Compile Include="Entity\Page\Pagination.cs" />
+    <Compile Include="Entity\Pagination\Pagination.cs" />
     <Compile Include="Entity\Payer.cs" />
     <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Rate.cs" />
