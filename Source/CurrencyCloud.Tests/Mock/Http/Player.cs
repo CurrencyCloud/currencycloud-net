@@ -3,6 +3,8 @@ using System.Collections;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 
 namespace CurrencyCloud.Tests.Mock.Http
@@ -10,17 +12,31 @@ namespace CurrencyCloud.Tests.Mock.Http
     class Player
     {
         private HttpListener listener;
+        private Dictionary<string, Queue> recordingsSet;
         private Queue recordings;
 
         public Player(string path)
         {
-            recordings = new Queue();
+            recordingsSet = new Dictionary<string, Queue>();
 
             var recs = File.ReadAllText(path);
             foreach (var rec in JArray.Parse(recs))
             {
-                recordings.Enqueue(rec);
+                var name = rec["name"].ToString();
+
+                var recordings = new Queue();
+                foreach (var request in rec["requests"])
+                {
+                    recordings.Enqueue(request);
+                }
+
+                recordingsSet.Add(name, recordings);
             }
+        }
+
+        public void Play(string name)
+        {
+            recordings = recordingsSet[name];
         }
 
         public void Start(string baseUrl)
@@ -29,66 +45,70 @@ namespace CurrencyCloud.Tests.Mock.Http
             listener.Prefixes.Add(baseUrl.EndsWith("/") ? baseUrl : baseUrl + "/");
             listener.Start();
 
-            while (listener.IsListening)
+            Task.Factory.StartNew(() =>
             {
-                try
+                while (listener.IsListening)
                 {
-                    HttpListenerContext context = listener.GetContext();
-                    HttpListenerRequest request = context.Request;
-                    HttpListenerResponse response = context.Response;
-
-                    dynamic recording = recordings.Dequeue();
-
-                    bool isMatchingRequest = recording.request.method == request.HttpMethod ||
-                                             recording.request.path == request.Url.AbsolutePath ||
-                                             recording.request.query == request.Url.Query;
-                    if(isMatchingRequest && recording.request.headers != null)
+                    try
                     {
-                        foreach (var header in recording.request.headers)
+                        HttpListenerContext context = listener.GetContext();
+                        HttpListenerRequest request = context.Request;
+                        HttpListenerResponse response = context.Response;
+
+                        dynamic recording = recordings.Dequeue();
+
+                        bool isMatchingRequest = recording.request.method == request.HttpMethod ||
+                                                 recording.request.path == request.Url.AbsolutePath ||
+                                                 recording.request.query == request.Url.Query;
+                        if (isMatchingRequest && recording.request.headers != null)
                         {
-                            if (request.Headers.Get(header.Name) != header.Value.ToString())
+                            foreach (var header in recording.request.headers)
                             {
-                                isMatchingRequest = false;
-                                break;
+                                if (request.Headers.Get(header.Name) != header.Value.ToString())
+                                {
+                                    isMatchingRequest = false;
+                                    break;
+                                }
                             }
                         }
-                    }
-                    if (!isMatchingRequest)
-                    {
-                        throw new InvalidOperationException("Request is not recorded.");
-                    }
-
-                    response.StatusCode = recording.response.status;
-
-                    if(recording.response.headers != null)
-                    {
-                        foreach (var header in recording.response.headers)
+                        if (!isMatchingRequest)
                         {
-                            response.Headers.Add(header.Name, header.Value.ToString());
+                            throw new InvalidOperationException("Request is not recorded.");
                         }
+
+                        response.StatusCode = recording.response.status;
+
+                        if (recording.response.headers != null)
+                        {
+                            foreach (var header in recording.response.headers)
+                            {
+                                response.Headers.Add(header.Name, header.Value.ToString());
+                            }
+                        }
+
+                        byte[] responseBuffer = Encoding.UTF8.GetBytes(recording.response.body.ToString());
+                        response.ContentLength64 = responseBuffer.Length;
+
+                        Stream responseStream = response.OutputStream;
+                        responseStream.Write(responseBuffer, 0, responseBuffer.Length);
+                        responseStream.Close();
                     }
+                    catch (System.Exception)
+                    {
+                        Close();
 
-                    byte[] responseBuffer = Encoding.UTF8.GetBytes(recording.response.body.ToString());
-                    response.ContentLength64 = responseBuffer.Length;
-
-                    Stream responseStream = response.OutputStream;
-                    responseStream.Write(responseBuffer, 0, responseBuffer.Length);
-                    responseStream.Close();
+                        throw;
+                    }
                 }
-                catch (System.Exception)
-                {
-                    Stop();
-
-                    throw;
-                }
-            }
+            });
         }
 
-        public void Stop()
+        public void Close()
         {
-            if(listener.IsListening)
+            if(listener != null)
             {
                 listener.Stop();
+                listener.Close();
             }
         }
     }

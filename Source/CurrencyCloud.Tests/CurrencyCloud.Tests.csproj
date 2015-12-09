@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="ClientTest.cs" />
     <Compile Include="AccountsTest.cs" />
+    <Compile Include="Mock\Data\Contacts.cs" />
+    <Compile Include="Mock\Data\Beneficiaries.cs" />
     <Compile Include="Mock\Data\Accounts.cs" />
     <Compile Include="Mock\Data\Authentication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

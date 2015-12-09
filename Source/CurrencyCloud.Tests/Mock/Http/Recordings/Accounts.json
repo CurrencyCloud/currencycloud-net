@@ -1,1 +1,678 @@
-﻿
+﻿[
+  {
+    "name": "SetUp",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "TearDown",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Create",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/accounts/create",
+          "query": "?account_name=Acme Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164 Bishops Gate&city=London&state_or_province=Ontario&postal_code=CR4 3RZ&country=GB&spread_table=no_markup&identification_type=none"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
+            "account_name": "Acme Ltd.",
+            "brand": "currencycloud",
+            "your_reference": "POS-UID-23523",
+            "status": "enabled",
+            "street": "164 Bishops Gate",
+            "city": "London",
+            "state_or_province": "Ontario",
+            "country": "GB",
+            "postal_code": "CR4 3RZ",
+            "spread_table": "no_markup",
+            "legal_entity_type": "company",
+            "created_at": "2015-10-21T17:22:37+00:00",
+            "updated_at": "2015-10-21T17:22:37+00:00",
+            "identification_type": "none",
+            "identification_value": null,
+            "short_reference": "151021-00021"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/current",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "account_name": "Toptal",
+            "brand": "currencycloud",
+            "your_reference": null,
+            "status": "enabled",
+            "street": null,
+            "city": null,
+            "state_or_province": null,
+            "country": null,
+            "postal_code": null,
+            "spread_table": "fxcg_rfx_default",
+            "legal_entity_type": null,
+            "created_at": "2015-10-30T13:46:49+00:00",
+            "updated_at": "2015-10-30T13:52:32+00:00",
+            "identification_type": null,
+            "identification_value": null,
+            "short_reference": "151030-00006"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Reauthenticate",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/current",
+          "headers": {
+            "X-Auth-Token": "3907f05da86533710efc589d58f51f45"
+          }
+        },
+        "response": {
+          "status": 401,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "error_code": "auth_failed",
+            "error_messages": {
+              "username": [
+                {
+                  "code": "invalid_supplied_credentials",
+                  "message": "Authentication failed with the supplied credentials",
+                  "params": {
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/current",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "account_name": "Toptal",
+            "brand": "currencycloud",
+            "your_reference": null,
+            "status": "enabled",
+            "street": null,
+            "city": null,
+            "state_or_province": null,
+            "country": null,
+            "postal_code": null,
+            "spread_table": "fxcg_rfx_default",
+            "legal_entity_type": null,
+            "created_at": "2015-10-30T13:46:49+00:00",
+            "updated_at": "2015-10-30T13:52:32+00:00",
+            "identification_type": null,
+            "identification_value": null,
+            "short_reference": "151030-00006"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Close",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FailAfterClose",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FailWithError",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/balances/wrong",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 400,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "error_code": "invalid_currency",
+            "error_messages": {
+              "currency": [
+                {
+                  "code": "currency_is_in_invalid_format",
+                  "message": "currency is not a valid ISO 4217 currency code",
+                  "params": {
+                    "type": "currency"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "RunOnbehalfof",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/current",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "account_name": "Toptal",
+            "brand": "currencycloud",
+            "your_reference": null,
+            "status": "enabled",
+            "street": null,
+            "city": null,
+            "state_or_province": null,
+            "country": null,
+            "postal_code": null,
+            "spread_table": "fxcg_rfx_default",
+            "legal_entity_type": null,
+            "created_at": "2015-10-30T13:46:49+00:00",
+            "updated_at": "2015-10-30T13:52:32+00:00",
+            "identification_type": null,
+            "identification_value": null,
+            "short_reference": "151030-00006"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/contacts/create?account_id=3a7d2f90-ae1f-493c-a8d6-26ad43700259&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554 87845&your_reference=ACME12345&mobile_phone_number=07564 534 54&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "login_id": "john",
+            "id": "12d4f6d3-7a52-47e1-8e35-6017a492e3e3",
+            "first_name": "John",
+            "last_name": "Smith",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "account_name": "Toptal",
+            "status": "enabled",
+            "locale": "en-US",
+            "timezone": "Europe/London",
+            "email_address": "john.smith@company.com",
+            "mobile_phone_number": "07564 534 54",
+            "phone_number": "06554 87845",
+            "your_reference": "ACME12345",
+            "date_of_birth": "1980-01-22",
+            "created_at": "2015-10-21T23:18:13+00:00",
+            "updated_at": "2015-10-21T23:18:13+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "18b5868c-7cd4-4c92-b867-b5928b625d75",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "12d4f6d3-7a52-47e1-8e35-6017a492e3e3",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-10-21T23:18:14+00:00",
+            "updated_at": "2015-10-21T23:18:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/contacts/current",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "login_id": "test.it.now@mailinator.com",
+            "id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "first_name": "Irina",
+            "last_name": "Gudkova",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "account_name": "Toptal",
+            "status": "enabled",
+            "locale": "en",
+            "timezone": "Europe/London",
+            "email_address": "test.it.now@mailinator.com",
+            "mobile_phone_number": null,
+            "phone_number": null,
+            "your_reference": null,
+            "date_of_birth": null,
+            "created_at": "2015-10-13T11:47:30+00:00",
+            "updated_at": "2015-10-13T11:47:30+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "eefd340d-1ff9-4bd4-a8c5-59e3959f00c9",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-10-21T23:18:15+00:00",
+            "updated_at": "2015-10-21T23:18:15+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  }
+]

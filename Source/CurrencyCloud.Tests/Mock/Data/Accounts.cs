@@ -9,11 +9,11 @@
 
             Optional = new
             {
-                YourReference = "UID-201511",
+                YourReference = "POS-UID-23523",
                 Status = "enabled",
-                Street = "194 Bishops Gate",
+                Street = "164 Bishops Gate",
                 City = "London",
-                StateOrProvince = "",
+                StateOrProvince = "Ontario",
                 PostalCode = "CR4 3RZ",
                 Country = "GB",
                 SpreadTable = "no_markup",

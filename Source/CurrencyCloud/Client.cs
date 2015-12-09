@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Dynamic;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -17,6 +18,9 @@ using CurrencyCloud.Exception;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Entity.List;
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("CurrencyCloud.Tests")]
 
 namespace CurrencyCloud
 {
@@ -27,6 +31,20 @@ namespace CurrencyCloud
     {
         private HttpClient httpClient;
         private dynamic credentials;
+        private string onBehalfOf;
+
+        internal string Token
+        {
+            get
+            {
+                return httpClient.DefaultRequestHeaders.GetValues("X-Auth-Token").FirstOrDefault();
+            }
+            set
+            {
+                httpClient.DefaultRequestHeaders.Remove("X-Auth-Token");
+                httpClient.DefaultRequestHeaders.Add("X-Auth-Token", value);
+            }
+        }
 
         #region Request
 
@@ -57,6 +75,19 @@ namespace CurrencyCloud
             if (httpClient == null)
             {
                 throw new InvalidOperationException("Client is not initialized.");
+            }
+
+            if (onBehalfOf != null)
+            {
+                if(paramsObj == null)
+                {
+                    paramsObj = new ParamsObject();
+                }
+
+                paramsObj.Add(new
+                {
+                    OnBehalfOf = onBehalfOf
+                });
             }
 
             string requestUri = path;
@@ -114,7 +145,55 @@ namespace CurrencyCloud
 
         #endregion
 
+        #region OnBehalfOf
+
+        /// <summary>
+        /// Executes operations on behalf of another contact.
+        /// </summary>
+        /// <param name="id">Id of the contact.</param>
+        /// <param name="function">Asynchronous function, which is executed on behalf of the given contact.</param>
+        /// <returns>Asynchronous task.</returns>
+        /// <exception cref="InvalidOperationException">Thrown if the previous call of the method has not yet completed.</exception>
+        /// <exception cref="ArgumentException">Thrown when <paramref name="id"/> is not a valid UUID.</exception>
+        public async Task OnBehalfOf(string id, Func<Task> function)
+        {
+            if (onBehalfOf != null)
+            {
+                throw new InvalidOperationException("OnBehalfOf has already been called and not yet completed.");
+            }
+
+            string UuidPattern = @"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$";
+            if (!Regex.IsMatch(id, UuidPattern))
+            {
+                throw new ArgumentException("Id is not a valid UUID", "id");
+            }
+
+            onBehalfOf = id;
+
+            try
+            {
+                await function();
+            }
+            finally
+            {
+                onBehalfOf = null;
+            }
+        }
+
+        #endregion
+
         #region Initialization
+
+        /// <summary>
+        /// Gets a value that indicates whether the client is initialized.
+        /// </summary>
+        public bool IsInitialized
+        {
+            get
+            {
+                return httpClient != null;
+            }
+        }
 
         /// <summary>
         /// Initializes the client and generates authentication token for the API user.
@@ -129,9 +208,11 @@ namespace CurrencyCloud
             httpClient = new HttpClient();
             httpClient.BaseAddress = new Uri(apiServer.Url);
 
-            credentials = new ParamsObject();
-            credentials.LoginId = loginId;
-            credentials.ApiKey = apiKey;
+            credentials = new
+            {
+                LoginId = loginId,
+                ApiKey = apiKey
+            };
 
             return await AuthorizeAsync();
         }
@@ -144,6 +225,11 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task CloseAsync()
         {
+            if (httpClient == null)
+            {
+                throw new InvalidOperationException("Client is not initialized.");
+            }
+
             HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
             if (res.IsSuccessStatusCode)
             {

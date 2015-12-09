@@ -1,0 +1,8 @@
+language: csharp
+solution: CurrencyCloud.sln
+before_install:
+  - sudo apt-get install nunit-console
+before_script:
+  - nuget restore CurrencyCloud.sln
+after_script:
+  - nunit-console Source/CurrencyCloud.Tests/bin/Release/CurrencyCloud.Tests.dll
