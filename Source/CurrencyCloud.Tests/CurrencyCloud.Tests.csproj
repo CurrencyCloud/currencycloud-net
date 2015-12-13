@@ -32,7 +32,6 @@
   <ItemGroup>
     <Reference Include="CurrencyCloud">
       <HintPath>..\CurrencyCloud\bin\Debug\CurrencyCloud.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -52,8 +51,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TransactionsTest.cs" />
+    <Compile Include="SettlementsTest.cs" />
+    <Compile Include="ReferenceTest.cs" />
+    <Compile Include="RatesTest.cs" />
+    <Compile Include="Mock\Data\Payments.cs" />
+    <Compile Include="PaymentsTest.cs" />
+    <Compile Include="PayersTest.cs" />
+    <Compile Include="ConversionsTest.cs" />
+    <Compile Include="ContactsTest.cs" />
+    <Compile Include="BeneficiariesTest.cs" />
+    <Compile Include="BalancesTest.cs" />
     <Compile Include="ClientTest.cs" />
     <Compile Include="AccountsTest.cs" />
+    <Compile Include="Mock\Data\Conversions.cs" />
     <Compile Include="Mock\Data\Contacts.cs" />
     <Compile Include="Mock\Data\Beneficiaries.cs" />
     <Compile Include="Mock\Data\Accounts.cs" />
@@ -62,6 +73,16 @@
     <Compile Include="Mock\Http\Player.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Mock\Http\Recordings\Beneficiaries.json" />
+    <None Include="Mock\Http\Recordings\Transactions.json" />
+    <None Include="Mock\Http\Recordings\Settlements.json" />
+    <None Include="Mock\Http\Recordings\Reference.json" />
+    <None Include="Mock\Http\Recordings\Rates.json" />
+    <None Include="Mock\Http\Recordings\Payments.json" />
+    <None Include="Mock\Http\Recordings\Payers.json" />
+    <None Include="Mock\Http\Recordings\Conversions.json" />
+    <None Include="Mock\Http\Recordings\Contacts.json" />
+    <None Include="Mock\Http\Recordings\Balances.json" />
     <None Include="Mock\Http\Recordings\Accounts.json" />
     <None Include="Mock\Http\Recordings\Client.json" />
     <None Include="packages.config" />

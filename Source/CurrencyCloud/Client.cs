@@ -1300,10 +1300,18 @@ namespace CurrencyCloud
             {
                 string key = param.Key;
 
-                string value = param.Value.ToString();
-                if(param.Value is bool)
+                string value;
+                if(param.Value is DateTime)
                 {
-                    value = value.ToLower();
+                    value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
+                }
+                else if (param.Value is bool)
+                {
+                    value = param.Value.ToString().ToLower();
+                }
+                else
+                {
+                    value = param.Value.ToString();
                 }
 
                 return key + "=" + value;

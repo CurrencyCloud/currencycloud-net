@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
@@ -62,5 +63,50 @@ namespace CurrencyCloud.Entity
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Conversion))
+            {
+                return false;
+            }
+
+            var conversion = obj as Conversion;
+
+            return Id == conversion.Id &&
+                   AccountId == conversion.AccountId &&
+                   CreatorContactId == conversion.CreatorContactId &&
+                   ShortReference == conversion.ShortReference &&
+                   SettlementDate == conversion.SettlementDate &&
+                   ConversionDate == conversion.ConversionDate &&
+                   Status == conversion.Status &&
+                   PartnerStatus == conversion.PartnerStatus &&
+                   CurrencyPair == conversion.CurrencyPair &&
+                   BuyCurrency == conversion.BuyCurrency &&
+                   AccountId == conversion.AccountId &&
+                   SellCurrency == conversion.SellCurrency &&
+                   FixedSide == conversion.FixedSide &&
+                   PartnerBuyAmount == conversion.PartnerBuyAmount &&
+                   PartnerSellAmount == conversion.PartnerSellAmount &&
+                   ClientBuyAmount == conversion.ClientBuyAmount &&
+                   ClientSellAmount == conversion.ClientSellAmount &&
+                   MidMarketRate == conversion.MidMarketRate &&
+                   CoreRate == conversion.CoreRate &&
+                   PartnerRate == conversion.PartnerRate &&
+                   ClientRate == conversion.ClientRate &&
+                   DepositRequired == conversion.DepositRequired &&
+                   DepositAmount == conversion.DepositAmount &&
+                   DepositCurrency == conversion.DepositCurrency &&
+                   DepositStatus == conversion.DepositStatus &&
+                   DepositRequiredAt == conversion.DepositRequiredAt &&
+                   PaymentIds.SequenceEqual(conversion.PaymentIds) &&
+                   CreatedAt == conversion.CreatedAt &&
+                   UpdatedAt == conversion.UpdatedAt;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

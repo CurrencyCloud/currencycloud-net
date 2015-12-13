@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
@@ -72,5 +73,54 @@ namespace CurrencyCloud.Entity
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Beneficiary))
+            {
+                return false;
+            }
+
+            var beneficiary = obj as Beneficiary;
+
+            return Id == beneficiary.Id &&
+                   BankAccountHolderName == beneficiary.BankAccountHolderName &&
+                   Name == beneficiary.Name &&
+                   Email == beneficiary.Email &&
+                   PaymentTypes.SequenceEqual(beneficiary.PaymentTypes) &&
+                   BeneficiaryAddress.SequenceEqual(beneficiary.BeneficiaryAddress) &&
+                   BeneficiaryCountry == beneficiary.BeneficiaryCountry &&
+                   BeneficiaryEntityType == beneficiary.BeneficiaryEntityType &&
+                   BeneficiaryCompanyName == beneficiary.BeneficiaryCompanyName &&
+                   BeneficiaryFirstName == beneficiary.BeneficiaryFirstName &&
+                   BeneficiaryLastName == beneficiary.BeneficiaryLastName &&
+                   BeneficiaryCity == beneficiary.BeneficiaryCity &&
+                   BeneficiaryPostcode == beneficiary.BeneficiaryPostcode &&
+                   BeneficiaryStateOrProvince == beneficiary.BeneficiaryStateOrProvince &&
+                   BeneficiaryDateOfBirth == beneficiary.BeneficiaryDateOfBirth &&
+                   BeneficiaryIdentificationType == beneficiary.BeneficiaryIdentificationType &&
+                   BeneficiaryIdentificationValue == beneficiary.BeneficiaryIdentificationValue &&
+                   BankCountry == beneficiary.BankCountry &&
+                   BankName == beneficiary.BankName &&
+                   BankAccountType == beneficiary.BankAccountType &&
+                   Currency == beneficiary.Currency &&
+                   AccountNumber == beneficiary.AccountNumber &&
+                   RoutingCodeType1 == beneficiary.RoutingCodeType1 &&
+                   RoutingCodeValue1 == beneficiary.RoutingCodeValue1 &&
+                   RoutingCodeType2 == beneficiary.RoutingCodeType2 &&
+                   RoutingCodeValue2 == beneficiary.RoutingCodeValue2 &&
+                   BicSwift == beneficiary.BicSwift &&
+                   Iban == beneficiary.Iban &&
+                   DefaultBeneficiary == beneficiary.DefaultBeneficiary &&
+                   CreatorContactId == beneficiary.CreatorContactId &&
+                   BankAddress.SequenceEqual(beneficiary.BankAddress) &&
+                   CreatedAt == beneficiary.CreatedAt &&
+                   UpdatedAt == beneficiary.UpdatedAt;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

@@ -39,5 +39,38 @@ namespace CurrencyCloud.Entity
         public DateTime UpdatedAt { get; set; }
 
         public DateTime CompletedAt{ get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Transaction))
+            {
+                return false;
+            }
+
+            var transaction = obj as Transaction;
+
+            return Id == transaction.Id &&
+                   BalanceId == transaction.BalanceId &&
+                   AccountId == transaction.AccountId &&
+                   Currency == transaction.Currency &&
+                   Amount == transaction.Amount &&
+                   BalanceAmount == transaction.BalanceAmount &&
+                   Type == transaction.Type &&
+                   Action == transaction.Action &&
+                   RelatedEntityType == transaction.RelatedEntityType &&
+                   RelatedEntityId == transaction.RelatedEntityId &&
+                   RelatedEntityShortReference == transaction.RelatedEntityShortReference &&
+                   Status == transaction.Status &&
+                   Reason == transaction.Reason &&
+                   SettlesAt == transaction.SettlesAt &&
+                   CreatedAt == transaction.CreatedAt &&
+                   UpdatedAt == transaction.UpdatedAt &&
+                   CompletedAt == transaction.CompletedAt;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

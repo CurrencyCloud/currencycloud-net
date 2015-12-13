@@ -20,7 +20,7 @@ namespace CurrencyCloud.Entity
 
         public string FixedSide { get; set; }
 
-        public decimal midMarketRate { get; set; }
+        public decimal MidMarketRate { get; set; }
 
         public decimal CoreRate { get; set; }
 
@@ -33,5 +33,35 @@ namespace CurrencyCloud.Entity
         public decimal DepositAmount { get; set; }
 
         public string DepositCurrency { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Rate))
+            {
+                return false;
+            }
+
+            var rate = obj as Rate;
+
+            return SettlementCutOffTime == rate.SettlementCutOffTime &&
+                   CurrencyPair == rate.CurrencyPair &&
+                   ClientBuyCurrency == rate.ClientBuyCurrency &&
+                   ClientSellCurrency == rate.ClientSellCurrency &&
+                   ClientBuyAmount == rate.ClientBuyAmount &&
+                   ClientSellAmount == rate.ClientSellAmount &&
+                   FixedSide == rate.FixedSide &&
+                   MidMarketRate == rate.MidMarketRate &&
+                   CoreRate == rate.CoreRate &&
+                   PartnerRate == rate.PartnerRate &&
+                   ClientRate == rate.ClientRate &&
+                   DepositRequired == rate.DepositRequired &&
+                   DepositAmount == rate.DepositAmount &&
+                   DepositCurrency == rate.DepositCurrency;
+        }
+
+        public override int GetHashCode()
+        {
+            return CurrencyPair.GetHashCode();
+        }
     }
 }

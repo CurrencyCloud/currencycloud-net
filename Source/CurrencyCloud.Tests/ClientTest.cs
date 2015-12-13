@@ -47,6 +47,7 @@ namespace CurrencyCloud.Tests
             player.Play("Initialize");
 
             var token = await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+
             Assert.IsNotEmpty(token);
 
             await client.CloseAsync();
@@ -166,11 +167,13 @@ namespace CurrencyCloud.Tests
             await client.OnBehalfOf(contact.Id, async () =>
             {
                 beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.BankAccountHolderName, beneficiaryParams.BankCountry, beneficiaryParams.Currency, beneficiaryParams.Name, beneficiaryParams.Optional);
+
                 Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
             });
 
             contact = await client.GetCurrentContactAsync();
             beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.BankAccountHolderName, beneficiaryParams.BankCountry, beneficiaryParams.Currency, beneficiaryParams.Name, beneficiaryParams.Optional);
+
             Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
 
             await client.CloseAsync();

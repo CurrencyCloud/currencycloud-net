@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
@@ -34,5 +35,35 @@ namespace CurrencyCloud.Entity
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Payer))
+            {
+                return false;
+            }
+
+            var payer = obj as Payer;
+
+            return Id == payer.Id &&
+                   LegalEntityType == payer.LegalEntityType &&
+                   CompanyName == payer.CompanyName &&
+                   FirstName == payer.FirstName &&
+                   LastName == payer.LastName &&
+                   Address.SequenceEqual(payer.Address) &&
+                   City == payer.City &&
+                   StateOrProvince == payer.StateOrProvince &&
+                   IdentificationType == payer.IdentificationType &&
+                   IdentificationValue == payer.IdentificationValue &&
+                   Postcode == payer.Postcode &&
+                   DateOfBirth == payer.DateOfBirth &&
+                   CreatedAt == payer.CreatedAt &&
+                   UpdatedAt == payer.UpdatedAt;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

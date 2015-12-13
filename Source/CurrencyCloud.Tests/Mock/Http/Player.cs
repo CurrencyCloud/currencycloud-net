@@ -57,9 +57,9 @@ namespace CurrencyCloud.Tests.Mock.Http
 
                         dynamic recording = recordings.Dequeue();
 
-                        bool isMatchingRequest = recording.request.method == request.HttpMethod ||
-                                                 recording.request.path == request.Url.AbsolutePath ||
-                                                 recording.request.query == request.Url.Query;
+                        bool isMatchingRequest = recording.request.method == request.HttpMethod &&
+                                                 recording.request.path == request.Url.AbsolutePath &&
+                                                 (recording.request.query ?? "") == request.Url.Query;
                         if (isMatchingRequest && recording.request.headers != null)
                         {
                             foreach (var header in recording.request.headers)

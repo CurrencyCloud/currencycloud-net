@@ -39,5 +39,39 @@ namespace CurrencyCloud.Entity
         public string IdentificationValue { get; set; }
 
         public string ShortReference { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if(!(obj is Account))
+            {
+                return false;
+            }
+
+            var account = obj as Account;
+
+            return Id == account.Id &&
+                   LegalEntityType == account.LegalEntityType &&
+                   AccountName == account.AccountName &&
+                   Brand == account.Brand &&
+                   YourReference == account.YourReference &&
+                   Status == account.Status &&
+                   Street == account.Street &&
+                   City == account.City &&
+                   StateOrProvince == account.StateOrProvince &&
+                   Country == account.Country &&
+                   PostalCode == account.PostalCode &&
+                   SpreadTable == account.SpreadTable &&
+                   CreatedAt == account.CreatedAt &&
+                   UpdatedAt == account.UpdatedAt &&
+                   IdentificationType == account.IdentificationType &&
+                   IdentificationValue == account.IdentificationValue &&
+                   ShortReference == account.ShortReference;
+
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
     }
 }

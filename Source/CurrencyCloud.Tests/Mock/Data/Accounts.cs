@@ -25,19 +25,15 @@
         {
             AccountName = "Company PLC",
             LegalEntityType = "company",
-
-            Optional = new
-            {
-                YourReference = "0012345564ABC",
-                Status = "enabled",
-                Street = "13 London Road",
-                City = "London",
-                StateOrProvince = "",
-                PostalCode = "AB12 CD2",
-                Country = "GB",
-                SpreadTable = "flat_0.5_percent",
-                IdentificationType = "none"
-            }
+            YourReference = "0012345564ABC",
+            Status = "enabled",
+            Street = "13 London Road",
+            City = "London",
+            StateOrProvince = "",
+            PostalCode = "AB12 CD2",
+            Country = "GB",
+            SpreadTable = "flat_0.5_percent",
+            IdentificationType = "none"
         };
     }
 }

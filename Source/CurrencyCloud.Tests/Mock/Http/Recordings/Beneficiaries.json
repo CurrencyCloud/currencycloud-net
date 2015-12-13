@@ -1,0 +1,694 @@
+﻿[
+  {
+    "name": "SetUp",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "TearDown",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Validate",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/validate",
+          "query": "?bank_country=GB&currency=GBP&beneficiary_country=GB&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200605",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "payment_types": [ "regular" ],
+            "bank_country": "GB",
+            "bank_name": "BARCLAYS BANK PLC",
+            "bank_account_type": null,
+            "currency": "GBP",
+            "account_number": "13071472",
+            "routing_code_type_1": "sort_code",
+            "beneficiary_address": [ ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": null,
+            "beneficiary_company_name": null,
+            "beneficiary_first_name": null,
+            "beneficiary_last_name": null,
+            "beneficiary_city": null,
+            "beneficiary_postcode": null,
+            "beneficiary_state_or_province": null,
+            "beneficiary_date_of_birth": null,
+            "beneficiary_identification_type": null,
+            "beneficiary_identification_value": null,
+            "routing_code_value_1": "200605",
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": null,
+            "iban": null,
+            "bank_address": [ "Leicester", "Leicestershire" ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Create",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Get",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Update",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+          "query": "?bank_account_holder_name=Martin%20McFly&bank_country=US&currency=USD&name=Employee%20Funds&beneficiary_address=9303%20Roslyndale%20Ave.&beneficiary_country=US&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200606&routing_code_type_2=aba&routing_code_value_2=780&bic_swift=USSWIFT&iban=US89370400440532013000&default_beneficiary=true&bank_address=1%20Courthouse%20Square&bank_name=Emmet%20Bank&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Back%20to%20the%20Future&beneficiary_first_name=Martin&beneficiary_last_name=McFly&beneficiary_city=Hill%20Valley&beneficiary_postcode=91331&beneficiary_state_or_province=CA&beneficiary_date_of_birth=1968-06-09&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "Martin McFly",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority" ],
+            "beneficiary_address": [ "9303 Roslyndale Ave." ],
+            "beneficiary_country": "US",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Back to the Future",
+            "beneficiary_first_name": "Martin",
+            "beneficiary_last_name": "McFly",
+            "beneficiary_city": "Hill Valley",
+            "beneficiary_postcode": "91331",
+            "beneficiary_state_or_province": "CA",
+            "beneficiary_date_of_birth": "1968-06-09",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "US",
+            "bank_name": "Emmet Bank",
+            "bank_account_type": "checking",
+            "currency": "USD",
+            "account_number": "13071472",
+            "routing_code_type_1": "sort_code",
+            "routing_code_value_1": "200606",
+            "routing_code_type_2": "aba",
+            "routing_code_value_2": "780",
+            "bic_swift": "USSWIFT",
+            "iban": "US89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "1 Courthouse Square" ],
+            "created_at": "2015-11-01T20:58:16+00:00",
+            "updated_at": "2015-11-01T20:58:17+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "Martin McFly",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority" ],
+            "beneficiary_address": [ "9303 Roslyndale Ave." ],
+            "beneficiary_country": "US",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Back to the Future",
+            "beneficiary_first_name": "Martin",
+            "beneficiary_last_name": "McFly",
+            "beneficiary_city": "Hill Valley",
+            "beneficiary_postcode": "91331",
+            "beneficiary_state_or_province": "CA",
+            "beneficiary_date_of_birth": "1968-06-09",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "US",
+            "bank_name": "Emmet Bank",
+            "bank_account_type": "checking",
+            "currency": "USD",
+            "account_number": "13071472",
+            "routing_code_type_1": "sort_code",
+            "routing_code_value_1": "200606",
+            "routing_code_type_2": "aba",
+            "routing_code_value_2": "780",
+            "bic_swift": "USSWIFT",
+            "iban": "US89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "1 Courthouse Square" ],
+            "created_at": "2015-11-01T20:58:16+00:00",
+            "updated_at": "2015-11-01T20:58:17+00:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Find",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/beneficiaries/find",
+          "query": "?name=Employee%20Funds&order=created_at&order_asc_desc=desc&per_page=5",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "beneficiaries": [
+              {
+                "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+                "bank_account_holder_name": "John Doe",
+                "name": "Employee Funds",
+                "email": null,
+                "payment_types": [ "priority", "regular" ],
+                "beneficiary_address": [ "23 Acacia Road" ],
+                "beneficiary_country": "GB",
+                "beneficiary_entity_type": "company",
+                "beneficiary_company_name": "Some Company LLC",
+                "beneficiary_first_name": "John",
+                "beneficiary_last_name": "Doe",
+                "beneficiary_city": "London",
+                "beneficiary_postcode": "W11 2BQ",
+                "beneficiary_state_or_province": "TX",
+                "beneficiary_date_of_birth": "1990-07-20",
+                "beneficiary_identification_type": "none",
+                "beneficiary_identification_value": null,
+                "bank_country": "DE",
+                "bank_name": "COMMERZBANK AG",
+                "bank_account_type": "checking",
+                "currency": "EUR",
+                "account_number": null,
+                "routing_code_type_1": null,
+                "routing_code_value_1": null,
+                "routing_code_type_2": null,
+                "routing_code_value_2": null,
+                "bic_swift": "COBADEFF",
+                "iban": "DE89370400440532013000",
+                "default_beneficiary": "true",
+                "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+                "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+                "created_at": "2015-11-01T20:58:14+00:00",
+                "updated_at": "2015-11-01T20:58:14+00:00"
+              }
+            ],
+            "pagination": {
+              "total_entries": 1,
+              "total_pages": 1,
+              "current_page": 1,
+              "per_page": 5,
+              "previous_page": -1,
+              "next_page": -1,
+              "order": "created_at",
+              "order_asc_desc": "desc"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Delete",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba/delete",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2015-11-01T20:58:14+00:00",
+            "updated_at": "2015-11-01T20:58:14+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+          }
+        },
+        "response": {
+          "status": 404,
+          "headers": {
+            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "error_code": "beneficiary_not_found",
+            "error_messages": {
+              "id": [
+                {
+                  "code": "beneficiary_not_found",
+                  "message": "Beneficiary was not found for this id",
+                  "params": { }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+]

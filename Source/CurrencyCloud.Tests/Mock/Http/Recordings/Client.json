@@ -23,7 +23,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -101,7 +101,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -227,7 +227,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -269,7 +269,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -311,7 +311,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -384,7 +384,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -462,7 +462,8 @@
       {
         "request": {
           "method": "POST",
-          "path": "/v2/contacts/create?account_id=3a7d2f90-ae1f-493c-a8d6-26ad43700259&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554 87845&your_reference=ACME12345&mobile_phone_number=07564 534 54&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
+          "path": "/v2/contacts/create",
+          "query":  "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -498,6 +499,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none&on_behalf_of=12d4f6d3-7a52-47e1-8e35-6017a492e3e3",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -585,6 +587,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
+          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -636,7 +639,7 @@
       {
         "request": {
           "method": "POST",
-          "path": "v2/authenticate/close_session",
+          "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }

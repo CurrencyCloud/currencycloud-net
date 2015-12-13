@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
@@ -33,5 +34,35 @@ namespace CurrencyCloud.Entity
         public string RoutingCodeType2 { get; set; }
 
         public string RoutingCodeValue2 { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is SettlementAccount))
+            {
+                return false;
+            }
+
+            var settlementAccount = obj as SettlementAccount;
+
+            return BankAccountHolderName == settlementAccount.BankAccountHolderName &&
+                   BeneficiaryAddress.SequenceEqual(settlementAccount.BeneficiaryAddress) &&
+                   BeneficiaryCountry == settlementAccount.BeneficiaryCountry &&
+                   BankName == settlementAccount.BankName &&
+                   BankAddress.SequenceEqual(settlementAccount.BankAddress) &&
+                   BankCountry == settlementAccount.BankCountry &&
+                   Currency == settlementAccount.Currency &&
+                   BicSwift == settlementAccount.BicSwift &&
+                   Iban == settlementAccount.Iban &&
+                   AccountNumber == settlementAccount.AccountNumber &&
+                   RoutingCodeType1 == settlementAccount.RoutingCodeType1 &&
+                   RoutingCodeValue1 == settlementAccount.RoutingCodeValue1 &&
+                   RoutingCodeType2 == settlementAccount.RoutingCodeType2 &&
+                   RoutingCodeValue2 == settlementAccount.RoutingCodeValue2;
+        }
+
+        public override int GetHashCode()
+        {
+            return AccountNumber.GetHashCode();
+        }
     }
 }
