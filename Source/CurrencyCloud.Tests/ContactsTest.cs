@@ -17,10 +17,10 @@ namespace CurrencyCloud.Tests
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
-
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
+
             client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
         }
 
@@ -42,10 +42,12 @@ namespace CurrencyCloud.Tests
         {
             player.Play("CreateResetToken");
 
-            //var account1 = Accounts.Account1;
+            var contact1 = Contacts.Contact1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(created.Contains(account1));
+            Account account = await client.GetCurrentAccountAsync();
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+
+            Assert.DoesNotThrow(async () => await client.CreateResetTokenAsync(created.LoginId));
         }
 
         /// <summary>
@@ -56,10 +58,22 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Create");
 
-            //var account1 = Accounts.Account1;
+            var contact1 = Contacts.Contact1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(created.Contains(account1));
+            Account account = await client.GetCurrentAccountAsync();
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+
+            Assert.AreEqual(contact1.FirstName, created.FirstName);
+            Assert.AreEqual(contact1.LastName, created.LastName);
+            Assert.AreEqual(contact1.EmailAddress, created.EmailAddress);
+            Assert.AreEqual(contact1.PhoneNumber, created.PhoneNumber);
+            Assert.AreEqual(contact1.Optional.YourReference, created.YourReference);
+            Assert.AreEqual(contact1.Optional.MobilePhoneNumber, created.MobilePhoneNumber);
+            Assert.AreEqual(contact1.Optional.LoginId, created.LoginId);
+            Assert.AreEqual(contact1.Optional.Status, created.Status);
+            Assert.AreEqual(contact1.Optional.Locale, created.Locale);
+            Assert.AreEqual(contact1.Optional.Timezone, created.Timezone);
+            Assert.AreEqual(contact1.Optional.DateOfBirth, created.DateOfBirth);
         }
 
         /// <summary>
@@ -70,10 +84,13 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            //var account1 = Accounts.Account1;
+            var contact1 = Contacts.Contact1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Account account = await client.GetCurrentAccountAsync();
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+            Contact gotten = await client.GetContactAsync(created.Id);
+
+            Assert.AreEqual(gotten, created);
         }
 
         /// <summary>
@@ -84,10 +101,15 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Update");
 
-            //var account1 = Accounts.Account1;
+            var contact1 = Contacts.Contact1;
+            var contact2 = Contacts.Contact2;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Account account = await client.GetCurrentAccountAsync();
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+            Contact updated = await client.UpdateContactAsync(created.Id, contact2);
+            Contact gotten = await client.GetContactAsync(created.Id);
+
+            Assert.AreEqual(gotten, updated);
         }
 
         /// <summary>
@@ -98,26 +120,29 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Find");
 
-            //Account current = await client.GetCurrentAccountAsync();
-            //PaginatedAccounts accounts = await client.FindAccountsAsync(new
-            //{
-            //    AccountName = current.AccountName,
-            //    Order = "created_at",
-            //    OrderAscDesc = "desc",
-            //    PerPage = 5
-            //});
+            Contact current = await client.GetCurrentContactAsync();
+            PaginatedContacts found = await client.FindContactsAsync(new
+            {
+                LoginId = current.LoginId,
+                Order = "created_at",
+                OrderAscDesc = "desc",
+                PerPage = 5
+            });
+
+            Assert.Contains(current, found.Contacts);
         }
 
         /// <summary>
         /// Successfully gets current contact.
         /// </summary>
         [Test]
-        public async void GetCurrent()
+        public void GetCurrent()
         {
             player.Play("GetCurrent");
 
-            //Account current = await client.GetCurrentAccountAsync();
-            //Assert.IsNotNull(current);
+            Assert.DoesNotThrow(async () => {
+                Contact current = await client.GetCurrentContactAsync();
+            });
         }
     }
 }

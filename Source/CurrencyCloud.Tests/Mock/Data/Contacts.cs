@@ -1,4 +1,6 @@
-﻿namespace CurrencyCloud.Tests.Mock.Data
+﻿using System;
+
+namespace CurrencyCloud.Tests.Mock.Data
 {
     static class Contacts
     {
@@ -17,7 +19,7 @@
                 Status = "enabled",
                 Locale = "en-US",
                 Timezone = "Europe/London",
-                DateOfBirth = "1980-01-22"
+                DateOfBirth = new DateTime(1980, 1, 22)
             }
         };
 
@@ -27,17 +29,13 @@
             LastName = "Brown",
             EmailAddress = "dr.emmet.brown@company.com",
             PhoneNumber = "073 789 1661",
-
-            Optional = new
-            {
-                YourReference = "doc",
-                MobilePhoneNumber = "073 789 1661",
-                LoginId = "emmet",
-                Status = "enabled",
-                Locale = "en-US",
-                Timezone = "Europe/London",
-                DateOfBirth = "1960-01-29"
-            }
+            YourReference = "doc",
+            MobilePhoneNumber = "073 789 1661",
+            LoginId = "emmet",
+            Status = "enabled",
+            Locale = "en-US",
+            Timezone = "Europe/London",
+            DateOfBirth = new DateTime(1960, 1, 29)
         };
     }
 }

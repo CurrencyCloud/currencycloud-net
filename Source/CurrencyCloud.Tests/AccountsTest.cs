@@ -117,13 +117,13 @@ namespace CurrencyCloud.Tests
         /// Successfully gets current account.
         /// </summary>
         [Test]
-        public async void GetCurrent()
+        public void GetCurrent()
         {
             player.Play("GetCurrent");
 
-            Account current = await client.GetCurrentAccountAsync();
-
-            Assert.IsNotNull(current);
+            Assert.DoesNotThrow(async () => {
+                Account current = await client.GetCurrentAccountAsync();
+            });
         }
     }
 }

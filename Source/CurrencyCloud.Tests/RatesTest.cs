@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
-using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using CurrencyCloud.Entity.List;
 
 namespace CurrencyCloud.Tests
 {
@@ -17,10 +17,10 @@ namespace CurrencyCloud.Tests
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
-
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
+
             client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
         }
 
@@ -38,32 +38,26 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a rate.
         /// </summary>
         [Test]
-        public async void Get()
+        public void Get()
         {
             player.Play("Get");
 
-            //var account1 = Accounts.Account1;
-
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Assert.DoesNotThrow(async () => {
+                Rate gotten = await client.GetRateAsync("EUR", "GBP", "buy", 6700);
+            });
         }
 
         /// <summary>
         /// Successfully finds a rate.
         /// </summary>
         [Test]
-        public async void Find()
+        public void Find()
         {
             player.Play("Find");
 
-            //Account current = await client.GetCurrentAccountAsync();
-            //PaginatedAccounts accounts = await client.FindAccountsAsync(new
-            //{
-            //    AccountName = current.AccountName,
-            //    Order = "created_at",
-            //    OrderAscDesc = "desc",
-            //    PerPage = 5
-            //});
+            Assert.DoesNotThrow(async () => {
+                RatesList found = await client.FindRatesAsync("USDGBP");
+            });
         }
     }
 }

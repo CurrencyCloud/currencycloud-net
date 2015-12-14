@@ -43,21 +43,12 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Validate");
 
-            var beneficiaryDetails = new
+            Beneficiary validated = await client.ValidateBeneficiaryAsync("GB", "GBP", "GB", new
             {
-                BankCountry = "GB",
-                Currency = "GBP",
-                BeneficiaryCountry = "GB",
-
-                Optional = new
-                {
-                    AccountNumber = "13071472",
-                    RoutingCodeType1 = "sort_code",
-                    RoutingCodeValue1 = "200605"
-                }
-            };
-
-            var validated = await client.ValidateBeneficiaryAsync(beneficiaryDetails.BankCountry, beneficiaryDetails.Currency, beneficiaryDetails.BeneficiaryCountry, beneficiaryDetails.Optional);
+                AccountNumber = "13071472",
+                RoutingCodeType1 = "sort_code",
+                RoutingCodeValue1 = "200605"
+            });
 
             Assert.IsNull(validated.Id);
         }

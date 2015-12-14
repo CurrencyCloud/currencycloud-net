@@ -2,6 +2,8 @@
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using CurrencyCloud.Entity;
+using CurrencyCloud.Entity.Pagination;
 
 namespace CurrencyCloud.Tests
 {
@@ -36,13 +38,14 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a balance.
         /// </summary>
         [Test]
-        public async void Get()
+        public void Get()
         {
             player.Play("Get");
 
-            var balance = await client.GetBalanceAsync("GBP");
-
-            Assert.AreEqual(balance.Currency, "GBP");
+            Assert.DoesNotThrow(async () =>
+            {
+                Balance balance = await client.GetBalanceAsync("GBP");
+            });
         }
 
         /// <summary>
@@ -53,8 +56,13 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Find");
 
-            var balance = await client.GetBalanceAsync("GBP");
-            var found = await client.FindBalancesAsync();
+            Balance balance = await client.GetBalanceAsync("GBP");
+            PaginatedBalances found = await client.FindBalancesAsync(new
+            {
+                Order = "created_at",
+                OrderAscDesc = "desc",
+                PerPage = 5
+            });
 
             Assert.Contains(balance, found.Balances);
         }

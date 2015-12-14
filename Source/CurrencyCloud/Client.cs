@@ -920,7 +920,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the currencies.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<CurrenciesList> GetAvailableCurrencies()
+        public async Task<CurrenciesList> GetAvailableCurrenciesAsync()
         {
             return await RequestAsync<CurrenciesList>("/v2/reference/currencies", HttpMethod.Get);
         }
@@ -933,7 +933,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the payment dates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentDatesList> GetPaymentDates(string currency, dynamic optional = null)
+        public async Task<PaymentDatesList> GetPaymentDatesAsync(string currency, dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             paramsObj.Currency = currency;
@@ -952,7 +952,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found rates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<SettlementAccountsList> GetSettlementAccounts(dynamic optional = null)
+        public async Task<SettlementAccountsList> GetSettlementAccountsAsync(dynamic optional = null)
         {
             dynamic paramsObj = new ParamsObject();
             if (optional != null)
@@ -1300,8 +1300,16 @@ namespace CurrencyCloud
             {
                 string key = param.Key;
 
+                if (param.Value is Array)
+                {
+                    var values = from object item in param.Value as Array
+                                 select key + "[]=" + item.ToString();
+
+                    return string.Join("&", values.ToList());
+                }
+
                 string value;
-                if(param.Value is DateTime)
+                if (param.Value is DateTime)
                 {
                     value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
                 }
@@ -1313,7 +1321,6 @@ namespace CurrencyCloud
                 {
                     value = param.Value.ToString();
                 }
-
                 return key + "=" + value;
             }));
         }

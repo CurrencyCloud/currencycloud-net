@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
-using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 
@@ -17,10 +16,10 @@ namespace CurrencyCloud.Tests
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
-
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
+
             client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
         }
 
@@ -42,10 +41,29 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            //var account1 = Accounts.Account1;
+            var conversion1 = Conversions.Conversion1;
+            var beneficiary1 = Beneficiaries.Beneficiary1;
+            var payment1 = Payments.Payment1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
+            Payment payment = await client.CreatePaymentAsync(payment1.Currency, beneficiary.Id, payment1.Amount, payment1.Reason, payment1.Reference, new
+            {
+                ConversionId = conversion.Id
+            });
+
+            Payer gotten = await client.GetPayerAsync(payment.PayerId);
+
+            Assert.AreEqual(payment1.Optional.PayerCompanyName, gotten.CompanyName);
+            Assert.AreEqual(payment1.Optional.PayerFirstName, gotten.FirstName);
+            Assert.AreEqual(payment1.Optional.PayerLastName, gotten.LastName);
+            Assert.AreEqual(payment1.Optional.PayerCity, gotten.City);
+            Assert.AreEqual(payment1.Optional.PayerAddress, gotten.Address);
+            Assert.AreEqual(payment1.Optional.PayerPostcode, gotten.Postcode);
+            Assert.AreEqual(payment1.Optional.PayerStateOrProvince, gotten.StateOrProvince);
+            Assert.AreEqual(payment1.Optional.PayerCountry, gotten.Country);
+            Assert.AreEqual(payment1.Optional.PayerDateOfBirth, gotten.DateOfBirth);
+            Assert.AreEqual(payment1.Optional.PayerIdentificationType, gotten.IdentificationType);
         }
     }
 }

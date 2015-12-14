@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace CurrencyCloud.Entity
@@ -18,11 +17,13 @@ namespace CurrencyCloud.Entity
 
         public string LastName { get; set; }
 
-        public List<string> Address { get; set; }
+        public string Address { get; set; }
 
         public string City { get; set; }
 
         public string StateOrProvince { get; set; }
+
+        public string Country { get; set; }
 
         public string IdentificationType { get; set; }
 

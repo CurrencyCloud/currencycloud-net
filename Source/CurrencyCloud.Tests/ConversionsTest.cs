@@ -4,6 +4,7 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using System.Collections;
 
 namespace CurrencyCloud.Tests
 {
@@ -17,10 +18,10 @@ namespace CurrencyCloud.Tests
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
-
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
+
             client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
         }
 
@@ -42,10 +43,13 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Create");
 
-            //var account1 = Accounts.Account1;
+            var conversion1 = Conversions.Conversion1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(created.Contains(account1));
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+
+            Assert.AreEqual(conversion1.BuyCurrency, created.BuyCurrency);
+            Assert.AreEqual(conversion1.SellCurrency, created.SellCurrency);
+            Assert.AreEqual(conversion1.FixedSide, created.FixedSide);
         }
 
         /// <summary>
@@ -56,10 +60,12 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            //var account1 = Accounts.Account1;
+            var conversion1 = Conversions.Conversion1;
 
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion gotten = await client.GetConversionAsync(created.Id);
+
+            Assert.AreEqual(gotten, created);
         }
 
         /// <summary>
@@ -70,14 +76,21 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Find");
 
-            //Account current = await client.GetCurrentAccountAsync();
-            //PaginatedAccounts accounts = await client.FindAccountsAsync(new
-            //{
-            //    AccountName = current.AccountName,
-            //    Order = "created_at",
-            //    OrderAscDesc = "desc",
-            //    PerPage = 5
-            //});
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            PaginatedConversions found = await client.FindConversionsAsync(new
+            {
+                ConversionIds = new string[]
+                {
+                    created.Id
+                },
+                Order = "created_at",
+                OrderAscDesc = "desc",
+                PerPage = 5
+            });
+
+            Assert.Contains(created, found.Conversions);
         }
     }
 }

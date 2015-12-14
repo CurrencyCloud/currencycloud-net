@@ -1,9 +1,8 @@
 ﻿using NUnit.Framework;
-using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
-using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using CurrencyCloud.Entity.List;
 
 namespace CurrencyCloud.Tests
 {
@@ -17,7 +16,6 @@ namespace CurrencyCloud.Tests
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
-
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
@@ -38,50 +36,70 @@ namespace CurrencyCloud.Tests
         /// Successfully gets beneficiary required details.
         /// </summary>
         [Test]
-        public async void GetBeneficiaryRequiredDetails()
+        public void GetBeneficiaryRequiredDetails()
         {
             player.Play("GetBeneficiaryRequiredDetails");
 
-            //var account1 = Accounts.Account1;
-
-            //Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            //Assert.IsTrue(AreEqual(account1, created));
+            Assert.DoesNotThrow(async () => {
+                BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync(new
+                {
+                    Currency = "GBP",
+                    BankAccountCountry = "GB",
+                    BeneficiaryCountry = "GB"
+                });
+            });
         }
 
         /// <summary>
         /// Successfully gets conversion dates.
         /// </summary>
         [Test]
-        public async void GetConversionDates()
+        public void GetConversionDates()
         {
             player.Play("GetConversionDates");
+
+            Assert.DoesNotThrow(async () => {
+                ConversionDatesList gotten = await client.GetConversionDatesAsync("USDGBP");
+            });
         }
 
         /// <summary>
         /// Successfully gets available currencies.
         /// </summary>
         [Test]
-        public async void GetAvailableCurrencies()
+        public void GetAvailableCurrencies()
         {
             player.Play("GetAvailableCurrencies");
+
+            Assert.DoesNotThrow(async () => {
+                CurrenciesList gotten = await client.GetAvailableCurrenciesAsync();
+            });
         }
 
         /// <summary>
         /// Successfully gets payment dates.
         /// </summary>
         [Test]
-        public async void GetPaymentDates()
+        public void GetPaymentDates()
         {
             player.Play("GetPaymentDates");
+
+            Assert.DoesNotThrow(async () => {
+                PaymentDatesList gotten = await client.GetPaymentDatesAsync("USD");
+            });
         }
 
         /// <summary>
         /// Successfully gets settlement accounts.
         /// </summary>
         [Test]
-        public async void GetSettlementAccounts()
+        public void GetSettlementAccounts()
         {
             player.Play("GetSettlementAccounts");
+
+            Assert.DoesNotThrow(async () => {
+                SettlementAccountsList gotten = await client.GetSettlementAccountsAsync("EUR");
+            });
         }
     }
 }

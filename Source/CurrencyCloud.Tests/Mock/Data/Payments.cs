@@ -1,4 +1,6 @@
-﻿namespace CurrencyCloud.Tests.Mock.Data
+﻿using System;
+
+namespace CurrencyCloud.Tests.Mock.Data
 {
     static class Payments
     {
@@ -21,7 +23,7 @@
                 PayerPostcode = "W11 2BQ",
                 PayerStateOrProvince = "TX",
                 PayerCountry = "GB",
-                PayerDateOfBirth = "1980-10-10",
+                PayerDateOfBirth = new DateTime(1980, 10, 10),
                 PayerIdentificationType = "none"
             }
         };
@@ -32,22 +34,18 @@
             Amount = 0.23,
             Reason = "Prepayment of salary for April",
             Reference = "INVOICE 122/1",
-
-            Optional = new
-            {
-                PaymentType = "regular",
-                PayerEntityType = "individual",
-                PayerCompanyName = "Jens enskild firma",
-                PayerFirstName = "Jennifer",
-                PayerLastName = "Waylon",
-                PayerCity = "Stockholm",
-                PayerAddress = "22 Garvargatan",
-                PayerPostcode = "12332",
-                PayerStateOrProvince = "Stockholm",
-                PayerCountry = "SE",
-                PayerDateOfBirth = "1981-12-10",
-                PayerIdentificationType = "none"
-            }
+            PaymentType = "regular",
+            PayerEntityType = "individual",
+            PayerCompanyName = "Jens enskild firma",
+            PayerFirstName = "Jennifer",
+            PayerLastName = "Waylon",
+            PayerCity = "Stockholm",
+            PayerAddress = "22 Garvargatan",
+            PayerPostcode = "12332",
+            PayerStateOrProvince = "Stockholm",
+            PayerCountry = "SE",
+            PayerDateOfBirth = new DateTime(1981, 12, 10),
+            PayerIdentificationType = "none"
         };
     }
 }
