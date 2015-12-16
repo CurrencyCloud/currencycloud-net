@@ -12,8 +12,6 @@ public class ParamsObject : DynamicObject, IEnumerable
 {
     private Dictionary<string, object> storage;
 
-    #region Expand
-
     private void Expand(ParamsObject paramsObj)
     {
         foreach (KeyValuePair<string, object> param in paramsObj)
@@ -21,22 +19,6 @@ public class ParamsObject : DynamicObject, IEnumerable
             storage.Add(param.Key, param.Value);
         }
     }
-
-    //private void Expand(dynamic dynamicObj)
-    //{
-    //    var props = dynamicObj.GetType().GetProperties();
-    //    foreach (var prop in props)
-    //    {
-    //        string key = prop.Name;
-    //        object value = prop.GetValue(dynamicObj);
-
-    //        storage.Add(key.ToSnakeCase(), value);
-    //    }
-    //}
-
-    #endregion
-
-    #region Overloaded
 
     public static ParamsObject operator +(ParamsObject paramsObj1, ParamsObject paramsObj2)
     {
@@ -54,42 +36,6 @@ public class ParamsObject : DynamicObject, IEnumerable
 
         return res;
     }
-
-    //public static ParamsObject operator +(ParamsObject paramsObj, dynamic dynamicObj)
-    //{
-    //    var res = new ParamsObject();
-
-    //    if (paramsObj != null)
-    //    {
-    //        res.Expand(paramsObj);
-    //    }
-
-    //    if (dynamicObj != null)
-    //    {
-    //        res.Expand(dynamicObj);
-    //    }
-
-    //    return res;
-    //}
-
-    //public static ParamsObject operator +(dynamic dynamicObj, ParamsObject paramsObj)
-    //{
-    //    var res = new ParamsObject();
-
-    //    if (dynamicObj != null)
-    //    {
-    //        res.Expand(dynamicObj);
-    //    }
-
-    //    if (paramsObj != null)
-    //    {
-    //        res.Expand(paramsObj);
-    //    }
-
-    //    return res;
-    //}
-
-    #endregion
 
     public ParamsObject()
     {

@@ -72,10 +72,7 @@ namespace CurrencyCloud.Tests.Mock.Http
                             }
                         }
                         if (!isMatchingRequest)
-                        {//todo
-                            Console.WriteLine(recording.request.query);
-                            Console.WriteLine(request.Url.Query);
-
+                        {
                             throw new InvalidOperationException("Request is not recorded.");
                         }
 
