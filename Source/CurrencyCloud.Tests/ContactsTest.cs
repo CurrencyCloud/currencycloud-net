@@ -45,7 +45,7 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
 
             Assert.DoesNotThrow(async () => await client.CreateResetTokenAsync(created.LoginId));
         }
@@ -61,7 +61,7 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
 
             Assert.AreEqual(contact1.FirstName, created.FirstName);
             Assert.AreEqual(contact1.LastName, created.LastName);
@@ -87,7 +87,7 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
             Contact gotten = await client.GetContactAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -105,8 +105,8 @@ namespace CurrencyCloud.Tests
             var contact2 = Contacts.Contact2;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, contact1.Optional);
-            Contact updated = await client.UpdateContactAsync(created.Id, contact2);
+            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
+            Contact updated = await client.UpdateContactAsync(created.Id, new ParamsObject(contact2));
             Contact gotten = await client.GetContactAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -121,13 +121,13 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Contact current = await client.GetCurrentContactAsync();
-            PaginatedContacts found = await client.FindContactsAsync(new
+            PaginatedContacts found = await client.FindContactsAsync(new ParamsObject(new
             {
                 LoginId = current.LoginId,
                 Order = "created_at",
                 OrderAscDesc = "desc",
                 PerPage = 5
-            });
+            }));
 
             Assert.Contains(current, found.Contacts);
         }

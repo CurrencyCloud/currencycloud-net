@@ -43,12 +43,12 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Validate");
 
-            Beneficiary validated = await client.ValidateBeneficiaryAsync("GB", "GBP", "GB", new
+            Beneficiary validated = await client.ValidateBeneficiaryAsync("GB", "GBP", "GB", new ParamsObject(new
             {
                 AccountNumber = "13071472",
                 RoutingCodeType1 = "sort_code",
                 RoutingCodeValue1 = "200605"
-            });
+            }));
 
             Assert.IsNull(validated.Id);
         }
@@ -63,7 +63,7 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
 
             Assert.AreEqual(beneficiary1.BankAccountHolderName, created.BankAccountHolderName);
             Assert.AreEqual(beneficiary1.BankCountry, created.BankCountry);
@@ -98,7 +98,7 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
             Beneficiary gotten = await client.GetBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -115,8 +115,8 @@ namespace CurrencyCloud.Tests
             var beneficiary1 = Beneficiaries.Beneficiary1;
             var beneficiary2 = Beneficiaries.Beneficiary2;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
-            Beneficiary updated = await client.UpdateBeneficiaryAsync(created.Id, beneficiary2);
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Beneficiary updated = await client.UpdateBeneficiaryAsync(created.Id, new ParamsObject(beneficiary2));
             Beneficiary gotten = await client.GetBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -132,14 +132,14 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
-            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync(new
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync(new ParamsObject(new
             {
                 Name = created.Name,
                 Order = "created_at",
                 OrderAscDesc = "desc",
                 PerPage = 5
-            });
+            }));
 
             Assert.Contains(created, found.Beneficiaries);
         }
@@ -154,7 +154,7 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, beneficiary1.Optional);
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
             Beneficiary deleted = await client.DeleteBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(created, deleted);

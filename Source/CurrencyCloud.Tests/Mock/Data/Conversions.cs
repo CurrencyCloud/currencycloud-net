@@ -7,7 +7,7 @@
             BuyCurrency = "EUR",
             SellCurrency = "GBP",
             FixedSide = "buy",
-            Amount = 10000.23,
+            Amount = 10000.23m,
             Reason = "Settling invoices",
             TermAgreement = true
         };

@@ -40,13 +40,14 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetBeneficiaryRequiredDetails");
 
-            Assert.DoesNotThrow(async () => {
-                BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync(new
+            Assert.DoesNotThrow(async () =>
+            {
+                BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync(new ParamsObject(new
                 {
                     Currency = "GBP",
                     BankAccountCountry = "GB",
                     BeneficiaryCountry = "GB"
-                });
+                }));
             });
         }
 
@@ -98,7 +99,10 @@ namespace CurrencyCloud.Tests
             player.Play("GetSettlementAccounts");
 
             Assert.DoesNotThrow(async () => {
-                SettlementAccountsList gotten = await client.GetSettlementAccountsAsync("EUR");
+                SettlementAccountsList gotten = await client.GetSettlementAccountsAsync(new ParamsObject(new
+                {
+                    Currency = "EUR"
+                }));
             });
         }
     }

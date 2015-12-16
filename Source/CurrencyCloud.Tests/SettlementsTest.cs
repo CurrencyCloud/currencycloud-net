@@ -45,10 +45,10 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrow(async () =>
             {
-                Settlement created = await client.CreateSettlementAsync(new
+                Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
                 {
                     Type = "net"
-                });
+                }));
             });
         }
 
@@ -60,10 +60,10 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            Settlement created = await client.CreateSettlementAsync(new
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement gotten = await client.GetSettlementAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -77,16 +77,16 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Find");
 
-            Settlement created = await client.CreateSettlementAsync(new
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
-            PaginatedSettlements found = await client.FindSettlementsAsync(new
+            }));
+            PaginatedSettlements found = await client.FindSettlementsAsync(new ParamsObject(new
             {
                 Order = "created_at",
                 OrderAscDesc = "desc",
                 PerPage = 5
-            });
+            }));
 
             Assert.Contains(created, found.Settlements);
         }
@@ -99,10 +99,10 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Delete");
 
-            Settlement created = await client.CreateSettlementAsync(new
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement deleted = await client.DeleteSettlementAsync(created.Id);
 
             Assert.AreEqual(created, deleted);
@@ -129,11 +129,11 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.reason, conversion1.TermAgreement);
-            Settlement created = await client.CreateSettlementAsync(new
+            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement updated = await client.AddConversionToSettlementAsync(created.Id, conversion.Id);
 
             Assert.Contains(conversion.Id, updated.ConversionIds);
@@ -150,11 +150,11 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.reason, conversion1.TermAgreement);
-            Settlement created = await client.CreateSettlementAsync(new
+            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement updated = await client.AddConversionToSettlementAsync(created.Id, conversion.Id);
             updated = await client.RemoveConversionFromSettlementAsync(created.Id, conversion.Id);
 
@@ -171,11 +171,11 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.reason, conversion1.TermAgreement);
-            Settlement created = await client.CreateSettlementAsync(new
+            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement updated = await client.AddConversionToSettlementAsync(created.Id, conversion.Id);
             updated = await client.ReleaseSettlementAsync(created.Id);
 
@@ -192,11 +192,11 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.reason, conversion1.TermAgreement);
-            Settlement created = await client.CreateSettlementAsync(new
+            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
-            });
+            }));
             Settlement updated = await client.AddConversionToSettlementAsync(created.Id, conversion.Id);
             updated = await client.ReleaseSettlementAsync(created.Id);
             updated = await client.UnreleaseSettlementAsync(created.Id);

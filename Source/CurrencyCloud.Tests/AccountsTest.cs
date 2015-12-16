@@ -44,7 +44,7 @@ namespace CurrencyCloud.Tests
 
             var account1 = Accounts.Account1;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
+            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
 
             Assert.AreEqual(account1.AccountName, created.AccountName);
             Assert.AreEqual(account1.LegalEntityType, created.LegalEntityType);
@@ -69,7 +69,7 @@ namespace CurrencyCloud.Tests
 
             var account1 = Accounts.Account1;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
+            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
             Account gotten = await client.GetAccountAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -86,8 +86,8 @@ namespace CurrencyCloud.Tests
             var account1 = Accounts.Account1;
             var account2 = Accounts.Account2;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, account1.Optional);
-            Account updated = await client.UpdateAccountAsync(created.Id, account2);
+            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
+            Account updated = await client.UpdateAccountAsync(created.Id, new ParamsObject(account2));
             Account gotten = await client.GetAccountAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -102,13 +102,13 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Account current = await client.GetCurrentAccountAsync();
-            PaginatedAccounts found = await client.FindAccountsAsync(new
+            PaginatedAccounts found = await client.FindAccountsAsync(new ParamsObject(new
             {
                 AccountName = current.AccountName,
                 Order = "created_at",
                 OrderAscDesc = "desc",
                 PerPage = 5
-            });
+            }));
 
             Assert.Contains(current, found.Accounts);
         }

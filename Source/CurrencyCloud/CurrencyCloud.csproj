@@ -79,6 +79,7 @@
     <Compile Include="Environment\ApiServer.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Environment\Platform.cs" />
+    <Compile Include="ParamsObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
   </ItemGroup>

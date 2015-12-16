@@ -45,7 +45,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
 
             Assert.AreEqual(conversion1.BuyCurrency, created.BuyCurrency);
             Assert.AreEqual(conversion1.SellCurrency, created.SellCurrency);
@@ -62,7 +62,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
             Conversion gotten = await client.GetConversionAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -78,8 +78,8 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, (decimal) conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
-            PaginatedConversions found = await client.FindConversionsAsync(new
+            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            PaginatedConversions found = await client.FindConversionsAsync(new ParamsObject(new
             {
                 ConversionIds = new string[]
                 {
@@ -88,7 +88,7 @@ namespace CurrencyCloud.Tests
                 Order = "created_at",
                 OrderAscDesc = "desc",
                 PerPage = 5
-            });
+            }));
 
             Assert.Contains(created, found.Conversions);
         }

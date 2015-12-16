@@ -63,11 +63,11 @@ namespace Cookbook
                 Console.WriteLine(conversion);
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary required details:");
-                BeneficiaryDetailsList beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync(new
+                BeneficiaryDetailsList beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync(new ParamsObject(new
                 {
                     Currency = conversionParams.BuyCurrency,
                     BankAccountCountry = beneficiaryParams.Country
-                });
+                }));
                 var details = (from detailsList in beneficiaryDetails.Details
                                select string.Join(", ", (from detail in detailsList
                                                          select string.Format("{0}={1}", detail.Key, detail.Value))
@@ -75,19 +75,19 @@ namespace Cookbook
                 Console.WriteLine(string.Join(Environment.NewLine, details.ToList()));
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary:");
-                Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.Account, beneficiaryParams.Country, conversionParams.BuyCurrency, beneficiaryParams.Name, new
+                Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.Account, beneficiaryParams.Country, conversionParams.BuyCurrency, beneficiaryParams.Name, new ParamsObject(new
                 {
                     BicSwift = beneficiaryParams.BicSwift,
                     Iban = beneficiaryParams.Iban
-                });
+                }));
                 Console.WriteLine(beneficiary);
 
                 Console.WriteLine(Environment.NewLine + "Payment:");
-                Payment payment = await client.CreatePaymentAsync(conversionParams.BuyCurrency, beneficiary.Id, conversionParams.Amount, paymentParams.Reason, paymentParams.Reference, new
+                Payment payment = await client.CreatePaymentAsync(conversionParams.BuyCurrency, beneficiary.Id, conversionParams.Amount, paymentParams.Reason, paymentParams.Reference, new ParamsObject(new
                 {
                     ConversionId = conversion.Id,
                     PaymentType = paymentParams.Type
-                });
+                }));
                 Console.WriteLine(payment);
             }
             catch (ApiException ex)

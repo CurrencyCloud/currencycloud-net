@@ -7,7 +7,7 @@
             AccountName = "Acme Ltd.",
             LegalEntityType = "company",
 
-            Optional = new
+            Optional = new 
             {
                 YourReference = "POS-UID-23523",
                 Status = "enabled",

@@ -16,7 +16,7 @@ namespace CurrencyCloud.Entity
 
         public List<string> ConversionIds { get; set; }
 
-        public Dictionary<string, SettlementEntry> Entries { get; set; }
+        public List<Dictionary<string, SettlementEntry>> Entries { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

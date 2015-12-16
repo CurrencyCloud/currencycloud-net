@@ -4,7 +4,7 @@ namespace CurrencyCloud.Tests.Mock.Data
 {
     static class Payments
     {
-        public static readonly dynamic Payment1 = new
+        public static dynamic Payment1 = new
         {
             Currency = "EUR",
             Amount = 10000,
@@ -31,9 +31,9 @@ namespace CurrencyCloud.Tests.Mock.Data
         public static readonly dynamic Payment2 = new
         {
             Currency = "EUR",
-            Amount = 0.23,
+            Amount = 0.23m,
             Reason = "Prepayment of salary for April",
-            Reference = "INVOICE 122/1",
+            Reference = "INVOICE 122",
             PaymentType = "regular",
             PayerEntityType = "individual",
             PayerCompanyName = "Jens enskild firma",
