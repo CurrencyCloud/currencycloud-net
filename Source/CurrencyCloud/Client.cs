@@ -58,6 +58,7 @@ namespace CurrencyCloud
                 JObject resObject = JObject.Parse(resString);
 
                 var token = resObject["auth_token"].Value<string>();
+
                 httpClient.DefaultRequestHeaders.Remove("X-Auth-Token");
                 httpClient.DefaultRequestHeaders.Add("X-Auth-Token", token);
 
@@ -202,6 +203,7 @@ namespace CurrencyCloud
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
             httpClient = new HttpClient();
+
             httpClient.BaseAddress = new Uri(apiServer.Url);
 
             credentials = new
