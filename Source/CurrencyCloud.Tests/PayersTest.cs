@@ -46,7 +46,7 @@ namespace CurrencyCloud.Tests
             var payment1 = Payments.Payment1;
 
             Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
-            Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1);
 
             dynamic paymentOptional1 = new ParamsObject(payment1.Optional);
             paymentOptional1.ConversionId = conversion.Id;

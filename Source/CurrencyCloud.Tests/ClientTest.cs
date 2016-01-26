@@ -166,13 +166,13 @@ namespace CurrencyCloud.Tests
             Contact contact = await client.CreateContactAsync(account.Id, contactParams.FirstName, contactParams.LastName, contactParams.EmailAddress, contactParams.PhoneNumber, new ParamsObject(contactParams.Optional));
             await client.OnBehalfOf(contact.Id, async () =>
             {
-                beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.BankAccountHolderName, beneficiaryParams.BankCountry, beneficiaryParams.Currency, beneficiaryParams.Name, new ParamsObject(beneficiaryParams.Optional));
+                beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams);
 
                 Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
             });
 
             contact = await client.GetCurrentContactAsync();
-            beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.BankAccountHolderName, beneficiaryParams.BankCountry, beneficiaryParams.Currency, beneficiaryParams.Name, new ParamsObject(beneficiaryParams.Optional));
+            beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams);
 
             Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
 

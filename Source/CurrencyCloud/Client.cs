@@ -361,17 +361,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the validated beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Beneficiary> ValidateBeneficiaryAsync(string bankCountry, string currency, string beneficiaryCountry, ParamsObject optional = null)
+        public async Task<Beneficiary> ValidateBeneficiaryAsync(BeneficiaryValidateParameters validateParameters, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.BankCountry = bankCountry;
-            paramsObj.Currency = currency;
-            paramsObj.BeneficiaryCountry = beneficiaryCountry;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            dynamic paramsObj = ParamsObject.CreateFromStaticObject(validateParameters);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                paramsObj.OnBehalfOf = onBehalfOf;
 
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/validate", HttpMethod.Post, paramsObj);
         }
@@ -387,18 +381,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Beneficiary> CreateBeneficiaryAsync(string bankAccountHolderName, string bankCountry, string currency, string name, ParamsObject optional = null)
+        public async Task<Beneficiary> CreateBeneficiaryAsync(Beneficiary beneficiary, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.BankAccountHolderName = bankAccountHolderName;
-            paramsObj.BankCountry = bankCountry;
-            paramsObj.Currency = currency;
-            paramsObj.Name = name;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            dynamic paramsObj = ParamsObject.CreateFromStaticObject(beneficiary);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                paramsObj.OnBehalfOf = onBehalfOf;
 
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/create", HttpMethod.Post, paramsObj);
         }
@@ -411,8 +398,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Beneficiary> GetBeneficiaryAsync(string id, ParamsObject optional = null)
+        public async Task<Beneficiary> GetBeneficiaryAsync(string id, string onBehalfOf = null)
         {
+            dynamic optional = new ParamsObject();
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.OnBehalfOf = onBehalfOf;
+
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/" + id, HttpMethod.Get, optional);
         }
 
@@ -424,8 +415,16 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Beneficiary> UpdateBeneficiaryAsync(string id, ParamsObject optional = null)
+        public async Task<Beneficiary> UpdateBeneficiaryAsync(Beneficiary beneficiary, string onBehalfOf = null)
         {
+            string id = beneficiary.Id;
+            if (id == null)
+                throw new ArgumentException("beneficiary.Id can not be null");
+
+            dynamic optional = ParamsObject.CreateFromStaticObject(beneficiary);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.OnBehalfOf = onBehalfOf;
+
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/" + id, HttpMethod.Post, optional);
         }
 
@@ -436,8 +435,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found beneficiaries, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedBeneficiaries> FindBeneficiariesAsync(ParamsObject optional = null)
+        public async Task<PaginatedBeneficiaries> FindBeneficiariesAsync(BeneficiaryFindParameters parameters, string onBehalfOf = null)
         {
+            dynamic optional = ParamsObject.CreateFromStaticObject(parameters);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.OnBehalfOf = onBehalfOf;
+
             return await RequestAsync<PaginatedBeneficiaries>("/v2/beneficiaries/find", HttpMethod.Get, optional);
         }
 
@@ -449,8 +452,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the deleted beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Beneficiary> DeleteBeneficiaryAsync(string id, ParamsObject optional = null)
+        public async Task<Beneficiary> DeleteBeneficiaryAsync(string id, string onBehalfOf = null)
         {
+            dynamic optional = new ParamsObject();
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.OnBehalfOf = onBehalfOf;
+
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/" + id + "/delete", HttpMethod.Post, optional);
         }
 

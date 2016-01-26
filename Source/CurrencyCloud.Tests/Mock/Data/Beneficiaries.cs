@@ -1,24 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using CurrencyCloud.Entity;
 
 namespace CurrencyCloud.Tests.Mock.Data
 {
     static class Beneficiaries
     {
-        public static readonly dynamic Beneficiary1 = new
-        {
-            BankAccountHolderName = "John Doe",
-            BankCountry = "DE",
-            Currency = "EUR",
-            Name = "Employee Funds",
-
-            Optional = new
-            {
-                BeneficiaryAddress = "23 Acacia Road",
+        public static readonly Beneficiary Beneficiary1 = new Beneficiary(
+            "John Doe",
+            "DE",
+            "EUR",
+            "Employee Funds"
+            )
+        { 
+                BeneficiaryAddress = new List<string>(new string[] { "23 Acacia Road" }),
                 BeneficiaryCountry = "GB",
                 BicSwift = "COBADEFF",
                 Iban = "DE89370400440532013000",
                 DefaultBeneficiary = true,
-                BankAddress = "KAISERSTRASSE 16",
+                BankAddress = new List<string>(new string[] { "KAISERSTRASSE 16" }),
                 BankName = "COMMERZBANK AG",
                 BankAccountType = "checking",
                 BeneficiaryEntityType = "company",
@@ -30,16 +30,17 @@ namespace CurrencyCloud.Tests.Mock.Data
                 BeneficiaryStateOrProvince = "TX",
                 BeneficiaryDateOfBirth = new DateTime(1990, 7, 20),
                 BeneficiaryIdentificationType = "none"
-            }
         };
 
-        public static readonly dynamic Beneficiary2 = new
-        {
-            BankAccountHolderName = "Martin McFly",
-            BankCountry = "US",
-            Currency = "USD",
-            Name = "Employee Funds",
-            BeneficiaryAddress = "9303 Roslyndale Ave.",
+        public static readonly Beneficiary Beneficiary2 = new Beneficiary(
+        
+            "Martin McFly",
+            "US",
+            "USD",
+            "Employee Funds"
+            )
+        { 
+            BeneficiaryAddress = new List<string>(new string[] { "9303 Roslyndale Ave." }),
             BeneficiaryCountry = "US",
             AccountNumber = "13071472",
             RoutingCodeType1 = "sort_code",
@@ -49,7 +50,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             BicSwift = "USSWIFT",
             Iban = "US89370400440532013000",
             DefaultBeneficiary = true,
-            BankAddress = "1 Courthouse Square",
+            BankAddress = new List<string>(new string[] { "1 Courthouse Square" }),
             BankName = "Emmet Bank",
             BankAccountType = "checking",
             BeneficiaryEntityType = "company",

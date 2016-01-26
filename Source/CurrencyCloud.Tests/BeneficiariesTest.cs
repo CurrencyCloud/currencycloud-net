@@ -43,12 +43,13 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Validate");
 
-            Beneficiary validated = await client.ValidateBeneficiaryAsync("GB", "GBP", "GB", new ParamsObject(new
+            Beneficiary validated = await client.ValidateBeneficiaryAsync(
+                new BeneficiaryValidateParameters("GB", "GBP", "GB")
             {
                 AccountNumber = "13071472",
                 RoutingCodeType1 = "sort_code",
                 RoutingCodeValue1 = "200605"
-            }));
+            });
 
             Assert.IsNull(validated.Id);
         }
@@ -63,29 +64,29 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
 
             Assert.AreEqual(beneficiary1.BankAccountHolderName, created.BankAccountHolderName);
             Assert.AreEqual(beneficiary1.BankCountry, created.BankCountry);
             Assert.AreEqual(beneficiary1.Currency, created.Currency);
             Assert.AreEqual(beneficiary1.Name, created.Name);
-            Assert.Contains(beneficiary1.Optional.BeneficiaryAddress, created.BeneficiaryAddress);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryCountry, created.BeneficiaryCountry);
-            Assert.AreEqual(beneficiary1.Optional.BicSwift, created.BicSwift);
-            Assert.AreEqual(beneficiary1.Optional.Iban, created.Iban);
-            Assert.AreEqual(beneficiary1.Optional.DefaultBeneficiary, created.DefaultBeneficiary);
-            Assert.Contains(beneficiary1.Optional.BankAddress, created.BankAddress);
-            Assert.AreEqual(beneficiary1.Optional.BankName, created.BankName);
-            Assert.AreEqual(beneficiary1.Optional.BankAccountType, created.BankAccountType);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryEntityType, created.BeneficiaryEntityType);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryCompanyName, created.BeneficiaryCompanyName);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryFirstName, created.BeneficiaryFirstName);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryLastName, created.BeneficiaryLastName);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryCity, created.BeneficiaryCity);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryPostcode, created.BeneficiaryPostcode);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryStateOrProvince, created.BeneficiaryStateOrProvince);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryDateOfBirth, created.BeneficiaryDateOfBirth);
-            Assert.AreEqual(beneficiary1.Optional.BeneficiaryIdentificationType, created.BeneficiaryIdentificationType);
+            Assert.Contains(beneficiary1.BeneficiaryAddress[0], created.BeneficiaryAddress);
+            Assert.AreEqual(beneficiary1.BeneficiaryCountry, created.BeneficiaryCountry);
+            Assert.AreEqual(beneficiary1.BicSwift, created.BicSwift);
+            Assert.AreEqual(beneficiary1.Iban, created.Iban);
+            Assert.AreEqual(beneficiary1.DefaultBeneficiary, created.DefaultBeneficiary);
+            Assert.Contains(beneficiary1.BankAddress[0], created.BankAddress);
+            Assert.AreEqual(beneficiary1.BankName, created.BankName);
+            Assert.AreEqual(beneficiary1.BankAccountType, created.BankAccountType);
+            Assert.AreEqual(beneficiary1.BeneficiaryEntityType, created.BeneficiaryEntityType);
+            Assert.AreEqual(beneficiary1.BeneficiaryCompanyName, created.BeneficiaryCompanyName);
+            Assert.AreEqual(beneficiary1.BeneficiaryFirstName, created.BeneficiaryFirstName);
+            Assert.AreEqual(beneficiary1.BeneficiaryLastName, created.BeneficiaryLastName);
+            Assert.AreEqual(beneficiary1.BeneficiaryCity, created.BeneficiaryCity);
+            Assert.AreEqual(beneficiary1.BeneficiaryPostcode, created.BeneficiaryPostcode);
+            Assert.AreEqual(beneficiary1.BeneficiaryStateOrProvince, created.BeneficiaryStateOrProvince);
+            Assert.AreEqual(beneficiary1.BeneficiaryDateOfBirth, created.BeneficiaryDateOfBirth);
+            Assert.AreEqual(beneficiary1.BeneficiaryIdentificationType, created.BeneficiaryIdentificationType);
         }
 
         /// <summary>
@@ -98,7 +99,7 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
             Beneficiary gotten = await client.GetBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -115,8 +116,9 @@ namespace CurrencyCloud.Tests
             var beneficiary1 = Beneficiaries.Beneficiary1;
             var beneficiary2 = Beneficiaries.Beneficiary2;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
-            Beneficiary updated = await client.UpdateBeneficiaryAsync(created.Id, new ParamsObject(beneficiary2));
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
+            beneficiary2.Id = created.Id;
+            Beneficiary updated = await client.UpdateBeneficiaryAsync(beneficiary2);
             Beneficiary gotten = await client.GetBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -132,14 +134,14 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
-            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync(new ParamsObject(new
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
+            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync(new BeneficiaryFindParameters
             {
                 Name = created.Name,
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = BeneficiaryFindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(created, found.Beneficiaries);
         }
@@ -154,7 +156,7 @@ namespace CurrencyCloud.Tests
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
-            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
             Beneficiary deleted = await client.DeleteBeneficiaryAsync(created.Id);
 
             Assert.AreEqual(created, deleted);

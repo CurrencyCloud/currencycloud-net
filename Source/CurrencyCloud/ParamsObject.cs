@@ -56,6 +56,37 @@ namespace CurrencyCloud
             }
         }
 
+        internal static ParamsObject CreateFromStaticObject(object obj)
+        {
+            Type t = obj.GetType();
+            ParamsObject ret = new ParamsObject();
+            foreach (var p in t.GetProperties())
+            {
+                var r = Attribute.IsDefined(p, typeof(ParamAttribute));
+                if (!r)
+                    continue;
+
+                object propValue = p.GetValue(obj);
+                if (propValue != null)
+                {
+                    if (propValue.GetType().GetInterface("IList") != null)
+                    {
+                        string newValue = "";
+                        foreach (object item in (IList)propValue)
+                        {
+                            if (newValue.Length > 0)
+                                newValue += ", ";
+                            newValue += item.ToString();
+                        }
+                        propValue = newValue;
+                    }
+                    ret.Add(p.Name, propValue);
+                }
+            }
+            return ret;
+
+        }
+
         public int Count
         {
             get
