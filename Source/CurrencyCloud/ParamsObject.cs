@@ -75,7 +75,7 @@ namespace CurrencyCloud
                         foreach (object item in (IList)propValue)
                         {
                             if (newValue.Length > 0)
-                                newValue += ", ";
+                                newValue += " \r\n";
                             newValue += item.ToString();
                         }
                         propValue = newValue;
