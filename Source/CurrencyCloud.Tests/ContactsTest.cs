@@ -45,7 +45,8 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
+            contact1.AccountId = account.Id;
+            Contact created = await client.CreateContactAsync(contact1);
 
             Assert.DoesNotThrow(async () => await client.CreateResetTokenAsync(created.LoginId));
         }
@@ -61,19 +62,20 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
+            contact1.AccountId = account.Id;
+            Contact created = await client.CreateContactAsync(contact1);
 
             Assert.AreEqual(contact1.FirstName, created.FirstName);
             Assert.AreEqual(contact1.LastName, created.LastName);
             Assert.AreEqual(contact1.EmailAddress, created.EmailAddress);
             Assert.AreEqual(contact1.PhoneNumber, created.PhoneNumber);
-            Assert.AreEqual(contact1.Optional.YourReference, created.YourReference);
-            Assert.AreEqual(contact1.Optional.MobilePhoneNumber, created.MobilePhoneNumber);
-            Assert.AreEqual(contact1.Optional.LoginId, created.LoginId);
-            Assert.AreEqual(contact1.Optional.Status, created.Status);
-            Assert.AreEqual(contact1.Optional.Locale, created.Locale);
-            Assert.AreEqual(contact1.Optional.Timezone, created.Timezone);
-            Assert.AreEqual(contact1.Optional.DateOfBirth, created.DateOfBirth);
+            Assert.AreEqual(contact1.YourReference, created.YourReference);
+            Assert.AreEqual(contact1.MobilePhoneNumber, created.MobilePhoneNumber);
+            Assert.AreEqual(contact1.LoginId, created.LoginId);
+            Assert.AreEqual(contact1.Status, created.Status);
+            Assert.AreEqual(contact1.Locale, created.Locale);
+            Assert.AreEqual(contact1.Timezone, created.Timezone);
+            Assert.AreEqual(contact1.DateOfBirth, created.DateOfBirth);
         }
 
         /// <summary>
@@ -87,7 +89,8 @@ namespace CurrencyCloud.Tests
             var contact1 = Contacts.Contact1;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
+            contact1.AccountId = account.Id;
+            Contact created = await client.CreateContactAsync(contact1);
             Contact gotten = await client.GetContactAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -105,8 +108,11 @@ namespace CurrencyCloud.Tests
             var contact2 = Contacts.Contact2;
 
             Account account = await client.GetCurrentAccountAsync();
-            Contact created = await client.CreateContactAsync(account.Id, contact1.FirstName, contact1.LastName, contact1.EmailAddress, contact1.PhoneNumber, new ParamsObject(contact1.Optional));
-            Contact updated = await client.UpdateContactAsync(created.Id, new ParamsObject(contact2));
+            contact1.AccountId = account.Id;
+            Contact created = await client.CreateContactAsync(contact1);
+            contact2.Id = created.Id;
+            contact2.AccountId = account.Id;
+            Contact updated = await client.UpdateContactAsync(contact2);
             Contact gotten = await client.GetContactAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -121,13 +127,13 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Contact current = await client.GetCurrentContactAsync();
-            PaginatedContacts found = await client.FindContactsAsync(new ParamsObject(new
+            PaginatedContacts found = await client.FindContactsAsync(new ContactFindParameters
             {
                 LoginId = current.LoginId,
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(current, found.Contacts);
         }

@@ -4,34 +4,62 @@ namespace CurrencyCloud.Entity
 {
     public class Contact : Entity
     {
+        public Contact(
+            string accountId,
+            string firstName,
+            string lastName,
+            string emailAddress,
+            string phoneNumber
+            )
+        {
+            this.AccountId = accountId;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.EmailAddress = emailAddress;
+            this.PhoneNumber = phoneNumber;
+        }
+
+        [Newtonsoft.Json.JsonConstructor]
         internal Contact() { }
 
         public string Id { get; set; }
 
+        [Param]
         public string LoginId { get; set; }
 
+        [Param]
         public string YourReference { get; set; }
 
+        [Param]
         public string FirstName { get; set; }
 
+        [Param]
         public string LastName { get; set; }
 
+        [Param]
         public string AccountId { get; set; }
 
         public string AccountName { get; set; }
 
+        [Param]
         public string Status { get; set; }
 
+        [Param]
         public string PhoneNumber { get; set; }
 
+        [Param]
         public string MobilePhoneNumber { get; set; }
 
+        [Param]
         public string Locale { get; set; }
 
+        [Param]
         public string Timezone { get; set; }
 
+        [Param]
         public string EmailAddress { get; set; }
 
+        [Param]
         public DateTime DateOfBirth { get; set; }
 
         public DateTime CreatedAt { get; set; }

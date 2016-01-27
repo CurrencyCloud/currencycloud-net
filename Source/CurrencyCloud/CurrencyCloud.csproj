@@ -52,6 +52,7 @@
     <Compile Include="Entity\Find\AccountFindParameters.cs" />
     <Compile Include="Entity\Find\BalanceFindParameters.cs" />
     <Compile Include="Entity\Find\BeneficiaryFindParameters.cs" />
+    <Compile Include="Entity\Find\ContactFindParameters.cs" />
     <Compile Include="Entity\Find\FindParameters.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />

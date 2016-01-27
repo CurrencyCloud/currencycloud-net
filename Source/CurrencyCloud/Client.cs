@@ -507,19 +507,9 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Contact> CreateContactAsync(string accountId, string firstName, string lastName, string emailAddress, string phoneNumber, ParamsObject optional = null)
+        public async Task<Contact> CreateContactAsync(Contact contact)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.AccountId = accountId;
-            paramsObj.FirstName = firstName;
-            paramsObj.LastName = lastName;
-            paramsObj.EmailAddress = emailAddress;
-            paramsObj.PhoneNumber = phoneNumber;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            dynamic paramsObj = ParamsObject.CreateFromStaticObject(contact);
 
             return await RequestAsync<Contact>("/v2/contacts/create", HttpMethod.Post, paramsObj);
         }
@@ -532,9 +522,9 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Contact> GetContactAsync(string id, ParamsObject optional = null)
+        public async Task<Contact> GetContactAsync(string id)
         {
-            return await RequestAsync<Contact>("/v2/contacts/" + id, HttpMethod.Get, optional);
+            return await RequestAsync<Contact>("/v2/contacts/" + id, HttpMethod.Get, null);
         }
 
         /// <summary>
@@ -545,8 +535,16 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Contact> UpdateContactAsync(string id, ParamsObject optional = null)
+        public async Task<Contact> UpdateContactAsync(Contact contact)
         {
+            string id = contact.Id;
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Contact.Id can not be null");
+
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(contact);
+            //remove account_id. Not required by server while update.
+            optional.Remove("AccountId");
+
             return await RequestAsync<Contact>("/v2/contacts/" + id, HttpMethod.Post, optional);
         }
 
@@ -557,8 +555,10 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found contacts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedContacts> FindContactsAsync(ParamsObject optional = null)
+        public async Task<PaginatedContacts> FindContactsAsync(ContactFindParameters parameters)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+
             return await RequestAsync<PaginatedContacts>("/v2/contacts/find", HttpMethod.Get, optional);
         }
 
