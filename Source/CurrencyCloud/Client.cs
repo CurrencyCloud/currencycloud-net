@@ -647,8 +647,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested payer.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payer> GetPayerAsync(string id, ParamsObject optional = null)
+        public async Task<Payer> GetPayerAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Payer>("/v2/payers/" + id, HttpMethod.Get, optional);
         }
 
