@@ -44,19 +44,19 @@ namespace CurrencyCloud.Tests
 
             var account1 = Accounts.Account1;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
+            Account created = await client.CreateAccountAsync(account1);
 
             Assert.AreEqual(account1.AccountName, created.AccountName);
             Assert.AreEqual(account1.LegalEntityType, created.LegalEntityType);
-            Assert.AreEqual(account1.Optional.YourReference, created.YourReference);
-            Assert.AreEqual(account1.Optional.Status, created.Status);
-            Assert.AreEqual(account1.Optional.Street, created.Street);
-            Assert.AreEqual(account1.Optional.City, created.City);
-            Assert.AreEqual(account1.Optional.StateOrProvince, created.StateOrProvince);
-            Assert.AreEqual(account1.Optional.PostalCode, created.PostalCode);
-            Assert.AreEqual(account1.Optional.Country, created.Country);
-            Assert.AreEqual(account1.Optional.SpreadTable, created.SpreadTable);
-            Assert.AreEqual(account1.Optional.IdentificationType, created.IdentificationType);
+            Assert.AreEqual(account1.YourReference, created.YourReference);
+            Assert.AreEqual(account1.Status, created.Status);
+            Assert.AreEqual(account1.Street, created.Street);
+            Assert.AreEqual(account1.City, created.City);
+            Assert.AreEqual(account1.StateOrProvince, created.StateOrProvince);
+            Assert.AreEqual(account1.PostalCode, created.PostalCode);
+            Assert.AreEqual(account1.Country, created.Country);
+            Assert.AreEqual(account1.SpreadTable, created.SpreadTable);
+            Assert.AreEqual(account1.IdentificationType, created.IdentificationType);
         }
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace CurrencyCloud.Tests
 
             var account1 = Accounts.Account1;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
+            Account created = await client.CreateAccountAsync(account1);
             Account gotten = await client.GetAccountAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -86,8 +86,9 @@ namespace CurrencyCloud.Tests
             var account1 = Accounts.Account1;
             var account2 = Accounts.Account2;
 
-            Account created = await client.CreateAccountAsync(account1.AccountName, account1.LegalEntityType, new ParamsObject(account1.Optional));
-            Account updated = await client.UpdateAccountAsync(created.Id, new ParamsObject(account2));
+            Account created = await client.CreateAccountAsync(account1);
+            account2.Id = created.Id;
+            Account updated = await client.UpdateAccountAsync(account2);
             Account gotten = await client.GetAccountAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -102,13 +103,13 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Account current = await client.GetCurrentAccountAsync();
-            PaginatedAccounts found = await client.FindAccountsAsync(new ParamsObject(new
+            PaginatedAccounts found = await client.FindAccountsAsync(new AccountFindParameters
             {
                 AccountName = current.AccountName,
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(current, found.Accounts);
         }

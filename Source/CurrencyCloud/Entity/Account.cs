@@ -1,41 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
     public class Account : Entity
     {
+        public Account(string accountName, string legalEntityType)
+        {
+            this.AccountName = accountName;
+            this.LegalEntityType = legalEntityType;
+        }
+
+        [Newtonsoft.Json.JsonConstructor]
         internal Account() { }
 
         public string Id { get; set; }
 
+        [Param]
         public string LegalEntityType { get; set; }
 
+        [Param]
         public string AccountName { get; set; }
 
+        [Param]
         public string Brand { get; set; }
 
+        [Param]
         public string YourReference { get; set; }
 
+        [Param]
         public string Status { get; set; }
 
+        [Param]
         public string Street { get; set; }
 
+        [Param]
         public string City { get; set; }
 
+        [Param]
         public string StateOrProvince { get; set; }
 
+        [Param]
         public string Country { get; set; }
 
+        [Param]
         public string PostalCode { get; set; }
 
+        [Param]
         public string SpreadTable { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
 
+        [Param]
         public string IdentificationType { get; set; }
 
+        [Param]
         public string IdentificationValue { get; set; }
 
         public string ShortReference { get; set; }

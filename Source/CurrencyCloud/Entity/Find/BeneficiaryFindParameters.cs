@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CurrencyCloud.Entity
 {
-    public class BeneficiaryFindParameters
+    public class BeneficiaryFindParameters : FindParameters
     {
         [Param]
         public string BankAccountHolderName { get; set; }
@@ -71,15 +71,5 @@ namespace CurrencyCloud.Entity
         [Param]
         public bool? DefaultBeneficiary { get; set; }
 
-        [Param]
-        public int? Page { get; set; }
-        [Param]
-        public int? PerPage { get; set; }
-        [Param]
-        public string Order { get; set; }
-        [Param]
-        public enum OrderDirection { asc, desc};
-        [Param]
-        public OrderDirection? OrderAscDesc {get;set;}
     }
 }

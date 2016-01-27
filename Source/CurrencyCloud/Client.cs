@@ -255,16 +255,9 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Account> CreateAccountAsync(string accountName, string legalEntityType, ParamsObject optional = null)
+        public async Task<Account> CreateAccountAsync(Account account)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.AccountName = accountName;
-            paramsObj.LegalEntityType = legalEntityType;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            dynamic paramsObj = ParamsObject.CreateFromStaticObject(account);
 
             return await RequestAsync<Account>("/v2/accounts/create", HttpMethod.Post, paramsObj);
         }
@@ -277,8 +270,14 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Account> GetAccountAsync(string id, ParamsObject optional = null)
+        public async Task<Account> GetAccountAsync(string id, string onBehalfOf = null)
         {
+            var optional = new ParamsObject();
+            if (onBehalfOf != null)
+            {
+                optional.Add("OnBehalfOf", onBehalfOf);
+            }
+
             return await RequestAsync<Account>("/v2/accounts/" + id, HttpMethod.Get, optional);
         }
 
@@ -290,8 +289,13 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Account> UpdateAccountAsync(string id, ParamsObject optional = null)
+        public async Task<Account> UpdateAccountAsync(Account account)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(account);
+            string id = account.Id;
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Account id can not be null");
+
             return await RequestAsync<Account>("/v2/accounts/" + id, HttpMethod.Post, optional);
         }
 
@@ -302,8 +306,10 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found accounts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedAccounts> FindAccountsAsync(ParamsObject optional = null)
+        public async Task<PaginatedAccounts> FindAccountsAsync(AccountFindParameters parameters)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+
             return await RequestAsync<PaginatedAccounts>("/v2/accounts/find", HttpMethod.Get, optional);
         }
 
