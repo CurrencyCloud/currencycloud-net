@@ -2,14 +2,13 @@
 {
     static class Conversions
     {
-        public static readonly dynamic Conversion1 = new
-        {
-            BuyCurrency = "EUR",
-            SellCurrency = "GBP",
-            FixedSide = "buy",
-            Amount = 10000.23m,
-            Reason = "Settling invoices",
-            TermAgreement = true
-        };
+        public static readonly Entity.ConversionCreate Conversion1 = new Entity.ConversionCreate(
+            "EUR",
+            "GBP",
+            "buy",
+            10000.23m,
+            "Settling invoices",
+            true
+        );
     }
 }

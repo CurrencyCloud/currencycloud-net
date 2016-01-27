@@ -71,7 +71,7 @@ namespace CurrencyCloud
                 object propValue = p.GetValue(obj);
                 if (propValue != null)
                 {
-                    if (propValue.GetType().GetInterface("IList") != null)
+                    if (propValue.GetType() == typeof(List<string>))
                     {
                         string newValue = "";
                         foreach (object item in (IList)propValue)

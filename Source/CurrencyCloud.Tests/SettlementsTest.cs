@@ -129,7 +129,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
             Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
@@ -150,7 +150,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
             Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
@@ -171,7 +171,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
             Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"
@@ -192,7 +192,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
             Settlement created = await client.CreateSettlementAsync(new ParamsObject(new
             {
                 Type = "net"

@@ -45,7 +45,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion created = await client.CreateConversionAsync(conversion1);
 
             Assert.AreEqual(conversion1.BuyCurrency, created.BuyCurrency);
             Assert.AreEqual(conversion1.SellCurrency, created.SellCurrency);
@@ -62,7 +62,7 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
+            Conversion created = await client.CreateConversionAsync(conversion1);
             Conversion gotten = await client.GetConversionAsync(created.Id);
 
             Assert.AreEqual(gotten, created);
@@ -78,17 +78,17 @@ namespace CurrencyCloud.Tests
 
             var conversion1 = Conversions.Conversion1;
 
-            Conversion created = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
-            PaginatedConversions found = await client.FindConversionsAsync(new ParamsObject(new
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            PaginatedConversions found = await client.FindConversionsAsync(new ConversionFindParameters
             {
                 ConversionIds = new string[]
                 {
                     created.Id
                 },
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(created, found.Conversions);
         }

@@ -6,6 +6,8 @@ namespace CurrencyCloud.Entity
 {
     public class Conversion : Entity
     {
+
+        [Newtonsoft.Json.JsonConstructor]
         internal Conversion() { }
 
         public string Id { get; set; }

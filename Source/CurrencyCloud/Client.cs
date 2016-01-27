@@ -590,20 +590,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created conversion.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Conversion> CreateConversionAsync(string buyCurrency, string sellCurrency, string fixedSide, decimal amount, string reason, bool termAgreement, ParamsObject optional = null)
+        public async Task<Conversion> CreateConversionAsync(ConversionCreate create, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.BuyCurrency = buyCurrency;
-            paramsObj.SellCurrency = sellCurrency;
-            paramsObj.FixedSide = fixedSide;
-            paramsObj.Amount = amount;
-            paramsObj.Reason = reason;
-            paramsObj.TermAgreement = termAgreement;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            dynamic paramsObj = ParamsObject.CreateFromStaticObject(create);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                paramsObj.Add(ParamsObject.OnBehalfOf, onBehalfOf);
 
             return await RequestAsync<Conversion>("/v2/conversions/create", HttpMethod.Post, paramsObj);
         }
@@ -616,8 +607,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested conversion.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Conversion> GetConversionAsync(string id, ParamsObject optional = null)
+        public async Task<Conversion> GetConversionAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Conversion>("/v2/conversions/" + id, HttpMethod.Get, optional);
         }
 
@@ -628,8 +626,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found conversions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedConversions> FindConversionsAsync(ParamsObject optional = null)
+        public async Task<PaginatedConversions> FindConversionsAsync(ConversionFindParameters parameters, string onBehalfOn = null)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+
             return await RequestAsync<PaginatedConversions>("/v2/conversions/find", HttpMethod.Get, optional);
         }
 
