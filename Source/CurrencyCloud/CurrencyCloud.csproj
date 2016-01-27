@@ -50,6 +50,7 @@
     <Compile Include="Client.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\Find\AccountFindParameters.cs" />
+    <Compile Include="Entity\Find\BalanceFindParameters.cs" />
     <Compile Include="Entity\Find\BeneficiaryFindParameters.cs" />
     <Compile Include="Entity\Find\FindParameters.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />

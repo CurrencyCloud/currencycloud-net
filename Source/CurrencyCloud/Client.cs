@@ -336,8 +336,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested balance.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Balance> GetBalanceAsync(string currency, ParamsObject optional = null)
+        public async Task<Balance> GetBalanceAsync(string currency, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Balance>("/v2/balances/" + currency, HttpMethod.Get, optional);
         }
 
@@ -348,8 +355,10 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found balances, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedBalances> FindBalancesAsync(ParamsObject optional = null)
+        public async Task<PaginatedBalances> FindBalancesAsync(BalanceFindParameters parameters)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+
             return await RequestAsync<PaginatedBalances>("/v2/balances/find", HttpMethod.Get, optional);
         }
 

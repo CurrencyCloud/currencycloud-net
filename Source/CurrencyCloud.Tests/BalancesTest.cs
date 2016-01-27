@@ -57,12 +57,12 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Balance balance = await client.GetBalanceAsync("GBP");
-            PaginatedBalances found = await client.FindBalancesAsync(new ParamsObject(new
+            PaginatedBalances found = await client.FindBalancesAsync(new BalanceFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(balance, found.Balances);
         }

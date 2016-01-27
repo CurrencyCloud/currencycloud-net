@@ -12,6 +12,8 @@ namespace CurrencyCloud
     /// </summary>
     public class ParamsObject : DynamicObject, IEnumerable
     {
+        public static readonly string OnBehalfOf = "OnBehalfOf";
+
         private Dictionary<string, object> storage;
 
         private void Expand(ParamsObject paramsObj)
