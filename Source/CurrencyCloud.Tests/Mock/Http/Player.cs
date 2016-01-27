@@ -61,7 +61,14 @@ namespace CurrencyCloud.Tests.Mock.Http
                         System.Collections.Specialized.NameValueCollection recordingParams = System.Web.HttpUtility.ParseQueryString((string)(recording.request.query ?? ""));
                         bool isMathingQueryStrings = true;
                         foreach (string key in recordingParams)
+                        {
                             isMathingQueryStrings = isMathingQueryStrings && requestParams[key] == recordingParams[key];
+                            if (requestParams[key] != recordingParams[key])
+                            {
+                                throw new System.Exception(string.Format("Unexpected param value. Param name '{0}'. Expected '{1}' Received '{2}'",
+                                    key, recordingParams[key], requestParams[key]));
+                            }
+                        }
                         foreach(string key in requestParams)
                             isMathingQueryStrings = isMathingQueryStrings && requestParams[key] == recordingParams[key];
 
@@ -101,11 +108,11 @@ namespace CurrencyCloud.Tests.Mock.Http
                         responseStream.Write(responseBuffer, 0, responseBuffer.Length);
                         responseStream.Close();
                     }
-                    catch (System.Exception)
+                    catch (System.Exception ex)
                     {
                         Close();
 
-                        throw;
+                        throw ex;
                     }
                 }
             });
