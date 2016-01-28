@@ -45,12 +45,12 @@ namespace CurrencyCloud.Tests
             var conversion1 = Conversions.Conversion1;
 
             Conversion conversion = await client.CreateConversionAsync(conversion1);
-            PaginatedTransactions found = await client.FindTransactionsAsync(new ParamsObject(new
+            PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
             Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
 
             Assert.AreEqual(found.Transactions[0], gotten);
@@ -67,12 +67,12 @@ namespace CurrencyCloud.Tests
             var conversion1 = Conversions.Conversion1;
 
             Conversion conversion = await client.CreateConversionAsync(conversion1);
-            PaginatedTransactions found = await client.FindTransactionsAsync(new ParamsObject(new
+            PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
             Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);

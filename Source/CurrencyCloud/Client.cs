@@ -996,9 +996,9 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested transaction.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Transaction> GetTransactionAsync(string id, ParamsObject optional = null)
+        public async Task<Transaction> GetTransactionAsync(string id)
         {
-            return await RequestAsync<Transaction>("/v2/transactions/" + id, HttpMethod.Get, optional);
+            return await RequestAsync<Transaction>("/v2/transactions/" + id, HttpMethod.Get, null);
         }
 
         /// <summary>
@@ -1008,8 +1008,10 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found transactions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedTransactions> FindTransactionsAsync(ParamsObject optional = null)
+        public async Task<PaginatedTransactions> FindTransactionsAsync(TransactionFindParameters parameters = null)
         {
+            ParamsObject optional = parameters == null ? null : ParamsObject.CreateFromStaticObject(parameters);
+
             return await RequestAsync<PaginatedTransactions>("/v2/transactions/find", HttpMethod.Get, optional);
         }
 
