@@ -682,6 +682,7 @@ namespace CurrencyCloud
                 throw new ArgumentException("Payment.ID can not be null");
 
             ParamsObject optional = ParamsObject.CreateFromStaticObject(payment);
+            optional.AddNotNull("PayerDetailsSource", payment.PayerDetailsSource);
             if (payer != null)
             {
                 optional.AddNotNull("PayerEntityType", payer.LegalEntityType);
