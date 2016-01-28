@@ -24,10 +24,10 @@ namespace CurrencyCloud.Tests
             Conversion conversion = await client.CreateConversionAsync(conversion1);
             Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1);
 
-            dynamic paymentOptional1 = new ParamsObject(payment1.Optional);
-            paymentOptional1.ConversionId = conversion.Id;
+            payment1.ConversionId = conversion.Id;
+            payment1.BeneficiaryId = beneficiary.Id;
 
-            return await client.CreatePaymentAsync(payment.Currency, beneficiary.Id, payment.Amount, payment.Reason, payment.Reference, paymentOptional1);
+            return await client.CreatePaymentAsync(payment1, Payments.Payer1);
         }
 
         [TestFixtureSetUp]
@@ -97,7 +97,11 @@ namespace CurrencyCloud.Tests
             var payment2 = Payments.Payment2;
 
             Payment created = await CreatePayment(payment1);
-            Payment updated = await client.UpdatePaymentAsync(created.Id, new ParamsObject(payment2));
+
+            payment2.Id = created.Id;
+            payment2.BeneficiaryId = created.BeneficiaryId;
+
+            Payment updated = await client.UpdatePaymentAsync(payment2, Payments.Payer2);
             Payment gotten = await client.GetPaymentAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -114,14 +118,14 @@ namespace CurrencyCloud.Tests
             var payment1 = Payments.Payment1;
 
             Payment created = await CreatePayment(payment1);
-            PaginatedPayments found = await client.FindPaymentsAsync(new ParamsObject(new
+            PaginatedPayments found = await client.FindPaymentsAsync(new PaymentFindParameters
             {
                 BeneficiaryId = created.BeneficiaryId,
                 ConversionId = created.ConversionId,
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(created, found.Payments);
         }

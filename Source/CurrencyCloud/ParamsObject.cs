@@ -113,6 +113,13 @@ namespace CurrencyCloud
             return true;
         }
 
+        public void AddNotNull(string key, object value)
+        {
+            if (value == null)
+                return;
+            Add(key, value);
+        }
+
         public void Add(string key, object value)
         {
             storage.Add(key.ToSnakeCase(), value);

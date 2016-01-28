@@ -5,32 +5,45 @@ namespace CurrencyCloud.Entity
 {
     public class Payer : Entity
     {
-        internal Payer() { }
+        [Newtonsoft.Json.JsonConstructor]
+        public Payer() { }
 
         public string Id { get; set; }
 
+        [Param]
         public string LegalEntityType { get; set; }
 
+        [Param]
         public string CompanyName { get; set; }
 
+        [Param]
         public string FirstName { get; set; }
 
+        [Param]
         public string LastName { get; set; }
 
+        [Param]
         public string Address { get; set; }
 
+        [Param]
         public string City { get; set; }
 
+        [Param]
         public string StateOrProvince { get; set; }
 
+        [Param]
         public string Country { get; set; }
 
+        [Param]
         public string IdentificationType { get; set; }
 
+        [Param]
         public string IdentificationValue { get; set; }
 
+        [Param]
         public string Postcode { get; set; }
 
+        [Param]
         public DateTime DateOfBirth { get; set; }
 
         public DateTime CreatedAt { get; set; }

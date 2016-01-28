@@ -4,29 +4,53 @@ namespace CurrencyCloud.Entity
 {
     public class Payment : Entity
     {
+        public Payment(
+            string currency,
+            string beneficiaryId,
+            decimal amount,
+            string reason,
+            string reference
+            )
+        {
+            this.Currency = currency;
+            this.BeneficiaryId = beneficiaryId;
+            this.Amount = amount;
+            this.Reason = reason;
+            this.Reference = reference;
+        }
+
+        [Newtonsoft.Json.JsonConstructor]
         internal Payment() { }
 
         public string Id { get; set; }
 
         public string ShortReference { get; set; }
 
+        [Param]
         public string BeneficiaryId { get; set; }
 
+        [Param]
         public string ConversionId { get; set; }
 
+        [Param]
         public decimal Amount { get; set; }
 
+        [Param]
         public string Currency { get; set; }
 
         public string Status { get; set; }
 
+        [Param]
         public string PaymentType { get; set; }
 
+        [Param]
         public string Reference { get; set; }
 
+        [Param]
         public string Reason { get; set; }
 
-        public DateTime PaymentDate { get; set; }
+        [Param]
+        public DateTime? PaymentDate { get; set; }
 
         public DateTime TransferredAt { get; set; }
 

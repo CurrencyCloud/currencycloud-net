@@ -675,19 +675,26 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> CreatePaymentAsync(string currency, string beneficiaryId, int amount, string reason, string reference, ParamsObject optional = null)
+        public async Task<Payment> CreatePaymentAsync(Payment payment, Payer payer = null, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.Currency = currency;
-            paramsObj.BeneficiaryId = beneficiaryId;
-            paramsObj.Amount = amount;
-            paramsObj.Reason = reason;
-            paramsObj.Reference = reference;
-
-            if (optional != null)
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
+            if (payer != null)
             {
-                paramsObj += optional;
+                paramsObj.AddNotNull("PayerEntityType", payer.LegalEntityType);
+                paramsObj.AddNotNull("PayerCompanyName", payer.CompanyName);
+                paramsObj.AddNotNull("PayerFirstName", payer.FirstName);
+                paramsObj.AddNotNull("PayerLastName", payer.LastName);
+                paramsObj.AddNotNull("PayerCity", payer.City);
+                paramsObj.AddNotNull("PayerAddress", payer.Address);
+                paramsObj.AddNotNull("PayerPostcode", payer.Postcode);
+                paramsObj.AddNotNull("PayerStateOrProvince", payer.StateOrProvince);
+                paramsObj.AddNotNull("PayerCountry", payer.Country);
+                paramsObj.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
+                paramsObj.AddNotNull("PayerIdentificationType", payer.IdentificationType);
+                paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
             }
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                paramsObj.Add(ParamsObject.OnBehalfOf, onBehalfOf);
 
             return await RequestAsync<Payment>("/v2/payments/create", HttpMethod.Post, paramsObj);
         }
@@ -700,8 +707,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> GetPaymentAsync(string id, ParamsObject optional = null)
+        public async Task<Payment> GetPaymentAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Get, optional);
         }
 
@@ -713,8 +727,30 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> UpdatePaymentAsync(string id, ParamsObject optional = null)
+        public async Task<Payment> UpdatePaymentAsync(Payment payment, Payer payer = null, string onBehalfOn = null)
         {
+            string id = payment.Id;
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Payment.ID can not be null");
+
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(payment);
+            if (payer != null)
+            {
+                optional.AddNotNull("PayerEntityType", payer.LegalEntityType);
+                optional.AddNotNull("PayerCompanyName", payer.CompanyName);
+                optional.AddNotNull("PayerFirstName", payer.FirstName);
+                optional.AddNotNull("PayerLastName", payer.LastName);
+                optional.AddNotNull("PayerCity", payer.City);
+                optional.AddNotNull("PayerAddress", payer.Address);
+                optional.AddNotNull("PayerPostcode", payer.Postcode);
+                optional.AddNotNull("PayerStateOrProvince", payer.StateOrProvince);
+                optional.AddNotNull("PayerCountry", payer.Country);
+                optional.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
+                optional.AddNotNull("PayerIdentificationType", payer.IdentificationType);
+                optional.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+            }
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
             return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Post, optional);
         }
 
@@ -725,8 +761,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns  the list of the found payments, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedPayments> FindPaymentsAsync(ParamsObject optional = null)
+        public async Task<PaginatedPayments> FindPaymentsAsync(FindParameters parameers, string onBehalfOf = null)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameers);
+            if (!string.IsNullOrEmpty(onBehalfOf))
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+
             return await RequestAsync<PaginatedPayments>("/v2/payments/find", HttpMethod.Get, optional);
         }
 
@@ -738,8 +778,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the deleted payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> DeletePaymentAsync(string id, ParamsObject optional = null)
+        public async Task<Payment> DeletePaymentAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Payment>("/v2/payments/" + id + "/delete", HttpMethod.Post, optional);
         }
 

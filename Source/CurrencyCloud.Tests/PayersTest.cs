@@ -48,22 +48,22 @@ namespace CurrencyCloud.Tests
             Conversion conversion = await client.CreateConversionAsync(conversion1);
             Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1);
 
-            dynamic paymentOptional1 = new ParamsObject(payment1.Optional);
-            paymentOptional1.ConversionId = conversion.Id;
+            payment1.BeneficiaryId = beneficiary.Id;
+            payment1.ConversionId = conversion.Id;
 
-            Payment payment = await client.CreatePaymentAsync(payment1.Currency, beneficiary.Id, payment1.Amount, payment1.Reason, payment1.Reference, paymentOptional1);
+            Payment payment = await client.CreatePaymentAsync(payment1,Payments.Payer1);
             Payer gotten = await client.GetPayerAsync(payment.PayerId);
 
-            Assert.AreEqual(payment1.Optional.PayerCompanyName, gotten.CompanyName);
-            Assert.AreEqual(payment1.Optional.PayerFirstName, gotten.FirstName);
-            Assert.AreEqual(payment1.Optional.PayerLastName, gotten.LastName);
-            Assert.AreEqual(payment1.Optional.PayerCity, gotten.City);
-            Assert.AreEqual(payment1.Optional.PayerAddress, gotten.Address);
-            Assert.AreEqual(payment1.Optional.PayerPostcode, gotten.Postcode);
-            Assert.AreEqual(payment1.Optional.PayerStateOrProvince, gotten.StateOrProvince);
-            Assert.AreEqual(payment1.Optional.PayerCountry, gotten.Country);
-            Assert.AreEqual(payment1.Optional.PayerDateOfBirth, gotten.DateOfBirth);
-            Assert.AreEqual(payment1.Optional.PayerIdentificationType, gotten.IdentificationType);
+            Assert.AreEqual(Payments.Payer1.CompanyName, gotten.CompanyName);
+            Assert.AreEqual(Payments.Payer1.FirstName, gotten.FirstName);
+            Assert.AreEqual(Payments.Payer1.LastName, gotten.LastName);
+            Assert.AreEqual(Payments.Payer1.City, gotten.City);
+            Assert.AreEqual(Payments.Payer1.Address, gotten.Address);
+            Assert.AreEqual(Payments.Payer1.Postcode, gotten.Postcode);
+            Assert.AreEqual(Payments.Payer1.StateOrProvince, gotten.StateOrProvince);
+            Assert.AreEqual(Payments.Payer1.Country, gotten.Country);
+            Assert.AreEqual(Payments.Payer1.DateOfBirth, gotten.DateOfBirth);
+            Assert.AreEqual(Payments.Payer1.IdentificationType, gotten.IdentificationType);
         }
     }
 }
