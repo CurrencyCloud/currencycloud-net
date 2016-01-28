@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Entity\ConversionCreateParameters.cs" />
+    <Compile Include="Entity\DetailedRateParameters.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\Find\AccountFindParameters.cs" />
     <Compile Include="Entity\Find\BalanceFindParameters.cs" />

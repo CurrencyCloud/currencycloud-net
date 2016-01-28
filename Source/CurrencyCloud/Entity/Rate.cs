@@ -4,6 +4,7 @@ namespace CurrencyCloud.Entity
 {
     public class Rate : Entity
     {
+        [Newtonsoft.Json.JsonConstructor]
         internal Rate() { }
 
         public DateTime SettlementCutOffTime { get; set; }

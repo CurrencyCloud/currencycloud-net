@@ -43,7 +43,7 @@ namespace CurrencyCloud.Tests
             player.Play("Get");
 
             Assert.DoesNotThrow(async () => {
-                Rate gotten = await client.GetRateAsync("EUR", "GBP", "buy", 6700);
+                Rate gotten = await client.GetRateAsync(new DetailedRateParameters("EUR", "GBP", "buy", 6700));
             });
         }
 

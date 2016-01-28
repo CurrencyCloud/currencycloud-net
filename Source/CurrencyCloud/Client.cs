@@ -805,18 +805,10 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested rate.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Rate> GetRateAsync(string buyCurrency, string sellCurrency, string fixedSide, int amount, ParamsObject optional = null)
+        public async Task<Rate> GetRateAsync(DetailedRateParameters parameters, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.BuyCurrency = buyCurrency;
-            paramsObj.SellCurrency = sellCurrency;
-            paramsObj.FixedSide = fixedSide;
-            paramsObj.Amount = amount;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(parameters);
+            paramsObj.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
 
             return await RequestAsync<Rate>("/v2/rates/detailed", HttpMethod.Get, paramsObj);
         }
@@ -829,15 +821,13 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found rates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<RatesList> FindRatesAsync(string currencyPair, ParamsObject optional = null)
+        public async Task<RatesList> FindRatesAsync(string currencyPair, bool? ignoreInvalidPairs = null, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.CurrencyPair = currencyPair;
+            ParamsObject paramsObj = new ParamsObject();
+            paramsObj.Add("CurrencyPair",currencyPair);
+            paramsObj.AddNotNull("IgnoreInvalidPairs", ignoreInvalidPairs);
+            paramsObj.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
 
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
 
             return await RequestAsync<RatesList>("/v2/rates/find", HttpMethod.Get, paramsObj);
         }
