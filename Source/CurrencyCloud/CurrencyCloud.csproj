@@ -58,6 +58,7 @@
     <Compile Include="Entity\Find\ConversionFindParameters.cs" />
     <Compile Include="Entity\Find\FindParameters.cs" />
     <Compile Include="Entity\Find\PaymentFindParameters.cs" />
+    <Compile Include="Entity\Find\SettlementFindParameters.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />

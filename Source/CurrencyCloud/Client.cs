@@ -924,8 +924,16 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns newly created settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> CreateSettlementAsync(ParamsObject optional = null)
+        public async Task<Settlement> CreateSettlementAsync(string type = null, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(type) || !string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.AddNotNull("Type", type);
+                optional.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Settlement>("/v2/settlements/create", HttpMethod.Post, optional);
         }
 
@@ -937,8 +945,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> GetSettlementAsync(string id, ParamsObject optional = null)
+        public async Task<Settlement> GetSettlementAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Settlement>("/v2/settlements/" + id, HttpMethod.Get, optional);
         }
 
@@ -949,8 +964,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns  the list of the found settlements, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedSettlements> FindSettlementsAsync(ParamsObject optional = null)
+        public async Task<PaginatedSettlements> FindSettlementsAsync(SettlementFindParameters parameters, string onBehalfOf = null)
         {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+            optional.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
+
             return await RequestAsync<PaginatedSettlements>("/v2/settlements/find", HttpMethod.Get, optional);
         }
 
@@ -962,8 +980,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the deleted settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> DeleteSettlementAsync(string id, ParamsObject optional = null)
+        public async Task<Settlement> DeleteSettlementAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Settlement>("/v2/settlements/" + id + "/delete", HttpMethod.Post, optional);
         }
 
@@ -976,15 +1001,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> AddConversionToSettlementAsync(string id, string conversionId, ParamsObject optional = null)
+        public async Task<Settlement> AddConversionToSettlementAsync(string id, string conversionId, string onBehalfOf = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.ConversionId = conversionId;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("ConversionId", conversionId);
+            paramsObj.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
 
             return await RequestAsync<Settlement>("/v2/settlements/" + id + "/add_conversion", HttpMethod.Post, paramsObj);
         }
@@ -998,15 +1019,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> RemoveConversionFromSettlementAsync(string id, string conversionId, ParamsObject optional = null)
+        public async Task<Settlement> RemoveConversionFromSettlementAsync(string id, string conversionId, string onBehalfOf = null)
         {
             dynamic paramsObj = new ParamsObject();
-            paramsObj.ConversionId = conversionId;
+            paramsObj.Add("ConversionId", conversionId);
+            paramsObj.AddNotNull(ParamsObject.OnBehalfOf, onBehalfOf);
 
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
 
             return await RequestAsync<Settlement>("/v2/settlements/" + id + "/remove_conversion", HttpMethod.Post, paramsObj);
         }
@@ -1019,8 +1037,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> ReleaseSettlementAsync(string id, ParamsObject optional = null)
+        public async Task<Settlement> ReleaseSettlementAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Settlement>("/v2/settlements/" + id + "/release", HttpMethod.Post, optional);
         }
 
@@ -1032,8 +1057,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Settlement> UnreleaseSettlementAsync(string id, ParamsObject optional = null)
+        public async Task<Settlement> UnreleaseSettlementAsync(string id, string onBehalfOf = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(onBehalfOf))
+            {
+                optional = new ParamsObject();
+                optional.Add(ParamsObject.OnBehalfOf, onBehalfOf);
+            }
+
             return await RequestAsync<Settlement>("/v2/settlements/" + id + "/unrelease", HttpMethod.Post, optional);
         }
 
