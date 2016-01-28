@@ -778,8 +778,20 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the required beneficiary details.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<BeneficiaryDetailsList> GetBeneficiaryRequiredDetailsAsync(ParamsObject optional = null)
+        public async Task<BeneficiaryDetailsList> GetBeneficiaryRequiredDetailsAsync(string currency = null, string bankAccountCountry = null, string beneficiaryCountry = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(currency)
+                || !string.IsNullOrEmpty(bankAccountCountry)
+                || !string.IsNullOrEmpty(beneficiaryCountry)
+                )
+            {
+                optional = new ParamsObject();
+                optional.AddNotNull("Currency", currency);
+                optional.AddNotNull("BankAccountCountry", bankAccountCountry);
+                optional.AddNotNull("BeneficiaryCountry", beneficiaryCountry);
+            }
+
             return await RequestAsync<BeneficiaryDetailsList>("/v2/reference/beneficiary_required_details", HttpMethod.Get, optional);
         }
 
@@ -791,15 +803,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the conversion dates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionDatesList> GetConversionDatesAsync(string conversionPair, ParamsObject optional = null)
+        public async Task<ConversionDatesList> GetConversionDatesAsync(string conversionPair, DateTime? startDate = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.ConversionPair = conversionPair;
-
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("ConversionPair", conversionPair);
+            paramsObj.AddNotNull("StartDate", startDate);
 
             return await RequestAsync<ConversionDatesList>("/v2/reference/conversion_dates", HttpMethod.Get, paramsObj);
         }
@@ -823,15 +831,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the payment dates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentDatesList> GetPaymentDatesAsync(string currency, ParamsObject optional = null)
+        public async Task<PaymentDatesList> GetPaymentDatesAsync(string currency, DateTime? startDate = null)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.Currency = currency;
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("Currency", currency);
+            paramsObj.AddNotNull("StartDate", startDate);
 
-            if (optional != null)
-            {
-                paramsObj += optional;
-            }
 
             return await RequestAsync<PaymentDatesList>("/v2/reference/payment_dates", HttpMethod.Get, paramsObj);
         }
@@ -843,8 +848,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found rates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<SettlementAccountsList> GetSettlementAccountsAsync(ParamsObject optional = null)
+        public async Task<SettlementAccountsList> GetSettlementAccountsAsync(string currency = null)
         {
+            ParamsObject optional = null;
+            if (!string.IsNullOrEmpty(currency))
+            {
+                optional = new ParamsObject();
+                optional.Add("Currency", currency);
+            }
+
             return await RequestAsync<SettlementAccountsList>("/v2/reference/settlement_accounts", HttpMethod.Get, optional);
         }
 
