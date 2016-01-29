@@ -585,7 +585,7 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list of the found conversions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedConversions> FindConversionsAsync(ConversionFindParameters parameters, string onBehalfOn = null)
+        public async Task<PaginatedConversions> FindConversionsAsync(ConversionFindParameters parameters)
         {
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
