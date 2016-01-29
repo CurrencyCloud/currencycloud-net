@@ -243,9 +243,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new account.
         /// </summary>
-        /// <param name="accountName">Name of the account.</param>
-        /// <param name="legalEntityType">Type of the account's legal entity.</param>
-        /// <param name="optional">Optional parameters of the account.</param>
+        /// <param name="account">Account object</param>
         /// <returns>Asynchronous task, which returns newly created account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -260,7 +258,6 @@ namespace CurrencyCloud
         /// Gets details of an account.
         /// </summary>
         /// <param name="id">Id of the requested account.</param>
-        /// <param name="optional">Optional parameters of the requested account.</param>
         /// <returns>Asynchronous task, which returns the requested account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -272,8 +269,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Updates an existing account.
         /// </summary>
-        /// <param name="id">Id of the updated account.</param>
-        /// <param name="optional">Optional parameters of the updated account.</param>
+        /// <param name="account">Account object to be updated</param>
         /// <returns>Asynchronous task, which returns the updated account.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -290,7 +286,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds accounts matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought accounts.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found accounts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -320,7 +316,6 @@ namespace CurrencyCloud
         /// Gets the balance for a currency.
         /// </summary>
         /// <param name="currency">Currency to get the balance for.</param>
-        /// <param name="optional">Optional parameters of the requested balance.</param>
         /// <returns>Asynchronous task, which returns the requested balance.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -332,7 +327,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds balances matching the search criteria.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought balances.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found balances, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -350,10 +345,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Validates beneficiary details without creating one.
         /// </summary>
-        /// <param name="bankCountry">Country of the beneficiary's bank.</param>
-        /// <param name="currency">Currency of the beneficiary.</param>
-        /// <param name="beneficiaryCountry">Country of the beneficiary.</param>
-        /// <param name="optional">Optional parameters of the beneficiary.</param>
+        /// <param name="validateParameters">Beneficiary data to be validated</param>
         /// <returns>Asynchronous task, which returns the validated beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -367,11 +359,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new beneficiary.
         /// </summary>
-        /// <param name="bankAccountHolderName">Name of the beneficiary's bank account holder.</param>
-        /// <param name="bankCountry">Country of the beneficiary's bank.</param>
-        /// <param name="currency">Currency of the beneficiary.</param>
-        /// <param name="name">Name of the beneficiary.</param>
-        /// <param name="optional">Optional parameters of the beneficiary.</param>
+        /// <param name="beneficiary">Beneficiary object to be created</param>
         /// <returns>Asynchronous task, which returns newly created beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -386,7 +374,6 @@ namespace CurrencyCloud
         /// Gets details of a beneficiary.
         /// </summary>
         /// <param name="id">Id of the requested beneficiary.</param>
-        /// <param name="optional">Optional parameters of the requested beneficiary.</param>
         /// <returns>Asynchronous task, which returns the requested beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -399,11 +386,11 @@ namespace CurrencyCloud
         /// <summary>
         /// Updates an existing beneficiary.
         /// </summary>
-        /// <param name="id">Id of the updated beneficiary.</param>
-        /// <param name="optional">Optional parameters of the updated beneficiary.</param>
+        /// <param name="beneficiary">Beneficiary object to be updated</param>
         /// <returns>Asynchronous task, which returns the updated beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        /// <exception cref="ArgumentException">Thrown if Beneficiary.Id is NULL</exception>
         public async Task<Beneficiary> UpdateBeneficiaryAsync(Beneficiary beneficiary)
         {
             string id = beneficiary.Id;
@@ -418,7 +405,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds beneficiaries matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought beneficiaries.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found beneficiaries, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -433,7 +420,6 @@ namespace CurrencyCloud
         /// Deletes an existing beneficiary.
         /// </summary>
         /// <param name="id">Id of the deleted beneficiary.</param>
-        /// <param name="optional">Optional parameters of the deleted beneficiary.</param>
         /// <returns>Asynchronous task, which returns the deleted beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -466,12 +452,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new contact.
         /// </summary>
-        /// <param name="accountId">Id of the corresponding account.</param>
-        /// <param name="firstName">First name of the contact.</param>
-        /// <param name="lastName">Last name of the contact.</param>
-        /// <param name="emailAddress">Email address of the contact.</param>
-        /// <param name="phoneNumber">Phone number of the contact.</param>
-        /// <param name="optional">Optional parameters of the contact.</param>
+        /// <param name="contact">Contact object to be created</param>
         /// <returns>Asynchronous task, which returns newly created contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -486,7 +467,6 @@ namespace CurrencyCloud
         /// Gets details of a contact.
         /// </summary>
         /// <param name="id">Id of the requested contact.</param>
-        /// <param name="optional">Optional parameters of the requested contact.</param>
         /// <returns>Asynchronous task, which returns the requested contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -498,11 +478,11 @@ namespace CurrencyCloud
         /// <summary>
         /// Updates an existing contact.
         /// </summary>
-        /// <param name="id">Id of the updated contact.</param>
-        /// <param name="optional">Optional parameters of the updated contact.</param>
+        /// <param name="contact">Contact object to be updated</param>
         /// <returns>Asynchronous task, which returns the updated contact.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        /// <exception cref="ArgumentException">Thrown if Contact.Id is NULL</exception>
         public async Task<Contact> UpdateContactAsync(Contact contact)
         {
             string id = contact.Id;
@@ -519,7 +499,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds contacts matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought contacts.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found contacts, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -548,13 +528,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new conversion.
         /// </summary>
-        /// <param name="buyCurrency">Currency to buy.</param>
-        /// <param name="sellCurrency">Currency to sell.</param>
-        /// <param name="fixedSide">Fixed conversion side: buy or sell.</param>
-        /// <param name="amount">Amount to convert.</param>
-        /// <param name="reason">Reason for conversion.</param>
-        /// <param name="termAgreement">Agreement flag.</param>
-        /// <param name="optional">Optional parameters of the conversion.</param>
+        /// <param name="create">Data object for new conversion</param>
         /// <returns>Asynchronous task, which returns newly created conversion.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -569,7 +543,6 @@ namespace CurrencyCloud
         /// Gets details of a conversion.
         /// </summary>
         /// <param name="id">Id of the requested conversion.</param>
-        /// <param name="optional">Optional parameters of the requested conversion.</param>
         /// <returns>Asynchronous task, which returns the requested conversion.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -581,7 +554,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds conversions matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought conversions.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found conversions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -600,7 +573,6 @@ namespace CurrencyCloud
         /// Gets details of a payer.
         /// </summary>
         /// <param name="id">Id of the requested payer.</param>
-        /// <param name="optional">Optional parameters of the requested payer.</param>
         /// <returns>Asynchronous task, which returns the requested payer.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -616,15 +588,12 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new payment.
         /// </summary>
-        /// <param name="currency">Payment currency.</param>
-        /// <param name="beneficiaryId">Id of the payment beneficiary.</param>
-        /// <param name="amount">Payment amount.</param>
-        /// <param name="reason">Payment reason.</param>
-        /// <param name="reference">Payment reference</param>
-        /// <param name="optional">Optional parameters of the payment.</param>
+        /// <param name="payment">Payment object to be created</param>
+        /// <param name="payer">Optional payer info</param>
         /// <returns>Asynchronous task, which returns newly created payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        /// <remarks>Payment.PayerDetailsSource not passed to server while creation</remarks>
         public async Task<Payment> CreatePaymentAsync(Payment payment, Payer payer = null)
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
@@ -651,7 +620,6 @@ namespace CurrencyCloud
         /// Gets details of a payment.
         /// </summary>
         /// <param name="id">Id of the requested payment.</param>
-        /// <param name="optional">Optional parameters of the requested payment.</param>
         /// <returns>Asynchronous task, which returns the requested payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -664,11 +632,12 @@ namespace CurrencyCloud
         /// <summary>
         /// Updates an existing payment.
         /// </summary>
-        /// <param name="id">Id of the updated payment.</param>
-        /// <param name="optional">Optional parameters of the updated payment.</param>
+        /// <param name="payment">Payment object to be updated</param>
+        /// <param name="payer">Optional payer data to be updated for payment</param>
         /// <returns>Asynchronous task, which returns the updated payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        /// <exception cref="ArgumentException">Thrown when Payment.Id is NULL</exception>
         public async Task<Payment> UpdatePaymentAsync(Payment payment, Payer payer = null)
         {
             string id = payment.Id;
@@ -698,7 +667,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds payments matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought payments.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns  the list of the found payments, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -713,7 +682,6 @@ namespace CurrencyCloud
         /// Deletes an existing payment.
         /// </summary>
         /// <param name="id">Id of the deleted payment.</param>
-        /// <param name="optional">Optional parameters of the deleted payment.</param>
         /// <returns>Asynchronous task, which returns the deleted payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -729,11 +697,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Gets a full quote for the requested currency based on the spread table of the active contact.
         /// </summary>
-        /// <param name="buyCurrency">Currency to buy.</param>
-        /// <param name="sellCurrency">Currency to sell.</param>
-        /// <param name="fixedSide">Fixed conversion side: buy or sell.</param>
-        /// <param name="amount">Amount to convert.</param>
-        /// <param name="optional">Optional parameters of the requested rate.</param>
+        /// <param name="parameters">Rate parameters object</param>
         /// <returns>Asynchronous task, which returns the requested rate.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -747,8 +711,8 @@ namespace CurrencyCloud
         /// <summary>
         /// Gets core rate information for multiple currency pairs.
         /// </summary>
-        /// <param name="currencyPair"></param>
-        /// <param name="optional">Optional parameters of the sought rates.</param>
+        /// <param name="currencyPair">Currency pair</param>
+        /// <param name="ignoreInvalidPairs">Optional: Ignore invalid pairs</param>
         /// <returns>Asynchronous task, which returns the list of the found rates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -769,7 +733,9 @@ namespace CurrencyCloud
         /// <summary>
         /// Gets required beneficiary details and their basic validation formats.
         /// </summary>
-        /// <param name="optional">Optional beneficiary parameters.</param>
+        /// <param name="currency">Currency</param>
+        /// <param name="bankAccountCountry">Optional: Bank account country</param>
+        /// <param name="beneficiaryCountry">Optional: Beneficiary country</param>
         /// <returns>Asynchronous task, which returns the list of the required beneficiary details.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -794,7 +760,7 @@ namespace CurrencyCloud
         /// Gets dates for which the given currency pair can not be traded.
         /// </summary>
         /// <param name="conversionPair">Currency conversion pair.</param>
-        /// <param name="optional">Optional conversion parameters.</param>
+        /// <param name="startDate">Optional: start date</param>
         /// <returns>Asynchronous task, which returns the list of the conversion dates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -822,7 +788,7 @@ namespace CurrencyCloud
         /// Gets dates for which the given currency can not be paid.
         /// </summary>
         /// <param name="currency">Currency name.</param>
-        /// <param name="optional">Optional currency payment parameters.</param>
+        /// <param name="startDate">Start date</param>
         /// <returns>Asynchronous task, which returns the list of the payment dates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -839,7 +805,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Gets settlement account information, detailing where funds need to be sent to.
         /// </summary>
-        /// <param name="optional">Optional settlement account parameters.</param>
+        /// <param name="currency">Currency</param>
         /// <returns>Asynchronous task, which returns the list of the found rates.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -862,7 +828,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Creates a new settlement.
         /// </summary>
-        /// <param name="optional">Optional parameters of the settlement.</param>
+        /// <param name="type">net (also: bulk)</param>
         /// <returns>Asynchronous task, which returns newly created settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -882,7 +848,6 @@ namespace CurrencyCloud
         /// Gets details of a settlement.
         /// </summary>
         /// <param name="id">Id of the requested settlement.</param>
-        /// <param name="optional">Optional parameters of the requested settlement.</param>
         /// <returns>Asynchronous task, which returns the requested settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -894,7 +859,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds settlements matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought settlements.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns  the list of the found settlements, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -909,7 +874,6 @@ namespace CurrencyCloud
         /// Deletes an existing settlement.
         /// </summary>
         /// <param name="id">Id of the deleted settlement.</param>
-        /// <param name="optional">Optional parameters of the deleted settlement.</param>
         /// <returns>Asynchronous task, which returns the deleted settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -923,7 +887,6 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="id">Id of the settlement.</param>
         /// <param name="conversionId">Id of the conversion.</param>
-        /// <param name="optional">Optional parameters of the updated settlement.</param>
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -940,7 +903,6 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="id">Id of the settlement.</param>
         /// <param name="conversionId">Id of the conversion.</param>
-        /// <param name="optional">Optional parameters of the updated settlement.</param>
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -957,7 +919,6 @@ namespace CurrencyCloud
         /// Moves the settlement to state "released", meaning it is ready to be processed.
         /// </summary>
         /// <param name="id">Id of the settlement.</param>
-        /// <param name="optional">Optional parameters of the updated settlement.</param>
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -970,7 +931,6 @@ namespace CurrencyCloud
         /// Moves the settlement to state "open", allowing conversions to be added or removed.
         /// </summary>
         /// <param name="id">Id of the settlement.</param>
-        /// <param name="optional">Optional parameters of the updated settlement.</param>
         /// <returns>Asynchronous task, which returns the updated settlement.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -987,7 +947,6 @@ namespace CurrencyCloud
         /// Gets details of a transaction.
         /// </summary>
         /// <param name="id">Id of the requested transaction.</param>
-        /// <param name="optional">Optional parameters of the requested transaction.</param>
         /// <returns>Asynchronous task, which returns the requested transaction.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -999,7 +958,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Finds transactions matching the search criteria for the active user.
         /// </summary>
-        /// <param name="optional">Optional parameters of the sought transactions.</param>
+        /// <param name="parameters">Find parameters</param>
         /// <returns>Asynchronous task, which returns the list of the found transactions, as well as pagination information.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
