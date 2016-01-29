@@ -19,7 +19,7 @@ namespace CurrencyCloud.Tests
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]

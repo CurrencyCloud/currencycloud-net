@@ -14,7 +14,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Client.json");
 
-        dynamic credentials = Authentication.Credentials;
+        Credentials credentials = Authentication.Credentials;
 
         [TestFixtureSetUp]
         public void SetUp()
@@ -46,7 +46,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Initialize");
 
-            var token = await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            var token = await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
 
             Assert.IsNotEmpty(token);
 
@@ -61,7 +61,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("PersistToken");
 
-            await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
             await client.GetCurrentAccountAsync();
             await client.CloseAsync();
         }
@@ -74,7 +74,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Reauthenticate");
 
-            await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
 
             var expired = "3907f05da86533710efc589d58f51f45";
             client.Token = expired;
@@ -94,7 +94,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Close");
 
-            await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
             await client.CloseAsync();
 
             Assert.IsFalse(client.IsInitialized);
@@ -109,7 +109,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("FailAfterClose");
 
-            await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
             await client.CloseAsync();
             await client.GetCurrentAccountAsync();
         }
@@ -124,7 +124,7 @@ namespace CurrencyCloud.Tests
 
             try
             {
-                await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+                await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
                 await client.GetBalanceAsync("wrong");
 
                 Assert.Fail();
@@ -155,7 +155,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("RunOnbehalfof");
 
-            await client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey);
+            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
 
             var contactParams = Contacts.Contact1;
             var beneficiaryParams = Beneficiaries.Beneficiary1;

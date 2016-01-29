@@ -15,7 +15,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Payments.json");
 
-        private async Task<Payment> CreatePayment(dynamic payment)
+        private async Task<Payment> CreatePayment(Entity.Payment payment)
         {
             var conversion1 = Conversions.Conversion1;
             var beneficiary1 = Beneficiaries.Beneficiary1;
@@ -38,7 +38,7 @@ namespace CurrencyCloud.Tests
 
             var credentials = Authentication.Credentials;
 
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]

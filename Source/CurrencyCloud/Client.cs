@@ -29,7 +29,7 @@ namespace CurrencyCloud
     public class Client
     {
         private HttpClient httpClient;
-        private dynamic credentials;
+        private Credentials credentials;
         private string onBehalfOf;
 
         internal string Token
@@ -77,15 +77,13 @@ namespace CurrencyCloud
                 throw new InvalidOperationException("Client is not initialized.");
             }
 
-            dynamic paramsObj = new ParamsObject();
+            var paramsObj = new ParamsObject();
             if(obj != null)
             {
                 paramsObj += obj;
             }
-            if (onBehalfOf != null)
-            {
-                paramsObj.OnBehalfOf = onBehalfOf;
-            }
+
+            paramsObj.AddNotNull("OnBehalfOf", onBehalfOf);
 
             string requestUri = path;
             if (paramsObj.Count > 0)
@@ -206,11 +204,7 @@ namespace CurrencyCloud
 
             httpClient.BaseAddress = new Uri(apiServer.Url);
 
-            credentials = new
-            {
-                LoginId = loginId,
-                ApiKey = apiKey
-            };
+            credentials = new Credentials(loginId,apiKey);
 
             return await AuthorizeAsync();
         }
@@ -257,7 +251,7 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<Account> CreateAccountAsync(Account account)
         {
-            dynamic paramsObj = ParamsObject.CreateFromStaticObject(account);
+            var paramsObj = ParamsObject.CreateFromStaticObject(account);
 
             return await RequestAsync<Account>("/v2/accounts/create", HttpMethod.Post, paramsObj);
         }
@@ -416,7 +410,7 @@ namespace CurrencyCloud
             if (id == null)
                 throw new ArgumentException("beneficiary.Id can not be null");
 
-            dynamic optional = ParamsObject.CreateFromStaticObject(beneficiary);
+            var optional = ParamsObject.CreateFromStaticObject(beneficiary);
 
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/" + id, HttpMethod.Post, optional);
         }
@@ -463,8 +457,8 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task CreateResetTokenAsync(string loginId)
         {
-            dynamic paramsObj = new ParamsObject();
-            paramsObj.LoginId = loginId;
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("LoginId", loginId);
 
             await RequestAsync("/v2/contacts/reset_token/create", HttpMethod.Post, paramsObj);
         }
@@ -483,7 +477,7 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<Contact> CreateContactAsync(Contact contact)
         {
-            dynamic paramsObj = ParamsObject.CreateFromStaticObject(contact);
+            var paramsObj = ParamsObject.CreateFromStaticObject(contact);
 
             return await RequestAsync<Contact>("/v2/contacts/create", HttpMethod.Post, paramsObj);
         }
@@ -952,7 +946,7 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<Settlement> RemoveConversionFromSettlementAsync(string id, string conversionId)
         {
-            dynamic paramsObj = new ParamsObject();
+            var paramsObj = new ParamsObject();
             paramsObj.Add("ConversionId", conversionId);
 
 

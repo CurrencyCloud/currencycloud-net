@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Credentials.cs" />
     <Compile Include="Entity\ConversionCreateParameters.cs" />
     <Compile Include="Entity\DetailedRateParameters.cs" />
     <Compile Include="Entity\Entity.cs" />

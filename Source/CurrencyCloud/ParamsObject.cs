@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Collections;
 using CurrencyCloud.Extension;
@@ -10,10 +9,8 @@ namespace CurrencyCloud
     /// <summary>
     /// Represents expandable parameters object.
     /// </summary>
-    public class ParamsObject : DynamicObject, IEnumerable
+    public class ParamsObject 
     {
-        public static readonly string OnBehalfOf = "OnBehalfOf";
-
         private Dictionary<string, object> storage;
 
         private void Expand(ParamsObject paramsObj)
@@ -44,18 +41,6 @@ namespace CurrencyCloud
         public ParamsObject()
         {
             storage = new Dictionary<string, object>();
-        }
-
-        public ParamsObject(dynamic dynamicObj) : this()
-        {
-            var props = dynamicObj.GetType().GetProperties();
-            foreach (var prop in props)
-            {
-                string key = prop.Name;
-                object value = prop.GetValue(dynamicObj);
-
-                storage.Add(key.ToSnakeCase(), value);
-            }
         }
 
         internal static ParamsObject CreateFromStaticObject(object obj)
@@ -95,22 +80,6 @@ namespace CurrencyCloud
             {
                 return storage.Count;
             }
-        }
-
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
-        {
-            var key = binder.Name.ToSnakeCase();
-
-            return storage.TryGetValue(key, out result);
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            var key = binder.Name.ToSnakeCase();
-
-            storage[key] = value;
-
-            return true;
         }
 
         public void AddNotNull(string key, object value)
