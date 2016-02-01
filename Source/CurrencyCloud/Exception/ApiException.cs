@@ -99,6 +99,14 @@ namespace CurrencyCloud.Exception
         {
             return yamlString;
         }
+
+        public override string Message
+        {
+            get
+            {
+                return yamlString;
+            }
+        }
     }
 
     public class BadRequestException : ApiException
