@@ -22,33 +22,66 @@ namespace CurrencyCloud.Entity
         [Newtonsoft.Json.JsonConstructor]
         internal Payment() { }
 
+        ///<summary>
+        /// Unique ID of payment
+        ///</summary>
         public string Id { get; set; }
 
+        ///<summary>
+        /// Unique human readable identifier
+        ///</summary>
         public string ShortReference { get; set; }
 
+        ///<summary>
+        /// Unique ID of beneficiary
+        ///</summary>
         [Param]
         public string BeneficiaryId { get; set; }
 
+        ///<summary>
+        /// Conversion unique ID
+        ///</summary>
         [Param]
         public string ConversionId { get; set; }
 
+        ///<summary>
+        /// Amount of Payment to 2dp
+        ///</summary>
         [Param]
         public decimal Amount { get; set; }
 
+        ///<summary>
+        /// 3 character ISO 4217 currency code
+        ///</summary>
         [Param]
         public string Currency { get; set; }
 
+        ///<summary>
+        /// Status of the payment
+        ///</summary>
         public string Status { get; set; }
 
+        ///<summary>
+        /// Can be priority or regular
+        ///</summary>
         [Param]
         public string PaymentType { get; set; }
 
+        ///<summary>
+        /// Reference
+        ///</summary>
         [Param]
         public string Reference { get; set; }
 
+        ///<summary>
+        /// Reason for payment
+        ///</summary>
         [Param]
         public string Reason { get; set; }
 
+        ///<summary>
+        /// ISO 8601 Date when the payment should be paid
+        ///</summary>
         [Param]
         public DateTime? PaymentDate { get; set; }
 
@@ -64,6 +97,9 @@ namespace CurrencyCloud.Entity
 
         public string PayerId { get; set; }
 
+        ///<summary>
+        /// Source for payer details. Can be one of "account" or "payer". If "account" is passed, none of the payer details should be provided.
+        ///</summary>
         public string PayerDetailsSource { get; set; }
 
         public DateTime CreatedAt { get; set; }

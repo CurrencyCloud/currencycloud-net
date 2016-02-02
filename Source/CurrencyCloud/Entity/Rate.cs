@@ -9,16 +9,28 @@ namespace CurrencyCloud.Entity
 
         public DateTime SettlementCutOffTime { get; set; }
 
+        ///<summary>
+        /// Currency pair eg. EURUSD,GBPZAR
+        ///</summary>
         public string CurrencyPair { get; set; }
 
+        ///<summary>
+        /// Currency you are converting to
+        ///</summary>
         public string ClientBuyCurrency { get; set; }
 
+        ///<summary>
+        /// Currency you are converting from
+        ///</summary>
         public string ClientSellCurrency { get; set; }
 
         public decimal ClientBuyAmount { get; set; }
 
         public decimal ClientSellAmount { get; set; }
 
+        ///<summary>
+        /// The currency that the amount applies to, either buy or sell
+        ///</summary>
         public string FixedSide { get; set; }
 
         public decimal MidMarketRate { get; set; }

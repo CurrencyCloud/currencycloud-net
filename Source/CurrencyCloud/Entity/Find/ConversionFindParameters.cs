@@ -9,36 +9,69 @@ namespace CurrencyCloud.Entity
     public class ConversionFindParameters : FindParameters
     {
 
+        ///<summary>
+        /// Unique human readable identifier
+        ///</summary>
         [Param]
         public string ShortReference { get; set; }
 
+        ///<summary>
+        /// The current status of the Conversion
+        ///</summary>
         [Param]
         public string Status { get; set; }
 
+        ///<summary>
+        /// The partner status of the Conversion
+        ///</summary>
         [Param]
         public string PartnerStatus { get; set; }
 
+        ///<summary>
+        /// 3 character ISO 4217 currency code
+        ///</summary>
         [Param]
         public string BuyCurrency { get; set; }
 
+        ///<summary>
+        /// 3 character ISO 4217 currency code
+        ///</summary>
         [Param]
         public string SellCurrency { get; set; }
 
+        ///<summary>
+        /// Array of conversion ids
+        ///</summary>
         [Param]
         public string[] ConversionIds { get; set; }
 
+        ///<summary>
+        /// ISO 8601 Datetime when the payment was created
+        ///</summary>
         [Param]
         public DateTime? CreatedAtFrom { get; set; }
 
+        ///<summary>
+        /// ISO 8601 Datetime when the payment was created
+        ///</summary>
         [Param]
         public DateTime? CreatedAtTo { get; set; }
 
+        ///<summary>
+        /// ISO 8601 Datetime when the payment was updated
+        ///</summary>
         [Param]
         public DateTime? UpdatedAtFrom { get; set; }
 
+        ///<summary>
+        /// ISO 8601 Datetime when the payment was updated
+        ///</summary>
         [Param]
         public DateTime? UpdatedAtTo { get; set; }
 
+        ///<summary>
+        /// Currency pair
+        ///</summary>
         [Param]
         public string CurrencyPair { get; set; }
 
