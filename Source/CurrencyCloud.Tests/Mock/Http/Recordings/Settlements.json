@@ -339,7 +339,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -363,7 +363,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -435,13 +435,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7707.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:38+00:00",
             "updated_at": "2015-11-01T19:37:38+00:00",
             "released_at": ""
@@ -457,7 +463,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -481,7 +487,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -553,13 +559,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:38+00:00",
             "updated_at": "2015-11-01T19:37:38+00:00",
             "released_at": ""
@@ -588,14 +600,7 @@
             "short_reference": "20151101-MYXGBX",
             "type": "net",
             "conversion_ids": [ ],
-            "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+            "entries": [],
             "created_at": "2015-11-01T19:37:39+00:00",
             "updated_at": "2015-11-01T19:37:39+00:00",
             "released_at": ""
@@ -611,7 +616,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -635,7 +640,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -707,13 +712,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:38+00:00",
             "updated_at": "2015-11-01T19:37:38+00:00",
             "released_at": ""
@@ -742,13 +753,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:42+00:00",
             "updated_at": "2015-11-01T19:37:42+00:00",
             "released_at": "2015-11-01T19:37:42+00:00"
@@ -764,7 +781,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -788,7 +805,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -860,13 +877,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:38+00:00",
             "updated_at": "2015-11-01T19:37:38+00:00",
             "released_at": ""
@@ -895,13 +918,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:42+00:00",
             "updated_at": "2015-11-01T19:37:42+00:00",
             "released_at": "2015-11-01T19:37:42+00:00"
@@ -930,13 +959,19 @@
             "type": "net",
             "conversion_ids": [ "5c4716dc-42dd-4571-b4bf-0aa299fff928" ],
             "entries": [
-              {
-                "GBP": {
-                  "receive_amount": "0.00",
-                  "send_amount": "0.00"
-                }
-              }
-            ],
+                          {
+                            "EUR": {
+                              "receive_amount": "10000.23",
+                              "send_amount": "0.00"
+                            }
+                          },
+                          {
+                            "GBP": {
+                              "receive_amount": "0.00",
+                              "send_amount": "7688.18"
+                            }
+                          }
+                        ],
             "created_at": "2015-11-01T19:37:44+00:00",
             "updated_at": "2015-11-01T19:37:45+00:00",
             "released_at": ""

@@ -53,7 +53,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -77,7 +77,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -269,7 +269,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -293,7 +293,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
