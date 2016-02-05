@@ -127,6 +127,10 @@ namespace CurrencyCloud
                 {
                     value = param.Value.ToString().ToLower();
                 }
+                else if (param.Value is decimal)
+                {
+                    value = ((decimal)param.Value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                }
                 else
                 {
                     value = param.Value.ToString();
