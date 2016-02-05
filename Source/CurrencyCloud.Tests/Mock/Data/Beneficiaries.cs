@@ -47,7 +47,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             RoutingCodeValue1 = "200606",
             RoutingCodeType2 = "aba",
             RoutingCodeValue2 = "780",
-            BicSwift = "USSWIFT",
+            BicSwift = "DABADKKK",
             Iban = "US89370400440532013000",
             DefaultBeneficiary = true,
             BankAddress = new List<string>(new string[] { "1 Courthouse Square" }),
