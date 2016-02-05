@@ -86,7 +86,7 @@ namespace CurrencyCloud.Tests
                     created.Id
                 },
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

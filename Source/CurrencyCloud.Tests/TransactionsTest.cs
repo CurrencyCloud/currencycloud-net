@@ -48,7 +48,7 @@ namespace CurrencyCloud.Tests
             PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
             Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
@@ -70,7 +70,7 @@ namespace CurrencyCloud.Tests
             PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

@@ -131,7 +131,7 @@ namespace CurrencyCloud.Tests
             {
                 LoginId = current.LoginId,
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

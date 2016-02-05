@@ -139,7 +139,7 @@ namespace CurrencyCloud.Tests
             {
                 Name = created.Name,
                 Order = "created_at",
-                OrderAscDesc = BeneficiaryFindParameters.OrderDirection.desc,
+                OrderAscDesc = BeneficiaryFindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

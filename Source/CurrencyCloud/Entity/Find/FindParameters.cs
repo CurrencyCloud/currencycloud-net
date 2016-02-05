@@ -15,7 +15,7 @@ namespace CurrencyCloud.Entity
         [Param]
         public string Order { get; set; }
         [Param]
-        public enum OrderDirection { asc, desc };
+        public enum OrderDirection { Asc, Desc };
         [Param]
         public OrderDirection? OrderAscDesc { get; set; }
     }

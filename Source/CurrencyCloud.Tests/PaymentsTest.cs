@@ -123,7 +123,7 @@ namespace CurrencyCloud.Tests
                 BeneficiaryId = created.BeneficiaryId,
                 ConversionId = created.ConversionId,
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

@@ -60,7 +60,7 @@ namespace CurrencyCloud.Tests
             PaginatedBalances found = await client.FindBalancesAsync(new BalanceFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

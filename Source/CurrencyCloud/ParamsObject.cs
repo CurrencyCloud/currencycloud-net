@@ -131,6 +131,10 @@ namespace CurrencyCloud
                 {
                     value = ((decimal)param.Value).ToString(System.Globalization.CultureInfo.InvariantCulture);
                 }
+                else if (param.Value is Enum)
+                {
+                    value = param.Value.ToString().ToLower();
+                }
                 else
                 {
                     value = param.Value.ToString();

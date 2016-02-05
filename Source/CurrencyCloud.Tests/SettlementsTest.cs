@@ -75,7 +75,7 @@ namespace CurrencyCloud.Tests
             PaginatedSettlements found = await client.FindSettlementsAsync(new SettlementFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 

@@ -107,7 +107,7 @@ namespace CurrencyCloud.Tests
             {
                 AccountName = current.AccountName,
                 Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.desc,
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
 
