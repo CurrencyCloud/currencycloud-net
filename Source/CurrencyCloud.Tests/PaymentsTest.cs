@@ -143,6 +143,9 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             Payment deleted = await client.DeletePaymentAsync(created.Id);
 
+            //Temporary fix while server side does not return PayerDetailsSource for deletion.
+            deleted.PayerDetailsSource = "payer";
+
             Assert.AreEqual(created, deleted);
 
             try

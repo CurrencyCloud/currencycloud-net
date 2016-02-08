@@ -159,6 +159,8 @@ namespace CurrencyCloud.Tests
             Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
             Beneficiary deleted = await client.DeleteBeneficiaryAsync(created.Id);
 
+            
+
             Assert.AreEqual(created, deleted);
 
             try

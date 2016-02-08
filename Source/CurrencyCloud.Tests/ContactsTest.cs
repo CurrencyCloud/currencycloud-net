@@ -4,6 +4,8 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using System;
+using System.Linq;
 
 namespace CurrencyCloud.Tests
 {
@@ -46,9 +48,19 @@ namespace CurrencyCloud.Tests
 
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
+            if (!Authentication.ApiServer.Url.Contains("localhost"))
+                contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
 
             Assert.DoesNotThrow(async () => await client.CreateResetTokenAsync(created.LoginId));
+        }
+
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         /// <summary>
@@ -63,6 +75,8 @@ namespace CurrencyCloud.Tests
 
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
+            if (!Authentication.ApiServer.Url.Contains("localhost"))
+                contact1.LoginId = RandomString(10); 
             Contact created = await client.CreateContactAsync(contact1);
 
             Assert.AreEqual(contact1.FirstName, created.FirstName);
@@ -90,6 +104,8 @@ namespace CurrencyCloud.Tests
 
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
+            if (!Authentication.ApiServer.Url.Contains("localhost"))
+                contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
             Contact gotten = await client.GetContactAsync(created.Id);
 
@@ -109,6 +125,11 @@ namespace CurrencyCloud.Tests
 
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
+            if (!Authentication.ApiServer.Url.Contains("localhost"))
+            {
+                contact1.LoginId = RandomString(10);
+                contact2.LoginId = contact1.LoginId;
+            }
             Contact created = await client.CreateContactAsync(contact1);
             contact2.Id = created.Id;
             contact2.AccountId = account.Id;

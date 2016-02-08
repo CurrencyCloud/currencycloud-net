@@ -164,6 +164,8 @@ namespace CurrencyCloud.Tests
 
             Account account = await client.GetCurrentAccountAsync();
             contactParams.AccountId = account.Id;
+            if (!Authentication.ApiServer.Url.Contains("localhost"))
+                contactParams.LoginId = ContactsTest.RandomString(10);
             Contact contact = await client.CreateContactAsync(contactParams);
             await client.OnBehalfOf(contact.Id, async () =>
             {
