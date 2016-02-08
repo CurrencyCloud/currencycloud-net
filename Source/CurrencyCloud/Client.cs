@@ -979,7 +979,7 @@ namespace CurrencyCloud
             var query = requestMessage.RequestUri.Query;
             var queryParams = HttpUtility.ParseQueryString(query);
 
-            var parameters = queryParams.Cast<string>().ToDictionary(key => key.ToPascalCase(), value => queryParams[value]);
+            var parameters = queryParams.Cast<string>().ToDictionary(key => key, value => queryParams[value]);
             var verb = requestMessage.Method.Method;
             var url = requestMessage.RequestUri.OriginalString;
 
