@@ -135,39 +135,23 @@ catch (ApiException ex)
 }
 
 /* outputs
-CurrencyCloud.Exception.BadRequestException : BadRequestException
+BadRequestException
 ---
 platform: .NET 4.6 or later
 request:
-  parameters:
-    beneficiary_id: c3d7a3e9-d14d-4062-87e2-8957b523bfad
-    amount: 0.23
-    currency: EUR
-    payment_type: regular
-    reference: INVOICE 122
-    reason: Prepayment of salary for April
-    payer_entity_type: individual
-    payer_company_name: Jens enskild firma
-    payer_first_name: Jennifer
-    payer_last_name: Waylon
-    payer_city: Stockholm
-    payer_address: 22 Garvargatan
-    payer_postcode: 12332
-    payer_state_or_province: Stockholm
-    payer_country: SE
-    payer_date_of_birth: 1981-12-10
-    payer_identification_type: none
-  verb: POST
-  url: https://devapi.thecurrencycloud.com/v2/payments/WRONG_ID?beneficiary_id=c3d7a3e9-d14d-4062-87e2-8957b523bfad&amount=0.23&currency=EUR&payment_type=regular&reference=INVOICE 122&reason=Prepayment of salary for April&payer_entity_type=individual&payer_company_name=Jens enskild firma&payer_first_name=Jennifer&payer_last_name=Waylon&payer_city=Stockholm&payer_address=22 Garvargatan&payer_postcode=12332&payer_state_or_province=Stockholm&payer_country=SE&payer_date_of_birth=1981-12-10&payer_identification_type=none
+  parameters: {}
+  verb: GET
+  url: https://devapi.thecurrencycloud.com/v2/balances/XYZ
 response:
   status_code: 400
-  date: Fri, 12 Feb 2016 12:09:34 GMT
-  request_id: 2984392810358908724
+  date: Fri, 12 Feb 2016 12:23:59 GMT
+  request_id: 2984400063350753512
 errors:
-- field: id
-  code: id_is_not_valid_uuid
-  message: id should be in UUID format
-  params: {}
+- field: currency
+  code: invalid_currency
+  message: XYZ is not a valid ISO 4217 currency code
+  params:
+    currency: XYZ
 */
 ```
 # Development
