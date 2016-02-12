@@ -20,7 +20,8 @@ namespace Cookbook
 
         static async Task MainAsync()
         {
-            var conversionParams = new
+            //Data to use in example
+            var conversionData = new 
             {
                 BuyCurrency = "EUR",
                 SellCurrency = "GBP",
@@ -28,7 +29,7 @@ namespace Cookbook
                 FixedSide = "buy",
                 TermAgreement = true
             };
-            var beneficiaryParams = new
+            var beneficiaryData = new
             {
                 Name = "Employee Funds",
                 Country = "DE",
@@ -36,12 +37,15 @@ namespace Cookbook
                 BicSwift = "COBADEFF",
                 Iban = "DE89370400440532013000"
             };
-            var paymentParams = new
+            var paymentData = new
             {
                 Type = "regular",
                 Reason = "Invoice Payment",
                 Reference = "Invoice 1234"
             };
+
+
+            
 
             Client client = new Client();
 
@@ -54,20 +58,29 @@ namespace Cookbook
 
                 isAuthenticated = true;
 
+                var rateParams = new DetailedRateParameters(conversionData.BuyCurrency,
+                    conversionData.SellCurrency,
+                    conversionData.FixedSide,
+                    conversionData.Amount);
                 Console.WriteLine(Environment.NewLine + "Rate:");
-                Rate rate = await client.GetRateAsync(conversionParams.BuyCurrency, conversionParams.SellCurrency, conversionParams.FixedSide, conversionParams.Amount);
+                Rate rate = await client.GetRateAsync(rateParams);
                 Console.WriteLine(rate);
 
+                var conversionParams = new ConversionCreate(conversionData.BuyCurrency,
+                    conversionData.SellCurrency,
+                    conversionData.FixedSide,
+                    conversionData.Amount,
+                    "Invoice Payment", true);
                 Console.WriteLine(Environment.NewLine + "Conversion:");
-                Conversion conversion = await client.CreateConversionAsync(conversionParams.BuyCurrency, conversionParams.SellCurrency, conversionParams.FixedSide, conversionParams.Amount, paymentParams.Reason, conversionParams.TermAgreement);
+                Conversion conversion = await client.CreateConversionAsync(conversionParams);
                 Console.WriteLine(conversion);
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary required details:");
-                BeneficiaryDetailsList beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync(new ParamsObject(new
-                {
-                    Currency = conversionParams.BuyCurrency,
-                    BankAccountCountry = beneficiaryParams.Country
-                }));
+                BeneficiaryDetailsList beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync(
+                    currency: conversionData.BuyCurrency,
+                    bankAccountCountry: beneficiaryData.Country
+                );
+
                 var details = (from detailsList in beneficiaryDetails.Details
                                select string.Join(", ", (from detail in detailsList
                                                          select string.Format("{0}={1}", detail.Key, detail.Value))
@@ -75,19 +88,19 @@ namespace Cookbook
                 Console.WriteLine(string.Join(Environment.NewLine, details.ToList()));
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary:");
-                Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams.Account, beneficiaryParams.Country, conversionParams.BuyCurrency, beneficiaryParams.Name, new ParamsObject(new
+                Beneficiary beneficiary = await client.CreateBeneficiaryAsync(new Beneficiary( beneficiaryData.Account, beneficiaryData.Country, conversionData.BuyCurrency, beneficiaryData.Name)
                 {
-                    BicSwift = beneficiaryParams.BicSwift,
-                    Iban = beneficiaryParams.Iban
-                }));
+                    BicSwift = beneficiaryData.BicSwift,
+                    Iban = beneficiaryData.Iban
+                });
                 Console.WriteLine(beneficiary);
 
                 Console.WriteLine(Environment.NewLine + "Payment:");
-                Payment payment = await client.CreatePaymentAsync(conversionParams.BuyCurrency, beneficiary.Id, conversionParams.Amount, paymentParams.Reason, paymentParams.Reference, new ParamsObject(new
+                Payment payment = await client.CreatePaymentAsync(new Payment(conversionData.BuyCurrency, beneficiary.Id, conversionData.Amount, paymentData.Reason, paymentData.Reference)
                 {
                     ConversionId = conversion.Id,
-                    PaymentType = paymentParams.Type
-                }));
+                    PaymentType = paymentData.Type
+                });
                 Console.WriteLine(payment);
             }
             catch (ApiException ex)
@@ -97,7 +110,7 @@ namespace Cookbook
                     isAuthenticated = false;
                 }
 
-                Console.WriteLine(ex.ToYamlString());
+                Console.WriteLine(ex.Message);
             }
             catch (Exception ex)
             {
