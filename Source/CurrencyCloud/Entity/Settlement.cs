@@ -8,6 +8,9 @@ namespace CurrencyCloud.Entity
     {
         internal Settlement() { }
 
+        ///<summary>
+        /// Settlement ID
+        ///</summary>
         public string Id { get; set; }
 
         public string ShortReference { get; set; }

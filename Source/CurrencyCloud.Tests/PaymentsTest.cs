@@ -15,19 +15,19 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Payments.json");
 
-        private async Task<Payment> CreatePayment(dynamic payment)
+        private async Task<Payment> CreatePayment(Entity.Payment payment)
         {
             var conversion1 = Conversions.Conversion1;
             var beneficiary1 = Beneficiaries.Beneficiary1;
             var payment1 = Payments.Payment1;
 
-            Conversion conversion = await client.CreateConversionAsync(conversion1.BuyCurrency, conversion1.SellCurrency, conversion1.FixedSide, conversion1.Amount, conversion1.Reason, conversion1.TermAgreement);
-            Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1.BankAccountHolderName, beneficiary1.BankCountry, beneficiary1.Currency, beneficiary1.Name, new ParamsObject(beneficiary1.Optional));
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
+            Beneficiary beneficiary = await client.CreateBeneficiaryAsync(beneficiary1);
 
-            dynamic paymentOptional1 = new ParamsObject(payment1.Optional);
-            paymentOptional1.ConversionId = conversion.Id;
+            payment1.ConversionId = conversion.Id;
+            payment1.BeneficiaryId = beneficiary.Id;
 
-            return await client.CreatePaymentAsync(payment.Currency, beneficiary.Id, payment.Amount, payment.Reason, payment.Reference, paymentOptional1);
+            return await client.CreatePaymentAsync(payment1, Payments.Payer1);
         }
 
         [TestFixtureSetUp]
@@ -38,7 +38,7 @@ namespace CurrencyCloud.Tests
 
             var credentials = Authentication.Credentials;
 
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]
@@ -97,7 +97,11 @@ namespace CurrencyCloud.Tests
             var payment2 = Payments.Payment2;
 
             Payment created = await CreatePayment(payment1);
-            Payment updated = await client.UpdatePaymentAsync(created.Id, new ParamsObject(payment2));
+
+            payment2.Id = created.Id;
+            payment2.BeneficiaryId = created.BeneficiaryId;
+
+            Payment updated = await client.UpdatePaymentAsync(payment2, Payments.Payer2);
             Payment gotten = await client.GetPaymentAsync(created.Id);
 
             Assert.AreEqual(gotten, updated);
@@ -114,14 +118,14 @@ namespace CurrencyCloud.Tests
             var payment1 = Payments.Payment1;
 
             Payment created = await CreatePayment(payment1);
-            PaginatedPayments found = await client.FindPaymentsAsync(new ParamsObject(new
+            PaginatedPayments found = await client.FindPaymentsAsync(new PaymentFindParameters
             {
                 BeneficiaryId = created.BeneficiaryId,
                 ConversionId = created.ConversionId,
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(created, found.Payments);
         }
@@ -138,6 +142,9 @@ namespace CurrencyCloud.Tests
 
             Payment created = await CreatePayment(payment1);
             Payment deleted = await client.DeletePaymentAsync(created.Id);
+
+            //Temporary fix while server side does not return PayerDetailsSource for deletion.
+            deleted.PayerDetailsSource = "payer";
 
             Assert.AreEqual(created, deleted);
 

@@ -57,9 +57,24 @@ namespace CurrencyCloud.Tests.Mock.Http
 
                         dynamic recording = recordings.Dequeue();
 
+                        System.Collections.Specialized.NameValueCollection requestParams = System.Web.HttpUtility.ParseQueryString(request.Url.Query);
+                        System.Collections.Specialized.NameValueCollection recordingParams = System.Web.HttpUtility.ParseQueryString((string)(recording.request.query ?? ""));
+                        bool isMathingQueryStrings = true;
+                        foreach (string key in recordingParams)
+                        {
+                            isMathingQueryStrings = isMathingQueryStrings && requestParams[key] == recordingParams[key];
+                            if (requestParams[key] != recordingParams[key])
+                            {
+                                throw new System.Exception(string.Format("Unexpected param value. Param name '{0}'. Expected '{1}' Received '{2}'",
+                                    key, recordingParams[key], requestParams[key]));
+                            }
+                        }
+                        foreach(string key in requestParams)
+                            isMathingQueryStrings = isMathingQueryStrings && requestParams[key] == recordingParams[key];
+
                         bool isMatchingRequest = recording.request.method == request.HttpMethod &&
                                                  recording.request.path == request.Url.AbsolutePath &&
-                                                 (recording.request.query ?? "") == request.Url.Query;
+                                                 isMathingQueryStrings;
                         if (isMatchingRequest && recording.request.headers != null)
                         {
                             foreach (var header in recording.request.headers)
@@ -93,11 +108,11 @@ namespace CurrencyCloud.Tests.Mock.Http
                         responseStream.Write(responseBuffer, 0, responseBuffer.Length);
                         responseStream.Close();
                     }
-                    catch (System.Exception)
+                    catch (System.Exception ex)
                     {
                         Close();
 
-                        throw;
+                        throw ex;
                     }
                 }
             });

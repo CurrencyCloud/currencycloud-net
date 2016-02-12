@@ -53,7 +53,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -77,7 +77,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -199,7 +199,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -223,7 +223,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -384,7 +384,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -408,7 +408,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -525,7 +525,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055",
-          "query": "?currency=EUR&amount=0,23&reason=Prepayment%20of%20salary%20for%20April&reference=INVOICE%20122&payment_type=regular&payer_entity_type=individual&payer_company_name=Jens%20enskild%20firma&payer_first_name=Jennifer&payer_last_name=Waylon&payer_city=Stockholm&payer_address=22%20Garvargatan&payer_postcode=12332&payer_state_or_province=Stockholm&payer_country=SE&payer_date_of_birth=1981-12-10&payer_identification_type=none",
+          "query": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=0.23&reason=Prepayment%20of%20salary%20for%20April&reference=INVOICE%20122&payment_type=regular&payer_entity_type=individual&payer_company_name=Jens%20enskild%20firma&payer_first_name=Jennifer&payer_last_name=Waylon&payer_city=Stockholm&payer_address=22%20Garvargatan&payer_postcode=12332&payer_state_or_province=Stockholm&payer_country=SE&payer_date_of_birth=1981-12-10&payer_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -542,7 +542,7 @@
             "amount": "0.23",
             "beneficiary_id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
             "currency": "EUR",
-            "reference": "INVOICE 122/1",
+            "reference": "INVOICE 122",
             "reason": "Prepayment of salary for April",
             "status": "ready_to_send",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
@@ -581,7 +581,7 @@
             "amount": "0.23",
             "beneficiary_id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
             "currency": "EUR",
-            "reference": "INVOICE 122/1",
+            "reference": "INVOICE 122",
             "reason": "Prepayment of salary for April",
             "status": "ready_to_send",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
@@ -609,7 +609,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -633,7 +633,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -809,7 +809,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000,23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -833,7 +833,7 @@
             "buy_currency": "EUR",
             "sell_currency": "GBP",
             "client_buy_amount": "10000.23",
-            "client_sell_amount": "7215.17",
+            "client_sell_amount": "7706.18",
             "fixed_side": "buy",
             "mid_market_rate": "0.7216",
             "core_rate": "0.7215",
@@ -979,7 +979,7 @@
             "conversion_id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
-            "payer_details_source": "payer",
+            "payer_details_source": "",
             "created_at": "2015-10-27T19:53:27+00:00",
             "updated_at": "2015-10-27T19:53:28+00:00"
           }

@@ -4,15 +4,13 @@ namespace CurrencyCloud.Tests.Mock.Data
 {
     static class Contacts
     {
-        public static readonly dynamic Contact1 = new
-        {
-            FirstName = "John",
-            LastName = "Smith",
-            EmailAddress = "john.smith@company.com",
-            PhoneNumber = "06554 87845",
-
-            Optional = new
-            {
+        public static readonly Entity.Contact Contact1 = new Entity.Contact(
+           "To be filled later",
+            "John",
+            "Smith",
+            "john.smith@company.com",
+            "06554 87845")
+        { 
                 YourReference = "ACME12345",
                 MobilePhoneNumber = "07564 534 54",
                 LoginId = "john",
@@ -20,15 +18,15 @@ namespace CurrencyCloud.Tests.Mock.Data
                 Locale = "en-US",
                 Timezone = "Europe/London",
                 DateOfBirth = new DateTime(1980, 1, 22)
-            }
         };
 
-        public static readonly dynamic Contact2 = new
+        public static readonly Entity.Contact Contact2 = new Entity.Contact (
+            "To be filled later",
+            "Emmet",
+            "Brown",
+            "dr.emmet.brown@company.com",
+            "073 789 1661")
         {
-            FirstName = "Emmet",
-            LastName = "Brown",
-            EmailAddress = "dr.emmet.brown@company.com",
-            PhoneNumber = "073 789 1661",
             YourReference = "doc",
             MobilePhoneNumber = "073 789 1661",
             LoginId = "emmet",

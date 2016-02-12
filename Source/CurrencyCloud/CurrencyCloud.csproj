@@ -32,7 +32,7 @@
     <DocumentationFile>bin\Release\CurrencyCloud.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -48,7 +48,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
+    <Compile Include="Credentials.cs" />
+    <Compile Include="Entity\ConversionCreateParameters.cs" />
+    <Compile Include="Entity\DetailedRateParameters.cs" />
     <Compile Include="Entity\Entity.cs" />
+    <Compile Include="Entity\Find\AccountFindParameters.cs" />
+    <Compile Include="Entity\Find\BalanceFindParameters.cs" />
+    <Compile Include="Entity\Find\BeneficiaryFindParameters.cs" />
+    <Compile Include="Entity\Find\ContactFindParameters.cs" />
+    <Compile Include="Entity\Find\ConversionFindParameters.cs" />
+    <Compile Include="Entity\Find\FindParameters.cs" />
+    <Compile Include="Entity\Find\PaymentFindParameters.cs" />
+    <Compile Include="Entity\Find\SettlementFindParameters.cs" />
+    <Compile Include="Entity\Find\TransactionFindParameters.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />
@@ -77,9 +89,11 @@
     <Compile Include="Entity\Rate.cs" />
     <Compile Include="Entity\Settlement.cs" />
     <Compile Include="Entity\Transaction.cs" />
+    <Compile Include="Entity\Validate\BeneficiaryValidateParameters.cs" />
     <Compile Include="Environment\ApiServer.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Environment\Platform.cs" />
+    <Compile Include="ParamAttribute.cs" />
     <Compile Include="ParamsObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension\StringExtensions.cs" />

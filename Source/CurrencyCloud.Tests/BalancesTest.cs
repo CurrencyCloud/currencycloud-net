@@ -21,7 +21,7 @@ namespace CurrencyCloud.Tests
 
             var credentials = Authentication.Credentials;
 
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]
@@ -57,12 +57,12 @@ namespace CurrencyCloud.Tests
             player.Play("Find");
 
             Balance balance = await client.GetBalanceAsync("GBP");
-            PaginatedBalances found = await client.FindBalancesAsync(new ParamsObject(new
+            PaginatedBalances found = await client.FindBalancesAsync(new BalanceFindParameters
             {
                 Order = "created_at",
-                OrderAscDesc = "desc",
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
-            }));
+            });
 
             Assert.Contains(balance, found.Balances);
         }

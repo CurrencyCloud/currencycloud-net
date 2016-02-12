@@ -21,7 +21,7 @@ namespace CurrencyCloud.Tests
 
             var credentials = Authentication.Credentials;
 
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]
@@ -43,7 +43,7 @@ namespace CurrencyCloud.Tests
             player.Play("Get");
 
             Assert.DoesNotThrow(async () => {
-                Rate gotten = await client.GetRateAsync("EUR", "GBP", "buy", 6700);
+                Rate gotten = await client.GetRateAsync(new DetailedRateParameters("EUR", "GBP", "buy", 6700));
             });
         }
 

@@ -60,35 +60,33 @@ When working with API is finished, it is recommended to close the session and re
 
 ## Passing parameters
 
-Most of the API functions accept both required and optional parameters. To simplify creation of optional parameter sets of variable length `ParamsObject` class is introduced in the SDK. It is an implementation of the dynamic object concept that enables accessing properties via dot notation and adding or removing them in runtime:
+Most of the API functions accept entity instances as parameters. Every entity has mandatory parameters required by constructor. And optional parameters as properties. Null value means, that optional parameter not passed.
 
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
 
 await client.InitializeAsync(ApiServer.Demo, "loginId", "ApiKey");
 
-dynamic beneficiary = new CurrencyCloud.ParamsObject();
-beneficiary.BeneficiaryCountry = "GB";
-beneficiary.BeneficiaryEntityType = "company";
-beneficiary.BeneficiaryCompanyName = "JD Company LLC";
-beneficiary.BeneficiaryFirstName = "John";
-beneficiary.BeneficiaryLastName = "Doe";
-beneficiary.BeneficiaryCity = "London";
-beneficiary.BeneficiaryPostcode = "W11 2BQ";
-beneficiary.BeneficiaryStateOrProvince = "TX";
-beneficiary.BeneficiaryDateOfBirth = new DateTime(1990, 7, 20);
-
-dynamic pagination = new CurrencyCloud.ParamsObject(new
+var beneficiary = new CurrencyCloud.Entity.BeneficiaryFindParameters
 {
-  Page = 1,
-  PerPage = 5,
-  Order = "name",
-  OrderAscDesc = "asc "
-});
+    BeneficiaryCountry = "GB",
+    BeneficiaryEntityType = "company",
+    BeneficiaryCompanyName = "JD Company LLC",
+    BeneficiaryFirstName = "John",
+    BeneficiaryLastName = "Doe",
+    BeneficiaryCity = "London",
+    BeneficiaryPostcode = "W11 2BQ",
+    BeneficiaryStateOrProvince = "TX",
+    BeneficiaryDateOfBirth = new DateTime(1990, 7, 20),
+    Page = 1,
+    PerPage = 5,
+    Order = "name",
+    OrderAscDesc = FindParameters.OrderDirection.Asc
+};
 
-var beneficiaries = await client.FindBeneficiariesAsync(beneficiary + pagination);
+
+var beneficiaries = await client.FindBeneficiariesAsync(beneficiary);
 ```
-`ParamsObject` class expects dynamic parameter names to follow PascalCase naming convention.
 
 ## Asynchrony
 
@@ -97,18 +95,7 @@ Every API function is an asynchronous non-blocking operation implementing the Ta
 ## On Behalf Of
 
 Some API calls can be executed on behalf of another user (e.g. someone who has a sub-account with the logged in user). To achieve this, the `optional` argument of the SDK function should include `OnBehalfOf` parameter with a value of corresponding contact id:
-
-```
-CurrencyCloud.Client client = new CurrencyCloud.Client();
-
-await client.InitializeAsync(ApiServer.Demo, "loginId", "ApiKey");
-
-var rate = await client.GetRateAsync("SEK", "GBP", "buy", 900, new ParamsObject(new
-{
-  OnBehalfOf = "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc"
-}));
-```
-Alternatively, `OnBehalfOf(string id, Func<Task> function)` method can be used to run a bunch of API calls for the given contact id:
+`OnBehalfOf(string id, Func<Task> function)` method is used to run a bunch of API calls for the given contact id:
 
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
@@ -117,20 +104,21 @@ await client.InitializeAsync(ApiServer.Demo, "loginId", "ApiKey");
 
 await client.OnBehalfOf("5c4716dc-42dd-4571-b4bf-0aa299fff928", async () =>
 {
-  var beneficiary = await client.CreateBeneficiaryAsync("Martin McFly", "FR", "EUR", "Employee Funds");
-  var conversion = await client.CreateConversionAsync("EUR", "GBP", "buy", 10000, "Invoice Payment", true);
-  var payment = await client.CreatePaymentAsync("EUR", beneficiary.Id, 10000, "Invoice Payment", "Invoice 1234", new ParamsObject(new
+  var beneficiary = await client.CreateBeneficiaryAsync(new Beneficiary("Martin McFly", "FR", "EUR", "Employee Funds"));
+  var conversion = await client.CreateConversionAsync(new ConversionCreate("EUR", "GBP", "buy", 10000, "Invoice Payment", true));
+  var payment = await client.CreatePaymentAsync(new Payment("EUR", beneficiary.Id, 10000, "Invoice Payment", "Invoice 1234")
   {
-      ConversionId = conversion.Id,
-      PaymentType = "regular"
-  }));
+    ConversionId = conversion.Id,
+    PaymentType = "regular"
+  });
+
   Console.WriteLine(payment);
 });
 ```
 ## Errors
 
 If an API call fails, the SDK function throws an exception, which derives from `APIException` class and represents some specific type of server error, e.g. `AuthenticationException` or `BadRequestException`.
-Base `APIException` class exposes `ToYamlString()` serialization method to convert the error to human-readable YAML string:
+Base `APIException` class converts the error to human-readable YAML string:
 
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
@@ -143,30 +131,26 @@ try
 }
 catch (ApiException ex)
 {
-  Console.WriteLine(ex.ToYamlString());
-}
-catch (Exception ex)
-{
   Console.WriteLine(ex.Message);
 }
 
 /* outputs
 BadRequestException
 ---
-Platform: .NET 4.6 or later
-Request:
-  Parameters: {}
-  Verb: GET
-  Url: https://devapi.thecurrencycloud.com/v2/balances/XYZ
-Response:
-  StatusCode: 400
-  Date: Thu, 17 Dec 2015 09:06:11 GMT
-  RequestId: 2914269054259094430
-Errors:
-- Field: currency
-  Code: invalid_currency
-  Message: XYZ is not a valid ISO 4217 currency code
-  Params:
+platform: .NET 4.6 or later
+request:
+  parameters: {}
+  verb: GET
+  url: https://devapi.thecurrencycloud.com/v2/balances/XYZ
+response:
+  status_code: 400
+  date: Fri, 12 Feb 2016 12:23:59 GMT
+  request_id: 2984400063350753512
+errors:
+- field: currency
+  code: invalid_currency
+  message: XYZ is not a valid ISO 4217 currency code
+  params:
     currency: XYZ
 */
 ```

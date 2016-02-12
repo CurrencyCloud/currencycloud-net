@@ -18,11 +18,11 @@ namespace CurrencyCloud.Exception
             yamlBuilder.AppendLine(GetType().Name);
             yamlBuilder.AppendLine("---");
 
-            yamlBuilder.AppendFormat("Platform: {0}", Platform);
+            yamlBuilder.AppendFormat("platform: {0}", Platform);
             yamlBuilder.AppendLine();
 
-            yamlBuilder.AppendLine("Request:");
-            yamlBuilder.Append("  Parameters:");
+            yamlBuilder.AppendLine("request:");
+            yamlBuilder.Append("  parameters:");
             if (Request.Parameters.Count == 0)
             {
                 yamlBuilder.Append(" {}");
@@ -36,32 +36,32 @@ namespace CurrencyCloud.Exception
                 }
             }
             yamlBuilder.AppendLine();
-            yamlBuilder.AppendFormat("  Verb: {0}", Request.Verb);
+            yamlBuilder.AppendFormat("  verb: {0}", Request.Verb);
             yamlBuilder.AppendLine();
-            yamlBuilder.AppendFormat("  Url: {0}", Request.Url);
-            yamlBuilder.AppendLine();
-
-            yamlBuilder.AppendLine("Response:");
-            yamlBuilder.AppendFormat("  StatusCode: {0}", Response.StatusCode);
-            yamlBuilder.AppendLine();
-            yamlBuilder.AppendFormat("  Date: {0}", Response.Date.ToUniversalTime().ToString("r"));
-            yamlBuilder.AppendLine();
-            yamlBuilder.AppendFormat("  RequestId: {0}", Response.RequestId);
+            yamlBuilder.AppendFormat("  url: {0}", Request.Url);
             yamlBuilder.AppendLine();
 
-            yamlBuilder.Append("Errors:");
+            yamlBuilder.AppendLine("response:");
+            yamlBuilder.AppendFormat("  status_code: {0}", Response.StatusCode);
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  date: {0}", Response.Date.ToUniversalTime().ToString("r"));
+            yamlBuilder.AppendLine();
+            yamlBuilder.AppendFormat("  request_id: {0}", Response.RequestId);
+            yamlBuilder.AppendLine();
+
+            yamlBuilder.Append("errors:");
             foreach (var error in Errors)
             {
                 foreach (var errorMessage in error.ErrorMessages)
                 {
                     yamlBuilder.AppendLine();
-                    yamlBuilder.AppendFormat("- Field: {0}", error.Field);
+                    yamlBuilder.AppendFormat("- field: {0}", error.Field);
                     yamlBuilder.AppendLine();
-                    yamlBuilder.AppendFormat("  Code: {0}", errorMessage.Code);
+                    yamlBuilder.AppendFormat("  code: {0}", errorMessage.Code);
                     yamlBuilder.AppendLine();
-                    yamlBuilder.AppendFormat("  Message: {0}", errorMessage.Message);
+                    yamlBuilder.AppendFormat("  message: {0}", errorMessage.Message);
                     yamlBuilder.AppendLine();
-                    yamlBuilder.Append("  Params:");
+                    yamlBuilder.Append("  params:");
                     if (errorMessage.Params.Count == 0)
                     {
                         yamlBuilder.Append(" {}");
@@ -98,6 +98,14 @@ namespace CurrencyCloud.Exception
         public string ToYamlString()
         {
             return yamlString;
+        }
+
+        public override string Message
+        {
+            get
+            {
+                return yamlString;
+            }
         }
     }
 

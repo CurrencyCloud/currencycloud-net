@@ -19,7 +19,7 @@ namespace CurrencyCloud.Tests
             player.Play("SetUp");
 
             var credentials = Authentication.Credentials;
-            client.InitializeAsync(credentials.ApiServer, credentials.LoginId, credentials.APIkey).Wait();
+            client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
         [TestFixtureTearDown]
@@ -42,12 +42,7 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrow(async () =>
             {
-                BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync(new ParamsObject(new
-                {
-                    Currency = "GBP",
-                    BankAccountCountry = "GB",
-                    BeneficiaryCountry = "GB"
-                }));
+                BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync("GBP","GB","GB");
             });
         }
 
@@ -99,10 +94,7 @@ namespace CurrencyCloud.Tests
             player.Play("GetSettlementAccounts");
 
             Assert.DoesNotThrow(async () => {
-                SettlementAccountsList gotten = await client.GetSettlementAccountsAsync(new ParamsObject(new
-                {
-                    Currency = "EUR"
-                }));
+                SettlementAccountsList gotten = await client.GetSettlementAccountsAsync("EUR");
             });
         }
     }

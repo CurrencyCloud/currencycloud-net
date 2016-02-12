@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
 using System.Collections;
 using CurrencyCloud.Extension;
@@ -10,7 +9,7 @@ namespace CurrencyCloud
     /// <summary>
     /// Represents expandable parameters object.
     /// </summary>
-    public class ParamsObject : DynamicObject, IEnumerable
+    public class ParamsObject 
     {
         private Dictionary<string, object> storage;
 
@@ -44,16 +43,35 @@ namespace CurrencyCloud
             storage = new Dictionary<string, object>();
         }
 
-        public ParamsObject(dynamic dynamicObj) : this()
+        internal static ParamsObject CreateFromStaticObject(object obj)
         {
-            var props = dynamicObj.GetType().GetProperties();
-            foreach (var prop in props)
+            Type t = obj.GetType();
+            ParamsObject ret = new ParamsObject();
+            foreach (var p in t.GetProperties())
             {
-                string key = prop.Name;
-                object value = prop.GetValue(dynamicObj);
+                var r = Attribute.IsDefined(p, typeof(ParamAttribute));
+                if (!r)
+                    continue;
 
-                storage.Add(key.ToSnakeCase(), value);
+                object propValue = p.GetValue(obj);
+                if (propValue != null)
+                {
+                    if (propValue.GetType() == typeof(List<string>))
+                    {
+                        string newValue = "";
+                        foreach (object item in (IList)propValue)
+                        {
+                            if (newValue.Length > 0)
+                                newValue += " \r\n";
+                            newValue += item.ToString();
+                        }
+                        propValue = newValue;
+                    }
+                    ret.Add(p.Name, propValue);
+                }
             }
+            return ret;
+
         }
 
         public int Count
@@ -64,20 +82,11 @@ namespace CurrencyCloud
             }
         }
 
-        public override bool TryGetMember(GetMemberBinder binder, out object result)
+        public void AddNotNull(string key, object value)
         {
-            var key = binder.Name.ToSnakeCase();
-
-            return storage.TryGetValue(key, out result);
-        }
-
-        public override bool TrySetMember(SetMemberBinder binder, object value)
-        {
-            var key = binder.Name.ToSnakeCase();
-
-            storage[key] = value;
-
-            return true;
+            if (value == null)
+                return;
+            Add(key, value);
         }
 
         public void Add(string key, object value)
@@ -115,6 +124,14 @@ namespace CurrencyCloud
                     value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
                 }
                 else if (param.Value is bool)
+                {
+                    value = param.Value.ToString().ToLower();
+                }
+                else if (param.Value is decimal)
+                {
+                    value = ((decimal)param.Value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+                }
+                else if (param.Value is Enum)
                 {
                     value = param.Value.ToString().ToLower();
                 }
