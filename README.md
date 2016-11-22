@@ -1,8 +1,8 @@
 [![NuGet version](https://img.shields.io/nuget/v/CurrencyCloud.svg)](https://www.nuget.org/packages/CurrencyCloud/) [![Travis](https://img.shields.io/travis/CurrencyCloud/currencycloud-net.svg)](https://travis-ci.org/CurrencyCloud/currencycloud-net)
 
-# Currency Cloud
+# Currencycloud
 
-This is the official .NET SDK for v2 of Currency Cloud's API. Additional documentation for each API endpoint can be found at [Currency Cloud API documentation][introduction]. If you have any queries or you require support, please contact our sales team at sales@currencycloud.com.
+This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our sales team at sales@currencycloud.com.
 
 ## Installation
 
@@ -166,7 +166,7 @@ This project uses [semantic versioning][semver]. You can safely express a depend
 
 # Copyright
 
-Copyright (c) 2015 Currency Cloud. See [LICENSE][license] for details.
+Copyright (c) 2016 Currencycloud. See [LICENSE][license] for details.
 
 [introduction]: https://developer.currencycloud.com/documentation/getting-started/introduction
 [overview]:     https://developer.currencycloud.com/documentation/api-docs/overview/
