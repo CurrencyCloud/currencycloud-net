@@ -141,7 +141,7 @@ platform: .NET 4.6 or later
 request:
   parameters: {}
   verb: GET
-  url: https://devapi.thecurrencycloud.com/v2/balances/XYZ
+  url: https://devapi.currencycloud.com/v2/balances/XYZ
 response:
   status_code: 400
   date: Fri, 12 Feb 2016 12:23:59 GMT
