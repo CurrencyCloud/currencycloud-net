@@ -4,6 +4,7 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity.List;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -13,7 +14,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Rates.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -24,7 +25,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -42,7 +43,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 Rate gotten = await client.GetRateAsync(new DetailedRateParameters("EUR", "GBP", "buy", 6700));
             });
         }
@@ -55,7 +56,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Find");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 RatesList found = await client.FindRatesAsync("USDGBP");
             });
         }

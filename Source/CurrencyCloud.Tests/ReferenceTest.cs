@@ -3,6 +3,7 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity.List;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -12,7 +13,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Reference.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -22,7 +23,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -40,7 +41,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetBeneficiaryRequiredDetails");
 
-            Assert.DoesNotThrow(async () =>
+            Assert.DoesNotThrowAsync(async () =>
             {
                 BeneficiaryDetailsList gotten = await client.GetBeneficiaryRequiredDetailsAsync("GBP","GB","GB");
             });
@@ -54,7 +55,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetConversionDates");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 ConversionDatesList gotten = await client.GetConversionDatesAsync("USDGBP");
             });
         }
@@ -67,7 +68,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetAvailableCurrencies");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 CurrenciesList gotten = await client.GetAvailableCurrenciesAsync();
             });
         }
@@ -80,7 +81,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetPaymentDates");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 PaymentDatesList gotten = await client.GetPaymentDatesAsync("USD");
             });
         }
@@ -93,7 +94,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetSettlementAccounts");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 SettlementAccountsList gotten = await client.GetSettlementAccountsAsync("EUR");
             });
         }

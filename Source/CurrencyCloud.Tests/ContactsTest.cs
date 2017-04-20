@@ -6,6 +6,7 @@ using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -15,7 +16,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Contacts.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -26,7 +27,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -40,7 +41,7 @@ namespace CurrencyCloud.Tests
         /// Successfully creates reset token.
         /// </summary>
         [Test]
-        public async void CreateResetToken()
+        public async Task CreateResetToken()
         {
             player.Play("CreateResetToken");
 
@@ -52,7 +53,7 @@ namespace CurrencyCloud.Tests
                 contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
 
-            Assert.DoesNotThrow(async () => await client.CreateResetTokenAsync(created.LoginId));
+            Assert.DoesNotThrowAsync(async () => await client.CreateResetTokenAsync(created.LoginId));
         }
 
         public static string RandomString(int length)
@@ -67,7 +68,7 @@ namespace CurrencyCloud.Tests
         /// Successfully creates a contact.
         /// </summary>
         [Test]
-        public async void Create()
+        public async Task Create()
         {
             player.Play("Create");
 
@@ -96,7 +97,7 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a contact.
         /// </summary>
         [Test]
-        public async void Get()
+        public async Task Get()
         {
             player.Play("Get");
 
@@ -116,7 +117,7 @@ namespace CurrencyCloud.Tests
         /// Successfully updates a contact.
         /// </summary>
         [Test]
-        public async void Update()
+        public async Task Update()
         {
             player.Play("Update");
 
@@ -143,7 +144,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds a contact.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 
@@ -167,7 +168,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetCurrent");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 Contact current = await client.GetCurrentContactAsync();
             });
         }

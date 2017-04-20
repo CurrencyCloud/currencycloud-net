@@ -4,6 +4,7 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -13,7 +14,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Accounts.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -24,7 +25,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -38,7 +39,7 @@ namespace CurrencyCloud.Tests
         /// Successfully creates an account.
         /// </summary>
         [Test]
-        public async void Create()
+        public async Task Create()
         {
             player.Play("Create");
 
@@ -51,7 +52,7 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(account1.YourReference, created.YourReference);
 
             //Workaround to pass test with bug on server: returns "disabled" status sometimes on creation
-            Assert.IsNotNullOrEmpty(created.Status);
+            Assert.That(created.Status, Is.Not.Null.And.Not.Empty);
 
             Assert.AreEqual(account1.Street, created.Street);
             Assert.AreEqual(account1.City, created.City);
@@ -66,7 +67,7 @@ namespace CurrencyCloud.Tests
         /// Successfully gets an account.
         /// </summary>
         [Test]
-        public async void Get()
+        public async Task Get()
         {
             player.Play("Get");
 
@@ -82,7 +83,7 @@ namespace CurrencyCloud.Tests
         /// Successfully updates an account.
         /// </summary>
         [Test]
-        public async void Update()
+        public async Task Update()
         {
             player.Play("Update");
 
@@ -101,7 +102,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds an account.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 
@@ -125,7 +126,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetCurrent");
 
-            Assert.DoesNotThrow(async () => {
+            Assert.DoesNotThrowAsync(async () => {
                 Account current = await client.GetCurrentAccountAsync();
             });
         }

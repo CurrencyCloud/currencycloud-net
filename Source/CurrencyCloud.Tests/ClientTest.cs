@@ -5,6 +5,7 @@ using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Exception;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -16,13 +17,13 @@ namespace CurrencyCloud.Tests
 
         Credentials credentials = Authentication.Credentials;
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Close();
@@ -32,17 +33,16 @@ namespace CurrencyCloud.Tests
         /// Fails to make an API call before logging in.
         /// </summary>
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public async void FailBeforeInitialize()
+        public void FailBeforeInitialize()
         {
-            await client.GetCurrentAccountAsync();
+            Assert.ThrowsAsync<InvalidOperationException>(async () => await client.GetCurrentAccountAsync());
         }
 
         /// <summary>
         /// Successfully initializes the client and logs in.
         /// </summary>
         [Test]
-        public async void Initialize()
+        public async Task Initialize()
         {
             player.Play("Initialize");
 
@@ -57,7 +57,7 @@ namespace CurrencyCloud.Tests
         /// Persists authentication token and so can make a subsequent API call.
         /// </summary>
         [Test]
-        public async void PersistToken()
+        public async Task PersistToken()
         {
             player.Play("PersistToken");
 
@@ -70,7 +70,7 @@ namespace CurrencyCloud.Tests
         /// Silently re-authenticates if token has expired.
         /// </summary>
         [Test]
-        public async void Reauthenticate()
+        public async Task Reauthenticate()
         {
             player.Play("Reauthenticate");
 
@@ -90,7 +90,7 @@ namespace CurrencyCloud.Tests
         /// Successfully logs out.
         /// </summary>
         [Test]
-        public async void Close()
+        public async Task Close()
         {
             player.Play("Close");
 
@@ -104,21 +104,23 @@ namespace CurrencyCloud.Tests
         /// Fails to make an API call once logged out.
         /// </summary>
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public async void FailAfterClose()
+        public void FailAfterClose()
         {
-            player.Play("FailAfterClose");
+            Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                player.Play("FailAfterClose");
 
-            await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
-            await client.CloseAsync();
-            await client.GetCurrentAccountAsync();
+                await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
+                await client.CloseAsync();
+                await client.GetCurrentAccountAsync();
+            });
         }
 
         /// <summary>
         /// Returns full error information.
         /// </summary>
         [Test]
-        public async void FailWithError()
+        public async Task FailWithError()
         {
             player.Play("FailWithError");
 
@@ -131,15 +133,15 @@ namespace CurrencyCloud.Tests
             }
             catch (ApiException ex)
             {
-                Assert.IsNotNullOrEmpty(ex.Platform);
+                Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
 
-                Assert.IsNotNullOrEmpty(ex.Request.Verb);
-                Assert.IsNotNullOrEmpty(ex.Request.Url);
+                Assert.That(ex.Request.Verb, Is.Not.Null.And.Not.Empty);
+                Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
                 Assert.IsEmpty(ex.Request.Parameters);
 
                 Assert.AreEqual(ex.Response.StatusCode, 400);
                 Assert.IsFalse(DateTime.Equals(ex.Response.Date, DateTime.MinValue));
-                Assert.IsNotNullOrEmpty(ex.Response.RequestId);
+                Assert.That(ex.Response.RequestId, Is.Not.Null.And.Not.Empty);
 
                 Assert.IsNotEmpty(ex.Errors);
 
@@ -151,7 +153,7 @@ namespace CurrencyCloud.Tests
         /// Executes API calls on behalf of specified id; once completed, resets the id.
         /// </summary>
         [Test]
-        public async void RunOnbehalfof()
+        public async Task RunOnbehalfof()
         {
             player.Play("RunOnbehalfof");
 
@@ -186,10 +188,10 @@ namespace CurrencyCloud.Tests
         /// Fails if id parameter of OnBehalfOf is invalid.
         /// </summary>
         [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public async void FailOnbehalfof()
-        {
-            await client.OnBehalfOf("wrong", null);
+        public void FailOnbehalfof() {
+            Assert.ThrowsAsync<ArgumentException>(async () => {
+                await client.OnBehalfOf("wrong", null);
+            });
         }
     }
 }

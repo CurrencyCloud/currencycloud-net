@@ -5,6 +5,7 @@ using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Exception;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -14,7 +15,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Settlements.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -25,7 +26,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -43,7 +44,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Create");
 
-            Assert.DoesNotThrow(async () =>
+            Assert.DoesNotThrowAsync(async () =>
             {
                 Settlement created = await client.CreateSettlementAsync("net");
             });
@@ -53,7 +54,7 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a settlement.
         /// </summary>
         [Test]
-        public async void Get()
+        public async Task Get()
         {
             player.Play("Get");
 
@@ -67,7 +68,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds a settlement.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 
@@ -86,7 +87,7 @@ namespace CurrencyCloud.Tests
         /// Successfully deletes a settlement.
         /// </summary>
         [Test]
-        public async void Delete()
+        public async Task Delete()
         {
             player.Play("Delete");
 
@@ -111,7 +112,7 @@ namespace CurrencyCloud.Tests
         /// Successfully adds conversion to a settlement.
         /// </summary>
         [Test]
-        public async void AddConversion()
+        public async Task AddConversion()
         {
             player.Play("AddConversion");
 
@@ -129,7 +130,7 @@ namespace CurrencyCloud.Tests
         /// Successfully removes conversion from a settlement.
         /// </summary>
         [Test]
-        public async void RemoveConversion()
+        public async Task RemoveConversion()
         {
             player.Play("RemoveConversion");
 
@@ -147,7 +148,7 @@ namespace CurrencyCloud.Tests
         /// Successfully releases a settlement.
         /// </summary>
         [Test]
-        public async void Release()
+        public async Task Release()
         {
             player.Play("Release");
 
@@ -165,7 +166,7 @@ namespace CurrencyCloud.Tests
         /// Successfully unreleases a settlement.
         /// </summary>
         [Test]
-        public async void Unrelease()
+        public async Task Unrelease()
         {
             player.Play("Unrelease");
 
