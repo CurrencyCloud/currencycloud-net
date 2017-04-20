@@ -5,6 +5,7 @@ using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Exception;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -14,7 +15,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Beneficiaries.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -25,7 +26,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -39,7 +40,7 @@ namespace CurrencyCloud.Tests
         /// Successfully validates a beneficiary.
         /// </summary>
         [Test]
-        public async void Validate()
+        public async Task Validate()
         {
             player.Play("Validate");
 
@@ -58,7 +59,7 @@ namespace CurrencyCloud.Tests
         /// Successfully creates a beneficiary.
         /// </summary>
         [Test]
-        public async void Create()
+        public async Task Create()
         {
             player.Play("Create");
 
@@ -93,7 +94,7 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a beneficiary.
         /// </summary>
         [Test]
-        public async void Get()
+        public async Task Get()
         {
             player.Play("Get");
 
@@ -109,7 +110,7 @@ namespace CurrencyCloud.Tests
         /// Successfully updates a beneficiary.
         /// </summary>
         [Test]
-        public async void Update()
+        public async Task Update()
         {
             player.Play("Update");
 
@@ -128,7 +129,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds a beneficiary.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 
@@ -150,7 +151,7 @@ namespace CurrencyCloud.Tests
         /// Successfully deletes a beneficiary.
         /// </summary>
         [Test]
-        public async void Delete()
+        public async Task Delete()
         {
             player.Play("Delete");
 

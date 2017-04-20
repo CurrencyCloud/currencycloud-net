@@ -4,6 +4,7 @@ using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Entity.Pagination;
+using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -13,7 +14,7 @@ namespace CurrencyCloud.Tests
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Balances.json");
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -24,7 +25,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -42,7 +43,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Get");
 
-            Assert.DoesNotThrow(async () =>
+            Assert.DoesNotThrowAsync(async () =>
             {
                 Balance balance = await client.GetBalanceAsync("GBP");
             });
@@ -52,7 +53,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds a balance.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 

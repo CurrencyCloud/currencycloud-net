@@ -19,7 +19,8 @@ namespace CurrencyCloud.Tests.Mock.Http
         {
             recordingsSet = new Dictionary<string, Queue>();
 
-            var recs = File.ReadAllText(path);
+            string baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            var recs = File.ReadAllText(baseDirectory + path);
             foreach (var rec in JArray.Parse(recs))
             {
                 var name = rec["name"].ToString();

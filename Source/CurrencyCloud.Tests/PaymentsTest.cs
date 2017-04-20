@@ -30,7 +30,7 @@ namespace CurrencyCloud.Tests
             return await client.CreatePaymentAsync(payment1, Payments.Payer1);
         }
 
-        [TestFixtureSetUp]
+        [OneTimeSetUpAttribute]
         public void SetUp()
         {
             player.Start(ApiServer.Mock.Url);
@@ -41,7 +41,7 @@ namespace CurrencyCloud.Tests
             client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey).Wait();
         }
 
-        [TestFixtureTearDown]
+        [OneTimeTearDownAttribute]
         public void TearDown()
         {
             player.Play("TearDown");
@@ -55,7 +55,7 @@ namespace CurrencyCloud.Tests
         /// Successfully creates a payment.
         /// </summary>
         [Test]
-        public async void Create()
+        public async Task Create()
         {
             player.Play("Create");
 
@@ -73,7 +73,7 @@ namespace CurrencyCloud.Tests
         /// Successfully gets a payment.
         /// </summary>
         [Test]
-        public async void Get()
+        public async Task Get()
         {
             player.Play("Get");
 
@@ -89,7 +89,7 @@ namespace CurrencyCloud.Tests
         /// Successfully updates a payment.
         /// </summary>
         [Test]
-        public async void Update()
+        public async Task Update()
         {
             player.Play("Update");
 
@@ -111,7 +111,7 @@ namespace CurrencyCloud.Tests
         /// Successfully finds a payment.
         /// </summary>
         [Test]
-        public async void Find()
+        public async Task Find()
         {
             player.Play("Find");
 
@@ -134,7 +134,7 @@ namespace CurrencyCloud.Tests
         /// Successfully deletes a payment.
         /// </summary>
         [Test]
-        public async void Delete()
+        public async Task Delete()
         {
             player.Play("Delete");
 
