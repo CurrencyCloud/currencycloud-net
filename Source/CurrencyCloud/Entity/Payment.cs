@@ -9,14 +9,15 @@ namespace CurrencyCloud.Entity
             string beneficiaryId,
             decimal amount,
             string reason,
-            string reference
-            )
+            string reference,
+            string uniqueRequestId)
         {
             this.Currency = currency;
             this.BeneficiaryId = beneficiaryId;
             this.Amount = amount;
             this.Reason = reason;
             this.Reference = reference;
+            this.UniqueRequestId = uniqueRequestId;
         }
 
         [Newtonsoft.Json.JsonConstructor]
@@ -97,6 +98,8 @@ namespace CurrencyCloud.Entity
 
         public string PayerId { get; set; }
 
+        public string UniqueRequestId { get; set; }
+
         ///<summary>
         /// Source for payer details. Can be one of "account" or "payer". If "account" is passed, none of the payer details should be provided.
         ///</summary>
@@ -134,7 +137,8 @@ namespace CurrencyCloud.Entity
                    PayerId == payment.PayerId &&
                    PayerDetailsSource == payment.PayerDetailsSource &&
                    CreatedAt == payment.CreatedAt &&
-                   UpdatedAt == payment.UpdatedAt;
+                   UpdatedAt == payment.UpdatedAt &&
+                   UniqueRequestId == payment.UniqueRequestId;
         }
 
         public override int GetHashCode()

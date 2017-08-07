@@ -96,6 +96,8 @@ namespace CurrencyCloud.Entity
 
         public DateTime UpdatedAt { get; set; }
 
+        public string UniqueRequestId { get; set; }
+
         public override bool Equals(object obj)
         {
             if (!(obj is Conversion))
@@ -133,7 +135,8 @@ namespace CurrencyCloud.Entity
                    DepositRequiredAt == conversion.DepositRequiredAt &&
                    PaymentIds.SequenceEqual(conversion.PaymentIds) &&
                    CreatedAt == conversion.CreatedAt &&
-                   UpdatedAt == conversion.UpdatedAt;
+                   UpdatedAt == conversion.UpdatedAt &&
+                   UniqueRequestId == conversion.UniqueRequestId;
         }
 
         public override int GetHashCode()
