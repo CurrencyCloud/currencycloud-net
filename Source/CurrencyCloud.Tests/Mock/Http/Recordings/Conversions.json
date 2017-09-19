@@ -53,7 +53,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -106,7 +106,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }
@@ -206,7 +206,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/conversions/create",
-          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true",
+          "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
           }

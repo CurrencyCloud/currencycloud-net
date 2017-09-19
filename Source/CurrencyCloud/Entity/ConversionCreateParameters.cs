@@ -14,7 +14,8 @@ namespace CurrencyCloud.Entity
             string fixedSide,
             decimal amount,
             string reason,
-            bool termAgreement
+            bool termAgreement,
+            string uniqueRequestId
             )
         {
             this.BuyCurrency = buyCurrency;
@@ -23,6 +24,7 @@ namespace CurrencyCloud.Entity
             this.Amount = amount;
             this.Reason = reason;
             this.TermAgreement = termAgreement;
+            this.UniqueRequestId = uniqueRequestId;
         }
 
         ///<summary>
@@ -72,6 +74,12 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public decimal? ClientSellAmount { get; set; }
+        
+        ///<summary>
+        /// User provided Idempotency Id
+        ///</summary>
+        [Param]
+        public string UniqueRequestId { get; set; }
 
     }
 }

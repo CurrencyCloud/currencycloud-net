@@ -12,7 +12,7 @@
     <summary>The SDK library for v2 of Currency Cloud's APIs.</summary>
     <copyright>Copyright (c) 2017 Currency Cloud</copyright>
     <tags>CurrencyCloud API Client</tags>
-    <releaseNotes> </releaseNotes>
+    <releaseNotes>Added&amp;#x0020;Unique&amp;#x0020;Reuqest&amp;#x0020;Identifier&amp;#x0020;field.</releaseNotes>
     <dependencies>
    <group targetFramework="net45">
       <dependency id="Newtonsoft.Json" version="7.0.1" />
