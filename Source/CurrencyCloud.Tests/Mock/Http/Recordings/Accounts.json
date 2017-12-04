@@ -6,7 +6,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/authenticate/api",
-          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "headers": {
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+          },
+          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
         },
         "response": {
           "status": 200,
@@ -30,7 +33,8 @@
           "method": "POST",
           "path": "/v2/authenticate/close_session",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -53,9 +57,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "query": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -91,7 +96,8 @@
           "method": "GET",
           "path": "/v2/accounts/current",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -131,9 +137,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "query": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -169,7 +176,8 @@
           "method": "GET",
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -209,9 +217,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "query": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -246,9 +255,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
-          "query": "?account_name=Company%20PLC&legal_entity_type=company&your_reference=0012345564ABC&status=enabled&street=13%20London%20Road&city=London&state_or_province=&postal_code=AB12%20CD2&country=GB&spread_table=flat_0.5_percent&identification_type=none",
+          "body": "?account_name=Company%20PLC&legal_entity_type=company&your_reference=0012345564ABC&status=enabled&street=13%20London%20Road&city=London&state_or_province=&postal_code=AB12%20CD2&country=GB&spread_table=flat_0.5_percent&identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -284,7 +294,8 @@
           "method": "GET",
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -325,7 +336,8 @@
           "method": "GET",
           "path": "/v2/accounts/current",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -362,7 +374,8 @@
           "path": "/v2/accounts/find",
           "query": "?account_name=Toptal&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -417,7 +430,8 @@
           "method": "GET",
           "path": "/v2/accounts/current",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {

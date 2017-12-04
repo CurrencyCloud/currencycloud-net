@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using System.Net.Http;
 using CurrencyCloud.Extension;
 
 namespace CurrencyCloud
@@ -72,6 +73,16 @@ namespace CurrencyCloud
             }
             return ret;
 
+        }
+
+        public FormUrlEncodedContent buildFormUrlBodyFromParams()
+        {
+            List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
+            foreach (KeyValuePair<string, object> param in storage)
+            {
+                paramList.Add(new KeyValuePair<string, string>(param.Key, param.Value.ToString()));
+            }                                 
+            return new FormUrlEncodedContent(paramList);
         }
 
         public int Count

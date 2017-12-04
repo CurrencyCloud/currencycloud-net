@@ -6,7 +6,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/authenticate/api",
-          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "headers": {
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+          },
+          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
         },
         "response": {
           "status": 200,
@@ -30,7 +33,8 @@
           "method": "POST",
           "path": "/v2/authenticate/close_session",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -54,7 +58,8 @@
           "method": "GET",
           "path": "/v2/balances/GBP",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -84,7 +89,8 @@
           "method": "GET",
           "path": "/v2/balances/GBP",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -110,7 +116,8 @@
           "path": "/v2/balances/find",
           "query": "?order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
