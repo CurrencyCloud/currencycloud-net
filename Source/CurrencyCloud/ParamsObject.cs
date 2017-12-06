@@ -10,7 +10,7 @@ namespace CurrencyCloud
     /// <summary>
     /// Represents expandable parameters object.
     /// </summary>
-    public class ParamsObject 
+    public class ParamsObject
     {
         private Dictionary<string, object> storage;
 
@@ -80,8 +80,8 @@ namespace CurrencyCloud
             List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
             foreach (KeyValuePair<string, object> param in storage)
             {
-                paramList.Add(new KeyValuePair<string, string>(param.Key, param.Value.ToString()));
-            }                                 
+                paramList.Add(new KeyValuePair<string, string>(param.Key, formatValue(param)));
+            }
             return new FormUrlEncodedContent(paramList);
         }
 
@@ -153,5 +153,39 @@ namespace CurrencyCloud
                 return key + "=" + value;
             }));
         }
+
+        internal string formatValue(KeyValuePair<string, object> param)
+        {
+            if (param.Value is Array)
+            {
+                var values = from object item in param.Value as Array
+                             select param.Key + "[]=" + item.ToString();
+
+                return string.Join("&", values.ToList());
+            }
+            String value;
+            if (param.Value is DateTime)
+            {
+                value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
+            }
+            else if (param.Value is bool)
+            {
+                value = param.Value.ToString().ToLower();
+            }
+            else if (param.Value is decimal)
+            {
+                value = ((decimal)param.Value).ToString(System.Globalization.CultureInfo.InvariantCulture);
+            }
+            else if (param.Value is Enum)
+            {
+                value = param.Value.ToString().ToLower();
+            }
+            else
+            {
+                value = param.Value.ToString();
+            }
+            return value;
+        }
+
     }
 }
