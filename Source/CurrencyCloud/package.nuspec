@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>CurrencyCloud</id>
-    <version>0.10.1.0</version>
+    <version>0.10.4.0</version>
     <title>CurrencyCloud Client Library</title>
     <authors>Currency Cloud</authors>
     <owners>Currency Cloud</owners>
@@ -12,10 +12,10 @@
     <summary>The SDK library for v2 of Currency Cloud's APIs.</summary>
     <copyright>Copyright (c) 2017 Currency Cloud</copyright>
     <tags>CurrencyCloud API Client</tags>
-    <releaseNotes>Added&amp;#x0020;Unique&amp;#x0020;Reuqest&amp;#x0020;Identifier&amp;#x0020;field.</releaseNotes>
+    <releaseNotes>Added&amp;#x0020;SDK&amp;#x0020;User-Agent&amp;#x0020;Header.&amp;#x000D;&amp;#x000A;Updated&amp;#x0020;HTTP&amp;#x0020;POST&amp;#x0020;parameter&amp;#x0020;handling.</releaseNotes>
     <dependencies>
    <group targetFramework="net45">
-      <dependency id="Newtonsoft.Json" version="7.0.1" />
+      <dependency id="Newtonsoft.Json" version="10.0.3" />
    </group>
 </dependencies>
   </metadata>

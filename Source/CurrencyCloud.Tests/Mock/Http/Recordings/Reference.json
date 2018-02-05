@@ -6,7 +6,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/authenticate/api",
-          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "headers": {
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+          },
+          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
         },
         "response": {
           "status": 200,
@@ -30,7 +33,8 @@
           "method": "POST",
           "path": "/v2/authenticate/close_session",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -55,7 +59,8 @@
           "path": "/v2/reference/beneficiary_required_details",
           "query": "?currency=GBP&bank_account_country=GB&beneficiary_country=GB",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -115,7 +120,8 @@
           "path": "/v2/reference/conversion_dates",
           "query": "?conversion_pair=USDGBP",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -273,7 +279,8 @@
           "method": "GET",
           "path": "/v2/reference/currencies",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -430,7 +437,8 @@
           "path": "/v2/reference/payment_dates",
           "query": "?currency=USD",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -480,7 +488,8 @@
           "path": "/v2/reference/settlement_accounts",
           "query": "?currency=EUR",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {

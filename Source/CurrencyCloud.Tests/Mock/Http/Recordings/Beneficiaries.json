@@ -6,7 +6,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/authenticate/api",
-          "query": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "headers": {
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+          },
+          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
         },
         "response": {
           "status": 200,
@@ -30,7 +33,8 @@
           "method": "POST",
           "path": "/v2/authenticate/close_session",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -53,9 +57,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/validate",
-          "query": "?bank_country=GB&currency=GBP&beneficiary_country=GB&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200605",
+          "body": "?bank_country=GB&currency=GBP&beneficiary_country=GB&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200605",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -103,9 +108,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
-          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -161,9 +167,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
-          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -215,7 +222,8 @@
           "method": "GET",
           "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -271,9 +279,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
-          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -324,9 +333,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
-          "query": "?bank_account_holder_name=Martin%20McFly&bank_country=US&currency=USD&name=Employee%20Funds&beneficiary_address=9303%20Roslyndale%20Ave.&beneficiary_country=US&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200606&routing_code_type_2=aba&routing_code_value_2=780&bic_swift=DABADKKK&iban=US89370400440532013000&default_beneficiary=true&bank_address=1%20Courthouse%20Square&bank_name=Emmet%20Bank&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Back%20to%20the%20Future&beneficiary_first_name=Martin&beneficiary_last_name=McFly&beneficiary_city=Hill%20Valley&beneficiary_postcode=91331&beneficiary_state_or_province=CA&beneficiary_date_of_birth=1968-06-09&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=Martin%20McFly&bank_country=US&currency=USD&name=Employee%20Funds&beneficiary_address=9303%20Roslyndale%20Ave.&beneficiary_country=US&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200606&routing_code_type_2=aba&routing_code_value_2=780&bic_swift=DABADKKK&iban=US89370400440532013000&default_beneficiary=true&bank_address=1%20Courthouse%20Square&bank_name=Emmet%20Bank&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Back%20to%20the%20Future&beneficiary_first_name=Martin&beneficiary_last_name=McFly&beneficiary_city=Hill%20Valley&beneficiary_postcode=91331&beneficiary_state_or_province=CA&beneficiary_date_of_birth=1968-06-09&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -381,7 +391,8 @@
           "method": "GET",
           "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -440,9 +451,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
-          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -495,7 +507,8 @@
           "path": "/v2/beneficiaries/find",
           "query": "?name=Employee%20Funds&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -565,9 +578,10 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/create",
-          "query": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -619,7 +633,8 @@
           "method": "POST",
           "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba/delete",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {
@@ -671,7 +686,8 @@
           "method": "GET",
           "path": "/v2/beneficiaries/c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7"
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
           }
         },
         "response": {

@@ -31,6 +31,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
+        private string userAgent = "CurrencyCloudSDK/2.0 .NET/0.10.4.0";
 
         internal string Token
         {
@@ -49,9 +50,17 @@ namespace CurrencyCloud
 
         private async Task<string> AuthorizeAsync()
         {
-            string requestUri = string.Format("/v2/authenticate/api?login_id={0}&api_key={1}", credentials.LoginId, credentials.ApiKey);
+            string requestUri = string.Format("/v2/authenticate/api");
 
-            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, requestUri));
+            ParamsObject authParams = new ParamsObject();
+            authParams.Add("login_id", credentials.LoginId);
+            authParams.Add("api_key", credentials.ApiKey);
+
+            HttpRequestMessage httpAuthRequestMessage = new HttpRequestMessage(HttpMethod.Post, requestUri)
+            {
+                Content = authParams.buildFormUrlBodyFromParams()
+            };
+            HttpResponseMessage res = await httpClient.SendAsync(httpAuthRequestMessage);
             if (res.IsSuccessStatusCode)
             {
                 string resString = await res.Content.ReadAsStringAsync();
@@ -93,7 +102,17 @@ namespace CurrencyCloud
 
             Func<Task<TResult>> requestAsyncDelegate = async () => 
             {
-                HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(method, requestUri));
+                HttpRequestMessage httpRequestMessage = null;
+                if (method == HttpMethod.Get)
+                {
+                    httpRequestMessage = new HttpRequestMessage(method, requestUri);
+                } else {
+                    httpRequestMessage = new HttpRequestMessage(method, path)
+                    {
+                        Content = paramsObj.buildFormUrlBodyFromParams()
+                    };
+                }
+                HttpResponseMessage res = await httpClient.SendAsync(httpRequestMessage);
                 if (res.IsSuccessStatusCode)
                 {
                     string resString = await res.Content.ReadAsStringAsync();
@@ -201,7 +220,8 @@ namespace CurrencyCloud
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
             httpClient = new HttpClient();
-
+            httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
+          
             httpClient.BaseAddress = new Uri(apiServer.Url);
 
             credentials = new Credentials(loginId,apiKey);
