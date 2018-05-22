@@ -1,28 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CurrencyCloud.Entity
 {
+    [Obsolete("Class ConversionCreate is deprecated. Use a Conversion object instead, setting its properties to appropiate values", false)]
     public class ConversionCreate
     {
-        public ConversionCreate(
-            string buyCurrency,
-            string sellCurrency,
-            string fixedSide,
-            decimal amount,
-            string reason,
-            bool termAgreement,
-            string uniqueRequestId
-            )
+        public ConversionCreate(string buyCurrency, string sellCurrency, string fixedSide, decimal amount, bool termAgreement, string uniqueRequestId)
         {
             this.BuyCurrency = buyCurrency;
             this.SellCurrency = sellCurrency;
             this.FixedSide = fixedSide;
             this.Amount = amount;
-            this.Reason = reason;
             this.TermAgreement = termAgreement;
             this.UniqueRequestId = uniqueRequestId;
         }
@@ -74,7 +62,7 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public decimal? ClientSellAmount { get; set; }
-        
+
         ///<summary>
         /// User provided Idempotency Id
         ///</summary>
