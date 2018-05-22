@@ -1,25 +1,18 @@
 [![NuGet version](https://img.shields.io/nuget/v/CurrencyCloud.svg)](https://www.nuget.org/packages/CurrencyCloud/) [![Travis](https://img.shields.io/travis/CurrencyCloud/currencycloud-net.svg)](https://travis-ci.org/CurrencyCloud/currencycloud-net)
-
 # Currencycloud
-
-This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our sales team at sales@currencycloud.com.
+This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our development team at development@currencycloud.com
 
 ## Installation
-
 The library is distributed on `NuGet`. To install the latest version, run the following command in the Package Manager Console: 
-
 ``` sh
-PM> Install-Package CurrencyCloud
+PM> Install-Package Currencycloud
 ```
 
 ## Supported .NET versions
-
 The least supported .NET framework version is 4.5.
 
 # Usage
-
 The following example retrieves a list of all tradeable currencies:
-
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
 
@@ -42,16 +35,14 @@ catch (Exception ex)
   Console.WriteLine(ex.Message);
 }
 ```
-More extensive examples can be found in the [Examples] solution.
+More extensive examples can be found in the [Examples] solution or by checking the [Unit Tests][utests]
 
 ## Client
-
 The object of class `CurrencyCloud.Client` is a single entry point to access all Currency Cloud's API functions.
 
 Supported APIs are listed in the [Currency Cloud API overview][overview].
 
 ## Initialization
-
 Prior to making API requests via the `CurrencyCloud.Client` object, it must be initialized by calling `InitializeAsync(ApiServer apiServer, string loginId, string apiKey)` method, that starts a new session for the API user with the given credentials. If an API function is invoked by a non-initialized client, `InvalidOperationException` is thrown.
 
 `InitializeAsync` method retrieves authentication token, which is passed with all subsequent API calls. If a call fails due to token is expired, then re-authentication is performed, so that the token is refreshed and the failed request is retried.
@@ -59,9 +50,7 @@ Prior to making API requests via the `CurrencyCloud.Client` object, it must be i
 When working with API is finished, it is recommended to close the session and reset the client by calling its `CloseAsync()` method.
 
 ## Passing parameters
-
 Most of the API functions accept entity instances as parameters. Every entity has mandatory parameters required by constructor. And optional parameters as properties. Null value means, that optional parameter not passed.
-
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
 
@@ -71,12 +60,12 @@ var beneficiary = new CurrencyCloud.Entity.BeneficiaryFindParameters
 {
     BeneficiaryCountry = "GB",
     BeneficiaryEntityType = "company",
-    BeneficiaryCompanyName = "JD Company LLC",
+    BeneficiaryCompanyName = "Currencycloud",
     BeneficiaryFirstName = "John",
     BeneficiaryLastName = "Doe",
     BeneficiaryCity = "London",
-    BeneficiaryPostcode = "W11 2BQ",
-    BeneficiaryStateOrProvince = "TX",
+    BeneficiaryPostcode = "E1 6FQ",
+    BeneficiaryStateOrProvince = "LND",
     BeneficiaryDateOfBirth = new DateTime(1990, 7, 20),
     Page = 1,
     PerPage = 5,
@@ -84,19 +73,15 @@ var beneficiary = new CurrencyCloud.Entity.BeneficiaryFindParameters
     OrderAscDesc = FindParameters.OrderDirection.Asc
 };
 
-
 var beneficiaries = await client.FindBeneficiariesAsync(beneficiary);
 ```
 
 ## Asynchrony
-
 Every API function is an asynchronous non-blocking operation implementing the Task-based Asynchronous Pattern.
 
 ## On Behalf Of
-
 Some API calls can be executed on behalf of another user (e.g. someone who has a sub-account with the logged in user). To achieve this, the `optional` argument of the SDK function should include `OnBehalfOf` parameter with a value of corresponding contact id:
-`OnBehalfOf(string id, Func<Task> function)` method is used to run a bunch of API calls for the given contact id:
-
+`OnBehalfOf(string id, Func<Task> function)` method is used to run many API calls for the given contact id:
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
 
@@ -116,10 +101,8 @@ await client.OnBehalfOf("5c4716dc-42dd-4571-b4bf-0aa299fff928", async () =>
 });
 ```
 ## Errors
-
 If an API call fails, the SDK function throws an exception, which derives from `APIException` class and represents some specific type of server error, e.g. `AuthenticationException` or `BadRequestException`.
 Base `APIException` class converts the error to human-readable YAML string:
-
 ```
 CurrencyCloud.Client client = new CurrencyCloud.Client();
 
@@ -144,7 +127,7 @@ request:
   url: https://devapi.currencycloud.com/v2/balances/XYZ
 response:
   status_code: 400
-  date: Fri, 12 Feb 2016 12:23:59 GMT
+  date: Fri, 12 Feb 2017 12:23:59 GMT
   request_id: 2984400063350753512
 errors:
 - field: currency
@@ -155,22 +138,47 @@ errors:
 */
 ```
 # Development
-
 ## Dependencies
-
 * [Newtonsoft.Json][newtonsoft]
 
-## Versioning
+## Contributing
+**We welcome pull requests from everyone!** Please see [CONTRIBUTING][contr]
+Our sincere thanks for [helping us][hof] create the best API for moving money anywhere around the world!
 
+## Versioning
 This project uses [semantic versioning][semver]. You can safely express a dependency on a major version and expect all minor and patch versions to be backwards compatible.
 
-# Copyright
+## Deprecation Policy
+Technology evolves quickly and we are always looking for better ways to serve our customers. From time to time we need to make room for innovation by removing sections of code that are no longer necessary. We understand this can be disruptive and consequently we have designed a Deprecation Policy that protects our customers' investment and that allows us to take advantage of modern tools, frameworks and practices in developing software.
 
-Copyright (c) 2016 Currencycloud. See [LICENSE][license] for details.
+Deprecation means that we discourage the use of a feature, design or practice because it has been superseded or is no longer considered efficient or safe but instead of removing it immediately, we mark it as **[Obsolete]** to provide backwards compatibility and time for you to update your projects. While the deprecated feature remains in the SDK for a period of time, we advise that you replace it with the recommended alternative which is explained in the relevant section of the code.
+
+We remove deprecated features after **six months** from the time of announcement.
+
+The security of our customers' assets is of paramount importance to us and sometimes we have to deprecate features because they may pose a security threat or because new, more secure, ways are available. On such occasions we reserve the right to set a different deprecation period which may range from **immediate removal** to the standard **six months**. 
+
+Once a feature has been marked as deprecated, we no longer develop the code or implement bug fixes. We only do security fixes.
+
+### List of features being deprecated
+```
+As of 2.1.5: Method Client.ValidateBeneficiaryAsync(BeneficiaryValidateParameters)
+As of 2.1.5: Class BeneficiaryValidateParameters
+As of 2.1.5: Class ConversionCreateParameters
+As of 2.1.5: Class DetailedRateParameters
+```
+
+# Support
+We actively support the latest version of the SDK. We support the immediate previous version on best-efforts basis. All other versions are no longer supported nor maintained.
+
+# Copyright
+Copyright (c) 2015-2018 Currencycloud. See [LICENSE][license] for details.
 
 [introduction]: https://developer.currencycloud.com/documentation/getting-started/introduction
 [overview]:     https://developer.currencycloud.com/documentation/api-docs/overview/
 [examples]:     Examples
+[utests]:       Source/CurrencyCloud.Tests
 [newtonsoft]:   https://www.nuget.org/packages/Newtonsoft.Json/
 [semver]:       http://semver.org/
 [license]:      LICENSE.md
+[contr]:	      CONTRIBUTING.md
+[hof]:	        HALL_OF_FAME.md

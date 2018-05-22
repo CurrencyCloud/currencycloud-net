@@ -27,7 +27,27 @@ namespace CurrencyCloud.Environment
                     if(releaseValue != null)
                     {
                         int releaseNumber = Convert.ToInt32(releaseValue);
-                        if (releaseNumber >= 393295)
+                        if (releaseNumber >= 461808)
+                        {
+                            versionNumber = "4.7.2 or later";
+                        }
+                        else if (releaseNumber >= 461308)
+                        {
+                            versionNumber = "4.7.1 or later";
+                        }
+                        else if (releaseNumber >= 460798)
+                        {
+                            versionNumber = "4.7 or later";
+                        }
+                        else if (releaseNumber >= 394802)
+                        {
+                            versionNumber = "4.6.2 or later";
+                        }
+                        else if (releaseNumber >= 394254)
+                        {
+                            versionNumber = "4.6.1 or later";
+                        }
+                        else if (releaseNumber >= 393295)
                         {
                             versionNumber = "4.6 or later";
                         }
@@ -42,6 +62,10 @@ namespace CurrencyCloud.Environment
                         else if (releaseNumber >= 378389)
                         {
                             versionNumber = "4.5 or later";
+                        }
+                        else
+                        {
+                            versionNumber = "version unknown";
                         }
                     }
 
