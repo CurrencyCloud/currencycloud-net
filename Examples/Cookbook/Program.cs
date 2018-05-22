@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Linq;
 using CurrencyCloud;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Entity.List;
@@ -21,7 +20,7 @@ namespace Cookbook
         static async Task MainAsync()
         {
             //Data to use in example
-            var conversionData = new 
+            var conversionData = new
             {
                 BuyCurrency = "EUR",
                 SellCurrency = "GBP",
@@ -44,36 +43,34 @@ namespace Cookbook
                 Reference = "Invoice 1234"
             };
 
-
-            
-
             Client client = new Client();
 
             bool isAuthenticated = false;
 
             try
             {
-                var token = await client.InitializeAsync(ApiServer.Demo, "test.it@mailinator.com", "b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4");
+                var token = await client.InitializeAsync(ApiServer.Demo, "development@currencycloud.com", "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef");
+
                 Console.WriteLine("Token: {0}", token);
 
                 isAuthenticated = true;
 
-                var rateParams = new DetailedRateParameters(conversionData.BuyCurrency,
+                var rateParams = new DetailedRates(conversionData.BuyCurrency,
                     conversionData.SellCurrency,
                     conversionData.FixedSide,
                     conversionData.Amount);
                 Console.WriteLine(Environment.NewLine + "Rate:");
                 Rate rate = await client.GetRateAsync(rateParams);
-                Console.WriteLine(rate);
+                Console.WriteLine(rate.ToJSON());
 
-                var conversionParams = new ConversionCreate(conversionData.BuyCurrency,
+                var conversionParams = new Conversion(conversionData.BuyCurrency,
                     conversionData.SellCurrency,
                     conversionData.FixedSide,
                     conversionData.Amount,
-                    "Invoice Payment", true);
+                    true);
                 Console.WriteLine(Environment.NewLine + "Conversion:");
                 Conversion conversion = await client.CreateConversionAsync(conversionParams);
-                Console.WriteLine(conversion);
+                Console.WriteLine(conversion.ToJSON());
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary required details:");
                 BeneficiaryDetailsList beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync(
@@ -81,11 +78,7 @@ namespace Cookbook
                     bankAccountCountry: beneficiaryData.Country
                 );
 
-                var details = (from detailsList in beneficiaryDetails.Details
-                               select string.Join(", ", (from detail in detailsList
-                                                         select string.Format("{0}={1}", detail.Key, detail.Value))
-                                                        .ToList()));
-                Console.WriteLine(string.Join(Environment.NewLine, details.ToList()));
+                Console.WriteLine(beneficiaryDetails.ToJSON());
 
                 Console.WriteLine(Environment.NewLine + "Beneficiary:");
                 Beneficiary beneficiary = await client.CreateBeneficiaryAsync(new Beneficiary( beneficiaryData.Account, beneficiaryData.Country, conversionData.BuyCurrency, beneficiaryData.Name)
@@ -93,7 +86,7 @@ namespace Cookbook
                     BicSwift = beneficiaryData.BicSwift,
                     Iban = beneficiaryData.Iban
                 });
-                Console.WriteLine(beneficiary);
+                Console.WriteLine(beneficiary.ToJSON());
 
                 Console.WriteLine(Environment.NewLine + "Payment:");
                 Payment payment = await client.CreatePaymentAsync(new Payment(conversionData.BuyCurrency, beneficiary.Id, conversionData.Amount, paymentData.Reason, paymentData.Reference)
@@ -101,7 +94,7 @@ namespace Cookbook
                     ConversionId = conversion.Id,
                     PaymentType = paymentData.Type
                 });
-                Console.WriteLine(payment);
+                Console.WriteLine(payment.ToJSON());
             }
             catch (ApiException ex)
             {
