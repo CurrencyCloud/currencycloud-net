@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CurrencyCloud.Entity
 {
@@ -50,6 +46,12 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string RelatedEntityId { get; set; }
+        
+        ///<summary>
+        /// Server generated unique reference for each related object
+        ///</summary>
+        [Param]
+        public string RelatedEntityShortReference { get; set; }
 
         ///<summary>
         /// Current status of transactions - completed, pending, deleted
@@ -68,6 +70,18 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Reason { get; set; }
+        
+        ///<summary>
+        /// ISO 8601 expected processing date
+        ///</summary>
+        [Param]
+        public DateTime? SettlesAtFrom { get; set; }
+
+        ///<summary>
+        /// ISO 8601 expected processing date
+        ///</summary>
+        [Param]
+        public DateTime? SettlesAtTo { get; set; }
 
         ///<summary>
         /// ISO 8601 Date when the transaction was created
@@ -116,6 +130,15 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string CurrencyPair { get; set; }
+        
+        ///<summary>
+        /// Controls the search of transactions at all account levels. Defaults to own.
+        /// own: allows to search transactions on the main account
+        /// clients: allows to search transactions of account sub accounts
+        /// all: allows to search transactions across account and sub-accounts
+        ///</summary>
+        [Param]
+        public string Scope { get; set; }
     }
 }
 

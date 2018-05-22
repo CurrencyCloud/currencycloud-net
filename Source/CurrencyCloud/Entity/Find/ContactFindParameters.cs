@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CurrencyCloud.Entity
+﻿namespace CurrencyCloud.Entity
 {
     public class ContactFindParameters : FindParameters
     {
@@ -22,13 +16,13 @@ namespace CurrencyCloud.Entity
         public string AccountId { get; set; }
 
         ///<summary>
-        /// First name
+        /// Forename
         ///</summary>
         [Param]
         public string FirstName { get; set; }
 
         ///<summary>
-        /// Last name
+        /// Surname
         ///</summary>
         [Param]
         public string LastName { get; set; }
