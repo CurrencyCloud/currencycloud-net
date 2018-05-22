@@ -47,13 +47,10 @@ namespace CurrencyCloud.Tests
 
             Account created = await client.CreateAccountAsync(account1);
 
+            Assert.That(created.Status, Is.Not.Null.And.Not.Empty);
             Assert.AreEqual(account1.AccountName, created.AccountName);
             Assert.AreEqual(account1.LegalEntityType, created.LegalEntityType);
             Assert.AreEqual(account1.YourReference, created.YourReference);
-
-            //Workaround to pass test with bug on server: returns "disabled" status sometimes on creation
-            Assert.That(created.Status, Is.Not.Null.And.Not.Empty);
-
             Assert.AreEqual(account1.Street, created.Street);
             Assert.AreEqual(account1.City, created.City);
             Assert.AreEqual(account1.StateOrProvince, created.StateOrProvince);
@@ -61,6 +58,10 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(account1.Country, created.Country);
             Assert.AreEqual(account1.SpreadTable, created.SpreadTable);
             Assert.AreEqual(account1.IdentificationType, created.IdentificationType);
+            Assert.AreEqual(account1.Brand, created.Brand);
+            Assert.AreEqual(account1.ApiTrading, created.ApiTrading);
+            Assert.AreEqual(account1.OnlineTrading, created.OnlineTrading);
+            Assert.AreEqual(account1.PhoneTrading, created.PhoneTrading);
         }
 
         /// <summary>

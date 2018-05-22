@@ -54,7 +54,7 @@ namespace CurrencyCloud.Tests
             });
             Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
 
-            Assert.AreEqual(found.Transactions[0], gotten);
+            Assert.AreEqual(found.Transactions[0].ToJSON(), gotten.ToJSON());
         }
 
         /// <summary>

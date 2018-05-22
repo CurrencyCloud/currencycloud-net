@@ -3,16 +3,22 @@ using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity.List
 {
-    public class BeneficiaryDetailsList
+    public class PayerDetailsList
     {
-        internal BeneficiaryDetailsList() { }
+        internal PayerDetailsList() { }
+
+        public struct RequiredField
+        {
+            public string Name { get; set; }
+            public string ValidationRule { get; set; }
+        }
 
         public struct Detail
         {
+            public string PayerEntityType { get; set; }
             public string PaymentType { get; set; }
-            public string AcctNumber { get; set; }
-            public string BicSwift { get; set; }
-            public string BeneficiaryEntityType { get; set; }
+            public List<RequiredField> RequiredFields { get; set; }
+            public string PayerIdentificationType { get; set; }
         }
 
         public List<Detail> Details { get; set; }

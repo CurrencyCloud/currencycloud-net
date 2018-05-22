@@ -37,25 +37,6 @@ namespace CurrencyCloud.Tests
             player.Close();
         }
 
-        /// <summary>
-        /// Successfully creates reset token.
-        /// </summary>
-        [Test]
-        public async Task CreateResetToken()
-        {
-            player.Play("CreateResetToken");
-
-            var contact1 = Contacts.Contact1;
-
-            Account account = await client.GetCurrentAccountAsync();
-            contact1.AccountId = account.Id;
-            if (!Authentication.ApiServer.Url.Contains("localhost"))
-                contact1.LoginId = RandomString(10);
-            Contact created = await client.CreateContactAsync(contact1);
-
-            Assert.DoesNotThrowAsync(async () => await client.CreateResetTokenAsync(created.LoginId));
-        }
-
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -77,7 +58,7 @@ namespace CurrencyCloud.Tests
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
             if (!Authentication.ApiServer.Url.Contains("localhost"))
-                contact1.LoginId = RandomString(10); 
+                contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
 
             Assert.AreEqual(contact1.FirstName, created.FirstName);

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity.List
 {
@@ -7,5 +8,17 @@ namespace CurrencyCloud.Entity.List
         internal CurrenciesList() { }
 
         public List<Currency> Currencies { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Currencies
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
     }
 }

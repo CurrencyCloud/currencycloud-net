@@ -44,9 +44,10 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Validate");
 
-            Beneficiary validated = await client.ValidateBeneficiaryAsync(
-                new BeneficiaryValidateParameters("GB", "GBP", "GB")
+            Beneficiary validated = await client.ValidateBeneficiaryAsync(new Beneficiary
             {
+                BankCountry = "GB",
+                Currency = "GBP",
                 AccountNumber = "13071472",
                 RoutingCodeType1 = "sort_code",
                 RoutingCodeValue1 = "200605"
@@ -160,7 +161,7 @@ namespace CurrencyCloud.Tests
             Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
             Beneficiary deleted = await client.DeleteBeneficiaryAsync(created.Id);
 
-            
+
 
             Assert.AreEqual(created, deleted);
 

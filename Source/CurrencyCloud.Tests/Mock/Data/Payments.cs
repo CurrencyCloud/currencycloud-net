@@ -10,8 +10,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             "To be filled later",
             10000,
             "Salary for March",
-            "INVOICE 9876",
-            "request-12345"
+            "INVOICE 9876"
             )
         {
             PaymentType = "regular"
@@ -36,8 +35,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             "To be filled later",
             0.23m,
             "Prepayment of salary for April",
-            "INVOICE 122",
-            "request-12345"
+            "INVOICE 122"
             )
         {
             PaymentType = "regular"

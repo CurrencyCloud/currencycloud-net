@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             "EUR",
             "Employee Funds"
             )
-        { 
+        {
                 BeneficiaryAddress = new List<string>(new string[] { "23 Acacia Road" }),
                 BeneficiaryCountry = "GB",
                 BicSwift = "COBADEFF",
@@ -33,13 +33,13 @@ namespace CurrencyCloud.Tests.Mock.Data
         };
 
         public static readonly Beneficiary Beneficiary2 = new Beneficiary(
-        
+
             "Martin McFly",
             "US",
             "USD",
             "Employee Funds"
             )
-        { 
+        {
             BeneficiaryAddress = new List<string>(new string[] { "9303 Roslyndale Ave." }),
             BeneficiaryCountry = "US",
             AccountNumber = "13071472",

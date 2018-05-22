@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Settlement : Entity
     {
-        internal Settlement() { }
+        public Settlement() { }
 
         ///<summary>
         /// Settlement ID
@@ -21,11 +22,34 @@ namespace CurrencyCloud.Entity
 
         public List<Dictionary<string, SettlementEntry>> Entries { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public DateTime ReleasedAt { get; set; }
+        public DateTime? ReleasedAt { get; set; }
+
+        [Param]
+        public string Type { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    Status,
+                    ShortReference,
+                    Type,
+                    ConversionIds,
+                    Entries,
+                    CreatedAt,
+                    UpdatedAt,
+                    ReleasedAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {

@@ -7,14 +7,14 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           },
-          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -34,13 +34,13 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -59,13 +59,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -82,8 +82,8 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
             "short_reference": "151030-00006"
@@ -97,13 +97,13 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -122,8 +122,8 @@
             "phone_number": "06554 87845",
             "your_reference": "ACME12345",
             "date_of_birth": "1980-01-22",
-            "created_at": "2015-10-27T18:34:41+00:00",
-            "updated_at": "2015-10-27T18:34:41+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -134,13 +134,13 @@
           "body": "?login_id=john",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -159,13 +159,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -182,8 +182,8 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
             "short_reference": "151030-00006"
@@ -197,13 +197,13 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -222,8 +222,8 @@
             "phone_number": "06554 87845",
             "your_reference": "ACME12345",
             "date_of_birth": "1980-01-22",
-            "created_at": "2015-10-27T18:34:41+00:00",
-            "updated_at": "2015-10-27T18:34:41+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }
@@ -238,13 +238,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -261,8 +261,8 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
             "short_reference": "151030-00006"
@@ -276,13 +276,13 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -301,8 +301,8 @@
             "phone_number": "06554 87845",
             "your_reference": "ACME12345",
             "date_of_birth": "1980-01-22",
-            "created_at": "2015-10-27T18:34:41+00:00",
-            "updated_at": "2015-10-27T18:34:41+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -312,13 +312,13 @@
           "path": "/v2/contacts/38b2e976-60c3-416a-be2e-51c700aed246",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -337,8 +337,8 @@
             "phone_number": "06554 87845",
             "your_reference": "ACME12345",
             "date_of_birth": "1980-01-22",
-            "created_at": "2015-10-27T18:34:41+00:00",
-            "updated_at": "2015-10-27T18:34:41+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }
@@ -353,13 +353,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -376,8 +376,8 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
             "short_reference": "151030-00006"
@@ -391,13 +391,13 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -416,8 +416,8 @@
             "phone_number": "06554 87845",
             "your_reference": "ACME12345",
             "date_of_birth": "1980-01-22",
-            "created_at": "2015-10-27T18:34:41+00:00",
-            "updated_at": "2015-10-27T18:34:41+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -428,13 +428,13 @@
           "body": "?first_name=Emmet&last_name=Brown&email_address=dr.emmet.brown@company.com&phone_number=073%20789%201661&your_reference=doc&mobile_phone_number=073%20789%201661&login_id=emmet&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1960-01-29",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -453,8 +453,8 @@
             "phone_number": "073 789 1661",
             "your_reference": "doc",
             "date_of_birth": "1960-01-29",
-            "created_at": "2015-10-27T18:34:44+00:00",
-            "updated_at": "2015-10-27T18:34:44+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -464,13 +464,13 @@
           "path": "/v2/contacts/38b2e976-60c3-416a-be2e-51c700aed246",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -489,8 +489,8 @@
             "phone_number": "073 789 1661",
             "your_reference": "doc",
             "date_of_birth": "1960-01-29",
-            "created_at": "2015-10-27T18:34:44+00:00",
-            "updated_at": "2015-10-27T18:34:44+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }
@@ -505,18 +505,18 @@
           "path": "/v2/contacts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "login_id": "test.it@mailinator.com",
+            "login_id": "development@currencycloud.com",
             "id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "first_name": "Irina",
             "last_name": "Gudkova",
@@ -530,8 +530,8 @@
             "phone_number": null,
             "your_reference": null,
             "date_of_birth": null,
-            "created_at": "2015-10-13T11:47:30+00:00",
-            "updated_at": "2015-10-13T11:47:30+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -539,23 +539,23 @@
         "request": {
           "method": "GET",
           "path": "/v2/contacts/find",
-          "query": "?login_id=test.it@mailinator.com&order=created_at&order_asc_desc=desc&per_page=5",
+          "query": "?login_id=development@currencycloud.com&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
             "contacts": [
               {
-                "login_id": "test.it@mailinator.com",
+                "login_id": "development@currencycloud.com",
                 "id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
                 "first_name": "Irina",
                 "last_name": "Gudkova",
@@ -569,8 +569,8 @@
                 "phone_number": null,
                 "your_reference": null,
                 "date_of_birth": null,
-                "created_at": "2015-10-13T11:47:30+00:00",
-                "updated_at": "2015-10-13T11:47:30+00:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
               }
             ],
             "pagination": {
@@ -597,18 +597,18 @@
           "path": "/v2/contacts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "login_id": "test.it@mailinator.com",
+            "login_id": "development@currencycloud.com",
             "id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "first_name": "Irina",
             "last_name": "Gudkova",
@@ -622,8 +622,8 @@
             "phone_number": null,
             "your_reference": null,
             "date_of_birth": null,
-            "created_at": "2015-10-13T11:47:30+00:00",
-            "updated_at": "2015-10-13T11:47:30+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }

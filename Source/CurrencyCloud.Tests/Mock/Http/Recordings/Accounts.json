@@ -7,14 +7,14 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           },
-          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -34,13 +34,13 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -57,16 +57,16 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -76,18 +76,23 @@
             "brand": "currencycloud",
             "your_reference": "POS-UID-23523",
             "status": "enabled",
-            "street": "164 Bishops Gate",
+            "street": "12 Steward St",
             "city": "London",
-            "state_or_province": "Ontario",
+            "state_or_province": "London",
             "country": "GB",
-            "postal_code": "CR4 3RZ",
+            "postal_code": "E1 6FQ",
             "spread_table": "no_markup",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:37+00:00",
-            "updated_at": "2015-10-21T17:22:37+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00021"
+            "short_reference": "151021-00021",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       },
@@ -97,13 +102,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -120,11 +125,16 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
-            "short_reference": "151030-00006"
+            "short_reference": "151030-00006",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       }
@@ -137,16 +147,16 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -156,18 +166,23 @@
             "brand": "currencycloud",
             "your_reference": "POS-UID-23523",
             "status": "enabled",
-            "street": "164 Bishops Gate",
+            "street": "12 Steward St",
             "city": "London",
-            "state_or_province": "Ontario",
+            "state_or_province": "London",
             "country": "GB",
-            "postal_code": "CR4 3RZ",
+            "postal_code": "E1 6FQ",
             "spread_table": "no_markup",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:37+00:00",
-            "updated_at": "2015-10-21T17:22:37+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00021"
+            "short_reference": "151021-00021",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       },
@@ -177,13 +192,13 @@
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -193,18 +208,23 @@
             "brand": "currencycloud",
             "your_reference": "POS-UID-23523",
             "status": "enabled",
-            "street": "164 Bishops Gate",
+            "street": "12 Steward St",
             "city": "London",
-            "state_or_province": "Ontario",
+            "state_or_province": "London",
             "country": "GB",
-            "postal_code": "CR4 3RZ",
+            "postal_code": "E1 6FQ",
             "spread_table": "no_markup",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:37+00:00",
-            "updated_at": "2015-10-21T17:22:37+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00021"
+            "short_reference": "151021-00021",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       }
@@ -217,16 +237,16 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=164%20Bishops%20Gate&city=London&state_or_province=Ontario&postal_code=CR4%203RZ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -236,18 +256,23 @@
             "brand": "currencycloud",
             "your_reference": "POS-UID-23523",
             "status": "enabled",
-            "street": "164 Bishops Gate",
+            "street": "12 Steward St",
             "city": "London",
-            "state_or_province": "Ontario",
+            "state_or_province": "London",
             "country": "GB",
-            "postal_code": "CR4 3RZ",
+            "postal_code": "E1 6FQ",
             "spread_table": "no_markup",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:37+00:00",
-            "updated_at": "2015-10-21T17:22:37+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00021"
+            "short_reference": "151021-00021",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       },
@@ -255,16 +280,16 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
-          "body": "?account_name=Company%20PLC&legal_entity_type=company&your_reference=0012345564ABC&status=enabled&street=13%20London%20Road&city=London&state_or_province=&postal_code=AB12%20CD2&country=GB&spread_table=flat_0.5_percent&identification_type=none",
+          "body": "?account_name=Company%20PLC&legal_entity_type=company&your_reference=0012345564ABC&status=enabled&street=12%20Steward%20St&city=London&state_or_province=&postal_code=E1%206FQ&country=GB&spread_table=flat_0.5_percent&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -274,18 +299,23 @@
             "brand": "currencycloud",
             "your_reference": "0012345564ABC",
             "status": "enabled",
-            "street": "1 London Road",
+            "street": "12 Steward St",
             "city": "London",
             "state_or_province": "",
             "country": "GB",
-            "postal_code": "AB12 CD1",
+            "postal_code": "E1 6FQ",
             "spread_table": "flat_0.5_percent",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:38+00:00",
-            "updated_at": "2015-10-21T17:22:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00023"
+            "short_reference": "151021-00023",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       },
@@ -295,13 +325,13 @@
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -311,18 +341,23 @@
             "brand": "currencycloud",
             "your_reference": "0012345564ABC",
             "status": "enabled",
-            "street": "1 London Road",
+            "street": "12 Steward St",
             "city": "London",
             "state_or_province": "",
             "country": "GB",
-            "postal_code": "AB12 CD1",
+            "postal_code": "E1 6FQ",
             "spread_table": "flat_0.5_percent",
             "legal_entity_type": "company",
-            "created_at": "2015-10-21T17:22:38+00:00",
-            "updated_at": "2015-10-21T17:22:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": "none",
             "identification_value": null,
-            "short_reference": "151021-00023"
+            "short_reference": "151021-00023",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       }
@@ -337,13 +372,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -360,11 +395,16 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
-            "short_reference": "151030-00006"
+            "short_reference": "151030-00006",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       },
@@ -375,13 +415,13 @@
           "query": "?account_name=Toptal&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -400,11 +440,16 @@
                 "postal_code": null,
                 "spread_table": "fxcg_rfx_default",
                 "legal_entity_type": null,
-                "created_at": "2015-10-30T13:46:49+00:00",
-                "updated_at": "2015-10-30T13:52:32+00:00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
                 "identification_type": null,
                 "identification_value": null,
-                "short_reference": "151030-00006"
+                "short_reference": "151030-00006",
+                "api_trading": true,
+                "online_trading": true,
+                "phone_trading": true,
+                "process_third_party_funds": true,
+                "settlement_type": "net"
               }
             ],
             "pagination": {
@@ -431,13 +476,13 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -454,11 +499,16 @@
             "postal_code": null,
             "spread_table": "fxcg_rfx_default",
             "legal_entity_type": null,
-            "created_at": "2015-10-30T13:46:49+00:00",
-            "updated_at": "2015-10-30T13:52:32+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "identification_type": null,
             "identification_value": null,
-            "short_reference": "151030-00006"
+            "short_reference": "151030-00006",
+            "api_trading": true,
+            "online_trading": true,
+            "phone_trading": true,
+            "process_third_party_funds": true,
+            "settlement_type": "net"
           }
         }
       }

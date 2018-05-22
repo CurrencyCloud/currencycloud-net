@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class SettlementAccount : Entity
     {
-        internal SettlementAccount() { }
+        public SettlementAccount() { }
 
         public string BankAccountHolderName { get; set; }
 
@@ -19,6 +20,7 @@ namespace CurrencyCloud.Entity
 
         public string BankCountry { get; set; }
 
+        [Param]
         public string Currency { get; set; }
 
         public string BicSwift { get; set; }
@@ -34,6 +36,34 @@ namespace CurrencyCloud.Entity
         public string RoutingCodeType2 { get; set; }
 
         public string RoutingCodeValue2 { get; set; }
+
+        [Param]
+        public string AccountId { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    BankAccountHolderName,
+                    BeneficiaryAddress,
+                    BeneficiaryCountry,
+                    BankName,
+                    BankAddress,
+                    BankCountry,
+                    Currency,
+                    BicSwift,
+                    Iban,
+                    AccountNumber,
+                    RoutingCodeType1,
+                    RoutingCodeValue1,
+                    RoutingCodeType2,
+                    RoutingCodeValue2
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {

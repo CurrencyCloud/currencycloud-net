@@ -4,7 +4,6 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
-using System.Collections;
 using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests

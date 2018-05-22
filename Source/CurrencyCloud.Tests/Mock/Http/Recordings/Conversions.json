@@ -7,14 +7,14 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           },
-          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -34,14 +34,14 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
 
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -61,21 +61,21 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
 
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
           "body": {
             "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
-            "settlement_date": "2015-10-29T14:00:00+00:00",
-            "conversion_date": "2015-10-29T00:00:00+00:00",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
             "short_reference": "20151027-ZMNZZB",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
@@ -99,8 +99,9 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
           }
         }
       }
@@ -116,21 +117,21 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
 
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
           "body": {
             "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
-            "settlement_date": "2015-10-29T14:00:00+00:00",
-            "conversion_date": "2015-10-29T00:00:00+00:00",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
             "short_reference": "20151027-ZMNZZB",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
@@ -154,8 +155,9 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
           }
         }
       },
@@ -165,20 +167,20 @@
           "path": "/v2/conversions/5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
             "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
-            "settlement_date": "2015-10-29T14:00:00+00:00",
-            "conversion_date": "2015-10-29T00:00:00+00:00",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
             "short_reference": "20151027-ZMNZZB",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
@@ -202,8 +204,9 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
           }
         }
       }
@@ -219,21 +222,21 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
 
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
           "body": {
             "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
-            "settlement_date": "2015-10-29T14:00:00+00:00",
-            "conversion_date": "2015-10-29T00:00:00+00:00",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
             "short_reference": "20151027-ZMNZZB",
             "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
             "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
@@ -257,8 +260,9 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
           }
         }
       },
@@ -269,13 +273,13 @@
           "query": "?conversion_ids%5B%5D=5c4716dc-42dd-4571-b4bf-0aa299fff928&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -283,8 +287,8 @@
             "conversions": [
               {
                 "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
-                "settlement_date": "2015-10-29T14:00:00+00:00",
-                "conversion_date": "2015-10-29T00:00:00+00:00",
+                "settlement_date": "2018-01-01T12:34:56+00:00",
+                "conversion_date": "2018-01-01T12:34:56+00:00",
                 "short_reference": "20151027-ZMNZZB",
                 "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
                 "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
@@ -308,8 +312,9 @@
                 "deposit_status": "not_required",
                 "deposit_required_at": "",
                 "payment_ids": [ ],
-                "created_at": "2015-10-27T19:53:17+00:00",
-                "updated_at": "2015-10-27T19:53:17+00:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
+                "beneficiary_external_reference": ""
               }
             ],
             "pagination": {

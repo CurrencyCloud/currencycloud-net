@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Beneficiary : Entity
     {
 
-        public Beneficiary(string bankAccountHolderName,
-            string bankCountry,
-            string currency,
-            string name)
+        public Beneficiary(string bankAccountHolderName, string bankCountry, string currency, string name)
         {
             this.BankAccountHolderName = bankAccountHolderName;
             this.BankCountry = bankCountry;
@@ -18,13 +16,11 @@ namespace CurrencyCloud.Entity
             this.Name = name;
         }
 
-        [Newtonsoft.Json.JsonConstructor]
-        internal Beneficiary()
-        {
-        }
+        [JsonConstructor]
+        public Beneficiary() { }
 
         /// <summary>
-        /// ID of the beneficiary 
+        /// ID of the beneficiary
         /// </summary>
         public string Id { get; set; }
 
@@ -50,7 +46,7 @@ namespace CurrencyCloud.Entity
         /// Priority or regular
         ///</summary>
         [Param]
-        public List<string> PaymentTypes { get; set; }
+        public string[] PaymentTypes { get; set; }
 
         ///<summary>
         /// Address of beneficiary
@@ -110,7 +106,7 @@ namespace CurrencyCloud.Entity
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
         [Param]
-        public DateTime BeneficiaryDateOfBirth { get; set; }
+        public DateTime? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
         /// Type of the identification document. One of 'none', 'drivers_license', 'social_security_number', 'green_card', 'passport', 'visa', 'matricula_consular', 'registro_federal_de_contribuyentes', 'credential_de_elector', 'social_insurance_number', 'citizenship_papers', 'drivers_license_canadian', 'existing_credit_card_details', 'employer_identification_number', 'national_id', 'others' or 'incorporation_number'
@@ -123,6 +119,11 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string BeneficiaryIdentificationValue { get; set; }
+
+        ///<summary>
+        /// External reference for the beneficiary
+        ///</summary>
+        public string BeneficiaryExternalReference { get; set; }
 
         ///<summary>
         /// A two-letter country code as defined in ISO 3166-1 of the bank account
@@ -194,7 +195,7 @@ namespace CurrencyCloud.Entity
         /// boolean
         ///</summary>
         [Param]
-        public bool DefaultBeneficiary { get; set; }
+        public bool? DefaultBeneficiary { get; set; }
 
         [Param]
         public string CreatorContactId { get; set; }
@@ -205,9 +206,54 @@ namespace CurrencyCloud.Entity
         [Param]
         public List<string> BankAddress { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    BankAccountHolderName,
+                    Name,
+                    Email,
+                    PaymentTypes,
+                    BeneficiaryAddress,
+                    BeneficiaryCountry,
+                    BeneficiaryEntityType,
+                    BeneficiaryCompanyName,
+                    BeneficiaryFirstName,
+                    BeneficiaryLastName,
+                    BeneficiaryCity,
+                    BeneficiaryPostcode,
+                    BeneficiaryStateOrProvince,
+                    BeneficiaryDateOfBirth,
+                    BeneficiaryIdentificationType,
+                    BeneficiaryIdentificationValue,
+                    BankCountry,
+                    BankName,
+                    BankAccountType,
+                    Currency,
+                    AccountNumber,
+                    RoutingCodeType1,
+                    RoutingCodeValue1,
+                    RoutingCodeType2,
+                    RoutingCodeValue2,
+                    BicSwift,
+                    Iban,
+                    DefaultBeneficiary,
+                    CreatorContactId,
+                    BankAddress,
+                    CreatedAt,
+                    UpdatedAt,
+                    BeneficiaryExternalReference
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {
@@ -250,7 +296,8 @@ namespace CurrencyCloud.Entity
                    CreatorContactId == beneficiary.CreatorContactId &&
                    BankAddress.SequenceEqual(beneficiary.BankAddress) &&
                    CreatedAt == beneficiary.CreatedAt &&
-                   UpdatedAt == beneficiary.UpdatedAt;
+                   UpdatedAt == beneficiary.UpdatedAt &&
+                   BeneficiaryExternalReference == beneficiary.BeneficiaryExternalReference;
         }
 
         public override int GetHashCode()

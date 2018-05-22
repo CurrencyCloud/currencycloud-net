@@ -1,10 +1,11 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Transaction : Entity
     {
-        internal Transaction() { }
+        public Transaction() { }
 
         public string Id { get; set; }
 
@@ -20,9 +21,9 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Absolute Amount of the transactions to 2dp
         ///</summary>
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
-        public decimal BalanceAmount { get; set; }
+        public decimal? BalanceAmount { get; set; }
 
         ///<summary>
         /// "debit" or "credit"
@@ -59,13 +60,47 @@ namespace CurrencyCloud.Entity
         ///</summary>
         public string Reason { get; set; }
 
-        public DateTime SettlesAt { get; set; }
+        public DateTime? SettlesAt { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
-        public DateTime CompletedAt { get; set; }
+        public DateTime? CompletedAt { get; set; }
+
+        public string BeneficiaryId { get; set; }
+
+        public string CurrencyPair { get; set; }
+
+        public string Scope { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    BalanceId,
+                    AccountId,
+                    Currency,
+                    Amount,
+                    BalanceAmount,
+                    Type,
+                    Action,
+                    RelatedEntityType,
+                    RelatedEntityId,
+                    RelatedEntityShortReference,
+                    Status,
+                    Reason,
+                    SettlesAt,
+                    CreatedAt,
+                    UpdatedAt,
+                    CompletedAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {
@@ -92,7 +127,10 @@ namespace CurrencyCloud.Entity
                    SettlesAt == transaction.SettlesAt &&
                    CreatedAt == transaction.CreatedAt &&
                    UpdatedAt == transaction.UpdatedAt &&
-                   CompletedAt == transaction.CompletedAt;
+                   CompletedAt == transaction.CompletedAt &&
+                   BeneficiaryId == transaction.BalanceId &&
+                   CurrencyPair == transaction.CurrencyPair &&
+                   Scope == transaction.Scope;
         }
 
         public override int GetHashCode()

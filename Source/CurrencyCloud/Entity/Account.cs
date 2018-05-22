@@ -1,22 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Account : Entity
     {
-        public Account(string accountName, string legalEntityType)
+        public Account(string accountName, string legalEntityType, string street, string city, string postalCode, string country)
         {
             this.AccountName = accountName;
             this.LegalEntityType = legalEntityType;
+            this.Street = street;
+            this.City = city;
+            this.PostalCode = postalCode;
+            this.Country = country;
         }
 
-        [Newtonsoft.Json.JsonConstructor]
-        internal Account() { }
+        [JsonConstructor]
+        public Account() { }
 
         /// <summary>
-        /// ID of the account 
+        /// ID of the account
         /// </summary>
         public string Id { get; set; }
 
@@ -86,9 +89,9 @@ namespace CurrencyCloud.Entity
         [Param]
         public string SpreadTable { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
         ///<summary>
         /// Type of the identification document. One of 'none', 'drivers_license', 'social_security_number', 'green_card', 'passport', 'visa', 'matricula_consular', 'registro_federal_de_contribuyentes', 'credential_de_elector', 'social_insurance_number', 'citizenship_papers', 'drivers_license_canadian', 'existing_credit_card_details', 'employer_identification_number', 'national_id', 'others' or 'incorporation_number'
@@ -98,11 +101,57 @@ namespace CurrencyCloud.Entity
 
         ///<summary>
         /// Identification value based on the identification document type. Required if identification_type is set
-        ///</summary>        
+        ///</summary>
         [Param]
         public string IdentificationValue { get; set; }
 
         public string ShortReference { get; set; }
+
+        [Param]
+        public bool? ApiTrading { get; set; }
+
+        [Param]
+        public bool? OnlineTrading { get; set; }
+
+        [Param]
+        public bool? PhoneTrading { get; set; }
+
+        public bool? ProcessThirdPartyFunds { get; set; }
+
+        public string SettlementType { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    AccountName,
+                    Brand,
+                    YourReference,
+                    Status,
+                    Street,
+                    City,
+                    StateOrProvince,
+                    Country,
+                    PostalCode,
+                    SpreadTable,
+                    LegalEntityType,
+                    CreatedAt,
+                    UpdatedAt,
+                    IdentificationType,
+                    IdentificationValue,
+                    ShortReference,
+                    ApiTrading,
+                    OnlineTrading,
+                    PhoneTrading,
+                    ProcessThirdPartyFunds,
+                    SettlementType
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {
@@ -129,8 +178,12 @@ namespace CurrencyCloud.Entity
                    UpdatedAt == account.UpdatedAt &&
                    IdentificationType == account.IdentificationType &&
                    IdentificationValue == account.IdentificationValue &&
-                   ShortReference == account.ShortReference;
-
+                   ShortReference == account.ShortReference &&
+                   ApiTrading == account.ApiTrading &&
+                   OnlineTrading == account.OnlineTrading &&
+                   PhoneTrading == account.PhoneTrading &&
+                   ProcessThirdPartyFunds == account.ProcessThirdPartyFunds &&
+                   SettlementType == account.SettlementType;
         }
 
         public override int GetHashCode()
