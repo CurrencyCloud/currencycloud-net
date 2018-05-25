@@ -756,9 +756,9 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the MT103 information for a SWIFT payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> GetPaymentSubmissionAsync(string id)
+        public async Task<PaymentSubmission> GetPaymentSubmissionAsync(string id)
         {
-            return await RequestAsync<Payment>("/v2/payments/" + id + "/submission", HttpMethod.Get, null);
+            return await RequestAsync<PaymentSubmission>("/v2/payments/" + id + "/submission", HttpMethod.Get, null);
         }
 
         #endregion

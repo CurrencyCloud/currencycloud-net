@@ -108,6 +108,23 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully gets a payment submission.
+        /// </summary>
+        [Test]
+        public async Task GetSubmission()
+        {
+            player.Play("GetSubmission");
+
+            var payment1 = Payments.Payment1;
+            var submission1 = Payments.Submission1;
+
+            Payment created = await CreatePayment(payment1);
+            PaymentSubmission gotten = await client.GetPaymentSubmissionAsync(created.Id);
+
+            Assert.AreEqual(gotten, submission1);
+        }
+
+        /// <summary>
         /// Successfully finds a payment.
         /// </summary>
         [Test]
