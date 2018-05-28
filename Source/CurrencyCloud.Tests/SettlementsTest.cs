@@ -65,12 +65,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a settlement.
+        /// Successfully finds a settlement with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             Settlement created = await client.CreateSettlementAsync("net");
             PaginatedSettlements found = await client.FindSettlementsAsync(new SettlementFindParameters
@@ -79,6 +79,20 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(created, found.Settlements);
+        }
+
+        /// <summary>
+        /// Successfully finds a settlement without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            Settlement created = await client.CreateSettlementAsync("net");
+            PaginatedSettlements found = await client.FindSettlementsAsync();
 
             Assert.Contains(created, found.Settlements);
         }

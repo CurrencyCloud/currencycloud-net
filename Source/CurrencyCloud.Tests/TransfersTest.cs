@@ -72,12 +72,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds transfers.
+        /// Successfully finds transfers with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var transfer3 = Transfers.Transfer3;
 
@@ -86,6 +86,27 @@ namespace CurrencyCloud.Tests
             {
                 ShortReference = "BT-20170118-VMSCBS"
             });
+
+            Assert.AreEqual(transfer3.SourceAccountId, found.Transfers[0].SourceAccountId);
+            Assert.AreEqual(transfer3.DestinationAccountId, found.Transfers[0].DestinationAccountId);
+            Assert.AreEqual(transfer3.Currency, found.Transfers[0].Currency);
+            Assert.AreEqual(transfer3.Amount, found.Transfers[0].Amount);
+            Assert.AreEqual(transfer3.Status, found.Transfers[0].Status);
+            Assert.AreEqual(transfer3.Reason, found.Transfers[0].Reason);
+        }
+
+        /// <summary>
+        /// Successfully finds transfers without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var transfer3 = Transfers.Transfer3;
+
+            //Transfer created = await client.CreateTransferAsync(transfer3);
+            PaginatedTransfers found = await client.FindTransfersAsync();
 
             Assert.AreEqual(transfer3.SourceAccountId, found.Transfers[0].SourceAccountId);
             Assert.AreEqual(transfer3.DestinationAccountId, found.Transfers[0].DestinationAccountId);

@@ -46,7 +46,7 @@ namespace CurrencyCloud.Tests
 
             var van = VirtualAccounts.Van1;
 
-            PaginatedVirtualAccounts found = await client.FindVirtualAccountsAsync(new FindParameters());
+            PaginatedVirtualAccounts found = await client.FindVirtualAccountsAsync();
 
             Console.WriteLine("Found: " + found.VirtualAccounts[0]);
 

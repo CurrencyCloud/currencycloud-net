@@ -37,12 +37,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds IBANS.
+        /// Successfully finds IBANS with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var iban = Ibans.Iban1;
 
@@ -50,6 +50,31 @@ namespace CurrencyCloud.Tests
             {
                 Currency = iban.Currency
             });
+
+            Console.WriteLine("Found: " + found.Ibans[0]);
+
+            Assert.AreEqual(iban.Id, found.Ibans[0].Id);
+            Assert.AreEqual(iban.IbanCode, found.Ibans[0].IbanCode);
+            Assert.AreEqual(iban.AccountId, found.Ibans[0].AccountId);
+            Assert.AreEqual(iban.Currency, found.Ibans[0].Currency);
+            Assert.AreEqual(iban.AccountHolderName, found.Ibans[0].AccountHolderName);
+            Assert.AreEqual(iban.BankInstitutionName, found.Ibans[0].BankInstitutionName);
+            Assert.AreEqual(iban.BankInstitutionAddress, found.Ibans[0].BankInstitutionAddress);
+            Assert.AreEqual(iban.BankInstitutionCountry, found.Ibans[0].BankInstitutionCountry);
+            Assert.AreEqual(iban.BicSwift, found.Ibans[0].BicSwift);
+        }
+
+        /// <summary>
+        /// Successfully finds IBANS without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var iban = Ibans.Iban1;
+
+            PaginatedIbans found = await client.FindIbansAsync();
 
             Console.WriteLine("Found: " + found.Ibans[0]);
 

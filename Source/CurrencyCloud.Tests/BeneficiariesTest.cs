@@ -127,12 +127,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a beneficiary.
+        /// Successfully finds a beneficiary with search paramaters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
@@ -144,6 +144,22 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = BeneficiaryFindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(created, found.Beneficiaries);
+        }
+
+        /// <summary>
+        /// Successfully finds a beneficiary without search paramaters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var beneficiary1 = Beneficiaries.Beneficiary1;
+
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
+            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync();
 
             Assert.Contains(created, found.Beneficiaries);
         }

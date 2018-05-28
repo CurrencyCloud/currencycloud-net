@@ -213,7 +213,7 @@
     ]
   },
   {
-    "name": "Find",
+    "name": "FindWithParams",
     "requests": [
       {
         "request": {
@@ -271,6 +271,125 @@
           "method": "GET",
           "path": "/v2/conversions/find",
           "query": "?conversion_ids%5B%5D=5c4716dc-42dd-4571-b4bf-0aa299fff928&order=created_at&order_asc_desc=desc&per_page=5",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "conversions": [
+              {
+                "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+                "settlement_date": "2018-01-01T12:34:56+00:00",
+                "conversion_date": "2018-01-01T12:34:56+00:00",
+                "short_reference": "20151027-ZMNZZB",
+                "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+                "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+                "currency_pair": "EURGBP",
+                "status": "awaiting_funds",
+                "buy_currency": "EUR",
+                "sell_currency": "GBP",
+                "client_buy_amount": "10000.23",
+                "client_sell_amount": "7706.18",
+                "fixed_side": "buy",
+                "mid_market_rate": "0.7216",
+                "core_rate": "0.7215",
+                "partner_rate": "",
+                "partner_status": "funds_arrived",
+                "partner_buy_amount": "0.00",
+                "partner_sell_amount": "0.00",
+                "client_rate": "0.7215",
+                "deposit_required": false,
+                "deposit_amount": "0.00",
+                "deposit_currency": "",
+                "deposit_status": "not_required",
+                "deposit_required_at": "",
+                "payment_ids": [ ],
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
+                "beneficiary_external_reference": ""
+              }
+            ],
+            "pagination": {
+              "total_entries": 1,
+              "total_pages": 1,
+              "current_page": 1,
+              "per_page": 5,
+              "previous_page": -1,
+              "next_page": -1,
+              "order": "created_at",
+              "order_asc_desc": "desc"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FindNoParams",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/create",
+          "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
+            "short_reference": "20151027-ZMNZZB",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "currency_pair": "EURGBP",
+            "status": "awaiting_funds",
+            "buy_currency": "EUR",
+            "sell_currency": "GBP",
+            "client_buy_amount": "10000.23",
+            "client_sell_amount": "7706.18",
+            "fixed_side": "buy",
+            "mid_market_rate": "0.7216",
+            "core_rate": "0.7215",
+            "partner_rate": "",
+            "partner_status": "funds_arrived",
+            "partner_buy_amount": "0.00",
+            "partner_sell_amount": "0.00",
+            "client_rate": "0.7215",
+            "deposit_required": false,
+            "deposit_amount": "0.00",
+            "deposit_currency": "",
+            "deposit_status": "not_required",
+            "deposit_required_at": "",
+            "payment_ids": [ ],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/conversions/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"

@@ -451,7 +451,7 @@
     ]
   },
   {
-    "name": "Find",
+    "name": "FindWithParams",
     "requests": [
       {
         "request": {
@@ -513,6 +513,134 @@
           "method": "GET",
           "path": "/v2/beneficiaries/find",
           "query": "?name=Employee%20Funds&order=created_at&order_asc_desc=desc&per_page=5",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "beneficiaries": [
+              {
+                "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+                "bank_account_holder_name": "John Doe",
+                "name": "Employee Funds",
+                "email": null,
+                "payment_types": [ "priority", "regular" ],
+                "beneficiary_address": [ "23 Acacia Road" ],
+                "beneficiary_country": "GB",
+                "beneficiary_entity_type": "company",
+                "beneficiary_company_name": "Some Company LLC",
+                "beneficiary_first_name": "John",
+                "beneficiary_last_name": "Doe",
+                "beneficiary_city": "London",
+                "beneficiary_postcode": "W11 2BQ",
+                "beneficiary_state_or_province": "TX",
+                "beneficiary_date_of_birth": "1990-07-20",
+                "beneficiary_identification_type": "none",
+                "beneficiary_identification_value": null,
+                "beneficiary_external_reference": null,
+                "bank_country": "DE",
+                "bank_name": "COMMERZBANK AG",
+                "bank_account_type": "checking",
+                "currency": "EUR",
+                "account_number": null,
+                "routing_code_type_1": null,
+                "routing_code_value_1": null,
+                "routing_code_type_2": null,
+                "routing_code_value_2": null,
+                "bic_swift": "COBADEFF",
+                "iban": "DE89370400440532013000",
+                "default_beneficiary": "true",
+                "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+                "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
+              }
+            ],
+            "pagination": {
+              "total_entries": 1,
+              "total_pages": 1,
+              "current_page": 1,
+              "per_page": 5,
+              "previous_page": -1,
+              "next_page": -1,
+              "order": "created_at",
+              "order_asc_desc": "desc"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FindNoParams",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/beneficiaries/create",
+          "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE89370400440532013000&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "bank_account_holder_name": "John Doe",
+            "name": "Employee Funds",
+            "email": null,
+            "payment_types": [ "priority", "regular" ],
+            "beneficiary_address": [ "23 Acacia Road" ],
+            "beneficiary_country": "GB",
+            "beneficiary_entity_type": "company",
+            "beneficiary_company_name": "Some Company LLC",
+            "beneficiary_first_name": "John",
+            "beneficiary_last_name": "Doe",
+            "beneficiary_city": "London",
+            "beneficiary_postcode": "W11 2BQ",
+            "beneficiary_state_or_province": "TX",
+            "beneficiary_date_of_birth": "1990-07-20",
+            "beneficiary_identification_type": "none",
+            "beneficiary_identification_value": null,
+            "beneficiary_external_reference": null,
+            "bank_country": "DE",
+            "bank_name": "COMMERZBANK AG",
+            "bank_account_type": "checking",
+            "currency": "EUR",
+            "account_number": null,
+            "routing_code_type_1": null,
+            "routing_code_value_1": null,
+            "routing_code_type_2": null,
+            "routing_code_value_2": null,
+            "bic_swift": "COBADEFF",
+            "iban": "DE89370400440532013000",
+            "default_beneficiary": "true",
+            "creator_contact_id": "8eddf045-4e98-48bf-821b-42c8eb926bc9",
+            "bank_address": [ "KAISERSTRASSE 16", "60261 FRANKFURT AM MAIN" ],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/beneficiaries/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"

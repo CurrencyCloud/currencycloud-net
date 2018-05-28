@@ -100,12 +100,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds an account.
+        /// Successfully finds an account with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             Account current = await client.GetCurrentAccountAsync();
             PaginatedAccounts found = await client.FindAccountsAsync(new AccountFindParameters
@@ -115,6 +115,20 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(current, found.Accounts);
+        }
+
+        /// <summary>
+        /// Successfully finds an account without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            Account current = await client.GetCurrentAccountAsync();
+            PaginatedAccounts found = await client.FindAccountsAsync();
 
             Assert.Contains(current, found.Accounts);
         }

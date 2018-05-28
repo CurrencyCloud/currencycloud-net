@@ -122,12 +122,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a contact.
+        /// Successfully finds a contact with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             Contact current = await client.GetCurrentContactAsync();
             PaginatedContacts found = await client.FindContactsAsync(new ContactFindParameters
@@ -137,6 +137,20 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(current, found.Contacts);
+        }
+
+        /// <summary>
+        /// Successfully finds a contact without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            Contact current = await client.GetCurrentContactAsync();
+            PaginatedContacts found = await client.FindContactsAsync();
 
             Assert.Contains(current, found.Contacts);
         }

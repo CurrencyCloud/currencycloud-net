@@ -69,12 +69,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a conversion.
+        /// Successfully finds a conversion with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var conversion1 = Conversions.Conversion1;
 
@@ -89,6 +89,22 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(created, found.Conversions);
+        }
+
+        /// <summary>
+        /// Successfully finds a conversion without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            PaginatedConversions found = await client.FindConversionsAsync();
 
             Assert.Contains(created, found.Conversions);
         }
