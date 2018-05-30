@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity.List
 {
@@ -12,5 +13,19 @@ namespace CurrencyCloud.Entity.List
         public DateTime FirstConversionDate { get; set; }
 
         public DateTime DefaultConversionDate { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    InvalidConversionDates,
+                    FirstConversionDate,
+                    DefaultConversionDate
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
     }
 }

@@ -46,6 +46,9 @@ namespace CurrencyCloud
 
         internal static ParamsObject CreateFromStaticObject(object obj)
         {
+            if (obj == null)
+                return null;
+
             Type t = obj.GetType();
             ParamsObject ret = new ParamsObject();
             foreach (var p in t.GetProperties())

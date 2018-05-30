@@ -108,12 +108,29 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a payment.
+        /// Successfully gets a payment submission.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task GetSubmission()
         {
-            player.Play("Find");
+            player.Play("GetSubmission");
+
+            var payment1 = Payments.Payment1;
+            var submission1 = Payments.Submission1;
+
+            Payment created = await CreatePayment(payment1);
+            PaymentSubmission gotten = await client.GetPaymentSubmissionAsync(created.Id);
+
+            Assert.AreEqual(gotten, submission1);
+        }
+
+        /// <summary>
+        /// Successfully finds a payment with search paramaters.
+        /// </summary>
+        [Test]
+        public async Task FindWithParams()
+        {
+            player.Play("FindWithParams");
 
             var payment1 = Payments.Payment1;
 
@@ -126,6 +143,22 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(created, found.Payments);
+        }
+
+        /// <summary>
+        /// Successfully finds a payment with search paramaters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var payment1 = Payments.Payment1;
+
+            Payment created = await CreatePayment(payment1);
+            PaginatedPayments found = await client.FindPaymentsAsync();
 
             Assert.Contains(created, found.Payments);
         }

@@ -7,14 +7,14 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           },
-          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -34,13 +34,13 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -59,13 +59,13 @@
           "path": "/v2/balances/GBP",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -74,15 +74,15 @@
             "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
             "currency": "GBP",
             "amount": "0.00",
-            "created_at": "2015-10-30T13:51:11+00:00",
-            "updated_at": "2015-10-30T13:51:11+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }
     ]
   },
   {
-    "name": "Find",
+    "name": "FindWithParams",
     "requests": [
       {
         "request": {
@@ -90,13 +90,13 @@
           "path": "/v2/balances/GBP",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -105,8 +105,8 @@
             "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
             "currency": "GBP",
             "amount": "0.00",
-            "created_at": "2015-10-30T13:51:11+00:00",
-            "updated_at": "2015-10-30T13:51:11+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -117,13 +117,13 @@
           "query": "?order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -134,32 +134,127 @@
                 "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
                 "currency": "SEK",
                 "amount": "0.00",
-                "created_at": "2015-11-07T20:12:09+03:00",
-                "updated_at": "2015-11-07T20:12:09+03:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
               },
               {
                 "id": "22ceada3-e357-4abe-8cf2-3fb08d393f22",
                 "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
                 "currency": "AED",
                 "amount": "0.00",
-                "created_at": "2015-11-02T04:21:41+03:00",
-                "updated_at": "2015-11-02T04:21:41+03:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
               },
               {
                 "id": "70167fc4-c099-4fa2-bc98-495c6917d2ff",
                 "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
                 "currency": "EUR",
                 "amount": "0.00",
-                "created_at": "2015-10-30T16:51:11+03:00",
-                "updated_at": "2015-10-30T16:51:11+03:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
               },
               {
                 "id": "07ee18e7-430e-4743-a42e-676061718a41",
                 "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
                 "currency": "GBP",
                 "amount": "0.00",
-                "created_at": "2015-10-30T16:51:11+03:00",
-                "updated_at": "2015-10-30T16:51:11+03:00"
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
+              }
+            ],
+            "pagination": {
+              "total_entries": 4,
+              "total_pages": 1,
+              "current_page": 1,
+              "per_page": 5,
+              "previous_page": -1,
+              "next_page": -1,
+              "order": "created_at",
+              "order_asc_desc": "desc"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FindNoParams",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/balances/GBP",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "07ee18e7-430e-4743-a42e-676061718a41",
+            "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
+            "currency": "GBP",
+            "amount": "0.00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/balances/find",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "balances": [
+              {
+                "id": "6ec9fb02-35a8-4552-8a35-efc309a612f0",
+                "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
+                "currency": "SEK",
+                "amount": "0.00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
+              },
+              {
+                "id": "22ceada3-e357-4abe-8cf2-3fb08d393f22",
+                "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
+                "currency": "AED",
+                "amount": "0.00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
+              },
+              {
+                "id": "70167fc4-c099-4fa2-bc98-495c6917d2ff",
+                "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
+                "currency": "EUR",
+                "amount": "0.00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
+              },
+              {
+                "id": "07ee18e7-430e-4743-a42e-676061718a41",
+                "account_id": "3a7d2f90-ae1f-493c-a8d6-26ad43700259",
+                "currency": "GBP",
+                "amount": "0.00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00"
               }
             ],
             "pagination": {

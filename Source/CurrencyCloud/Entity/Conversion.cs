@@ -1,14 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Conversion : Entity
     {
+        public Conversion(string buyCurrency, string sellCurrency, string fixedSide, decimal amount, bool termAgreement)
+        {
+            this.BuyCurrency = buyCurrency;
+            this.SellCurrency = sellCurrency;
+            this.FixedSide = fixedSide;
+            this.Amount = amount;
+            this.TermAgreement = termAgreement;
+        }
 
-        [Newtonsoft.Json.JsonConstructor]
-        internal Conversion() { }
+        [JsonConstructor]
+        public Conversion() { }
 
         ///<summary>
         /// ID of the conversion
@@ -24,12 +33,13 @@ namespace CurrencyCloud.Entity
         ///</summary>
         public string ShortReference { get; set; }
 
-        public DateTime SettlementDate { get; set; }
+        public DateTime? SettlementDate { get; set; }
 
         ///<summary>
         /// if nothing passed then default uses first_conversion_date
         ///</summary>
-        public DateTime ConversionDate { get; set; }
+        [Param]
+        public DateTime? ConversionDate { get; set; }
 
         ///<summary>
         /// The current status of the Conversion
@@ -49,54 +59,112 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// 3 character ISO 4217 currency code
         ///</summary>
+        [Param]
         public string BuyCurrency { get; set; }
 
         ///<summary>
         /// 3 character ISO 4217 currency code
         ///</summary>
+        [Param]
         public string SellCurrency { get; set; }
 
+        [Param]
         public string FixedSide { get; set; }
 
-        public decimal PartnerBuyAmount { get; set; }
+        [Param]
+        public decimal? Amount { get; set; }
 
-        public decimal PartnerSellAmount { get; set; }
+        public decimal? PartnerBuyAmount { get; set; }
+
+        public decimal? PartnerSellAmount { get; set; }
 
         ///<summary>
         /// Set the client buy amount instead of using a spread table
         ///</summary>
-        public decimal ClientBuyAmount { get; set; }
+        [Param]
+        public decimal? ClientBuyAmount { get; set; }
 
         ///<summary>
         /// Set the client sell amount instead of using a spread table
         ///</summary>
-        public decimal ClientSellAmount { get; set; }
+        [Param]
+        public decimal? ClientSellAmount { get; set; }
 
-        public decimal MidMarketRate { get; set; }
+        public decimal? MidMarketRate { get; set; }
 
-        public decimal CoreRate { get; set; }
+        public decimal? CoreRate { get; set; }
 
-        public decimal PartnerRate { get; set; }
+        public decimal? PartnerRate { get; set; }
 
-        public decimal ClientRate { get; set; }
+        public decimal? ClientRate { get; set; }
 
-        public bool DepositRequired { get; set; }
+        public bool? DepositRequired { get; set; }
 
-        public decimal DepositAmount { get; set; }
+        public decimal? DepositAmount { get; set; }
 
         public string DepositCurrency { get; set; }
 
         public string DepositStatus { get; set; }
 
-        public DateTime DepositRequiredAt { get; set; }
+        public DateTime? DepositRequiredAt { get; set; }
 
         public List<string> PaymentIds { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
 
+        [Param]
         public string UniqueRequestId { get; set; }
+
+        public decimal? UnallocatedFunds { get; set; }
+
+        [Param]
+        public bool? TermAgreement { get; set; }
+
+        [Param]
+        public string Reason { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    SettlementDate,
+                    ConversionDate,
+                    ShortReference,
+                    CreatorContactId,
+                    AccountId,
+                    CurrencyPair,
+                    Status,
+                    BuyCurrency,
+                    SellCurrency,
+                    ClientBuyAmount,
+                    ClientSellAmount,
+                    FixedSide,
+                    CoreRate,
+                    PartnerRate,
+                    PartnerStatus,
+                    PartnerBuyAmount,
+                    PartnerSellAmount,
+                    ClientRate,
+                    DepositRequired,
+                    DepositAmount,
+                    DepositCurrency,
+                    DepositStatus,
+                    DepositRequiredAt,
+                    PaymentIds,
+                    UnallocatedFunds,
+                    UniqueRequestId,
+                    CreatedAt,
+                    UpdatedAt,
+                    MidMarketRate
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {
@@ -136,7 +204,9 @@ namespace CurrencyCloud.Entity
                    PaymentIds.SequenceEqual(conversion.PaymentIds) &&
                    CreatedAt == conversion.CreatedAt &&
                    UpdatedAt == conversion.UpdatedAt &&
-                   UniqueRequestId == conversion.UniqueRequestId;
+                   UniqueRequestId == conversion.UniqueRequestId &&
+                   UnallocatedFunds == conversion.UnallocatedFunds &&
+                   Reason == conversion.Reason;
         }
 
         public override int GetHashCode()

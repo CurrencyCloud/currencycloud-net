@@ -37,25 +37,6 @@ namespace CurrencyCloud.Tests
             player.Close();
         }
 
-        /// <summary>
-        /// Successfully creates reset token.
-        /// </summary>
-        [Test]
-        public async Task CreateResetToken()
-        {
-            player.Play("CreateResetToken");
-
-            var contact1 = Contacts.Contact1;
-
-            Account account = await client.GetCurrentAccountAsync();
-            contact1.AccountId = account.Id;
-            if (!Authentication.ApiServer.Url.Contains("localhost"))
-                contact1.LoginId = RandomString(10);
-            Contact created = await client.CreateContactAsync(contact1);
-
-            Assert.DoesNotThrowAsync(async () => await client.CreateResetTokenAsync(created.LoginId));
-        }
-
         public static string RandomString(int length)
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -77,7 +58,7 @@ namespace CurrencyCloud.Tests
             Account account = await client.GetCurrentAccountAsync();
             contact1.AccountId = account.Id;
             if (!Authentication.ApiServer.Url.Contains("localhost"))
-                contact1.LoginId = RandomString(10); 
+                contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
 
             Assert.AreEqual(contact1.FirstName, created.FirstName);
@@ -141,12 +122,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a contact.
+        /// Successfully finds a contact with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             Contact current = await client.GetCurrentContactAsync();
             PaginatedContacts found = await client.FindContactsAsync(new ContactFindParameters
@@ -156,6 +137,20 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(current, found.Contacts);
+        }
+
+        /// <summary>
+        /// Successfully finds a contact without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            Contact current = await client.GetCurrentContactAsync();
+            PaginatedContacts found = await client.FindContactsAsync();
 
             Assert.Contains(current, found.Contacts);
         }

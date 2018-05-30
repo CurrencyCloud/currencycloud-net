@@ -1,4 +1,6 @@
-﻿namespace CurrencyCloud.Entity
+﻿using Newtonsoft.Json;
+
+namespace CurrencyCloud.Entity
 {
     public class SettlementEntry : Entity
     {
@@ -7,6 +9,19 @@
         public decimal SendAmount { get; set; }
 
         public decimal ReceiveAmount { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    SendAmount,
+                    ReceiveAmount
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {

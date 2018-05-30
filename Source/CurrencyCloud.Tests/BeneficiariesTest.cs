@@ -44,9 +44,10 @@ namespace CurrencyCloud.Tests
         {
             player.Play("Validate");
 
-            Beneficiary validated = await client.ValidateBeneficiaryAsync(
-                new BeneficiaryValidateParameters("GB", "GBP", "GB")
+            Beneficiary validated = await client.ValidateBeneficiaryAsync(new Beneficiary
             {
+                BankCountry = "GB",
+                Currency = "GBP",
                 AccountNumber = "13071472",
                 RoutingCodeType1 = "sort_code",
                 RoutingCodeValue1 = "200605"
@@ -126,12 +127,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a beneficiary.
+        /// Successfully finds a beneficiary with search paramaters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var beneficiary1 = Beneficiaries.Beneficiary1;
 
@@ -143,6 +144,22 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = BeneficiaryFindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(created, found.Beneficiaries);
+        }
+
+        /// <summary>
+        /// Successfully finds a beneficiary without search paramaters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var beneficiary1 = Beneficiaries.Beneficiary1;
+
+            Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
+            PaginatedBeneficiaries found = await client.FindBeneficiariesAsync();
 
             Assert.Contains(created, found.Beneficiaries);
         }
@@ -160,7 +177,7 @@ namespace CurrencyCloud.Tests
             Beneficiary created = await client.CreateBeneficiaryAsync(beneficiary1);
             Beneficiary deleted = await client.DeleteBeneficiaryAsync(created.Id);
 
-            
+
 
             Assert.AreEqual(created, deleted);
 

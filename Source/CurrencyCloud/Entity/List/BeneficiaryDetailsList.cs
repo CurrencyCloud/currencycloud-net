@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity.List
 {
@@ -6,6 +7,26 @@ namespace CurrencyCloud.Entity.List
     {
         internal BeneficiaryDetailsList() { }
 
-        public List<Dictionary<string, string>> Details { get; set; }
+        public struct Detail
+        {
+            public string PaymentType { get; set; }
+            public string AcctNumber { get; set; }
+            public string BicSwift { get; set; }
+            public string BeneficiaryEntityType { get; set; }
+        }
+
+        public List<Detail> Details { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Details
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
     }
 }

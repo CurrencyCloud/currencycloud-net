@@ -31,7 +31,7 @@ namespace CurrencyCloud.Extension
                 throw new ArgumentNullException("source");
             }
 
-            string snake = Regex.Replace(source, "([A-Z0-9])", "_$1").ToLower();
+            string snake = Regex.Replace(source, "(?<!([0-9]))[A-Z0-9](?!([0-9]))", "_$0").ToLower();
             if(snake.StartsWith("_"))
             {
                 snake = snake.Substring(1);

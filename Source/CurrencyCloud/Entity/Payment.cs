@@ -1,27 +1,21 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Payment : Entity
     {
-        public Payment(
-            string currency,
-            string beneficiaryId,
-            decimal amount,
-            string reason,
-            string reference,
-            string uniqueRequestId)
+        public Payment(string currency, string beneficiaryId, decimal amount, string reason, string reference)
         {
             this.Currency = currency;
             this.BeneficiaryId = beneficiaryId;
             this.Amount = amount;
             this.Reason = reason;
             this.Reference = reference;
-            this.UniqueRequestId = uniqueRequestId;
         }
 
-        [Newtonsoft.Json.JsonConstructor]
-        internal Payment() { }
+        [JsonConstructor]
+        public Payment() { }
 
         ///<summary>
         /// Unique ID of payment
@@ -49,7 +43,7 @@ namespace CurrencyCloud.Entity
         /// Amount of Payment to 2dp
         ///</summary>
         [Param]
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
         ///<summary>
         /// 3 character ISO 4217 currency code
@@ -86,9 +80,9 @@ namespace CurrencyCloud.Entity
         [Param]
         public DateTime? PaymentDate { get; set; }
 
-        public DateTime TransferredAt { get; set; }
+        public DateTime? TransferredAt { get; set; }
 
-        public int AuthorisationStepsRequired { get; set; }
+        public int? AuthorisationStepsRequired { get; set; }
 
         public string CreatorContactId { get; set; }
 
@@ -105,9 +99,51 @@ namespace CurrencyCloud.Entity
         ///</summary>
         public string PayerDetailsSource { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        public string PaymentGroupId { get; set; }
+
+        public decimal? FailureReturnedAmount { get; set; }
+
+        [Param]
+        public string UltimateBeneficiaryName { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    Amount,
+                    BeneficiaryId,
+                    Currency,
+                    Reference,
+                    Reason,
+                    Status,
+                    CreatorContactId,
+                    PaymentType,
+                    PaymentDate,
+                    TransferredAt,
+                    AuthorisationStepsRequired,
+                    LastUpdaterContactId,
+                    ShortReference,
+                    ConversionId,
+                    FailureReason,
+                    PayerId,
+                    PayerDetailsSource,
+                    CreatedAt,
+                    UpdatedAt,
+                    PaymentGroupId,
+                    UniqueRequestId,
+                    FailureReturnedAmount,
+                    UltimateBeneficiaryName
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {
@@ -138,7 +174,10 @@ namespace CurrencyCloud.Entity
                    PayerDetailsSource == payment.PayerDetailsSource &&
                    CreatedAt == payment.CreatedAt &&
                    UpdatedAt == payment.UpdatedAt &&
-                   UniqueRequestId == payment.UniqueRequestId;
+                   PaymentGroupId == payment.PaymentGroupId &&
+                   FailureReturnedAmount == payment.FailureReturnedAmount &&
+                   UniqueRequestId == payment.UniqueRequestId &&
+                   UltimateBeneficiaryName == payment.UltimateBeneficiaryName;
         }
 
         public override int GetHashCode()

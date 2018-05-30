@@ -1,10 +1,11 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Balance : Entity
     {
-        internal Balance() { }
+        public Balance() { }
 
         public string Id { get; set; }
 
@@ -12,11 +13,28 @@ namespace CurrencyCloud.Entity
 
         public string Currency { get; set; }
 
-        public decimal Amount { get; set; }
+        public decimal? Amount { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    AccountId,
+                    Currency,
+                    Amount,
+                    CreatedAt,
+                    UpdatedAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {

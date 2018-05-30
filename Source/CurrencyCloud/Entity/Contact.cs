@@ -1,16 +1,11 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
     public class Contact : Entity
     {
-        public Contact(
-            string accountId,
-            string firstName,
-            string lastName,
-            string emailAddress,
-            string phoneNumber
-            )
+        public Contact(string accountId, string firstName, string lastName, string emailAddress, string phoneNumber)
         {
             this.AccountId = accountId;
             this.FirstName = firstName;
@@ -19,11 +14,11 @@ namespace CurrencyCloud.Entity
             this.PhoneNumber = phoneNumber;
         }
 
-        [Newtonsoft.Json.JsonConstructor]
-        internal Contact() { }
+        [JsonConstructor]
+        public Contact() { }
 
         /// <summary>
-        /// ID of the contact 
+        /// ID of the contact
         /// </summary>
         public string Id { get; set; }
 
@@ -58,7 +53,7 @@ namespace CurrencyCloud.Entity
         public string AccountId { get; set; }
 
         /// <summary>
-        /// Account name  
+        /// Account name
         /// </summary>
         public string AccountName { get; set; }
 
@@ -102,11 +97,38 @@ namespace CurrencyCloud.Entity
         /// Date of birth
         ///</summary>
         [Param]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        public DateTime CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    LoginId,
+                    Id,
+                    FirstName,
+                    LastName,
+                    AccountId,
+                    AccountName,
+                    Status,
+                    Locale,
+                    Timezone,
+                    EmailAddress,
+                    MobilePhoneNumber,
+                    PhoneNumber,
+                    YourReference,
+                    DateOfBirth,
+                    CreatedAt,
+                    UpdatedAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
 
         public override bool Equals(object obj)
         {

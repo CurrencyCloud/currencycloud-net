@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CurrencyCloud.Entity
 {
@@ -11,7 +7,7 @@ namespace CurrencyCloud.Entity
 
         ///<summary>
         /// Bank account holder's name
-        ///</summary>        
+        ///</summary>
         [Param]
         public string BankAccountHolderName { get; set; }
 
@@ -20,12 +16,6 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Name { get; set; }
-
-        ///<summary>
-        /// Priority or regular
-        ///</summary>
-        [Param]
-        public string PaymentTypes { get; set; }
 
         ///<summary>
         /// A two-letter country code as defined in ISO 3166-1 that defines the beneficiary's country
@@ -46,13 +36,13 @@ namespace CurrencyCloud.Entity
         public string BeneficiaryCompanyName { get; set; }
 
         ///<summary>
-        /// Beneficiary first name
+        /// Beneficiary forename
         ///</summary>
         [Param]
         public string BeneficiaryFirstName { get; set; }
 
         ///<summary>
-        /// Beneficiary second name
+        /// Beneficiary surname
         ///</summary>
         [Param]
         public string BeneficiaryLastName { get; set; }
@@ -134,6 +124,15 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public bool? DefaultBeneficiary { get; set; }
+
+        ///<summary>
+        /// Controls the search of beneficiaries at all account levels. Defaults to own.
+        /// own: allows to search beneficiary on the main account
+        /// clients: allows to search beneficiary of account sub accounts
+        /// all: allows to search beneficiary across account and sub-accounts
+        ///</summary>
+        [Param]
+        public string Scope { get; set; }
 
     }
 }

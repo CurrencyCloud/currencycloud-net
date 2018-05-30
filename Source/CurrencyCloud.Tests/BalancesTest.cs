@@ -50,12 +50,12 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully finds a balance.
+        /// Successfully finds a balance with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             Balance balance = await client.GetBalanceAsync("GBP");
             PaginatedBalances found = await client.FindBalancesAsync(new BalanceFindParameters
@@ -64,6 +64,20 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.Contains(balance, found.Balances);
+        }
+
+        /// <summary>
+        /// Successfully finds a balance without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            Balance balance = await client.GetBalanceAsync("GBP");
+            PaginatedBalances found = await client.FindBalancesAsync();
 
             Assert.Contains(balance, found.Balances);
         }

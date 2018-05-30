@@ -7,14 +7,14 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           },
-          "body": "?login_id=test.it@mailinator.com&api_key=b5266326b1855443544626f188b8a234da99e1c36d91819419e17091b4f0a7f4"
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:00 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -34,13 +34,13 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:01 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -60,13 +60,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -77,8 +77,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -95,13 +95,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -112,8 +112,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -124,13 +124,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:11 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007472633409851"
           },
@@ -141,8 +141,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -150,7 +150,7 @@
     ]
   },
   {
-    "name": "Find",
+    "name": "FindWithParams",
     "requests": [
       {
         "request": {
@@ -159,13 +159,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -176,8 +176,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -189,13 +189,13 @@
           "query": "?order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -208,8 +208,8 @@
                 "type": "net",
                 "conversion_ids": [ ],
                 "entries": [ ],
-                "created_at": "2015-11-01T19:37:35+00:00",
-                "updated_at": "2015-11-01T19:37:35+00:00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
               },
               {
@@ -219,8 +219,8 @@
                 "type": "net",
                 "conversion_ids": [ ],
                 "entries": [ ],
-                "created_at": "2015-11-01T19:37:34+00:00",
-                "updated_at": "2015-11-01T19:37:34+00:00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
               },
               {
@@ -230,8 +230,108 @@
                 "type": "net",
                 "conversion_ids": [ ],
                 "entries": [ ],
-                "created_at": "2015-11-01T19:37:34+00:00",
-                "updated_at": "2015-11-01T19:37:34+00:00",
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
+                "released_at": ""
+              }
+            ],
+            "pagination": {
+              "total_entries": 3,
+              "total_pages": 1,
+              "current_page": 1,
+              "per_page": 5,
+              "previous_page": -1,
+              "next_page": -1,
+              "order": "created_at",
+              "order_asc_desc": "desc"
+            }
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "FindNoParams",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/settlements/create",
+          "body": "?type=net",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "48143aee-0d27-4400-914c-8b417d67884f",
+            "status": "open",
+            "short_reference": "20151101-RCVPPH",
+            "type": "net",
+            "conversion_ids": [ ],
+            "entries": [ ],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "released_at": ""
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/settlements/find",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "settlements": [
+              {
+                "id": "7995cd76-e82c-41d8-a6ea-0d1bd504e364",
+                "status": "open",
+                "short_reference": "20151101-THMFCD",
+                "type": "net",
+                "conversion_ids": [ ],
+                "entries": [ ],
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
+                "released_at": ""
+              },
+              {
+                "id": "48143aee-0d27-4400-914c-8b417d67884f",
+                "status": "open",
+                "short_reference": "20151101-RCVPPH",
+                "type": "net",
+                "conversion_ids": [ ],
+                "entries": [ ],
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
+                "released_at": ""
+              },
+              {
+                "id": "48143aee-0d27-4400-914c-8b417d67884f",
+                "status": "open",
+                "short_reference": "20151101-RCVPPH",
+                "type": "net",
+                "conversion_ids": [ ],
+                "entries": [ ],
+                "created_at": "2018-01-01T12:34:56+00:00",
+                "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
               }
             ],
@@ -260,13 +360,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -277,8 +377,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -289,13 +389,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/delete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -306,8 +406,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -318,13 +418,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 404,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -354,13 +454,13 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -391,8 +491,8 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -403,13 +503,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -420,8 +520,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -433,13 +533,13 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -463,8 +563,8 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:38+00:00",
-            "updated_at": "2015-11-01T19:37:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -481,13 +581,13 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -518,8 +618,8 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -530,13 +630,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -547,8 +647,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -560,13 +660,13 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -590,8 +690,8 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:38+00:00",
-            "updated_at": "2015-11-01T19:37:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -603,13 +703,13 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -620,8 +720,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [],
-            "created_at": "2015-11-01T19:37:39+00:00",
-            "updated_at": "2015-11-01T19:37:39+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -638,13 +738,13 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -675,8 +775,8 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -687,13 +787,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -704,8 +804,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -717,13 +817,13 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -747,8 +847,8 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:38+00:00",
-            "updated_at": "2015-11-01T19:37:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -759,13 +859,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/release",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -789,9 +889,9 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:42+00:00",
-            "updated_at": "2015-11-01T19:37:42+00:00",
-            "released_at": "2015-11-01T19:37:42+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "released_at": "2018-01-01T12:34:56+00:00"
           }
         }
       }
@@ -807,13 +907,13 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -844,8 +944,8 @@
             "deposit_status": "not_required",
             "deposit_required_at": "",
             "payment_ids": [ ],
-            "created_at": "2015-10-27T19:53:17+00:00",
-            "updated_at": "2015-10-27T19:53:17+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -856,13 +956,13 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -873,8 +973,8 @@
             "type": "net",
             "conversion_ids": [ ],
             "entries": [ ],
-            "created_at": "2015-11-01T19:37:34+00:00",
-            "updated_at": "2015-11-01T19:37:34+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -886,13 +986,13 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -916,8 +1016,8 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:38+00:00",
-            "updated_at": "2015-11-01T19:37:38+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }
@@ -928,13 +1028,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/release",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -958,9 +1058,9 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:42+00:00",
-            "updated_at": "2015-11-01T19:37:42+00:00",
-            "released_at": "2015-11-01T19:37:42+00:00"
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "released_at": "2018-01-01T12:34:56+00:00"
           }
         }
       },
@@ -970,13 +1070,13 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/unrelease",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/0.10.4.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
           }
         },
         "response": {
           "status": 200,
           "headers": {
-            "Date": "Sun, 01 Nov 2015 20:59:10 GMT",
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
             "Content-Type": "application/json;charset=utf-8",
             "X-Request-Id": "2910007469756093752"
           },
@@ -1000,8 +1100,8 @@
                             }
                           }
                         ],
-            "created_at": "2015-11-01T19:37:44+00:00",
-            "updated_at": "2015-11-01T19:37:45+00:00",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
             "released_at": ""
           }
         }

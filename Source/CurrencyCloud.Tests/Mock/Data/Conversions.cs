@@ -2,14 +2,12 @@
 {
     static class Conversions
     {
-        public static readonly Entity.ConversionCreate Conversion1 = new Entity.ConversionCreate(
+        public static readonly Entity.Conversion Conversion1 = new Entity.Conversion(
             "EUR",
             "GBP",
             "buy",
             10000.23m,
-            "Settling invoices",
-            true,
-            "my-unique-id"
+            true
         );
     }
 }

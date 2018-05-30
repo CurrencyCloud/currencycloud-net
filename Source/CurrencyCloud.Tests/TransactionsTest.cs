@@ -54,16 +54,16 @@ namespace CurrencyCloud.Tests
             });
             Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
 
-            Assert.AreEqual(found.Transactions[0], gotten);
+            Assert.AreEqual(found.Transactions[0].ToJSON(), gotten.ToJSON());
         }
 
         /// <summary>
-        /// Successfully finds a transaction.
+        /// Successfully finds a transaction with search parameters.
         /// </summary>
         [Test]
-        public async Task Find()
+        public async Task FindWithParams()
         {
-            player.Play("Find");
+            player.Play("FindWithParams");
 
             var conversion1 = Conversions.Conversion1;
 
@@ -74,6 +74,23 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
+
+            Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
+            Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);
+        }
+
+        /// <summary>
+        /// Successfully finds a transaction without search parameters.
+        /// </summary>
+        [Test]
+        public async Task FindNoParams()
+        {
+            player.Play("FindNoParams");
+
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
+            PaginatedTransactions found = await client.FindTransactionsAsync();
 
             Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
             Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);

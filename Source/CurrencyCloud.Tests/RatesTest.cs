@@ -4,7 +4,6 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity.List;
-using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
 {
@@ -44,7 +43,7 @@ namespace CurrencyCloud.Tests
             player.Play("Get");
 
             Assert.DoesNotThrowAsync(async () => {
-                Rate gotten = await client.GetRateAsync(new DetailedRateParameters("EUR", "GBP", "buy", 6700));
+                Rate gotten = await client.GetRateAsync(new DetailedRates("EUR", "GBP", "buy", 6700));
             });
         }
 
