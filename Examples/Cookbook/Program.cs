@@ -49,6 +49,7 @@ namespace Cookbook
 
             try
             {
+                // TODO: Before running the example please replace loginId and apiKey with valid credentials
                 var token = await client.InitializeAsync(ApiServer.Demo, "development@currencycloud.com", "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef");
 
                 Console.WriteLine("Token: {0}", token);
