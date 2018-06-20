@@ -5,6 +5,7 @@ using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
 using System.Threading.Tasks;
+using System;
 
 namespace CurrencyCloud.Tests
 {
@@ -107,6 +108,55 @@ namespace CurrencyCloud.Tests
             PaginatedConversions found = await client.FindConversionsAsync();
 
             Assert.Contains(created, found.Conversions);
+        }
+        
+        /// <summary>
+        /// Successfully cancels a conversion.
+        /// </summary>
+        [Test]
+        public async Task Cancel()
+        {
+            player.Play("Cancel");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            ConversionCancellation cancelled = await client.CancelConversionsAsync(created.Id, "some notes");
+
+            Assert.AreEqual(cancelled.ConversionId, created.Id);
+        }
+
+
+        /// <summary>
+        /// Successfully changes the date of a conversion.
+        /// </summary>
+        [Test]
+        public async Task DateChange()
+        {
+            player.Play("DateChange");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+
+            DateTime newSettlementDate = DateTime.Parse("2017-11-10T12:18:56+00:00");
+            ConversionDateChange dateChanged = await client.DateChangeConversionsAsync(created.Id, newSettlementDate);
+
+            Assert.AreEqual(dateChanged.NewSettlementDate, newSettlementDate);
+        }
+
+
+        /// <summary>
+        /// Successfully splits a conversion.
+        /// </summary>
+        [Test]
+        public async Task Split()
+        {
+            player.Play("Split");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            ConversionSplit split = await client.SplitConversionsAsync(created.Id, 100);
+
+            Assert.AreEqual(split.ParentConversion.Id, created.Id);
         }
     }
 }

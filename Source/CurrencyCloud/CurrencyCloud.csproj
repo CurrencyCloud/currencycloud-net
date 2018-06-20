@@ -108,6 +108,9 @@
     <Compile Include="ParamsObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extension\StringExtensions.cs" />
+    <Compile Include="Entity\ConversionCancellation.cs" />
+    <Compile Include="Entity\ConversionDateChange.cs" />
+    <Compile Include="Entity\ConversionSplit.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

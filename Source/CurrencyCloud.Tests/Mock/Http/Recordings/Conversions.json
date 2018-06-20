@@ -450,5 +450,273 @@
         }
       }
     ]
+  },
+  {
+    "name": "Cancel",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/create",
+          "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
+            "short_reference": "20151027-ZMNZZB",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "currency_pair": "EURGBP",
+            "status": "awaiting_funds",
+            "buy_currency": "EUR",
+            "sell_currency": "GBP",
+            "client_buy_amount": "10000.23",
+            "client_sell_amount": "7706.18",
+            "fixed_side": "buy",
+            "mid_market_rate": "0.7216",
+            "core_rate": "0.7215",
+            "partner_rate": "",
+            "partner_status": "funds_arrived",
+            "partner_buy_amount": "0.00",
+            "partner_sell_amount": "0.00",
+            "client_rate": "0.7215",
+            "deposit_required": false,
+            "deposit_amount": "0.00",
+            "deposit_currency": "",
+            "deposit_status": "not_required",
+            "deposit_required_at": "",
+            "payment_ids": [],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/5c4716dc-42dd-4571-b4bf-0aa299fff928/cancel",
+          "body": "?notes=some notes here",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "conversion_id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "amount": "-0.28",
+            "currency": "EUR",
+            "notes": "some notes here",
+            "event_date_time": "2018-06-06T12:18:56+00:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "DateChange",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/create",
+          "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
+            "short_reference": "20151027-ZMNZZB",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "currency_pair": "EURGBP",
+            "status": "awaiting_funds",
+            "buy_currency": "EUR",
+            "sell_currency": "GBP",
+            "client_buy_amount": "10000.23",
+            "client_sell_amount": "7706.18",
+            "fixed_side": "buy",
+            "mid_market_rate": "0.7216",
+            "core_rate": "0.7215",
+            "partner_rate": "",
+            "partner_status": "funds_arrived",
+            "partner_buy_amount": "0.00",
+            "partner_sell_amount": "0.00",
+            "client_rate": "0.7215",
+            "deposit_required": false,
+            "deposit_amount": "0.00",
+            "deposit_currency": "",
+            "deposit_status": "not_required",
+            "deposit_required_at": "",
+            "payment_ids": [],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/5c4716dc-42dd-4571-b4bf-0aa299fff928/date_change",
+          "body": "?new_settlement_date%3D2017-11-10T12%3A18%3A56%2B00%3A00",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "conversion_id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "amount": "-0.28",
+            "currency": "GBP",
+            "new_conversion_date": "2015-10-29T00:00:00+00:01",
+            "new_settlement_date": "2017-11-10T12:18:56+00:00",
+            "old_conversion_date": "2015-10-29T00:00:00+00:02",
+            "old_settlement_date": "2015-10-29T14:00:00+00:03",
+            "event_date_time": "2017-11-10T12:18:56+00:00"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Split",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/create",
+          "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "settlement_date": "2018-01-01T12:34:56+00:00",
+            "conversion_date": "2018-01-01T12:34:56+00:00",
+            "short_reference": "20151027-ZMNZZB",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "account_id": "78618e58-da3c-447f-ad59-1796accfeff9",
+            "currency_pair": "EURGBP",
+            "status": "awaiting_funds",
+            "buy_currency": "EUR",
+            "sell_currency": "GBP",
+            "client_buy_amount": "10000.23",
+            "client_sell_amount": "7706.18",
+            "fixed_side": "buy",
+            "mid_market_rate": "0.7216",
+            "core_rate": "0.7215",
+            "partner_rate": "",
+            "partner_status": "funds_arrived",
+            "partner_buy_amount": "0.00",
+            "partner_sell_amount": "0.00",
+            "client_rate": "0.7215",
+            "deposit_required": false,
+            "deposit_amount": "0.00",
+            "deposit_currency": "",
+            "deposit_status": "not_required",
+            "deposit_required_at": "",
+            "payment_ids": [],
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "beneficiary_external_reference": ""
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/conversions/5c4716dc-42dd-4571-b4bf-0aa299fff928/split",
+          "body": "?amount=100",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.1.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "parent_conversion": {
+              "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+              "short_reference": "20171027-ZMNZZB",
+              "sell_amount": "7452.17",
+              "sell_currency": "GBP",
+              "buy_amount": "12000.23",
+              "buy_currency": "EUR",
+              "settlement_date": "2017-10-29T14:00:00+00:00",
+              "conversion_date": "2017-10-29T00:00:00+00:00",
+              "status": "awaiting_funds"
+            },
+            "child_conversion": {
+              "id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+              "short_reference": "20171027-ZMNZZB",
+              "sell_amount": "7052.17",
+              "sell_currency": "GBP",
+              "buy_amount": "9800.23",
+              "buy_currency": "EUR",
+              "settlement_date": "2017-10-29T14:00:00+00:00",
+              "conversion_date": "2017-10-29T00:00:00+00:00",
+              "status": "awaiting_funds"
+            }
+          }
+        }
+      }
+    ]
   }
 ]
