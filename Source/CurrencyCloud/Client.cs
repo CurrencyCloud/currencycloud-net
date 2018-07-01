@@ -32,7 +32,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private string userAgent = "CurrencyCloudSDK/2.0 .NET/2.1.5";
+        private string userAgent = "CurrencyCloudSDK/2.0 .NET/2.2.1";
 
         internal string Token
         {
@@ -367,7 +367,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Validates beneficiary details without creating one.
         /// </summary>
-        /// <param name="validateParameters">Beneficiary data to be validated</param>
+        /// <param name="beneficiary">Beneficiary data to be validated</param>
         /// <returns>Asynchronous task, which returns the validated beneficiary.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -581,47 +581,48 @@ namespace CurrencyCloud
         }
 
         /// <summary>
-        /// Cancels a conversion.
+        /// Cancels the conversion identified by the provided unique id.
         /// </summary>
-        /// <param name="parameters">Cancel parameters</param>
+        /// <param name="id">Id of the conversion that is being cancelled</param>
+        /// <param name="notes">Notes describing the reason for cancellation</param>
         /// <returns>Asynchronous task, which returns the details of the cancelled conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<ConversionCancellation> CancelConversionsAsync(string id, string notes = null)
         {
-            ParamsObject paramsObj = new ParamsObject();;
+            ParamsObject paramsObj = new ParamsObject();
             paramsObj.AddNotNull("notes", notes);
 
             return await RequestAsync<ConversionCancellation>("/v2/conversions/" + id + "/cancel", HttpMethod.Post, paramsObj);
         }
 
-
         /// <summary>
-        /// Changes the settlement date of a conversion.
+        /// Changes the date ofthe conversion identified by the provided unique id.
         /// </summary>
-        /// <param name="parameters">DateChange parameters</param>
+        /// <param name="id">Id of the conversion that is being changed</param>
+        /// <param name="newSettlementDate">New conversion settlement date</param>
         /// <returns>Asynchronous task, which returns the details of the conversion date change</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionDateChange> DateChangeConversionsAsync(string id, DateTime new_settlement_date)
+        public async Task<ConversionDateChange> DateChangeConversionAsync(string id, DateTime newSettlementDate)
         {
-            ParamsObject paramsObj = new ParamsObject(); ;
-            paramsObj.Add("new_settlement_date", new_settlement_date);
+            ParamsObject paramsObj = new ParamsObject();
+            paramsObj.Add("NewSettlementDate", newSettlementDate);
 
             return await RequestAsync<ConversionDateChange>("/v2/conversions/" + id + "/date_change", HttpMethod.Post, paramsObj);
         }
 
-
         /// <summary>
         /// Splits a conversion.
         /// </summary>
-        /// <param name="parameters">Cancel parameters</param>
+        /// <param name="id">Id of the conversion that is being splt</param>
+        /// <param name="amount">The amount at which to split this conversion</param>
         /// <returns>Asynchronous task, which returns the details of the split conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<ConversionSplit> SplitConversionsAsync(string id, decimal amount)
         {
-            ParamsObject paramsObj = new ParamsObject(); ;
+            ParamsObject paramsObj = new ParamsObject();
             paramsObj.Add("amount", amount);
 
             return await RequestAsync<ConversionSplit>("/v2/conversions/" + id + "/split", HttpMethod.Post, paramsObj);
@@ -815,7 +816,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Gets a full quote for the requested currency based on the spread table of the active contact.
         /// </summary>
-        /// <param name="parameters">Rate parameters object</param>
+        /// <param name="detailedRates">Rate parameters object</param>
         /// <returns>Asynchronous task, which returns the requested rate.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>

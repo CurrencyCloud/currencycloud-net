@@ -109,7 +109,7 @@ namespace CurrencyCloud.Tests
 
             Assert.Contains(created, found.Conversions);
         }
-        
+
         /// <summary>
         /// Successfully cancels a conversion.
         /// </summary>
@@ -125,7 +125,6 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(cancelled.ConversionId, created.Id);
         }
 
-
         /// <summary>
         /// Successfully changes the date of a conversion.
         /// </summary>
@@ -137,12 +136,11 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            DateTime newSettlementDate = DateTime.Parse("2017-11-10T12:18:56+00:00");
-            ConversionDateChange dateChanged = await client.DateChangeConversionsAsync(created.Id, newSettlementDate);
+            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            ConversionDateChange dateChanged = await client.DateChangeConversionAsync(created.Id, newSettlementDate);
 
             Assert.AreEqual(dateChanged.NewSettlementDate, newSettlementDate);
         }
-
 
         /// <summary>
         /// Successfully splits a conversion.
