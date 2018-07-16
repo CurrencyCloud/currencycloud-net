@@ -1,8 +1,8 @@
-sudo: false
 language: csharp
 solution: Source/CurrencyCloud.sln
 before_install:
   - travis_retry nuget install NUnit.Runners -version 2.6.4
+  - sudo apt-get install -yq nunit-console
 before_script:
   - nuget restore Source/CurrencyCloud.sln
 after_script:
