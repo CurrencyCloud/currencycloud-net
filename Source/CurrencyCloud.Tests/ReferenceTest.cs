@@ -73,6 +73,19 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully gets purpose codes.
+        /// </summary>
+        [Test]
+        public void GetPaymentPurposeCodes()
+        {
+            player.Play("GetPaymentPurposeCodes");
+
+            Assert.DoesNotThrowAsync(async () => {
+                PurposeCodesList gotten = await client.GetPaymentPurposeCodes("INR");
+            });
+        }
+
+        /// <summary>
         /// Successfully gets payment dates.
         /// </summary>
         [Test]
