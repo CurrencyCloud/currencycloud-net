@@ -50,12 +50,12 @@
     <Compile Include="Mock\Data\Ibans.cs" />
     <Compile Include="Mock\Data\Transfers.cs" />
     <Compile Include="Mock\Data\VirtualAccounts.cs" />
+    <Compile Include="PaymentsTest.cs" />
     <Compile Include="TransactionsTest.cs" />
     <Compile Include="SettlementsTest.cs" />
     <Compile Include="ReferenceTest.cs" />
     <Compile Include="RatesTest.cs" />
     <Compile Include="Mock\Data\Payments.cs" />
-    <Compile Include="PaymentsTest.cs" />
     <Compile Include="PayersTest.cs" />
     <Compile Include="ConversionsTest.cs" />
     <Compile Include="ContactsTest.cs" />
