@@ -202,6 +202,7 @@ namespace CurrencyCloud.Tests
             player.Play("Authorise");
 
             var payment1 = Payments.Payment1;
+            var authorisation1 = Payments.Authorisation1;
 
             Payment created = await CreatePayment(payment1);
             
@@ -216,6 +217,7 @@ namespace CurrencyCloud.Tests
             Assert.IsTrue(authorisedPayments[0].Updated);
             Assert.IsEmpty(authorisedPayments[0].Error);
             Assert.AreEqual(created.Id, authorisedPayments[0].PaymentId);
+            Assert.AreEqual(authorisedPayments[0], authorisation1);
         }
     }
 }
