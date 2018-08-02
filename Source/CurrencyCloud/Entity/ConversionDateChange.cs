@@ -8,6 +8,12 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public ConversionDateChange() { }
 
+        public ConversionDateChange(string id, DateTime newSettlementDate)
+        {
+            this.ConversionId = id;
+            this.NewSettlementDate = newSettlementDate;
+        }
+
         public string ConversionId { get; set; }
 
         public string Currency { get; set; }
@@ -54,8 +60,8 @@ namespace CurrencyCloud.Entity
             var conversionDateChange = obj as ConversionDateChange;
 
             return ConversionId == conversionDateChange.ConversionId &&
-                   Currency == conversionDateChange.Currency &&
                    Amount == conversionDateChange.Amount &&
+                   Currency == conversionDateChange.Currency &&
                    NewConversionDate == conversionDateChange.NewConversionDate &&
                    NewSettlementDate == conversionDateChange.NewSettlementDate &&
                    OldConversionDate == conversionDateChange.OldConversionDate &&

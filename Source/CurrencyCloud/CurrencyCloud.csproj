@@ -39,16 +39,33 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc">
+      <HintPath>..\packages\Polly.6.1.0\lib\netstandard1.1\Polly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Credentials.cs" />
     <Compile Include="Entity\ConversionCreateParameters.cs" />
+    <Compile Include="Entity\ConversionDateChangeDetails.cs" />
+    <Compile Include="Entity\ConversionProfitAndLoss.cs" />
+    <Compile Include="Entity\ConversionSplitDetails.cs" />
+    <Compile Include="Entity\ConversionSplitHistory.cs" />
     <Compile Include="Entity\DetailedRateParameters.cs" />
     <Compile Include="Entity\DetailedRates.cs" />
     <Compile Include="Entity\Entity.cs" />
@@ -57,6 +74,7 @@
     <Compile Include="Entity\Find\BeneficiaryFindParameters.cs" />
     <Compile Include="Entity\Find\ContactFindParameters.cs" />
     <Compile Include="Entity\Find\ConversionFindParameters.cs" />
+    <Compile Include="Entity\Find\ConversionProfitAndLossFindParameters.cs" />
     <Compile Include="Entity\Find\FindParameters.cs" />
     <Compile Include="Entity\Find\IbanFindParameters.cs" />
     <Compile Include="Entity\Find\PaymentFindParameters.cs" />
@@ -66,6 +84,7 @@
     <Compile Include="Entity\Find\VirtualAccountFindParameters.cs" />
     <Compile Include="Entity\Iban.cs" />
     <Compile Include="Entity\List\PayerDetailsList.cs" />
+    <Compile Include="Entity\Pagination\PaginatedConversionProfitAndLosses.cs" />
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
@@ -111,6 +130,7 @@
     <Compile Include="Entity\ConversionCancellation.cs" />
     <Compile Include="Entity\ConversionDateChange.cs" />
     <Compile Include="Entity\ConversionSplit.cs" />
+    <Compile Include="Retry.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
