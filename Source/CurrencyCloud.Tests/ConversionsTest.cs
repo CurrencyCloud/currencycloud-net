@@ -82,7 +82,7 @@ namespace CurrencyCloud.Tests
             Conversion created = await client.CreateConversionAsync(conversion1);
             PaginatedConversions found = await client.FindConversionsAsync(new ConversionFindParameters
             {
-                ConversionIds = new string[]
+                ConversionIds = new []
                 {
                     created.Id
                 },
@@ -111,6 +111,33 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully quotes a conversion cancellation.
+        /// </summary>
+        [Test]
+        public async Task QuoteCancel()
+        {
+            player.Play("QuoteCancel");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            ConversionCancellation cancelQuoted = await client.QuoteCancelConversionAsync(new ConversionCancellation
+            {
+                ConversionId = created.Id
+            });
+
+            Assert.AreEqual(cancelQuoted.Currency, created.BuyCurrency);
+            Assert.IsNull(cancelQuoted.ConversionId);
+            Assert.IsNull(cancelQuoted.ContactId);
+            Assert.IsNull(cancelQuoted.AccountId);
+            Assert.NotZero((decimal)cancelQuoted.Amount);
+            Assert.IsNull(cancelQuoted.Notes);
+            Assert.NotNull(cancelQuoted.EventDateTime);
+            Assert.IsNull(cancelQuoted.EventAccountId);
+            Assert.IsNull(cancelQuoted.EventContactId);
+            Assert.IsNull(cancelQuoted.EventType);
+        }
+
+        /// <summary>
         /// Successfully cancels a conversion.
         /// </summary>
         [Test]
@@ -120,9 +147,40 @@ namespace CurrencyCloud.Tests
             var conversion1 = Conversions.Conversion1;
 
             Conversion created = await client.CreateConversionAsync(conversion1);
-            ConversionCancellation cancelled = await client.CancelConversionsAsync(created.Id, "some notes");
+            ConversionCancellation cancelled = await client.CancelConversionsAsync(new ConversionCancellation
+            {
+                ConversionId = created.Id,
+                Notes = "some notes"
+            });
 
             Assert.AreEqual(cancelled.ConversionId, created.Id);
+        }
+
+        /// <summary>
+        /// Successfully quotes a conversion date change.
+        /// </summary>
+        [Test]
+        public async Task QuoteDateChange()
+        {
+            player.Play("QuoteDateChange");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+
+            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            ConversionDateChange dateChangeQuoted = await client.QuoteDateChangeConversionAsync(new ConversionDateChange {
+                ConversionId = created.Id,
+                NewSettlementDate = newSettlementDate
+            });
+
+            Assert.AreEqual(dateChangeQuoted.ConversionId, created.Id);
+            Assert.AreEqual(dateChangeQuoted.Currency, created.SellCurrency);
+            Assert.NotZero((decimal)dateChangeQuoted.Amount);
+            Assert.AreEqual(dateChangeQuoted.NewSettlementDate, newSettlementDate);
+            Assert.NotNull(dateChangeQuoted.NewConversionDate);
+            Assert.NotNull(dateChangeQuoted.OldConversionDate);
+            Assert.NotNull(dateChangeQuoted.OldSettlementDate);
+            Assert.NotNull(dateChangeQuoted.EventDateTime);
         }
 
         /// <summary>
@@ -137,9 +195,111 @@ namespace CurrencyCloud.Tests
             Conversion created = await client.CreateConversionAsync(conversion1);
 
             DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
-            ConversionDateChange dateChanged = await client.DateChangeConversionAsync(created.Id, newSettlementDate);
+            ConversionDateChange dateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
+                ConversionId = created.Id,
+                NewSettlementDate = newSettlementDate
+            });
 
+            Assert.AreEqual(dateChanged.ConversionId, created.Id);
+            Assert.AreEqual(dateChanged.Currency, created.SellCurrency);
+            Assert.NotZero((decimal)dateChanged.Amount);
             Assert.AreEqual(dateChanged.NewSettlementDate, newSettlementDate);
+            Assert.NotNull(dateChanged.NewConversionDate);
+            Assert.NotNull(dateChanged.OldConversionDate);
+            Assert.NotNull(dateChanged.OldSettlementDate);
+            Assert.NotNull(dateChanged.EventDateTime);
+        }
+
+        /// <summary>
+        /// Successfully retrieves all the date changes of a conversion.
+        /// </summary>
+        [Test]
+        public async Task DateChangeDetails()
+        {
+            player.Play("DateChangeDetails");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+
+            DateTime firstSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            ConversionDateChange firstDateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
+                ConversionId = created.Id,
+                NewSettlementDate = firstSettlementDate
+            });
+
+            DateTime secondSettlementDate = DateTime.Parse("2018-03-05T12:34:56+00:00");
+            ConversionDateChange secondDateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
+                ConversionId = created.Id,
+                NewSettlementDate = secondSettlementDate
+            });
+
+            ConversionDateChangeDetails dateChangeDetails = await client.DateChangeDetailsConversionAsync(new Conversion
+            {
+                Id = created.Id
+            });
+
+            Assert.AreEqual(firstDateChanged.ConversionId, created.Id);
+            Assert.AreEqual(secondDateChanged.ConversionId, firstDateChanged.ConversionId);
+            Assert.AreEqual(firstDateChanged.Currency, created.SellCurrency);
+            Assert.AreEqual(secondDateChanged.Currency, firstDateChanged.Currency);
+            Assert.NotNull(firstDateChanged.OldConversionDate);
+            Assert.NotNull(firstDateChanged.OldSettlementDate);
+            Assert.AreEqual(firstDateChanged.NewSettlementDate, firstSettlementDate);
+            Assert.NotNull(firstDateChanged.NewConversionDate);
+            Assert.AreEqual(secondDateChanged.NewSettlementDate, secondSettlementDate);
+            Assert.AreEqual(secondDateChanged.OldConversionDate, firstDateChanged.NewConversionDate);
+            Assert.AreEqual(secondDateChanged.OldSettlementDate, firstDateChanged.NewSettlementDate);
+            Assert.NotNull(firstDateChanged.EventDateTime);
+            Assert.NotNull(secondDateChanged.EventDateTime);
+            Assert.AreEqual(dateChangeDetails.InitialValueDate, created.ConversionDate);
+            Assert.AreEqual(dateChangeDetails.InitialDeliveryDate, created.SettlementDate);
+            Assert.AreEqual(dateChangeDetails.CurrentValueDate, secondDateChanged.NewConversionDate);
+            Assert.AreEqual(dateChangeDetails.CurrentDeliveryDate, secondDateChanged.NewSettlementDate);
+            Assert.AreEqual(dateChangeDetails.FloatingCurrency, created.SellCurrency);
+
+            decimal? profitLoss = 0;
+            foreach (ConversionDateChangeDetails.DateChange element in dateChangeDetails.Changes)
+            {
+                profitLoss += element.ProfitAndLoss + (element.AdminFee ?? 0);
+                Assert.NotNull(element.RequestedValueDate);
+                Assert.NotNull(element.NewValueDate);
+                Assert.NotNull(element.NewDeliveryDate);
+                Assert.AreEqual(element.Type, "elected_roll");
+                Assert.NotNull(element.Status);
+            }
+
+            Assert.AreEqual(dateChangeDetails.TotalProfitAndLoss, profitLoss);
+        }
+
+        /// <summary>
+        /// Successfully previews a conversion split.
+        /// </summary>
+        [Test]
+        public async Task PreviewSplit()
+        {
+            player.Play("PreviewSplit");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            ConversionSplit splitPreviewed = await client.PreviewSplitConversionAsync(new Conversion
+            {
+                Id = created.Id,
+                Amount = 9370
+            });
+
+            Assert.AreEqual(splitPreviewed.ParentConversion.Id, created.Id);
+            Assert.IsNull(splitPreviewed.ChildConversion.Id);
+            Assert.NotNull(splitPreviewed.ParentConversion.ShortReference);
+            Assert.IsNull(splitPreviewed.ChildConversion.ShortReference);
+            Assert.AreEqual(splitPreviewed.ParentConversion.SellCurrency, created.SellCurrency);
+            Assert.AreEqual(splitPreviewed.ParentConversion.BuyCurrency, created.BuyCurrency);
+            Assert.AreEqual(splitPreviewed.ChildConversion.BuyCurrency, splitPreviewed.ParentConversion.BuyCurrency);
+            Assert.AreEqual(splitPreviewed.ChildConversion.SellCurrency, splitPreviewed.ParentConversion.SellCurrency);
+            Assert.AreEqual(splitPreviewed.ParentConversion.ConversionDate, splitPreviewed.ChildConversion.ConversionDate);
+            Assert.AreEqual(splitPreviewed.ParentConversion.SettlementDate, splitPreviewed.ChildConversion.SettlementDate);
+            Assert.AreEqual(splitPreviewed.ParentConversion.Status, splitPreviewed.ChildConversion.Status);
+            Assert.AreEqual(created.ClientBuyAmount, splitPreviewed.ParentConversion.BuyAmount + splitPreviewed.ChildConversion.BuyAmount);
+            Assert.AreEqual(created.ClientSellAmount, splitPreviewed.ParentConversion.SellAmount + splitPreviewed.ChildConversion.SellAmount);
         }
 
         /// <summary>
@@ -152,9 +312,89 @@ namespace CurrencyCloud.Tests
             var conversion1 = Conversions.Conversion1;
 
             Conversion created = await client.CreateConversionAsync(conversion1);
-            ConversionSplit split = await client.SplitConversionsAsync(created.Id, 100);
+            ConversionSplit split = await client.SplitConversionAsync(new Conversion
+            {
+                Id = created.Id,
+                Amount = 9370
+            });
 
             Assert.AreEqual(split.ParentConversion.Id, created.Id);
+            Assert.NotNull(split.ChildConversion.Id);
+            Assert.NotNull(split.ParentConversion.ShortReference);
+            Assert.NotNull(split.ChildConversion.ShortReference);
+            Assert.AreEqual(split.ParentConversion.SellCurrency, created.SellCurrency);
+            Assert.AreEqual(split.ParentConversion.BuyCurrency, created.BuyCurrency);
+            Assert.AreEqual(split.ChildConversion.BuyCurrency, split.ParentConversion.BuyCurrency);
+            Assert.AreEqual(split.ChildConversion.SellCurrency, split.ParentConversion.SellCurrency);
+            Assert.AreEqual(split.ParentConversion.SettlementDate, split.ChildConversion.SettlementDate);
+            Assert.AreEqual(split.ParentConversion.Status, split.ChildConversion.Status);
+            Assert.AreEqual(created.ClientBuyAmount, split.ParentConversion.BuyAmount + split.ChildConversion.BuyAmount);
+            Assert.AreEqual(created.ClientSellAmount, split.ParentConversion.SellAmount + split.ChildConversion.SellAmount);
+        }
+
+        /// <summary>
+        /// Successfully splits a conversion.
+        /// </summary>
+        [Test]
+        public async Task SplitHistory()
+        {
+            player.Play("SplitHistory");
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion created = await client.CreateConversionAsync(conversion1);
+            ConversionSplit splitConversion = await client.SplitConversionAsync(new Conversion
+            {
+                Id = created.Id,
+                Amount = 9370
+            });
+            ConversionSplit splitChild = await client.SplitConversionAsync(new Conversion
+            {
+                Id = splitConversion.ChildConversion.Id,
+                Amount = 6951
+            });
+            ConversionSplitHistory splitHistoryParent = await client.SplitHistoryConversionAsync(new Conversion
+            {
+                Id = splitConversion.ParentConversion.Id
+            });
+            ConversionSplitHistory splitHistoryChildChild = await client.SplitHistoryConversionAsync(new Conversion
+            {
+                Id = splitChild.ChildConversion.Id
+            });
+
+            Assert.AreEqual(splitConversion.ParentConversion.Id, created.Id);
+            Assert.AreEqual(splitChild.ParentConversion.Id, splitConversion.ChildConversion.Id);
+            Assert.AreEqual(splitConversion.ChildConversion.BuyAmount, splitChild.ParentConversion.BuyAmount + splitChild.ChildConversion.BuyAmount);
+            Assert.NotNull(splitHistoryParent.ParentConversion);
+            Assert.Null(splitHistoryParent.OriginConversion);
+            Assert.IsNotEmpty(splitHistoryParent.ChildConversions);
+            Assert.NotNull(splitHistoryChildChild.ParentConversion);
+            Assert.NotNull(splitHistoryChildChild.OriginConversion);
+            Assert.IsEmpty(splitHistoryChildChild.ChildConversions);
+            Assert.AreEqual(splitHistoryChildChild.OriginConversion.Id, splitHistoryParent.ParentConversion.Id);
+        }
+
+        /// <summary>
+        /// Returns an object that contains information related to actions on conversions that have generated profit or loss.
+        /// </summary>
+        [Test]
+        public async Task FindProfitAndLosses()
+        {
+            player.Play("FindProfitAndLosses");
+
+            PaginatedConversionProfitAndLosses profitAndLosses = await client.FindConversionProfitAndLossesAsync();
+
+            foreach (ConversionProfitAndLoss element in profitAndLosses.ConversionProfitAndLosses)
+            {
+                Assert.NotNull(element.AccountId);
+                Assert.NotNull(element.ContactId);
+                Assert.NotNull(element.EventAccountId);
+                Assert.NotNull(element.EventContactId);
+                Assert.AreEqual(element.EventType, "self_service_roll");
+                Assert.NotZero(element.Amount ?? 0);
+                Assert.NotNull(element.Currency);
+                Assert.NotNull(element.EventDateTime);
+            }
+            Assert.AreEqual(profitAndLosses.ConversionProfitAndLosses.Count, profitAndLosses.Pagination.TotalEntries);
         }
     }
 }
