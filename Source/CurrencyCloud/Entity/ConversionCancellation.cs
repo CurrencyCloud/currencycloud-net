@@ -8,6 +8,12 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public ConversionCancellation() { }
 
+        public ConversionCancellation(string id, string notes = null)
+        {
+            this.ContactId = id;
+            this.Notes = notes;
+        }
+
         ///<summary>
         /// ID of the conversion
         ///</summary>
@@ -66,11 +72,11 @@ namespace CurrencyCloud.Entity
             var conversionCancellation = obj as ConversionCancellation;
 
             return ConversionId == conversionCancellation.ConversionId &&
-                   AccountId == conversionCancellation.AccountId &&
                    ContactId == conversionCancellation.ContactId &&
-                   Notes == conversionCancellation.Notes &&
+                   AccountId == conversionCancellation.AccountId &&
                    Currency == conversionCancellation.Currency &&
                    Amount == conversionCancellation.Amount &&
+                   Notes == conversionCancellation.Notes &&
                    EventDateTime == conversionCancellation.EventDateTime &&
                    EventAccountId == conversionCancellation.EventAccountId &&
                    EventContactId == conversionCancellation.EventContactId &&

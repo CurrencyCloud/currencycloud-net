@@ -8,9 +8,9 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public ConversionSplit() { }
 
-        public Conversion ParentConversion { get; set; }
+        public ConversionSplitDetails ParentConversion { get; set; }
 
-        public Conversion ChildConversion { get; set; }
+        public ConversionSplitDetails ChildConversion { get; set; }
 
         public string ToJSON()
         {

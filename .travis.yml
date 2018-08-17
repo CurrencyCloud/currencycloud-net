@@ -1,9 +1,8 @@
 language: csharp
 solution: Source/CurrencyCloud.sln
 before_install:
-  - travis_retry nuget install NUnit.Runners -version 2.6.4
-  - sudo apt-get install -yq nunit-console
+  - travis_retry nuget install NUnit.ConsoleRunner -Version 3.8.0
 before_script:
   - nuget restore Source/CurrencyCloud.sln
 after_script:
-  - nunit-console Source/CurrencyCloud.Tests/bin/Release/CurrencyCloud.Tests.dll
+  - mono ./NUnit.ConsoleRunner.3.8.0/tools/nunit3-console.exe ./Source/CurrencyCloud.Tests/bin/Release/CurrencyCloud.Tests.dll

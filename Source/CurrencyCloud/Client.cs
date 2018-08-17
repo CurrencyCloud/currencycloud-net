@@ -4,11 +4,14 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Runtime.CompilerServices;
+using System.Threading;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -18,7 +21,8 @@ using CurrencyCloud.Exception;
 using CurrencyCloud.Environment;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Entity.List;
-using System.Runtime.CompilerServices;
+using Polly;
+using Polly.Retry;
 
 [assembly: InternalsVisibleTo("Currencycloud.Tests")]
 
@@ -32,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private string userAgent = "CurrencyCloudSDK/2.0 .NET/2.2.1";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/2.4.3";
 
         internal string Token
         {
@@ -46,6 +50,58 @@ namespace CurrencyCloud
                 httpClient.DefaultRequestHeaders.Add("X-Auth-Token", value);
             }
         }
+
+        #region Retry
+
+        private static TimeSpan backoffWait(int attempt, int min, int max, int jitter)
+        {
+            var wait = TimeSpan.FromMilliseconds(min * Math.Pow(2, attempt))
+                       + TimeSpan.FromMilliseconds(new Random().Next(jitter));
+
+            Debug.WriteLine("[Backoff] - Waiting {0} ms before retrying. {1} retries left", wait.TotalMilliseconds, Retry.NumRetries - attempt);
+
+            if (wait.TotalMilliseconds <= min)
+                return TimeSpan.FromMilliseconds(min);
+
+            return wait.TotalMilliseconds > max ? TimeSpan.FromMilliseconds(max) : wait;
+        }
+
+        private static HttpRequestMessage CloneHttpRequestMessage(HttpRequestMessage req)
+        {
+            HttpRequestMessage clone = new HttpRequestMessage(req.Method, req.RequestUri);
+
+            var ms = new MemoryStream();
+            if (req.Content != null)
+            {
+                req.Content.CopyToAsync(ms).ConfigureAwait(false);
+                ms.Position = 0;
+                clone.Content = new StreamContent(ms);
+
+                if (req.Content.Headers != null)
+                    foreach (var h in req.Content.Headers)
+                        clone.Content.Headers.Add(h.Key, h.Value);
+            }
+
+            clone.Version = req.Version;
+
+            foreach (KeyValuePair<string, object> prop in req.Properties)
+                clone.Properties.Add(prop);
+
+            foreach (KeyValuePair<string, IEnumerable<string>> header in req.Headers)
+                clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
+
+            return clone;
+        }
+
+        private static RetryPolicy<HttpResponseMessage> retryPolicy = Policy<HttpResponseMessage>
+            .Handle<HttpRequestException>()
+            .OrResult(res => Retry.OnError.Contains(res.StatusCode))
+            .WaitAndRetryAsync(
+                Retry.NumRetries,
+                attempt => backoffWait(attempt, Retry.MinWait, Retry.MaxWait, Retry.Jitter),
+                (err, delay) => Debug.WriteLine("[Retry Policy] - Delaying for {0} ms.", delay.TotalMilliseconds));
+
+        #endregion
 
         #region Request
 
@@ -61,7 +117,16 @@ namespace CurrencyCloud
             {
                 Content = authParams.buildFormUrlBodyFromParams()
             };
-            HttpResponseMessage res = await httpClient.SendAsync(httpAuthRequestMessage);
+
+            if (Retry.Enabled)
+                Debug.WriteLine("[Retrying authentication] - Retries: {0}, MinWait: {1}, MaxWait: {2}, Jitter: {3}",
+                    Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
+
+            HttpResponseMessage res = Retry.Enabled ?
+                await retryPolicy.ExecuteAsync(
+                    ct => httpClient.SendAsync(CloneHttpRequestMessage(httpAuthRequestMessage)), CancellationToken.None) :
+                await httpClient.SendAsync(httpAuthRequestMessage);
+
             if (res.IsSuccessStatusCode)
             {
                 string resString = await res.Content.ReadAsStringAsync();
@@ -74,10 +139,8 @@ namespace CurrencyCloud
 
                 return token;
             }
-            else
-            {
-                throw await ApiExceptionFactory.FromHttpResponse(res);
-            }
+
+            throw await ApiExceptionFactory.FromHttpResponse(res);
         }
 
         private async Task<TResult> RequestAsync<TResult>(string path, HttpMethod method, ParamsObject obj = null)
@@ -108,13 +171,24 @@ namespace CurrencyCloud
                 if (method == HttpMethod.Get)
                 {
                     httpRequestMessage = new HttpRequestMessage(method, requestUri);
-                } else {
+                }
+                else
+                {
                     httpRequestMessage = new HttpRequestMessage(method, path)
                     {
                         Content = paramsObj.buildFormUrlBodyFromParams()
                     };
                 }
-                HttpResponseMessage res = await httpClient.SendAsync(httpRequestMessage);
+
+                if (Retry.Enabled)
+                    Debug.WriteLine("[Retrying request] - Retries: {0}, MinWait: {1}, MaxWait: {2}, Jitter: {3}",
+                        Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
+
+                HttpResponseMessage res = Retry.Enabled ?
+                    await retryPolicy.ExecuteAsync(
+                        ct => httpClient.SendAsync(CloneHttpRequestMessage(httpRequestMessage)), CancellationToken.None) :
+                    await httpClient.SendAsync(httpRequestMessage);
+
                 if (res.IsSuccessStatusCode)
                 {
                     string resString = await res.Content.ReadAsStringAsync();
@@ -127,10 +201,8 @@ namespace CurrencyCloud
 
                     return JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
                 }
-                else
-                {
-                    throw await ApiExceptionFactory.FromHttpResponse(res);
-                }
+
+                throw await ApiExceptionFactory.FromHttpResponse(res);
             };
 
             for (int attempts = 0;; attempts++)
@@ -300,7 +372,7 @@ namespace CurrencyCloud
             ParamsObject optional = ParamsObject.CreateFromStaticObject(account);
             string id = account.Id;
             if (string.IsNullOrEmpty(id))
-                throw new ArgumentException("Account id can not be null");
+                throw new ArgumentException("Account Id cannot be null");
 
             return await RequestAsync<Account>("/v2/accounts/" + id, HttpMethod.Post, optional);
         }
@@ -409,7 +481,6 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<Beneficiary> GetBeneficiaryAsync(string id)
         {
-
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/" + id, HttpMethod.Get, null);
         }
 
@@ -425,7 +496,7 @@ namespace CurrencyCloud
         {
             string id = beneficiary.Id;
             if (id == null)
-                throw new ArgumentException("beneficiary.Id can not be null");
+                throw new ArgumentException("Beneficiary Id cannot be null");
 
             var optional = ParamsObject.CreateFromStaticObject(beneficiary);
 
@@ -502,7 +573,7 @@ namespace CurrencyCloud
         {
             string id = contact.Id;
             if (string.IsNullOrEmpty(id))
-                throw new ArgumentException("Contact.Id can not be null");
+                throw new ArgumentException("Contact Id can not be null");
 
             ParamsObject optional = ParamsObject.CreateFromStaticObject(contact);
             //remove account_id. Not required by server while update.
@@ -581,6 +652,20 @@ namespace CurrencyCloud
         }
 
         /// <summary>
+        /// Quotes cost of cancelling conversion identified by the provided unique id.
+        /// </summary>
+        /// <param name="id">Id of the conversion that is being quoted</param>
+        /// <returns>Asynchronous task, which returns the details of the cancelled conversion</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ConversionCancellation> QuoteCancelConversionAsync(ConversionCancellation conversionCancellationQuote)
+        {
+            string id = conversionCancellationQuote.ConversionId;
+
+            return await RequestAsync<ConversionCancellation>("/v2/conversions/" + id + "/cancellation_quote", HttpMethod.Get, null);
+        }
+
+        /// <summary>
         /// Cancels the conversion identified by the provided unique id.
         /// </summary>
         /// <param name="id">Id of the conversion that is being cancelled</param>
@@ -588,12 +673,37 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the details of the cancelled conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionCancellation> CancelConversionsAsync(string id, string notes = null)
+        public async Task<ConversionCancellation> CancelConversionsAsync(ConversionCancellation conversionCancellation)
         {
-            ParamsObject paramsObj = new ParamsObject();
-            paramsObj.AddNotNull("notes", notes);
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionCancellation);
+            string id = conversionCancellation.ConversionId;
+
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Conversion Id cannot be null");
 
             return await RequestAsync<ConversionCancellation>("/v2/conversions/" + id + "/cancel", HttpMethod.Post, paramsObj);
+        }
+
+        /// <summary>
+        /// Returns an object containing the quote for changing the date of the specified conversion.
+        /// </summary>
+        /// <param name="id">Id of the conversion that is being changed</param>
+        /// <param name="newSettlementDate">New conversion settlement date</param>
+        /// <returns>Asynchronous task, which returns the details of the conversion date change</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ConversionDateChange> QuoteDateChangeConversionAsync(ConversionDateChange conversionDateChange)
+        {
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
+            string id = conversionDateChange.ConversionId;
+            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Conversion Id cannot be null");
+            if (!newSettlementDate.HasValue)
+                throw new ArgumentException("New Settlement Date cannot be null");
+
+            return await RequestAsync<ConversionDateChange>("/v2/conversions/" + id + "/date_change_quote", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -604,12 +714,55 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the details of the conversion date change</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionDateChange> DateChangeConversionAsync(string id, DateTime newSettlementDate)
+        public async Task<ConversionDateChange> DateChangeConversionAsync(ConversionDateChange conversionDateChange)
         {
-            ParamsObject paramsObj = new ParamsObject();
-            paramsObj.Add("NewSettlementDate", newSettlementDate);
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
+            string id = conversionDateChange.ConversionId;
+            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Conversion Id cannot be null");
+            if (!newSettlementDate.HasValue)
+                throw new ArgumentException("New Settlement Date cannot be null");
 
             return await RequestAsync<ConversionDateChange>("/v2/conversions/" + id + "/date_change", HttpMethod.Post, paramsObj);
+        }
+
+        /// <summary>
+        /// Show all changes made to the settlement date of an existing conversion.
+        /// </summary>
+        /// <param name="id">Id of the conversion that is being changed</param>
+        /// <returns>Asynchronous task, which returns all changes made to the settlement date of the conversion</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ConversionDateChangeDetails> DateChangeDetailsConversionAsync(Conversion conversionDateChangeDetails)
+        {
+            string id = conversionDateChangeDetails.Id;
+
+            return await RequestAsync<ConversionDateChangeDetails>("/v2/conversions/" + id + "/date_change/details", HttpMethod.Get, null);
+        }
+
+        /// <summary>
+        /// Previews a conversion split.
+        /// </summary>
+        /// <param name="id">Id of the conversion to preview a split</param>
+        /// <param name="amount">The amount at which to split this conversion</param>
+        /// <returns>Asynchronous task, which returns the details of the split conversion</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ConversionSplit> PreviewSplitConversionAsync(Conversion conversionSplit)
+        {
+            string id = conversionSplit.Id;
+            decimal? amount = conversionSplit.Amount;
+
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Conversion Id cannot be null");
+            if (!amount.HasValue)
+                throw new ArgumentException("Amount cannot be null");
+
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionSplit);
+
+            return await RequestAsync<ConversionSplit>("/v2/conversions/" + id + "/split_preview", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
@@ -620,12 +773,47 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the details of the split conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionSplit> SplitConversionsAsync(string id, decimal amount)
+        public async Task<ConversionSplit> SplitConversionAsync(Conversion conversionSplit)
         {
-            ParamsObject paramsObj = new ParamsObject();
-            paramsObj.Add("amount", amount);
+            string id = conversionSplit.Id;
+            decimal? amount = conversionSplit.Amount;
+
+            if (string.IsNullOrEmpty(id))
+                throw new ArgumentException("Conversion Id cannot be null");
+            if (!amount.HasValue)
+                throw new ArgumentException("Amount cannot be null");
+
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionSplit);
 
             return await RequestAsync<ConversionSplit>("/v2/conversions/" + id + "/split", HttpMethod.Post, paramsObj);
+        }
+
+        /// <summary>
+        /// Conversion split history.
+        /// </summary>
+        /// <param name="id">Id of the conversion</param>
+        /// <returns>Asynchronous task, which returns the split history for a given conversion</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ConversionSplitHistory> SplitHistoryConversionAsync(Conversion conversionSplit)
+        {
+            string id = conversionSplit.Id;
+
+            return await RequestAsync<ConversionSplitHistory>("/v2/conversions/" + id + "/split_history", HttpMethod.Get, null);
+        }
+
+        /// <summary>
+        /// Returns an object that contains information related to actions on conversions that have generated profit or loss
+        /// </summary>
+        /// <param name="parameters">Find parameters</param>
+        /// <returns>Asynchronous task, which returns the list of the found conversions, as well as pagination information.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaginatedConversionProfitAndLosses> FindConversionProfitAndLossesAsync(ConversionProfitAndLossFindParameters parameters = null)
+        {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+
+            return await RequestAsync<PaginatedConversionProfitAndLosses>("/v2/conversions/profit_and_loss", HttpMethod.Get, optional);
         }
 
         #endregion
@@ -732,7 +920,6 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<Payment> GetPaymentAsync(string id)
         {
-
             return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Get, null);
         }
 
@@ -749,7 +936,7 @@ namespace CurrencyCloud
         {
             string id = payment.Id;
             if (string.IsNullOrEmpty(id))
-                throw new ArgumentException("Payment.ID can not be null");
+                throw new ArgumentException("Payment Id cannot be null");
 
             ParamsObject optional = ParamsObject.CreateFromStaticObject(payment);
             optional.AddNotNull("PayerDetailsSource", payment.PayerDetailsSource);
