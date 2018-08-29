@@ -1091,6 +1091,25 @@ namespace CurrencyCloud
         }
 
         /// <summary>
+        /// Gets a list of purpose codes for a given currency.
+        /// </summary>
+        /// <param name="currency">Currency to get the purpose codes for</param>
+        /// <param name="entityType">Optional: entity (individual or company)</param>
+        /// <param name="bankAccountCountry">Optional: bank account country</param>
+        /// <returns>Asynchronous task, which returns the list purpose codes.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PurposeCodesList> GetPaymentPurposeCodes(string currency, string entityType = null, string bankAccountCountry = null)
+        {
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("Currency", currency);
+            paramsObj.AddNotNull("EntityType", entityType);
+            paramsObj.AddNotNull("BankAccountCountry", bankAccountCountry);
+
+            return await RequestAsync<PurposeCodesList>("/v2/reference/payment_purpose_codes", HttpMethod.Get, paramsObj);
+        }
+
+        /// <summary>
         /// Gets dates for which the given currency can not be paid.
         /// </summary>
         /// <param name="currency">Currency name.</param>
