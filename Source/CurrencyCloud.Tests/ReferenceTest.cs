@@ -81,7 +81,7 @@ namespace CurrencyCloud.Tests
             player.Play("GetPaymentPurposeCodes");
 
             Assert.DoesNotThrowAsync(async () => {
-                PurposeCodesList gotten = await client.GetPaymentPurposeCodes("INR");
+                PurposeCodesList gotten = await client.GetPaymentPurposeCodes("CNY");
             });
         }
 

@@ -8,7 +8,7 @@ namespace CurrencyCloud.Entity
 
         public string Currency { get; set; }
 
-        public int EntityType { get; set; }
+        public string EntityType { get; set; }
 
         public string PurposeCode { get; set; }
 

@@ -533,7 +533,7 @@
           "query": "?currency=CNY",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.2.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.3"
           }
         },
         "response": {

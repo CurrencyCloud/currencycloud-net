@@ -1095,6 +1095,7 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="currency">Currency to get the purpose codes for</param>
         /// <param name="entityType">Optional: entity (individual or company)</param>
+        /// <param name="bankAccountCountry">Optional: bank account country</param>
         /// <returns>Asynchronous task, which returns the list purpose codes.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
