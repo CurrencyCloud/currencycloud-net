@@ -530,7 +530,7 @@
         "request": {
           "method": "GET",
           "path": "/v2/reference/payment_purpose_codes",
-          "query": "?currency=CNY",
+          "query": "?currency=CNY&bank_account_country=CN",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.3"
@@ -549,7 +549,8 @@
                 "currency": "INR",
                 "entity_type": "Company",
                 "purpose_code": "delivery",
-                "purpose_description": "Delivery fees for goods"
+                "purpose_description": "Delivery fees for goods",
+                "bank_account_country": "CN"
               }
             ]
           }

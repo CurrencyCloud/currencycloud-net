@@ -1099,12 +1099,12 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list purpose codes.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PurposeCodesList> GetPaymentPurposeCodes(string currency, string entityType = null, string bankAccountCountry = null)
+        public async Task<PurposeCodesList> GetPaymentPurposeCodes(string currency, string bankAccountCountry, string entityType = null)
         {
             var paramsObj = new ParamsObject();
             paramsObj.Add("Currency", currency);
+            paramsObj.Add("BankAccountCountry", bankAccountCountry);
             paramsObj.AddNotNull("EntityType", entityType);
-            paramsObj.AddNotNull("BankAccountCountry", bankAccountCountry);
 
             return await RequestAsync<PurposeCodesList>("/v2/reference/payment_purpose_codes", HttpMethod.Get, paramsObj);
         }
