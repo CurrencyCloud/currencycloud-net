@@ -14,6 +14,8 @@ namespace CurrencyCloud.Entity
 
         public string PurposeDescription { get; set; }
 
+        public string BankAccountCountry { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -23,7 +25,8 @@ namespace CurrencyCloud.Entity
                     Currency,
                     EntityType,
                     PurposeCode,
-                    PurposeDescription
+                    PurposeDescription,
+                    BankAccountCountry
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -41,7 +44,8 @@ namespace CurrencyCloud.Entity
             return Currency == pc.Currency &&
                    EntityType == pc.EntityType &&
                    PurposeCode == pc.PurposeCode &&
-                   PurposeDescription == pc.PurposeDescription;
+                   PurposeDescription == pc.PurposeDescription &&
+                   BankAccountCountry == pc.BankAccountCountry;
         }
 
         public override int GetHashCode()
