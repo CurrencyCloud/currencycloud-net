@@ -83,7 +83,18 @@ namespace CurrencyCloud
             List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
             foreach (KeyValuePair<string, object> param in storage)
             {
-                paramList.Add(new KeyValuePair<string, string>(param.Key, formatValue(param)));
+                if (param.Value is Array)
+                {
+                    foreach (var value in (string[]) param.Value)
+                    {
+                        KeyValuePair<string, object> entry = new KeyValuePair<string, object>(param.Key, value);
+                        paramList.Add(new KeyValuePair<string, string>(param.Key + "[]", formatValue(entry)));
+                    }
+                }
+                else
+                {
+                    paramList.Add(new KeyValuePair<string, string>(param.Key, formatValue(param)));
+                }
             }
             return new FormUrlEncodedContent(paramList);
         }
@@ -123,15 +134,6 @@ namespace CurrencyCloud
             return string.Join("&", storage.Select(param =>
             {
                 string key = param.Key;
-
-                if (param.Value is Array)
-                {
-                    var values = from object item in param.Value as Array
-                                 select key + "[]=" + item.ToString();
-
-                    return string.Join("&", values.ToList());
-                }
-
                 string value;
                 if (param.Value is DateTime)
                 {
