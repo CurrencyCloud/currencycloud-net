@@ -134,6 +134,15 @@ namespace CurrencyCloud
             return string.Join("&", storage.Select(param =>
             {
                 string key = param.Key;
+
+                if (param.Value is Array)
+                {
+                    var values = from object item in param.Value as Array
+                                 select key + "[]=" + item.ToString();
+
+                    return string.Join("&", values.ToList());
+                }
+
                 string value;
                 if (param.Value is DateTime)
                 {
