@@ -98,6 +98,7 @@ namespace CurrencyCloud.Entity
 
         public string PayerId { get; set; }
 
+        [Param]
         public string UniqueRequestId { get; set; }
 
         ///<summary>
