@@ -91,6 +91,7 @@
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
+    <Compile Include="Entity\PaymentAuthorisation.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
     <Compile Include="Entity\PurposeCode.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />
