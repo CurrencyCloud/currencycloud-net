@@ -995,7 +995,7 @@ namespace CurrencyCloud
         {
             return await RequestAsync<PaymentSubmission>("/v2/payments/" + id + "/submission", HttpMethod.Get, null);
         }
-        
+
         /// <summary>
         /// Returns an array of PaymentAuthorisation Objects
         /// </summary>
@@ -1009,11 +1009,9 @@ namespace CurrencyCloud
                 throw new ArgumentException("Payment IDs can not be null");
 
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment_ids);
-           
+
             return await RequestAsync<PaymentAuthorisation[]>("/v2/payments/authorise", HttpMethod.Post, paramsObj);
         }
-        
-        // 
 
         #endregion
 
@@ -1118,14 +1116,14 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the list purpose codes.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PurposeCodesList> GetPaymentPurposeCodes(string currency, string bankAccountCountry, string entityType = null)
+        public async Task<PaymentPurposeCodeList> GetPaymentPurposeCodes(string currency, string bankAccountCountry, string entityType = null)
         {
             var paramsObj = new ParamsObject();
             paramsObj.Add("Currency", currency);
             paramsObj.Add("BankAccountCountry", bankAccountCountry);
             paramsObj.AddNotNull("EntityType", entityType);
 
-            return await RequestAsync<PurposeCodesList>("/v2/reference/payment_purpose_codes", HttpMethod.Get, paramsObj);
+            return await RequestAsync<PaymentPurposeCodeList>("/v2/reference/payment_purpose_codes", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>

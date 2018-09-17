@@ -192,32 +192,6 @@ namespace CurrencyCloud.Tests
                 Assert.IsInstanceOf(typeof(NotFoundException), ex);
             }
         }
-        
-        /// <summary>
-        /// Successfully authorises a payment.
-        /// </summary>
-        [Test]
-        public async Task Authorise()
-        {
-            player.Play("Authorise");
 
-            var payment1 = Payments.Payment1;
-            var authorisation1 = Payments.Authorisation1;
-
-            Payment created = await CreatePayment(payment1);
-            
-            var authoriserCredentials = Authentication.AuthorisePaymentCredentials;
-            
-            // Login as different user - Authorise user
-            var logged_in_authoriser = await client.InitializeAsync(Authentication.ApiServer, authoriserCredentials.LoginId, authoriserCredentials.ApiKey);
-            
-            // Make a call to the payment.authorise and get the result
-            PaymentAuthorisation[] authorisedPayments =  await client.PaymentAuthorisationAsync(new string[] {created.Id});
-
-            Assert.IsTrue(authorisedPayments[0].Updated);
-            Assert.IsEmpty(authorisedPayments[0].Error);
-            Assert.AreEqual(created.Id, authorisedPayments[0].PaymentId);
-            Assert.AreEqual(authorisedPayments[0], authorisation1);
-        }
     }
 }

@@ -3,9 +3,9 @@ using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity.List
 {
-    public class PurposeCodesList
+    public class PaymentPurposeCodeList
     {
-        internal PurposeCodesList() { }
+        internal PaymentPurposeCodeList() { }
 
         public List<PaymentPurposeCode> PurposeCodes { get; set; }
 

@@ -84,7 +84,7 @@
     <Compile Include="Entity\Find\VirtualAccountFindParameters.cs" />
     <Compile Include="Entity\Iban.cs" />
     <Compile Include="Entity\List\PayerDetailsList.cs" />
-    <Compile Include="Entity\List\PurposeCodesList.cs" />
+    <Compile Include="Entity\List\PaymentPurposeCodesList.cs" />
     <Compile Include="Entity\Pagination\PaginatedConversionProfitAndLosses.cs" />
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
@@ -92,8 +92,8 @@
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
     <Compile Include="Entity\PaymentAuthorisation.cs" />
+    <Compile Include="Entity\PaymentPurposeCode.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
-    <Compile Include="Entity\PurposeCode.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />
     <Compile Include="Entity\SettlementAccount.cs" />
     <Compile Include="Entity\Currency.cs" />
@@ -141,12 +141,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\packages\NuGet.Build.Tasks.Pack.4.7.0\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\packages\NuGet.Build.Tasks.Pack.4.7.0\build\NuGet.Build.Tasks.Pack.targets')" />
+  <Import Project="..\packages\NuGet.Build.Tasks.Pack.4.8.0\build\NuGet.Build.Tasks.Pack.targets" Condition="Exists('..\packages\NuGet.Build.Tasks.Pack.4.8.0\build\NuGet.Build.Tasks.Pack.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NuGet.Build.Tasks.Pack.4.7.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Tasks.Pack.4.7.0\build\NuGet.Build.Tasks.Pack.targets'))" />
+    <Error Condition="!Exists('..\packages\NuGet.Build.Tasks.Pack.4.8.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Tasks.Pack.4.8.0\build\NuGet.Build.Tasks.Pack.targets'))" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
