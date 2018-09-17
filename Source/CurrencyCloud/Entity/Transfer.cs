@@ -45,6 +45,7 @@ namespace CurrencyCloud.Entity
 
         public string CreatorContactId { get; set; }
 
+        [Param]
         public string Reason { get; set; }
 
         public string ToJSON()

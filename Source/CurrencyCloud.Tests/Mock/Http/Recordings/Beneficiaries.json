@@ -57,7 +57,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/beneficiaries/validate",
-          "body": "?bank_country=GB&currency=GBP&beneficiary_country=GB&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200605",
+          "body": "?payment_types[]=regular&payment_types[]=priority&bank_country=GB&currency=GBP&beneficiary_country=GB&account_number=13071472&routing_code_type_1=sort_code&routing_code_value_1=200605",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.3"

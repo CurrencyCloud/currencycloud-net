@@ -7,6 +7,8 @@ using CurrencyCloud.Environment;
 using CurrencyCloud.Exception;
 using System.Threading.Tasks;
 
+using System.Collections.Generic;
+
 namespace CurrencyCloud.Tests
 {
     [TestFixture]
@@ -50,7 +52,8 @@ namespace CurrencyCloud.Tests
                 Currency = "GBP",
                 AccountNumber = "13071472",
                 RoutingCodeType1 = "sort_code",
-                RoutingCodeValue1 = "200605"
+                RoutingCodeValue1 = "200605",
+                PaymentTypes = new string[] { "regular", "priority" }
             });
 
             Assert.IsNull(validated.Id);
