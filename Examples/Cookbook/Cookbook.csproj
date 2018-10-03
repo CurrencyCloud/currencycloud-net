@@ -34,8 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CurrencyCloud, Version=2.2.1.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\CurrencyCloud.2.4.3\lib\net45\CurrencyCloud.dll</HintPath>
+    <Reference Include="CurrencyCloud, Version=2.4.4.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\CurrencyCloud.2.4.4\lib\net45\CurrencyCloud.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
