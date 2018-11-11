@@ -1,22 +1,23 @@
 <?xml version="1.0"?>
 <package>
-  <metadata>
-    <id>CurrencyCloud</id>
-    <version>2.4.4</version>
-    <title>Currencycloud Client Library</title>
-    <authors>Currencycloud</authors>
-    <owners>Currencycloud</owners>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <projectUrl>https://github.com/CurrencyCloud/currencycloud-net</projectUrl>
-    <description>The client library which implements Currencycloud's APIs.</description>
-    <summary>The SDK library for v2 of Currencycloud's APIs.</summary>
-    <copyright>Copyright (c) 2015-2018 Currencycloud</copyright>
-    <tags>Currencycloud API Client</tags>
-    <releaseNotes></releaseNotes>
-    <dependencies>
-   <group targetFramework="net45">
-      <dependency id="Newtonsoft.Json" version="11.0.2" />
-   </group>
-</dependencies>
-  </metadata>
+    <metadata>
+        <id>CurrencyCloud</id>
+        <version>2.4.5</version>
+        <title>Currencycloud Client Library</title>
+        <authors>Currencycloud</authors>
+        <owners>Currencycloud</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <projectUrl>https://github.com/CurrencyCloud/currencycloud-net</projectUrl>
+        <description>The client library which implements Currencycloud's APIs.</description>
+        <summary>The SDK library for v2 of Currencycloud's APIs.</summary>
+        <copyright>Copyright (c) 2015-2018 Currencycloud</copyright>
+        <tags>Currencycloud API Client</tags>
+        <releaseNotes></releaseNotes>
+        <dependencies>
+            <group targetFramework="net45">
+                <dependency id="Newtonsoft.Json" version="11.0.2" />
+                <dependency id="Polly" version="6.1.0" />
+            </group>
+        </dependencies>
+    </metadata>
 </package>
