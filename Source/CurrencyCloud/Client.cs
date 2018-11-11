@@ -1015,6 +1015,18 @@ namespace CurrencyCloud
             return await RequestAsync<PaymentAuthorisation[]>("/v2/payments/authorise", HttpMethod.Post, paramsObj);
         }
 
+        /// <summary>
+        /// Returns an object containing the confirmation details of a payment.
+        /// </summary>
+        /// <param name="id">Id of payment.</param>
+        /// <returns>Asynchronous task, which returns the confirmation details of a payment.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentConfirmation> GetPaymentConfirmationAsync(string id)
+        {
+            return await RequestAsync<PaymentConfirmation>("/v2/payments/" + id + "/confirmation", HttpMethod.Get, null);
+        }
+
         #endregion
 
         #region Rates
