@@ -57,7 +57,7 @@
       {
         "request": {
           "method": "GET",
-          "path": "/v2/ibans",
+          "path": "/v2/ibans/find",
           "query": "?currency=EUR",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
@@ -108,7 +108,7 @@
       {
         "request": {
           "method": "GET",
-          "path": "/v2/ibans",
+          "path": "/v2/ibans/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"

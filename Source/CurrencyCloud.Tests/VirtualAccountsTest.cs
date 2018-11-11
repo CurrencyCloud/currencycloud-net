@@ -48,7 +48,27 @@ namespace CurrencyCloud.Tests
 
             PaginatedVirtualAccounts found = await client.FindVirtualAccountsAsync();
 
-            Console.WriteLine("Found: " + found.VirtualAccounts[0]);
+            Assert.AreEqual(van.Id, found.VirtualAccounts[0].Id);
+            Assert.AreEqual(van.VirtualAccountNumber, found.VirtualAccounts[0].VirtualAccountNumber);
+            Assert.AreEqual(van.AccountId, found.VirtualAccounts[0].AccountId);
+            Assert.AreEqual(van.AccountHolderName, found.VirtualAccounts[0].AccountHolderName);
+            Assert.AreEqual(van.BankInstitutionName, found.VirtualAccounts[0].BankInstitutionName);
+            Assert.AreEqual(van.BankInstitutionAddress, found.VirtualAccounts[0].BankInstitutionAddress);
+            Assert.AreEqual(van.BankInstitutionCountry, found.VirtualAccounts[0].BankInstitutionCountry);
+            Assert.AreEqual(van.RoutingCode, found.VirtualAccounts[0].RoutingCode);
+        }
+
+        /// <summary>
+        /// Successfully gets authenticating user's account VANS.
+        /// </summary>
+        [Test]
+        public async Task Get()
+        {
+            player.Play("Get");
+
+            var van = VirtualAccounts.Van1;
+
+            PaginatedVirtualAccounts found = await client.GetVirtualAccountsAsync();
 
             Assert.AreEqual(van.Id, found.VirtualAccounts[0].Id);
             Assert.AreEqual(van.VirtualAccountNumber, found.VirtualAccounts[0].VirtualAccountNumber);
@@ -72,8 +92,6 @@ namespace CurrencyCloud.Tests
 
             PaginatedVirtualAccounts found = await client.FindSubAccountsVirtualAccountsAsync(new FindParameters());
 
-            Console.WriteLine("Found: " + found.VirtualAccounts[0]);
-
             Assert.AreEqual(van.Id, found.VirtualAccounts[0].Id);
             Assert.AreEqual(van.VirtualAccountNumber, found.VirtualAccounts[0].VirtualAccountNumber);
             Assert.AreEqual(van.AccountId, found.VirtualAccounts[0].AccountId);
@@ -95,8 +113,6 @@ namespace CurrencyCloud.Tests
             var van = VirtualAccounts.Van1;
 
             PaginatedVirtualAccounts found = await client.GetSubAccountVirtualAccountsAsync(van.Id);
-
-            Console.WriteLine("Found: " + found.VirtualAccounts[0]);
 
             Assert.AreEqual(van.Id, found.VirtualAccounts[0].Id);
             Assert.AreEqual(van.VirtualAccountNumber, found.VirtualAccounts[0].VirtualAccountNumber);
