@@ -62,15 +62,40 @@ namespace CurrencyCloud.Tests.Mock.Data
             SubmissionRef = "MXGGYAGJULIIQKDV"
         };
 
-        public static readonly Entity.PaymentAuthorisation Authorisation1 = new Entity.PaymentAuthorisation
+        public static readonly Entity.List.PaymentAuthorisationsList.Authorisation Authorisation1 =
+            new Entity.List.PaymentAuthorisationsList.Authorisation
         {
-            PaymentId = "855fa573-1ace-4da2-a55b-912f10103055",
-            PaymentStatus = "ready_to_send",
+            PaymentId = "8e3aeeb8-deeb-4665-96de-54b880a953ac",
+            PaymentStatus = "authorised",
+            Updated = false,
+            Error = "",
+            AuthStepsTaken = 1,
+            AuthStepsRequired = 1,
+            ShortReference = "180802-YKGDVV001"
+        };
+
+        public static readonly Entity.List.PaymentAuthorisationsList.Authorisation Authorisation2 =
+            new Entity.List.PaymentAuthorisationsList.Authorisation
+        {
+            PaymentId = "f16cafe4-1f8f-472e-99d9-8c828918d4f8",
+            PaymentStatus = "authorised",
             Updated = true,
             Error = "",
-            AuthStepsTaken = 3,
+            AuthStepsTaken = 1,
             AuthStepsRequired = 0,
-            ShortReference = ""
+            ShortReference = "180802-BXXTBP001"
+        };
+
+        public static readonly Entity.List.PaymentAuthorisationsList.Authorisation Authorisation3 =
+            new Entity.List.PaymentAuthorisationsList.Authorisation
+        {
+            PaymentId = "d025f90f-a23c-46f9-979a-35a9f98d9491",
+            PaymentStatus = "authorised",
+            Updated = false,
+            Error = "",
+            AuthStepsTaken = 1,
+            AuthStepsRequired = 1,
+            ShortReference = "180802-ZVTTLF001"
         };
 
         public static readonly Entity.PaymentConfirmation Confirmation1 = new Entity.PaymentConfirmation

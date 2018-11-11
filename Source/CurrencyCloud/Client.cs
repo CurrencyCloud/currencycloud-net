@@ -166,7 +166,9 @@ namespace CurrencyCloud
 
             Func<Task<TResult>> requestAsyncDelegate = async () =>
             {
-                Debug.WriteLine(httpClient.BaseAddress + " " + method.Method + " -> " + requestUri);
+                Debug.WriteLine("UTC: {0} - HTTP {1} Request - {2}{3}?{4}",
+                    DateTime.UtcNow, method.Method, httpClient.BaseAddress.ToString().TrimEnd('/'), path, paramsObj.ToQueryString());
+
                 HttpRequestMessage httpRequestMessage = null;
                 if (method == HttpMethod.Get)
                 {
@@ -181,7 +183,7 @@ namespace CurrencyCloud
                 }
 
                 if (Retry.Enabled)
-                    Debug.WriteLine("[Retrying request] - Retries: {0}, MinWait: {1}, MaxWait: {2}, Jitter: {3}",
+                    Debug.WriteLine("Retrying request - Retries: {0} | MinWait: {1} | MaxWait: {2} | Jitter: {3}]",
                         Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
 
                 HttpResponseMessage res = Retry.Enabled ?
@@ -192,6 +194,7 @@ namespace CurrencyCloud
                 if (res.IsSuccessStatusCode)
                 {
                     string resString = await res.Content.ReadAsStringAsync();
+                    Debug.WriteLine("UTC: {0} - HTTP Response: {1}", DateTime.UtcNow, resString);
 
                     var serializerSettings = new JsonSerializerSettings()
                     {
@@ -1005,14 +1008,15 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns an array of PaymentAuthorisation Objects</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentAuthorisation[]> PaymentAuthorisationAsync(string[] payment_ids)
+        public async Task<PaymentAuthorisationsList> PaymentAuthorisationAsync(string[] paymentIds)
         {
-            if (payment_ids.Length < 1)
+            if (paymentIds.Length < 1)
                 throw new ArgumentException("Payment IDs can not be null");
 
-            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment_ids);
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("PaymentIds", paymentIds);
 
-            return await RequestAsync<PaymentAuthorisation[]>("/v2/payments/authorise", HttpMethod.Post, paramsObj);
+            return await RequestAsync<PaymentAuthorisationsList>("/v2/payments/authorise", HttpMethod.Post, paramsObj);
         }
 
         /// <summary>
