@@ -28,6 +28,27 @@ namespace CurrencyCloud.Entity
 
         public DateTime? UpdatedAt { get; set; }
 
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    Amount,
+                    Currency,
+                    AdditionalInformation,
+                    ValueDate,
+                    Sender,
+                    ReceivingAccountNumber,
+                    ReceivingAccountIban,
+                    CreatedAt,
+                    UpdatedAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is SenderDetails))
