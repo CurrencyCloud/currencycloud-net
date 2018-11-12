@@ -1354,6 +1354,18 @@ namespace CurrencyCloud
             return await RequestAsync<PaginatedTransactions>("/v2/transactions/find", HttpMethod.Get, optional);
         }
 
+        /// <summary>
+        /// Get Sender Details.
+        /// </summary>
+        /// <param name="id">Id of the requested transaction.</param>
+        /// <returns>Asynchronous task, which returns details of the sender of funds.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<SenderDetails> GetSenderDetailsAsync(string id)
+        {
+            return await RequestAsync<SenderDetails>("/v2/transactions/sender/" + id, HttpMethod.Get, null);
+        }
+
         #endregion
 
         #region Transfers

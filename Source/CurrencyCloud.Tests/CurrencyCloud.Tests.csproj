@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="IbansTest.cs" />
     <Compile Include="Mock\Data\Ibans.cs" />
+    <Compile Include="Mock\Data\Transactions.cs" />
     <Compile Include="Mock\Data\Transfers.cs" />
     <Compile Include="Mock\Data\VirtualAccounts.cs" />
     <Compile Include="PaymentsTest.cs" />

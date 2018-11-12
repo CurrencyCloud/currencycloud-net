@@ -36,28 +36,6 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully gets a transaction.
-        /// </summary>
-        [Test]
-        public async Task Get()
-        {
-            player.Play("Get");
-
-            var conversion1 = Conversions.Conversion1;
-
-            Conversion conversion = await client.CreateConversionAsync(conversion1);
-            PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
-            {
-                Order = "created_at",
-                OrderAscDesc = FindParameters.OrderDirection.Desc,
-                PerPage = 5
-            });
-            Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
-
-            Assert.AreEqual(found.Transactions[0].ToJSON(), gotten.ToJSON());
-        }
-
-        /// <summary>
         /// Successfully finds a transaction with search parameters.
         /// </summary>
         [Test]
@@ -94,6 +72,49 @@ namespace CurrencyCloud.Tests
 
             Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
             Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);
+        }
+
+        /// <summary>
+        /// Successfully gets a transaction.
+        /// </summary>
+        [Test]
+        public async Task Get()
+        {
+            player.Play("Get");
+
+            var conversion1 = Conversions.Conversion1;
+
+            Conversion conversion = await client.CreateConversionAsync(conversion1);
+            PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
+            {
+                Order = "created_at",
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
+                PerPage = 5
+            });
+            Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
+
+            Assert.AreEqual(found.Transactions[0].ToJSON(), gotten.ToJSON());
+        }
+
+        /// <summary>
+        /// Successfully gets details of the sender of funds.
+        /// </summary>
+        [Test]
+        public async Task GetSenderDetails()
+        {
+            player.Play("GetSenderDetails");
+
+            var senderDetails = Transactions.SenderDetails1;
+
+            PaginatedTransactions found = await client.FindTransactionsAsync(new TransactionFindParameters
+            {
+                Order = "created_at",
+                OrderAscDesc = FindParameters.OrderDirection.Desc,
+                PerPage = 5
+            });
+            SenderDetails gotten = await client.GetSenderDetailsAsync(found.Transactions[0].Id);
+
+            Assert.AreEqual(senderDetails, gotten);
         }
     }
 }

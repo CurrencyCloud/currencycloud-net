@@ -95,6 +95,7 @@
     <Compile Include="Entity\PaymentConfirmation.cs" />
     <Compile Include="Entity\PaymentPurposeCode.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
+    <Compile Include="Entity\SenderDetails.cs" />
     <Compile Include="Entity\SettlementEntry.cs" />
     <Compile Include="Entity\SettlementAccount.cs" />
     <Compile Include="Entity\Currency.cs" />
