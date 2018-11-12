@@ -74,5 +74,14 @@ namespace CurrencyCloud.Entity
         {
             return Id.GetHashCode();
         }
+
+        public sealed class SettlementEntry
+        {
+            internal SettlementEntry() { }
+
+            public decimal SendAmount { get; set; }
+
+            public decimal ReceiveAmount { get; set; }
+        }
     }
 }
