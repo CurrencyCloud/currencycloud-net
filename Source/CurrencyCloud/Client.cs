@@ -1208,6 +1208,64 @@ namespace CurrencyCloud
 
         #endregion
 
+        #region Reports
+
+        /// <summary>
+        /// Finds report requests matching the given search criteria.
+        /// </summary>
+        /// <param name="parameters">Find parameters</param>
+        /// <returns>Asynchronous task, which returns  the list of the report requests, as well as pagination information.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaginatedReportRequests> FindReportRequestsAsync(ReportRequestFindParameters parameters = null)
+        {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
+
+            return await RequestAsync<PaginatedReportRequests>("/v2/reports/report_requests/find", HttpMethod.Get, optional);
+        }
+
+        /// <summary>
+        /// Gets details of the specified report request.
+        /// </summary>
+        /// <param name="id">Id of the requested report.</param>
+        /// <returns>Asynchronous task, which returns the requested transaction.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ReportRequest> GetReportRequestAsync(string id)
+        {
+            return await RequestAsync<ReportRequest>("/v2/reports/report_requests/" + id, HttpMethod.Get, null);
+        }
+
+        /// <summary>
+        /// Creates a new Conversion Report.
+        /// </summary>
+        /// <param name="parameters">Parameters for new Report</param>
+        /// <returns>Asynchronous task, which returns newly created conversion.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ReportRequest> CreateConversionReportAsync(ReportParameters parameters = null)
+        {
+            var paramsObj = ParamsObject.CreateFromStaticObject(parameters);
+
+            return await RequestAsync<ReportRequest>("/v2/reports/conversions/create", HttpMethod.Post, paramsObj);
+        }
+
+        /// <summary>
+        /// Creates a new Payment Report.
+        /// </summary>
+        /// <param name="parameters">Parameters for new Report</param>
+        /// <returns>Asynchronous task, which returns newly created conversion.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<ReportRequest> CreatePaymentReportAsync(ReportParameters parameters = null)
+        {
+            var paramsObj = ParamsObject.CreateFromStaticObject(parameters);
+
+            return await RequestAsync<ReportRequest>("/v2/reports/payments/create", HttpMethod.Post, paramsObj);
+        }
+
+        #endregion
+
         #region Settlements
 
         /// <summary>
