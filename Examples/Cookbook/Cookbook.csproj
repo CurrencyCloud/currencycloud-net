@@ -42,7 +42,7 @@
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc">
-      <HintPath>..\packages\Polly.6.1.0\lib\netstandard1.1\Polly.dll</HintPath>
+      <HintPath>..\packages\Polly.6.1.1\lib\netstandard1.1\Polly.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Core" />
