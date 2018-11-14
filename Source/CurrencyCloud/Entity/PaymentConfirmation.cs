@@ -26,6 +26,26 @@ namespace CurrencyCloud.Entity
 
         public DateTime? ExpiresAt { get; set; }
 
+        public string ToJSON()
+        {
+            var obj = new[]
+            {
+                new
+                {
+                    Id,
+                    PaymentId,
+                    AccountId,
+                    ShortReference,
+                    Status,
+                    ConfirmationUrl,
+                    CreatedAt,
+                    UpdatedAt,
+                    ExpiresAt
+                }
+            };
+            return JsonConvert.SerializeObject(obj);
+        }
+
         public override bool Equals(object obj)
         {
             if (!(obj is PaymentConfirmation))
