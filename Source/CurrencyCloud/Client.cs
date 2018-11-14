@@ -166,7 +166,13 @@ namespace CurrencyCloud
 
             Func<Task<TResult>> requestAsyncDelegate = async () =>
             {
-                Debug.WriteLine(httpClient.BaseAddress + " " + method.Method + " -> " + requestUri);
+                Debug.WriteLine("[UTC:" + DateTime.UtcNow +
+                                "][URL:" + httpClient.BaseAddress +
+                                "][Verb:" + method.Method +
+                                "][Path:" + path +
+                                "][Parameters:" + paramsObj.ToQueryString() +
+                                "]");
+
                 HttpRequestMessage httpRequestMessage = null;
                 if (method == HttpMethod.Get)
                 {
