@@ -456,6 +456,11 @@ namespace CurrencyCloud
             return await RequestAsync<Beneficiary>("/v2/beneficiaries/validate", HttpMethod.Post, paramsObj);
         }
 
+        /// <summary>
+        /// ValidateBeneficiaryAsync is deprecated, please use ValidateBeneficiaryAsync instead
+        /// </summary>
+        /// <param name="validateParameters"></param>
+        /// <returns></returns>
         [Obsolete("Method ValidateBeneficiaryAsync(BeneficiaryValidateParameters) is deprecated. Use ValidateBeneficiaryAsync(Beneficiary) instead", false)]
         public async Task<Beneficiary> ValidateBeneficiaryAsync(BeneficiaryValidateParameters validateParameters)
         {
@@ -660,7 +665,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Quotes cost of cancelling conversion identified by the provided unique id.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being quoted</param>
+        /// <param name="conversionCancellationQuote">Object holding the Id of the conversion that is being quoted</param>
         /// <returns>Asynchronous task, which returns the details of the cancelled conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -674,8 +679,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Cancels the conversion identified by the provided unique id.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being cancelled</param>
-        /// <param name="notes">Notes describing the reason for cancellation</param>
+        /// <param name="conversionCancellation">Object holding the Id and Notes (optional) of the conversion that is being cancelled</param>
         /// <returns>Asynchronous task, which returns the details of the cancelled conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -693,8 +697,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Returns an object containing the quote for changing the date of the specified conversion.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being changed</param>
-        /// <param name="newSettlementDate">New conversion settlement date</param>
+        /// <param name="conversionDateChange">Object holding the Id and New Settlement Date of the conversion that is being changed</param>
         /// <returns>Asynchronous task, which returns the details of the conversion date change</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -715,8 +718,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Changes the date ofthe conversion identified by the provided unique id.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being changed</param>
-        /// <param name="newSettlementDate">New conversion settlement date</param>
+        /// <param name="conversionDateChange">Object holding the Id and New Settlement Date of the conversion that is being changed</param>
         /// <returns>Asynchronous task, which returns the details of the conversion date change</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -737,8 +739,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Show all changes made to the settlement date of an existing conversion.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being changed</param>
-        /// <returns>Asynchronous task, which returns all changes made to the settlement date of the conversion</returns>
+        /// <param name="conversionDateChangeDetails">Object holding the Id of the conversion that is being changed</param>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<ConversionDateChangeDetails> DateChangeDetailsConversionAsync(Conversion conversionDateChangeDetails)
@@ -751,8 +752,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Previews a conversion split.
         /// </summary>
-        /// <param name="id">Id of the conversion to preview a split</param>
-        /// <param name="amount">The amount at which to split this conversion</param>
+        /// <param name="conversionSplit">Object holding the Id and Amount of the conversion to preview a split</param>
         /// <returns>Asynchronous task, which returns the details of the split conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -774,8 +774,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Splits a conversion.
         /// </summary>
-        /// <param name="id">Id of the conversion that is being splt</param>
-        /// <param name="amount">The amount at which to split this conversion</param>
+        /// <param name="conversionSplit">Object holding the Id and Amount of the conversion to split</param>
         /// <returns>Asynchronous task, which returns the details of the split conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -797,7 +796,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Conversion split history.
         /// </summary>
-        /// <param name="id">Id of the conversion</param>
+        /// <param name="conversionSplit">Object holding the Id of the conversion to query</param>
         /// <returns>Asynchronous task, which returns the split history for a given conversion</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -1007,7 +1006,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Returns an array of PaymentAuthorisation Objects
         /// </summary>
-        /// <param name="payment_ids[]">Payment Ids Array</param>
+        /// <param name="paymentIds">Array of Payment Ids to authorise</param>
         /// <returns>Asynchronous task, which returns an array of PaymentAuthorisation Objects</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>

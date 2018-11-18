@@ -8,9 +8,15 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public ConversionProfitAndLoss() { }
 
+        /// <summary>
+        /// ID of the Account that the Conversion belongs to
+        /// </summary>
         [Param]
         public string AccountId { get; set; }
 
+        /// <summary>
+        /// ID of the Contact that did the cancellation
+        /// </summary>
         [Param]
         public string ContactId { get; set; }
 
@@ -18,14 +24,23 @@ namespace CurrencyCloud.Entity
 
         public string EventContactId { get; set; }
 
+        /// <summary>
+        /// ID of the cancelled conversion
+        /// </summary>
         [Param]
         public string ConversionId { get; set; }
 
+        /// <summary>
+        /// Event type, in this case 'self_service_cancellation'
+        /// </summary>
         [Param]
         public string EventType { get; set; }
 
         public decimal? Amount { get; set; }
 
+        /// <summary>
+        /// The currency of the profit and loss. ISO 4217 standard
+        /// </summary>
         [Param]
         public string Currency { get; set; }
 

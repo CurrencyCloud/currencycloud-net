@@ -22,6 +22,9 @@ namespace CurrencyCloud.Entity
 
         public DateTime? NewConversionDate { get; set; }
 
+        /// <summary>
+        /// New conversion settlement date
+        /// </summary>
         [Param]
         public DateTime? NewSettlementDate { get; set; }
 
