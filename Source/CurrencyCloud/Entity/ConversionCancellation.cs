@@ -23,6 +23,9 @@ namespace CurrencyCloud.Entity
 
         public string ContactId { get; set; }
 
+        /// <summary>
+        /// User-generated notes for cancellation. Freeform text.
+        /// </summary>
         [Param]
         public string Notes { get; set; }
 

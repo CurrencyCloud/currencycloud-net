@@ -20,18 +20,33 @@ namespace CurrencyCloud.Entity
 
         public string ShortReference { get; set; }
 
+        /// <summary>
+        /// Account UUID of the paying account
+        /// </summary>
         [Param]
         public string SourceAccountId { get; set; }
 
+        /// <summary>
+        /// Account UUID of the receiving account
+        /// </summary>
         [Param]
         public string DestinationAccountId { get; set; }
 
+        /// <summary>
+        /// Three-digit currency code
+        /// </summary>
         [Param]
         public string Currency { get; set; }
 
+        /// <summary>
+        /// Amount
+        /// </summary>
         [Param]
         public decimal? Amount { get; set; }
 
+        /// <summary>
+        /// Transfer status
+        /// </summary>
         [Param]
         public string Status { get; set; }
 
@@ -45,6 +60,9 @@ namespace CurrencyCloud.Entity
 
         public string CreatorContactId { get; set; }
 
+        /// <summary>
+        /// User-generated reason for transfer. Freeform text
+        /// </summary>
         [Param]
         public string Reason { get; set; }
 

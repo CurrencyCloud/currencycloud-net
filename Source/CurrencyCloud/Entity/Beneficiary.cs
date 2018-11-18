@@ -7,7 +7,6 @@ namespace CurrencyCloud.Entity
 {
     public class Beneficiary : Entity
     {
-
         public Beneficiary(string bankAccountHolderName, string bankCountry, string currency, string name)
         {
             this.BankAccountHolderName = bankAccountHolderName;
@@ -192,11 +191,14 @@ namespace CurrencyCloud.Entity
         public string Iban { get; set; }
 
         ///<summary>
-        /// boolean
+        /// Set as default beneficiary
         ///</summary>
         [Param]
         public bool? DefaultBeneficiary { get; set; }
 
+        ///<summary>
+        /// UUID of creating Contact
+        ///</summary>
         [Param]
         public string CreatorContactId { get; set; }
 

@@ -73,7 +73,7 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Reason { get; set; }
-        
+
         ///<summary>
         /// Purpose code for payment
         ///</summary>
@@ -98,6 +98,9 @@ namespace CurrencyCloud.Entity
 
         public string PayerId { get; set; }
 
+        /// <summary>
+        /// User-generated idempotency key
+        /// </summary>
         [Param]
         public string UniqueRequestId { get; set; }
 
@@ -114,6 +117,9 @@ namespace CurrencyCloud.Entity
 
         public decimal? FailureReturnedAmount { get; set; }
 
+        /// <summary>
+        /// The name of the ultimate beneficiary if different
+        /// </summary>
         [Param]
         public string UltimateBeneficiaryName { get; set; }
 

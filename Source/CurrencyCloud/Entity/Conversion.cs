@@ -68,9 +68,15 @@ namespace CurrencyCloud.Entity
         [Param]
         public string SellCurrency { get; set; }
 
+        /// <summary>
+        /// Fix the buy or sell currency
+        /// </summary>
         [Param]
         public string FixedSide { get; set; }
 
+        /// <summary>
+        /// Amount of the fixed buy or sell currency
+        /// </summary>
         [Param]
         public decimal? Amount { get; set; }
 
@@ -114,14 +120,23 @@ namespace CurrencyCloud.Entity
 
         public DateTime? UpdatedAt { get; set; }
 
+        /// <summary>
+        /// User-generated idempotency key. Preferably in UUIDv4 format
+        /// </summary>
         [Param]
         public string UniqueRequestId { get; set; }
 
         public decimal? UnallocatedFunds { get; set; }
 
+        /// <summary>
+        /// Indicates agreement to terms and conditions
+        /// </summary>
         [Param]
         public bool? TermAgreement { get; set; }
 
+        /// <summary>
+        /// User-generated reason for payment. Freeform text
+        /// </summary>
         [Param]
         public string Reason { get; set; }
 
