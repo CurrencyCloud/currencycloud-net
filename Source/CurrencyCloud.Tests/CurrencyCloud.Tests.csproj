@@ -46,6 +46,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BackoffRetryTest.cs" />
     <Compile Include="IbansTest.cs" />
     <Compile Include="Mock\Data\Ibans.cs" />
     <Compile Include="Mock\Data\Transfers.cs" />
@@ -98,6 +99,7 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Mock\Http\Recordings\BackoffRetry.json" />
     <Content Include="Mock\Http\Recordings\Ibans.json" />
     <Content Include="Mock\Http\Recordings\Transfers.json" />
     <Content Include="Mock\Http\Recordings\VirtualAccounts.json" />
