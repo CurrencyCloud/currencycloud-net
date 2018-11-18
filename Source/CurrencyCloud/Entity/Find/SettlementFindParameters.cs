@@ -4,7 +4,6 @@ namespace CurrencyCloud.Entity
 {
     public class SettlementFindParameters : FindParameters
     {
-
         ///<summary>
         /// Unique human readable identifier
         ///</summary>

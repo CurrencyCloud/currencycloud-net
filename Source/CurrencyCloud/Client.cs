@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/2.4.5";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/2.7.2";
 
         internal string Token
         {
@@ -58,7 +58,8 @@ namespace CurrencyCloud
             var wait = TimeSpan.FromMilliseconds(min * Math.Pow(2, attempt))
                        + TimeSpan.FromMilliseconds(new Random().Next(jitter));
 
-            Debug.WriteLine("[Backoff] - Waiting {0} ms before retrying. {1} retries left", wait.TotalMilliseconds, Retry.NumRetries - attempt);
+            Debug.WriteLine("UTC: {0} - Backoff & Retry - Waiting {1}ms before retrying. {2} retries left",
+                DateTime.UtcNow, wait.TotalMilliseconds, Retry.NumRetries - attempt);
 
             if (wait.TotalMilliseconds <= min)
                 return TimeSpan.FromMilliseconds(min);
@@ -99,7 +100,8 @@ namespace CurrencyCloud
             .WaitAndRetryAsync(
                 Retry.NumRetries,
                 attempt => backoffWait(attempt, Retry.MinWait, Retry.MaxWait, Retry.Jitter),
-                (err, delay) => Debug.WriteLine("[Retry Policy] - Delaying for {0} ms.", delay.TotalMilliseconds));
+                (err, delay) => Debug.WriteLine("UTC: {0} - Retry Policy - Delaying for {1}ms.",
+                    DateTime.UtcNow, delay.TotalMilliseconds));
 
         #endregion
 
@@ -107,7 +109,7 @@ namespace CurrencyCloud
 
         private async Task<string> AuthorizeAsync()
         {
-            string requestUri = string.Format("/v2/authenticate/api");
+            string requestUri = "/v2/authenticate/api";
 
             ParamsObject authParams = new ParamsObject();
             authParams.Add("login_id", credentials.LoginId);
@@ -119,8 +121,8 @@ namespace CurrencyCloud
             };
 
             if (Retry.Enabled)
-                Debug.WriteLine("[Retrying authentication] - Retries: {0}, MinWait: {1}, MaxWait: {2}, Jitter: {3}",
-                    Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
+                Debug.WriteLine("UTC: {0} - Retrying authentication - Retries: {1}, MinWait: {2}, MaxWait: {3}, Jitter: {4}",
+                    DateTime.UtcNow, Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
 
             HttpResponseMessage res = Retry.Enabled ?
                 await retryPolicy.ExecuteAsync(
@@ -183,8 +185,8 @@ namespace CurrencyCloud
                 }
 
                 if (Retry.Enabled)
-                    Debug.WriteLine("Retrying request - Retries: {0} | MinWait: {1} | MaxWait: {2} | Jitter: {3}]",
-                        Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
+                    Debug.WriteLine("UTC: {0} - Retrying request - Retries: {1}, MinWait: {2}, MaxWait: {3}, Jitter: {4}]",
+                        DateTime.UtcNow, Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
 
                 HttpResponseMessage res = Retry.Enabled ?
                     await retryPolicy.ExecuteAsync(
@@ -196,7 +198,7 @@ namespace CurrencyCloud
                     string resString = await res.Content.ReadAsStringAsync();
                     Debug.WriteLine("UTC: {0} - HTTP Response: {1}", DateTime.UtcNow, resString);
 
-                    var serializerSettings = new JsonSerializerSettings()
+                    var serializerSettings = new JsonSerializerSettings
                     {
                         NullValueHandling = NullValueHandling.Ignore,
                         ContractResolver = new PascalContractResolver()
@@ -374,6 +376,7 @@ namespace CurrencyCloud
         {
             ParamsObject optional = ParamsObject.CreateFromStaticObject(account);
             string id = account.Id;
+
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentException("Account Id cannot be null");
 

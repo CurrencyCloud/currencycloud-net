@@ -8,14 +8,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             "development@currencycloud.com",
             "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         );
-        
-        public static readonly Credentials AuthorisePaymentCredentials = new Credentials(
-            "development_authorisor@currencycloud.com",
-            "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
-        );
-        
 
         public static readonly ApiServer ApiServer = ApiServer.Mock;
-
-}
+    }
 }
