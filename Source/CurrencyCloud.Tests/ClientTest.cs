@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace CurrencyCloud.Tests
 {
     [TestFixture]
-    public class ClientTest
+    class ClientTest
     {
         Client client = new Client();
         Player player = new Player("../../Mock/Http/Recordings/Client.json");

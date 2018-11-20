@@ -45,6 +45,5 @@ namespace CurrencyCloud.Entity
         {
             return Mt103.GetHashCode();
         }
-
     }
 }

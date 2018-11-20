@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NUnit.Framework;
 using CurrencyCloud.Entity;
+using CurrencyCloud.Entity.List;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
@@ -142,6 +143,26 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Authorises a payment in awaiting_authorisation state.
+        /// </summary>
+        [Test]
+        public async Task Authorise()
+        {
+            player.Play("Authorise");
+
+            PaymentAuthorisationsList gotten = await client.PaymentAuthorisationAsync( new []
+            {
+                "8e3aeeb8-deeb-4665-96de-54b880a953ac",
+                "f16cafe4-1f8f-472e-99d9-8c828918d4f8",
+                "d025f90f-a23c-46f9-979a-35a9f98d9491"
+            });
+
+            Assert.AreEqual(gotten.Authorisations[0], Payments.Authorisation1);
+            Assert.AreEqual(gotten.Authorisations[1], Payments.Authorisation2);
+            Assert.AreEqual(gotten.Authorisations[2], Payments.Authorisation3);
+        }
+
+        /// <summary>
         /// Successfully finds a payment with search paramaters.
         /// </summary>
         [Test]
@@ -209,6 +230,5 @@ namespace CurrencyCloud.Tests
                 Assert.IsInstanceOf(typeof(NotFoundException), ex);
             }
         }
-
     }
 }

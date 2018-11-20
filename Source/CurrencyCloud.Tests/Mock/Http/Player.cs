@@ -19,7 +19,7 @@ namespace CurrencyCloud.Tests.Mock.Http
         {
             recordingsSet = new Dictionary<string, Queue>();
 
-            string baseDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
             var recs = File.ReadAllText(baseDirectory + path);
             foreach (var rec in JArray.Parse(recs))
             {
@@ -46,7 +46,7 @@ namespace CurrencyCloud.Tests.Mock.Http
             listener.Prefixes.Add(baseUrl.EndsWith("/") ? baseUrl : baseUrl + "/");
             listener.Start();
 
-            Task.Factory.StartNew(() =>
+            Task.Run(() =>
             {
                 while (listener.IsListening)
                 {

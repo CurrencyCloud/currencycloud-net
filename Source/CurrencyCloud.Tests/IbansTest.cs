@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;

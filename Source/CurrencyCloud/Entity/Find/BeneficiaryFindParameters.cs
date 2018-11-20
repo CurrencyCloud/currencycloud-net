@@ -4,7 +4,6 @@ namespace CurrencyCloud.Entity
 {
     public class BeneficiaryFindParameters : FindParameters
     {
-
         ///<summary>
         /// Bank account holder's name
         ///</summary>
@@ -133,6 +132,5 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Scope { get; set; }
-
     }
 }
