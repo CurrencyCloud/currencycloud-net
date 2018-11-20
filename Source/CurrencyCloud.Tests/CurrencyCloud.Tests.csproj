@@ -48,9 +48,12 @@
   <ItemGroup>
     <Compile Include="IbansTest.cs" />
     <Compile Include="Mock\Data\Ibans.cs" />
+    <Compile Include="Mock\Data\ReportRequests.cs" />
+    <Compile Include="Mock\Data\Transactions.cs" />
     <Compile Include="Mock\Data\Transfers.cs" />
     <Compile Include="Mock\Data\VirtualAccounts.cs" />
     <Compile Include="PaymentsTest.cs" />
+    <Compile Include="ReportRequestsTest.cs" />
     <Compile Include="TransactionsTest.cs" />
     <Compile Include="SettlementsTest.cs" />
     <Compile Include="ReferenceTest.cs" />
@@ -99,6 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Mock\Http\Recordings\Ibans.json" />
+    <Content Include="Mock\Http\Recordings\ReportRequests.json" />
     <Content Include="Mock\Http\Recordings\Transfers.json" />
     <Content Include="Mock\Http\Recordings\VirtualAccounts.json" />
   </ItemGroup>

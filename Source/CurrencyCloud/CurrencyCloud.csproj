@@ -40,7 +40,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Polly, Version=6.0.0.0, Culture=neutral, PublicKeyToken=c8a3ffc3f8f825cc">
-      <HintPath>..\packages\Polly.6.1.0\lib\netstandard1.1\Polly.dll</HintPath>
+      <HintPath>..\packages\Polly.6.1.1\lib\netstandard1.1\Polly.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -78,6 +78,7 @@
     <Compile Include="Entity\Find\FindParameters.cs" />
     <Compile Include="Entity\Find\IbanFindParameters.cs" />
     <Compile Include="Entity\Find\PaymentFindParameters.cs" />
+    <Compile Include="Entity\Find\ReportRequestFindParameters.cs" />
     <Compile Include="Entity\Find\SettlementFindParameters.cs" />
     <Compile Include="Entity\Find\TransactionFindParameters.cs" />
     <Compile Include="Entity\Find\TransferFindParameters.cs" />
@@ -87,14 +88,18 @@
     <Compile Include="Entity\List\PaymentPurposeCodesList.cs" />
     <Compile Include="Entity\Pagination\PaginatedConversionProfitAndLosses.cs" />
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
+    <Compile Include="Entity\Pagination\PaginatedReportRequests.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
     <Compile Include="Entity\PaymentAuthorisation.cs" />
+    <Compile Include="Entity\PaymentConfirmation.cs" />
     <Compile Include="Entity\PaymentPurposeCode.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
-    <Compile Include="Entity\SettlementEntry.cs" />
+    <Compile Include="Entity\ReportParameters.cs" />
+    <Compile Include="Entity\ReportRequest.cs" />
+    <Compile Include="Entity\SenderDetails.cs" />
     <Compile Include="Entity\SettlementAccount.cs" />
     <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\Account.cs" />

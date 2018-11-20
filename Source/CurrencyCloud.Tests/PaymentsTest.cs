@@ -125,6 +125,23 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully gets a confirmation for a payment.
+        /// </summary>
+        [Test]
+        public async Task GetConfirmation()
+        {
+            player.Play("GetConfirmation");
+
+            var payment1 = Payments.Payment1;
+            var confirmation1 = Payments.Confirmation1;
+
+            Payment created = await CreatePayment(payment1);
+            PaymentConfirmation gotten = await client.GetPaymentConfirmationAsync(created.Id);
+
+            Assert.AreEqual(gotten, confirmation1);
+        }
+
+        /// <summary>
         /// Successfully finds a payment with search paramaters.
         /// </summary>
         [Test]

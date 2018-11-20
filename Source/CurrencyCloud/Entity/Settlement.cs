@@ -74,5 +74,48 @@ namespace CurrencyCloud.Entity
         {
             return Id.GetHashCode();
         }
+
+        public sealed class SettlementEntry
+        {
+            internal SettlementEntry() { }
+
+            public decimal SendAmount { get; set; }
+
+            public decimal ReceiveAmount { get; set; }
+
+            public string ToJSON()
+            {
+                var obj = new[]
+                {
+                    new
+                    {
+                        SendAmount,
+                        ReceiveAmount
+                    }
+                };
+                return JsonConvert.SerializeObject(obj);
+            }
+
+            public override bool Equals(object obj)
+            {
+                if (!(obj is SettlementEntry))
+                {
+                    return false;
+                }
+
+                var entry = obj as SettlementEntry;
+
+                return SendAmount == entry.SendAmount &&
+                       ReceiveAmount == entry.ReceiveAmount;
+            }
+
+            public override int GetHashCode()
+            {
+                unchecked
+                {
+                    return (SendAmount.GetHashCode() * 397) ^ ReceiveAmount.GetHashCode();
+                }
+            }
+        }
     }
 }

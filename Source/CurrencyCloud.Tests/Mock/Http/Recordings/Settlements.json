@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -60,7 +60,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -95,7 +95,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -124,7 +124,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -159,7 +159,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -189,7 +189,7 @@
           "query": "?order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -206,8 +206,23 @@
                 "status": "open",
                 "short_reference": "20151101-THMFCD",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+                  "aa4cf362-583a-45ce-a853-d5f9244de565"
+                ],
+                "entries": [
+                  {
+                    "USD": {
+                      "receive_amount": "500.00",
+                      "send_amount": "0.00"
+                    }
+                  },
+                  {
+                    "GBP": {
+                      "receive_amount": "0.00",
+                      "send_amount": "354.64"
+                    }
+                  }
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -217,8 +232,12 @@
                 "status": "open",
                 "short_reference": "20151101-RCVPPH",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+
+                ],
+                "entries": [
+
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -228,8 +247,23 @@
                 "status": "open",
                 "short_reference": "20151101-RCVPPH",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+                  "a32a55e5-2eab-4446-94d1-fd0c737e6b50"
+                ],
+                "entries": [
+                  {
+                    "GBP": {
+                      "receive_amount": "500.00",
+                      "send_amount": "0.00"
+                    }
+                  },
+                  {
+                    "EUR": {
+                      "receive_amount": "0.00",
+                      "send_amount": "354.64"
+                    }
+                  }
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -260,7 +294,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -289,7 +323,7 @@
           "path": "/v2/settlements/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -306,8 +340,23 @@
                 "status": "open",
                 "short_reference": "20151101-THMFCD",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+                  "aa4cf362-583a-45ce-a853-d5f9244de565"
+                ],
+                "entries": [
+                  {
+                    "USD": {
+                      "receive_amount": "500.00",
+                      "send_amount": "0.00"
+                    }
+                  },
+                  {
+                    "GBP": {
+                      "receive_amount": "0.00",
+                      "send_amount": "354.64"
+                    }
+                  }
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -317,8 +366,12 @@
                 "status": "open",
                 "short_reference": "20151101-RCVPPH",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+
+                ],
+                "entries": [
+
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -328,8 +381,23 @@
                 "status": "open",
                 "short_reference": "20151101-RCVPPH",
                 "type": "net",
-                "conversion_ids": [ ],
-                "entries": [ ],
+                "conversion_ids": [
+                  "a32a55e5-2eab-4446-94d1-fd0c737e6b50"
+                ],
+                "entries": [
+                  {
+                    "GBP": {
+                      "receive_amount": "500.00",
+                      "send_amount": "0.00"
+                    }
+                  },
+                  {
+                    "EUR": {
+                      "receive_amount": "0.00",
+                      "send_amount": "354.64"
+                    }
+                  }
+                ],
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00",
                 "released_at": ""
@@ -360,7 +428,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -389,7 +457,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/delete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -418,7 +486,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -454,7 +522,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -503,7 +571,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -533,7 +601,7 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -581,7 +649,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -630,7 +698,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -660,7 +728,7 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -703,7 +771,7 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -738,7 +806,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -787,7 +855,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -817,7 +885,7 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -859,7 +927,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/release",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -907,7 +975,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -956,7 +1024,7 @@
           "body": "?type=net",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -986,7 +1054,7 @@
           "body": "?conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -1028,7 +1096,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/release",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {
@@ -1070,7 +1138,7 @@
           "path": "/v2/settlements/48143aee-0d27-4400-914c-8b417d67884f/unrelease",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.4.5"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/2.7.2"
           }
         },
         "response": {

@@ -5,7 +5,6 @@ namespace CurrencyCloud.Tests.Mock.Data
     static class Payments
     {
         public static readonly Entity.Payment Payment1 = new Entity.Payment(
-
             "EUR",
             "To be filled later",
             10000,
@@ -15,7 +14,7 @@ namespace CurrencyCloud.Tests.Mock.Data
         {
             PaymentType = "regular"
         };
-        public static readonly Entity.Payer Payer1 = new Entity.Payer()
+        public static readonly Entity.Payer Payer1 = new Entity.Payer
         {
             LegalEntityType = "individual",
             CompanyName = "Some Company LLC",
@@ -41,7 +40,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             PaymentType = "regular"
         };
 
-        public static readonly Entity.Payer Payer2 = new Entity.Payer()
+        public static readonly Entity.Payer Payer2 = new Entity.Payer
         {
             LegalEntityType = "individual",
             CompanyName = "Jens enskild firma",
@@ -62,8 +61,8 @@ namespace CurrencyCloud.Tests.Mock.Data
             Mt103 = "{1:F01TCCLGB20AXXX0090000004}{2:I103BARCGB22XXXXN}{4: :20:20180101-ZSYWVY :23B:CRED :32A:160617GBP3000,0 :33B:GBP3000,0 :50K:/150618-00026 PCOMAPNY address New-York Province 555222 GB :53B:/20060513071472 :57C://SC200605 :59:/200605000 First Name Last Name e03036bf6c325dd12c58 London GB :70:test reference Test reason Payment group: 0160617-ZSYWVY :71A:SHA -}",
             SubmissionRef = "MXGGYAGJULIIQKDV"
         };
-        
-        public static readonly Entity.PaymentAuthorisation Authorisation1 = new Entity.PaymentAuthorisation 
+
+        public static readonly Entity.PaymentAuthorisation Authorisation1 = new Entity.PaymentAuthorisation
         {
             PaymentId = "855fa573-1ace-4da2-a55b-912f10103055",
             PaymentStatus = "ready_to_send",
@@ -72,6 +71,19 @@ namespace CurrencyCloud.Tests.Mock.Data
             AuthStepsTaken = 3,
             AuthStepsRequired = 0,
             ShortReference = ""
+        };
+
+        public static readonly Entity.PaymentConfirmation Confirmation1 = new Entity.PaymentConfirmation
+        {
+            Id = "e6b30f2d-0088-4d99-bb47-c6b136fcf447",
+            PaymentId = "855fa573-1ace-4da2-a55b-912f10103055",
+            AccountId = "72970a7c-7921-431c-b95f-3438724ba16f",
+            ShortReference = "PC-2436231-LYODVS",
+            Status = "completed",
+            ConfirmationUrl = "https://ccycloud-reports.example.com/payment_confirmations/404b407a-d143-4497-b5b9-6eb856377e20",
+            CreatedAt = new DateTime(2018, 01, 01, 12, 34, 56),
+            UpdatedAt = new DateTime(2018, 01, 01, 12, 34, 56),
+            ExpiresAt = new DateTime(2018, 01, 03)
         };
     }
 }
