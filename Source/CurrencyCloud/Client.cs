@@ -457,19 +457,6 @@ namespace CurrencyCloud
         }
 
         /// <summary>
-        /// ValidateBeneficiaryAsync is deprecated, please use ValidateBeneficiaryAsync instead
-        /// </summary>
-        /// <param name="validateParameters"></param>
-        /// <returns></returns>
-        [Obsolete("Method ValidateBeneficiaryAsync(BeneficiaryValidateParameters) is deprecated. Use ValidateBeneficiaryAsync(Beneficiary) instead", false)]
-        public async Task<Beneficiary> ValidateBeneficiaryAsync(BeneficiaryValidateParameters validateParameters)
-        {
-            var paramsObj = ParamsObject.CreateFromStaticObject(validateParameters);
-
-            return await RequestAsync<Beneficiary>("/v2/beneficiaries/validate", HttpMethod.Post, paramsObj);
-        }
-
-        /// <summary>
         /// Creates a new beneficiary.
         /// </summary>
         /// <param name="beneficiary">Beneficiary object to be created</param>
