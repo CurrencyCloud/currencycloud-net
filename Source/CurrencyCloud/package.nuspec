@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>CurrencyCloud</id>
-        <version>2.7.2</version>
+        <version>3.0.1</version>
         <title>Currencycloud Client Library</title>
         <authors>Currencycloud</authors>
         <owners>Currencycloud</owners>
