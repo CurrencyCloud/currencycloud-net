@@ -199,13 +199,6 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 
 ### List of features being deprecated
 ```
-As of 2.1.5:
-------------
-Method Client.ValidateBeneficiaryAsync(BeneficiaryValidateParameters)
-Class BeneficiaryValidateParameters
-Class ConversionCreateParameters
-Class DetailedRateParameters
-
 As of 2.7.2:
 ------------
 Method Client.FindSubAccountsIbansAsync(IbanFindParameters)
