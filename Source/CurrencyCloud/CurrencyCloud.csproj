@@ -61,12 +61,10 @@
   <ItemGroup>
     <Compile Include="Client.cs" />
     <Compile Include="Credentials.cs" />
-    <Compile Include="Entity\ConversionCreateParameters.cs" />
     <Compile Include="Entity\ConversionDateChangeDetails.cs" />
     <Compile Include="Entity\ConversionProfitAndLoss.cs" />
     <Compile Include="Entity\ConversionSplitDetails.cs" />
     <Compile Include="Entity\ConversionSplitHistory.cs" />
-    <Compile Include="Entity\DetailedRateParameters.cs" />
     <Compile Include="Entity\DetailedRates.cs" />
     <Compile Include="Entity\Entity.cs" />
     <Compile Include="Entity\Find\AccountFindParameters.cs" />
@@ -85,6 +83,7 @@
     <Compile Include="Entity\Find\VirtualAccountFindParameters.cs" />
     <Compile Include="Entity\Iban.cs" />
     <Compile Include="Entity\List\PayerDetailsList.cs" />
+    <Compile Include="Entity\List\PaymentAuthorisationsList.cs" />
     <Compile Include="Entity\List\PaymentPurposeCodesList.cs" />
     <Compile Include="Entity\Pagination\PaginatedConversionProfitAndLosses.cs" />
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
@@ -93,15 +92,12 @@
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
-    <Compile Include="Entity\PaymentAuthorisation.cs" />
     <Compile Include="Entity\PaymentConfirmation.cs" />
-    <Compile Include="Entity\PaymentPurposeCode.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
     <Compile Include="Entity\ReportParameters.cs" />
     <Compile Include="Entity\ReportRequest.cs" />
     <Compile Include="Entity\SenderDetails.cs" />
     <Compile Include="Entity\SettlementAccount.cs" />
-    <Compile Include="Entity\Currency.cs" />
     <Compile Include="Entity\Account.cs" />
     <Compile Include="Entity\Balance.cs" />
     <Compile Include="Entity\List\BeneficiaryDetailsList.cs" />
@@ -126,7 +122,6 @@
     <Compile Include="Entity\Settlement.cs" />
     <Compile Include="Entity\Transaction.cs" />
     <Compile Include="Entity\Transfer.cs" />
-    <Compile Include="Entity\Validate\BeneficiaryValidateParameters.cs" />
     <Compile Include="Entity\VirtualAccount.cs" />
     <Compile Include="Environment\ApiServer.cs" />
     <Compile Include="Exception\ApiException.cs" />
@@ -140,7 +135,6 @@
     <Compile Include="Entity\ConversionSplit.cs" />
     <Compile Include="Retry.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <None Include="package.nuspec" />
     <None Include="packages.config" />

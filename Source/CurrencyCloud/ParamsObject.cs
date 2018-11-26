@@ -200,6 +200,5 @@ namespace CurrencyCloud
             }
             return value;
         }
-
     }
 }

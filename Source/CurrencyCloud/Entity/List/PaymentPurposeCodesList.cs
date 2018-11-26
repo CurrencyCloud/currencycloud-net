@@ -7,6 +7,15 @@ namespace CurrencyCloud.Entity.List
     {
         internal PaymentPurposeCodeList() { }
 
+        public struct PaymentPurposeCode
+        {
+            public string Currency { get; set; }
+            public string EntityType { get; set; }
+            public string PurposeCode { get; set; }
+            public string PurposeDescription { get; set; }
+            public string BankAccountCountry { get; set; }
+        }
+
         public List<PaymentPurposeCode> PurposeCodes { get; set; }
 
         public string ToJSON()

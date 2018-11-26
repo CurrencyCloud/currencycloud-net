@@ -7,6 +7,16 @@ namespace CurrencyCloud.Entity.List
     {
         internal CurrenciesList() { }
 
+        public struct Currency
+        {
+            public string Code { get; set; }
+            public int DecimalPlaces { get; set; }
+            public string Name { get; set; }
+            public bool OnlineTrading { get; set; }
+            public bool CanBuy { get; set; }
+            public bool CanSell { get; set; }
+        }
+
         public List<Currency> Currencies { get; set; }
 
         public string ToJSON()

@@ -4,7 +4,6 @@ namespace CurrencyCloud.Entity
 {
     public class TransactionFindParameters : FindParameters
     {
-
         ///<summary>
         /// 3 digit ISO 4217 currency code
         ///</summary>
@@ -36,7 +35,7 @@ namespace CurrencyCloud.Entity
         public string Action { get; set; }
 
         /// <summary>
-        /// Related Object type that created the transaction - conversion, payment, inbound_funds 
+        /// Related Object type that created the transaction - conversion, payment, inbound_funds
         /// </summary>
         [Param]
         public string RelatedEntityType { get; set; }
@@ -46,7 +45,7 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string RelatedEntityId { get; set; }
-        
+
         ///<summary>
         /// Server generated unique reference for each related object
         ///</summary>
@@ -70,7 +69,7 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Reason { get; set; }
-        
+
         ///<summary>
         /// ISO 8601 expected processing date
         ///</summary>
@@ -130,7 +129,7 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string CurrencyPair { get; set; }
-        
+
         ///<summary>
         /// Controls the search of transactions at all account levels. Defaults to own.
         /// own: allows to search transactions on the main account

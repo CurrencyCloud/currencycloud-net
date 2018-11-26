@@ -107,12 +107,21 @@ namespace CurrencyCloud.Entity
 
         public string ShortReference { get; set; }
 
+        ///<summary>
+        /// Allows the account to make trades via the Currencycloud API
+        ///</summary>
         [Param]
         public bool? ApiTrading { get; set; }
 
+        ///<summary>
+        /// Allows the account to make trades via Currencycloud Direct
+        ///</summary>
         [Param]
         public bool? OnlineTrading { get; set; }
 
+        ///<summary>
+        /// Allows the account to make trades via phone
+        ///</summary>
         [Param]
         public bool? PhoneTrading { get; set; }
 

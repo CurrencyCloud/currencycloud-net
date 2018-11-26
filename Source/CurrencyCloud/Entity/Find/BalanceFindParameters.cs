@@ -4,7 +4,6 @@ namespace CurrencyCloud.Entity
 {
     public class BalanceFindParameters : FindParameters
     {
-
         ///<summary>
         /// Amount of balances to 2dp
         ///</summary>

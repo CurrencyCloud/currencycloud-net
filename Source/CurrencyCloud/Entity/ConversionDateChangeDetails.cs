@@ -88,6 +88,5 @@ namespace CurrencyCloud.Entity
 
             public string Status { get; set; }
         }
-
     }
 }

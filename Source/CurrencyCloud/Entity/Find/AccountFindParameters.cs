@@ -2,10 +2,9 @@
 {
     public class AccountFindParameters : FindParameters
     {
-
         ///<summary>
         /// Name of the account
-        ///</summary>        
+        ///</summary>
         [Param]
         public string AccountName { get; set; }
 
