@@ -917,52 +917,6 @@
             "event_date_time": "2018-01-01T12:34:56+00:00"
           }
         }
-      },
-      {
-        "request": {
-          "method": "GET",
-          "path": "/v2/conversions/5c4716dc-42dd-4571-b4bf-0aa299fff928/date_change/details",
-          "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
-          }
-        },
-        "response": {
-          "status": 200,
-          "headers": {
-            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
-            "Content-Type": "application/json;charset=utf-8",
-            "X-Request-Id": "2910007472633409851"
-          },
-          "body": {
-            "initial_value_date": "2018-01-01T12:34:56+00:00",
-            "current_value_date": "2018-03-05T12:34:56+00:00",
-            "initial_delivery_date": "2018-01-01T12:34:56+00:00",
-            "current_delivery_date": "2018-03-05T12:34:56+00:00",
-            "total_profit_and_loss": -5.90,
-            "floating_currency": "GBP",
-            "Changes": [
-              {
-                "requested_value_date": "2018-02-02T12:34:56+00:00",
-                "new_value_date": "2018-02-02T12:34:56+00:00",
-                "new_delivery_date": "2018-02-02T12:34:56+00:00",
-                "profit_and_loss": -2.98,
-                "admin_fee": null,
-                "type": "elected_roll",
-                "status": "trade_update_completed"
-              },
-              {
-                "requested_value_date": "2018-03-05T12:34:56+00:00",
-                "new_value_date": "2018-03-05T12:34:56+00:00",
-                "new_delivery_date": "2018-03-05T12:34:56+00:00",
-                "profit_and_loss": "-2.92",
-                "admin_fee": null,
-                "type": "elected_roll",
-                "status": "trade_update_completed"
-              }
-            ]
-          }
-        }
       }
     ]
   },
