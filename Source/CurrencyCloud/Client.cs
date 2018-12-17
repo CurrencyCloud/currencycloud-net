@@ -978,9 +978,11 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the deleted payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> DeletePaymentAsync(string id)
+        public async Task<Payment> DeletePaymentAsync(string id, string purposeCode = null)
         {
-            return await RequestAsync<Payment>("/v2/payments/" + id + "/delete", HttpMethod.Post, null);
+            var optionalParams = new ParamsObject();
+            optionalParams.AddNotNull("PurposeCode", purposeCode);
+            return await RequestAsync<Payment>("/v2/payments/" + id + "/delete", HttpMethod.Post, optionalParams);
         }
 
         /// <summary>
