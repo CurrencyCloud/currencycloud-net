@@ -912,9 +912,14 @@ namespace CurrencyCloud
         /// <returns>Asynchronous task, which returns the requested payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<Payment> GetPaymentAsync(string id)
+        public async Task<Payment> GetPaymentAsync(string id, bool? withDeleted = null, string purposeCode = null, string onBehalfOf = null)
         {
-            return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Get, null);
+            var paramsObject = new ParamsObject();
+            paramsObject.AddNotNull("WithDeleted", withDeleted);
+            paramsObject.AddNotNull("PurposeCode", purposeCode);
+            paramsObject.AddNotNull("OnBehalfOf", onBehalfOf);
+
+            return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Get, paramsObject);
         }
 
         /// <summary>
