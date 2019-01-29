@@ -724,19 +724,6 @@ namespace CurrencyCloud
         }
 
         /// <summary>
-        /// Show all changes made to the settlement date of an existing conversion.
-        /// </summary>
-        /// <param name="conversionDateChangeDetails">Object holding the Id of the conversion that is being changed</param>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<ConversionDateChangeDetails> DateChangeDetailsConversionAsync(Conversion conversionDateChangeDetails)
-        {
-            string id = conversionDateChangeDetails.Id;
-
-            return await RequestAsync<ConversionDateChangeDetails>("/v2/conversions/" + id + "/date_change/details", HttpMethod.Get, null);
-        }
-
-        /// <summary>
         /// Previews a conversion split.
         /// </summary>
         /// <param name="conversionSplit">Object holding the Id and Amount of the conversion to preview a split</param>

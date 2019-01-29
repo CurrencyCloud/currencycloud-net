@@ -211,67 +211,6 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully retrieves all the date changes of a conversion.
-        /// </summary>
-        [Test]
-        public async Task DateChangeDetails()
-        {
-            player.Play("DateChangeDetails");
-            var conversion1 = Conversions.Conversion1;
-
-            Conversion created = await client.CreateConversionAsync(conversion1);
-
-            DateTime firstSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
-            ConversionDateChange firstDateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
-                ConversionId = created.Id,
-                NewSettlementDate = firstSettlementDate
-            });
-
-            DateTime secondSettlementDate = DateTime.Parse("2018-03-05T12:34:56+00:00");
-            ConversionDateChange secondDateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
-                ConversionId = created.Id,
-                NewSettlementDate = secondSettlementDate
-            });
-
-            ConversionDateChangeDetails dateChangeDetails = await client.DateChangeDetailsConversionAsync(new Conversion
-            {
-                Id = created.Id
-            });
-
-            Assert.AreEqual(firstDateChanged.ConversionId, created.Id);
-            Assert.AreEqual(secondDateChanged.ConversionId, firstDateChanged.ConversionId);
-            Assert.AreEqual(firstDateChanged.Currency, created.SellCurrency);
-            Assert.AreEqual(secondDateChanged.Currency, firstDateChanged.Currency);
-            Assert.NotNull(firstDateChanged.OldConversionDate);
-            Assert.NotNull(firstDateChanged.OldSettlementDate);
-            Assert.AreEqual(firstDateChanged.NewSettlementDate, firstSettlementDate);
-            Assert.NotNull(firstDateChanged.NewConversionDate);
-            Assert.AreEqual(secondDateChanged.NewSettlementDate, secondSettlementDate);
-            Assert.AreEqual(secondDateChanged.OldConversionDate, firstDateChanged.NewConversionDate);
-            Assert.AreEqual(secondDateChanged.OldSettlementDate, firstDateChanged.NewSettlementDate);
-            Assert.NotNull(firstDateChanged.EventDateTime);
-            Assert.NotNull(secondDateChanged.EventDateTime);
-            Assert.AreEqual(dateChangeDetails.InitialValueDate, created.ConversionDate);
-            Assert.AreEqual(dateChangeDetails.InitialDeliveryDate, created.SettlementDate);
-            Assert.AreEqual(dateChangeDetails.CurrentValueDate, secondDateChanged.NewConversionDate);
-            Assert.AreEqual(dateChangeDetails.CurrentDeliveryDate, secondDateChanged.NewSettlementDate);
-            Assert.AreEqual(dateChangeDetails.FloatingCurrency, created.SellCurrency);
-
-            decimal? profitLoss = 0;
-            foreach (ConversionDateChangeDetails.DateChange element in dateChangeDetails.Changes)
-            {
-                profitLoss += element.ProfitAndLoss + (element.AdminFee ?? 0);
-                Assert.NotNull(element.RequestedValueDate);
-                Assert.NotNull(element.NewValueDate);
-                Assert.NotNull(element.NewDeliveryDate);
-                Assert.AreEqual(element.Type, "elected_roll");
-                Assert.NotNull(element.Status);
-            }
-
-            Assert.AreEqual(dateChangeDetails.TotalProfitAndLoss, profitLoss);
-        }
-
-        /// <summary>
         /// Successfully previews a conversion split.
         /// </summary>
         [Test]
