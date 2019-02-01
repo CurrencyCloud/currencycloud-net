@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>CurrencyCloud</id>
-        <version>3.0.1</version>
+        <version>4.0.0</version>
         <title>Currencycloud Client Library</title>
         <authors>Currencycloud</authors>
         <owners>Currencycloud</owners>
@@ -10,7 +10,7 @@
         <projectUrl>https://github.com/CurrencyCloud/currencycloud-net</projectUrl>
         <description>The client library which implements Currencycloud's APIs.</description>
         <summary>The SDK library for v2 of Currencycloud's APIs.</summary>
-        <copyright>Copyright (c) 2015-2018 Currencycloud</copyright>
+        <copyright>Copyright (c) 2015-2019 Currencycloud</copyright>
         <tags>Currencycloud API Client</tags>
         <releaseNotes></releaseNotes>
         <dependencies>
