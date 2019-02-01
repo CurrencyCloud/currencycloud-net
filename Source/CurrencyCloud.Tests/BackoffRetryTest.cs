@@ -11,7 +11,7 @@ namespace CurrencyCloud.Tests
     class BackoffRetryTest
     {
         Client client = new Client();
-        Player player = new Player("../../Mock/Http/Recordings/BackoffRetry.json");
+        Player player = new Player("../../../Mock/Http/Recordings/BackoffRetry.json");
         Credentials credentials = new Credentials("development@currencycloud.com", "deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef");
 
         [OneTimeSetUpAttribute]

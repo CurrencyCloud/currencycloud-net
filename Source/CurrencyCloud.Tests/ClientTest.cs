@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     class ClientTest
     {
         Client client = new Client();
-        Player player = new Player("../../Mock/Http/Recordings/Client.json");
+        Player player = new Player("../../../Mock/Http/Recordings/Client.json");
 
         Credentials credentials = Authentication.Credentials;
 

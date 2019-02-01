@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class IbansTest
     {
         Client client = new Client();
-        Player player = new Player("../../Mock/Http/Recordings/Ibans.json");
+        Player player = new Player("../../../Mock/Http/Recordings/Ibans.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
