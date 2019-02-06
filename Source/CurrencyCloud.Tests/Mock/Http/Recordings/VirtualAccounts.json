@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
 
           }
         },
@@ -60,7 +60,7 @@
           "path": "/v2/virtual_accounts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
           }
         },
         "response": {
@@ -107,7 +107,7 @@
           "path": "/v2/virtual_accounts",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
           }
         },
         "response": {
@@ -154,7 +154,7 @@
           "path": "/v2/virtual_accounts/subaccounts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
           }
         },
         "response": {
@@ -201,7 +201,7 @@
           "path": "/v2/virtual_accounts/subaccounts/00d272ee-fae5-4f97-b425-993a2d6e3a46",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/3.0.1"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
           }
         },
         "response": {
