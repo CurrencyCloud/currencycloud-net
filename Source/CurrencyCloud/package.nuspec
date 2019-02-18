@@ -6,6 +6,7 @@
         <title>Currencycloud Client Library</title>
         <authors>Currencycloud</authors>
         <owners>Currencycloud</owners>
+        <license type="expression">MIT</license>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <projectUrl>https://github.com/CurrencyCloud/currencycloud-net</projectUrl>
         <description>The client library which implements Currencycloud's APIs.</description>
