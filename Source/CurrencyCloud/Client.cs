@@ -1494,48 +1494,6 @@ namespace CurrencyCloud
             return await RequestAsync<PaginatedVirtualAccounts>("/v2/virtual_accounts/find", HttpMethod.Get, optional);
         }
 
-        /// <summary>
-        /// Get a list of Virtual Account Numbers attached to the authenticating user's account.
-        /// </summary>
-        /// <param name="parameters">Find parameters</param>
-        /// <returns>Asynchronous task, which returns the details of the Virtual Accounts assigned to the logged in account.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaginatedVirtualAccounts> GetVirtualAccountsAsync(FindParameters parameters = null)
-        {
-            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
-
-            return await RequestAsync<PaginatedVirtualAccounts>("/v2/virtual_accounts", HttpMethod.Get, optional);
-        }
-
-        /// <summary>
-        /// Find Virtual Accounts of the sub-accounts linked to the logged in account.
-        /// </summary>
-        /// <param name="parameters">Find parameters</param>
-        /// <returns>Asynchronous task, which returns the details of the Virtual Accounts assigned to the sub-accounts.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        [Obsolete("Method FindSubAccountsVirtualAccountsAsync(FindParameters) is deprecated. Use FindVirtualAccountsAsync(FindParameters) instead", false)]
-        public async Task<PaginatedVirtualAccounts> FindSubAccountsVirtualAccountsAsync(FindParameters parameters = null)
-        {
-            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
-
-            return await RequestAsync<PaginatedVirtualAccounts>("/v2/virtual_accounts/subaccounts/find", HttpMethod.Get, optional);
-        }
-
-        /// <summary>
-        /// Retrieve Virtual Accounts of the sub-account.
-        /// </summary>
-        /// <param name="id">Sub-Account ID</param>
-        /// <returns>Asynchronous task, which returns the details of the Virtual Accounts assigned to the sub-accounts.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        [Obsolete("Method GetSubAccountVirtualAccountsAsync(string) is deprecated. Use FindVirtualAccountsAsync(FindParameters) instead", false)]
-        public async Task<PaginatedVirtualAccounts> GetSubAccountVirtualAccountsAsync(string id)
-        {
-            return await RequestAsync<PaginatedVirtualAccounts>("/v2/virtual_accounts/subaccounts/" + id, HttpMethod.Get, null);
-        }
-
         #endregion
     }
 
