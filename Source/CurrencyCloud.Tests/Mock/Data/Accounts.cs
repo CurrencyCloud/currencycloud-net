@@ -39,5 +39,13 @@
             OnlineTrading = true,
             PhoneTrading = true
         };
+
+        public static readonly Entity.PaymentChargesSettings PaymentCharges = new Entity.PaymentChargesSettings(
+            "e277c9f9-679f-454f-8367-274b3ff977ff",
+            "18f3f814-fef0-4211-a028-fe22c4b69818")
+        {
+            Enabled = true,
+            Default = true
+        };
     }
 }

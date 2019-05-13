@@ -408,6 +408,39 @@ namespace CurrencyCloud
             return await RequestAsync<Account>("/v2/accounts/current", HttpMethod.Get);
         }
 
+        /// <summary>
+        /// Gets payment charges settings for given account.
+        /// </summary>
+        /// <returns>Asynchronous task, which returns the payment charges settings.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentChargesSettingsList> GetPaymentChargesSettingsAsync(string id)
+        {
+            return await RequestAsync<PaymentChargesSettingsList>("/v2/accounts/" + id + "/payment_charges_settings", HttpMethod.Get);
+        }
+
+        /// <summary>
+        /// Manage given Account's Payment Charge Settings (enable, disable, set default).
+        /// </summary>
+        /// <param name="paymentChargesSettings">Account's Payment Charge Settings object to be updated</param>
+        /// <returns>Asynchronous task, which returns the updated account.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentChargesSettings> ManageAccountPaymentChargesSettingsAsync(PaymentChargesSettings paymentChargesSettings)
+        {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(paymentChargesSettings);
+            string accountId = paymentChargesSettings.AccountId;
+            string chargeSettingsId = paymentChargesSettings.ChargeSettingsId;
+
+            if (string.IsNullOrEmpty(accountId))
+                throw new ArgumentException("Account Id cannot be null");
+
+            if (string.IsNullOrEmpty(chargeSettingsId))
+                throw new ArgumentException("Charge Settings Id cannot be null");
+
+            return await RequestAsync<PaymentChargesSettings>("/v2/accounts/" + accountId + "/payment_charges_settings/" + chargeSettingsId, HttpMethod.Post, optional);
+        }
+
         #endregion
 
         #region Balances

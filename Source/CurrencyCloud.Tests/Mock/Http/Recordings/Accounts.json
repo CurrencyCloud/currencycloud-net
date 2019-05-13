@@ -616,5 +616,77 @@
         }
       }
     ]
+  },
+  {
+    "name": "GetChargesSettings",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/e277c9f9-679f-454f-8367-274b3ff977ff/payment_charges_settings",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "payment_charges_settings": [
+              {
+                "charge_settings_id": "18f3f814-fef0-4211-a028-fe22c4b69818",
+                "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+                "charge_type": "ours",
+                "enabled": false,
+                "default": false
+              },
+              {
+                "charge_settings_id": "734bd817-0ab0-49ae-9e96-1f623a809f11",
+                "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+                "charge_type": "shared",
+                "enabled": true,
+                "default": true
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "ManageChargesSettings",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/accounts/e277c9f9-679f-454f-8367-274b3ff977ff/payment_charges_settings/18f3f814-fef0-4211-a028-fe22c4b69818",
+          "body": "?enabled=true&default=true",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "charge_settings_id": "18f3f814-fef0-4211-a028-fe22c4b69818",
+            "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+            "charge_type": "shared",
+            "enabled": true,
+            "default": true
+          }
+        }
+      }
+    ]
   }
 ]
