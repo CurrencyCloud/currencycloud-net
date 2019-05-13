@@ -846,34 +846,6 @@ namespace CurrencyCloud
             return await RequestAsync<PaginatedIbans>("/v2/ibans/find", HttpMethod.Get, optional);
         }
 
-        /// <summary>
-        /// Find IBANs of the sub-accounts linked to the logged in account.
-        /// </summary>
-        /// <param name="parameters">Find parameters</param>
-        /// <returns>Asynchronous task, which returns structure containing the details of the IBAN assigned to the sub-accounts.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        [Obsolete("Method FindSubAccountsIbansAsync(IbanFindParameters) is deprecated. Use FindIbansAsync(IbanFindParameters) instead", false)]
-        public async Task<PaginatedIbans> FindSubAccountsIbansAsync(IbanFindParameters parameters = null)
-        {
-            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
-
-            return await RequestAsync<PaginatedIbans>("/v2/ibans/subaccounts/find", HttpMethod.Get, optional);
-        }
-
-        /// <summary>
-        /// Retrieve IBAN of the sub-account.
-        /// </summary>
-        /// <param name="id">Sub-Account ID</param>
-        /// <returns>Asynchronous task, which returns structure containing the details of the IBAN assigned to the sub-accounts.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        [Obsolete("Method GetSubAccountsIbansAsync(string) is deprecated. Use FindIbansAsync(IbanFindParameters) instead", false)]
-        public async Task<PaginatedIbans> GetSubAccountsIbansAsync(string id)
-        {
-            return await RequestAsync<PaginatedIbans>("/v2/ibans/subaccounts/" + id, HttpMethod.Get, null);
-        }
-
         #endregion
 
         #region Payers
