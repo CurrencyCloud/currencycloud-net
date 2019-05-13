@@ -1712,5 +1712,37 @@
         }
       }
     ]
+  },
+  {
+    "name": "GetPaymentDeliveryDates",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/payments/payment_delivery_date",
+          "query": "?payment_date=2018-01-01&payment_type=regular&currency=EUR&bank_country=IT",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "payment_date": "2018-01-02",
+            "payment_delivery_date": "2019-05-31T00:00:00+00:00",
+            "payment_cutoff_time": "2019-05-31T11:30:00+00:00",
+            "payment_type": "regular",
+            "currency": "EUR",
+            "bank_country": "IT"
+          }
+        }
+      }
+    ]
   }
 ]

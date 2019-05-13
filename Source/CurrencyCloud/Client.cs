@@ -1040,6 +1040,29 @@ namespace CurrencyCloud
             return await RequestAsync<PaymentConfirmation>("/v2/payments/" + id + "/confirmation", HttpMethod.Get, null);
         }
 
+        /// <summary>
+        /// Returns an object containing the expected payment delivery date.
+        /// </summary>
+        /// <param name="paymentDeliveryDate">paymentDeliveryDate to query.</param>
+        /// <returns>Asynchronous task, which returns the confirmation details of a payment.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentDeliveryDates> GetPaymentDeliveryDatesAsync(PaymentDeliveryDates paymentDeliveryDates)
+        {
+            var paramsObj = ParamsObject.CreateFromStaticObject(paymentDeliveryDates);
+
+            if (!paymentDeliveryDates.PaymentDate.HasValue)
+                throw new ArgumentException("Payment Date cannot be null");
+            if (string.IsNullOrEmpty(paymentDeliveryDates.PaymentType))
+                throw new ArgumentException("Payment Type cannot be null");
+            if (string.IsNullOrEmpty(paymentDeliveryDates.Currency))
+                throw new ArgumentException("Currency Type cannot be null");
+            if (string.IsNullOrEmpty(paymentDeliveryDates.BankCountry))
+                throw new ArgumentException("Bank Country cannot be null");
+
+            return await RequestAsync<PaymentDeliveryDates>("/v2/payments/payment_delivery_date", HttpMethod.Get, paramsObj);
+        }
+
         #endregion
 
         #region Rates
