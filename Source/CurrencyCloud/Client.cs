@@ -94,7 +94,7 @@ namespace CurrencyCloud
             return clone;
         }
 
-        private static RetryPolicy<HttpResponseMessage> retryPolicy = Policy<HttpResponseMessage>
+        private static AsyncPolicy<HttpResponseMessage> retryPolicy = Policy<HttpResponseMessage>
             .Handle<HttpRequestException>()
             .OrResult(res => Retry.OnError.Contains(res.StatusCode))
             .WaitAndRetryAsync(
