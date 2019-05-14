@@ -132,5 +132,8 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string Scope { get; set; }
+
+        [Param]
+        public string BeneficiaryExternalReference { get; set; }
     }
 }
