@@ -2,7 +2,7 @@
 <package>
     <metadata>
         <id>CurrencyCloud</id>
-        <version>4.0.0</version>
+        <version>5.1.0</version>
         <title>Currencycloud Client Library</title>
         <authors>Currencycloud</authors>
         <owners>Currencycloud</owners>
@@ -16,8 +16,8 @@
         <releaseNotes></releaseNotes>
         <dependencies>
             <group targetFramework="net45">
-                <dependency id="Newtonsoft.Json" version="11.0.2" />
-                <dependency id="Polly" version="6.1.0" />
+                <dependency id="Newtonsoft.Json" version="12.0.2" />
+                <dependency id="Polly" version="7.1.0" />
             </group>
         </dependencies>
     </metadata>
