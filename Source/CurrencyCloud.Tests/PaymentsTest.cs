@@ -15,7 +15,7 @@ namespace CurrencyCloud.Tests
     class PaymentsTest
     {
         Client client = new Client();
-        Player player = new Player("../../../Mock/Http/Recordings/Payments.json");
+        Player player = new Player("/../../Mock/Http/Recordings/Payments.json");
 
         private async Task<Payment> CreatePayment(Entity.Payment payment)
         {
