@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using CurrencyCloud.Entity;
+using NUnit.Framework;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
@@ -108,6 +109,31 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrowAsync(async () => {
                 SettlementAccountsList gotten = await client.GetSettlementAccountsAsync("EUR");
+            });
+        }
+        
+        /// <summary>
+        /// Successfully gets bank details.
+        /// </summary>
+        [Test]
+        public void GetBankDetails()
+        {
+            player.Play("GetBankDetails");
+
+            Assert.DoesNotThrowAsync(async () => {
+                BankDetails bankDetails = await client.GetBankDetailsAsync("iban", "GB19TCCL00997901654515");
+                Assert.AreEqual("iban", bankDetails.IdentifierType);
+                Assert.AreEqual("GB19TCCL00997901654515", bankDetails.IdentifierValue);
+                Assert.AreEqual("GB19TCCL00997901654515", bankDetails.AccountNumber);
+                Assert.AreEqual("12 STEWARD STREET  THE STEWARD BUILDING FLOOR 0", bankDetails.BankAddress);
+                Assert.AreEqual("", bankDetails.BankBranch);
+                Assert.AreEqual("LONDON", bankDetails.BankCity);
+                Assert.AreEqual("UNITED KINGDOM", bankDetails.BankCountry);
+                Assert.AreEqual("THE CURRENCY CLOUD LIMITED", bankDetails.BankName);
+                Assert.AreEqual("LONDON", bankDetails.BankState);
+                Assert.AreEqual("TCCLGB22XXX", bankDetails.BicSwift);
+                Assert.AreEqual("GB", bankDetails.BankCountryISO);
+                Assert.That(bankDetails.Currency, Is.Null);
             });
         }
     }
