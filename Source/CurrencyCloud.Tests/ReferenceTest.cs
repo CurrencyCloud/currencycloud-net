@@ -122,6 +122,7 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrowAsync(async () => {
                 BankDetails bankDetails = await client.GetBankDetailsAsync("iban", "GB19TCCL00997901654515");
+                Assert.That(bankDetails, Is.Not.Null);
                 Assert.AreEqual("iban", bankDetails.IdentifierType);
                 Assert.AreEqual("GB19TCCL00997901654515", bankDetails.IdentifierValue);
                 Assert.AreEqual("GB19TCCL00997901654515", bankDetails.AccountNumber);
