@@ -4,6 +4,7 @@ using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
 using CurrencyCloud.Tests.Mock.Http;
 using CurrencyCloud.Environment;
+using CurrencyCloud.Entity.List;
 using System.Threading.Tasks;
 
 namespace CurrencyCloud.Tests
@@ -12,7 +13,7 @@ namespace CurrencyCloud.Tests
     class AccountsTest
     {
         Client client = new Client();
-        Player player = new Player("../../../Mock/Http/Recordings/Accounts.json");
+        Player player = new Player("/../../Mock/Http/Recordings/Accounts.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -144,6 +145,35 @@ namespace CurrencyCloud.Tests
             Assert.DoesNotThrowAsync(async () => {
                 Account current = await client.GetCurrentAccountAsync();
             });
+        }
+
+        /// <summary>
+        /// Successfully gets payment charges settings for given account.
+        /// </summary>
+        [Test]
+        public async Task GetChargesSettings()
+        {
+            player.Play("GetChargesSettings");
+
+            var settings = Accounts.PaymentCharges;
+
+            PaymentChargesSettingsList charges = await client.GetPaymentChargesSettingsAsync(settings.AccountId);
+            Assert.AreEqual(charges.PaymentChargesSettings[0].AccountId, settings.AccountId);
+            Assert.AreEqual(charges.PaymentChargesSettings[0].ChargeSettingsId, settings.ChargeSettingsId);
+        }
+
+        /// <summary>
+        /// Successfully manages given Account's Payment Charge Settings.
+        /// </summary>
+        [Test]
+        public async Task ManageChargesSettings()
+        {
+            player.Play("ManageChargesSettings");
+
+            var settings = Accounts.PaymentCharges;
+
+            PaymentChargesSettings charges = await client.ManageAccountPaymentChargesSettingsAsync(settings);
+            Assert.AreEqual(settings, charges);
         }
     }
 }

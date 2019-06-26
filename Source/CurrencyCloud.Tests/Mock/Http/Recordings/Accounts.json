@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -60,7 +60,7 @@
           "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -102,7 +102,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -150,7 +150,7 @@
           "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -192,7 +192,7 @@
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -240,7 +240,7 @@
           "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -283,7 +283,7 @@
           "body": "?account_name=Company%20PLC&legal_entity_type=company&your_reference=0012345564ABC&status=enabled&street=12%20Steward%20St&city=London&state_or_province=&postal_code=E1%206FQ&country=GB&spread_table=flat_0.5_percent&identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -325,7 +325,7 @@
           "path": "/v2/accounts/9c9c2492-b0f3-4cfe-9243-b062c9985a9c",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -372,7 +372,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -415,7 +415,7 @@
           "query": "?account_name=Toptal&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -476,7 +476,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -518,7 +518,7 @@
           "path": "/v2/accounts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -579,7 +579,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
@@ -612,6 +612,78 @@
             "phone_trading": true,
             "process_third_party_funds": true,
             "settlement_type": "net"
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "GetChargesSettings",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/accounts/e277c9f9-679f-454f-8367-274b3ff977ff/payment_charges_settings",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "payment_charges_settings": [
+              {
+                "charge_settings_id": "18f3f814-fef0-4211-a028-fe22c4b69818",
+                "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+                "charge_type": "ours",
+                "enabled": false,
+                "default": false
+              },
+              {
+                "charge_settings_id": "734bd817-0ab0-49ae-9e96-1f623a809f11",
+                "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+                "charge_type": "shared",
+                "enabled": true,
+                "default": true
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "ManageChargesSettings",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/accounts/e277c9f9-679f-454f-8367-274b3ff977ff/payment_charges_settings/18f3f814-fef0-4211-a028-fe22c4b69818",
+          "body": "?enabled=true&default=true",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "charge_settings_id": "18f3f814-fef0-4211-a028-fe22c4b69818",
+            "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
+            "charge_type": "shared",
+            "enabled": true,
+            "default": true
           }
         }
       }

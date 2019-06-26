@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Entity.List;
@@ -14,7 +15,7 @@ namespace CurrencyCloud.Tests
     class PaymentsTest
     {
         Client client = new Client();
-        Player player = new Player("../../../Mock/Http/Recordings/Payments.json");
+        Player player = new Player("/../../Mock/Http/Recordings/Payments.json");
 
         private async Task<Payment> CreatePayment(Entity.Payment payment)
         {
@@ -229,6 +230,24 @@ namespace CurrencyCloud.Tests
             {
                 Assert.IsInstanceOf(typeof(NotFoundException), ex);
             }
+        }
+
+        /// <summary>
+        /// Successfully gets a payment delivery date
+        /// </summary>
+        [Test]
+        public async Task GetPaymentDeliveryDates()
+        {
+            player.Play("GetPaymentDeliveryDates");
+
+            var paymentDeliveryDates = new PaymentDeliveryDates(new DateTime(2018, 1, 1),"regular", "EUR", "IT");
+
+            PaymentDeliveryDates created = await client.GetPaymentDeliveryDatesAsync(paymentDeliveryDates);
+
+            Assert.NotNull(created);
+            Assert.AreEqual(created.Currency, "EUR");
+            Assert.AreEqual(created.BankCountry, "IT");
+            Assert.AreEqual(created.PaymentType, "regular");
         }
     }
 }

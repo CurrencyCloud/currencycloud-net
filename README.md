@@ -199,12 +199,7 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 
 ### List of features being deprecated
 ```
-As of 2.7.2:
-------------
-Method Client.FindSubAccountsIbansAsync(IbanFindParameters)
-Method Client.GetSubAccountsIbansAsync(string)
-Method Client.FindSubAccountsVirtualAccountsAsync(FindParameters)
-Method CLient.GetSubAccountVirtualAccountsAsync(string)
+(No features are currently being deprecated)
 ```
 
 # Support
