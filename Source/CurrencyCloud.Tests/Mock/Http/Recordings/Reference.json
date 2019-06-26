@@ -983,7 +983,7 @@
           "query": "?identifier_type=iban&identifier_value=GB19TCCL00997901654515",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/4.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
           }
         },
         "response": {
