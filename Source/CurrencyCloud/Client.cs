@@ -1214,6 +1214,23 @@ namespace CurrencyCloud
             return await RequestAsync<PayerDetailsList>("/v2/reference/payer_required_details", HttpMethod.Get, paramsObj);
         }
 
+        /// <summary>
+        /// Gets Details of the bank associated to specified account.
+        /// </summary>
+        /// <param name="identifierType">IdentifierType</param>
+        /// <param name="identifierValue">IdentifierValue</param>
+        /// <returns>Asynchronous task, which returns the Bank Details.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<BankDetails> GetBankDetailsAsync(string identifierType, string identifierValue)
+        {
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("IdentifierType", identifierType);
+            paramsObj.AddNotNull("IdentifierValue", identifierValue);
+
+            return await RequestAsync<BankDetails>("/v2/reference/bank_details", HttpMethod.Get, paramsObj);
+        }
+        
         #endregion
 
         #region Reports

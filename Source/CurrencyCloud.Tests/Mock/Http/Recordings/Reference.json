@@ -972,5 +972,44 @@
         }
       }
     ]
+  },
+  {
+    "name": "GetBankDetails",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/reference/bank_details",
+          "query": "?identifier_type=iban&identifier_value=GB19TCCL00997901654515",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.1.0"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "identifier_value": "GB19TCCL00997901654515",
+            "identifier_type": "iban",
+            "account_number": "GB19TCCL00997901654515",
+            "bic_swift": "TCCLGB22XXX",
+            "bank_name": "THE CURRENCY CLOUD LIMITED",
+            "bank_branch": "",
+            "bank_address": "12 STEWARD STREET  THE STEWARD BUILDING FLOOR 0",
+            "bank_city": "LONDON",
+            "bank_state": "LONDON",
+            "bank_post_code": "E1 6FQ",
+            "bank_country": "UNITED KINGDOM",
+            "bank_country_ISO": "GB",
+            "currency": null
+          }
+        }
+      }
+    ]
   }
 ]
