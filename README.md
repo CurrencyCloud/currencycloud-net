@@ -3,13 +3,13 @@
 This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our development team at development@currencycloud.com
 
 ## Installation
-The library is distributed on `NuGet`. To install the latest version, run the following command in the Package Manager Console: 
+The library is distributed on `NuGet`. To install the latest version, run the following command in the Package Manager Console:
 ```sh
 PM> Install-Package Currencycloud
 ```
 
 ## Supported .NET versions
-The least supported .NET framework version is 4.5.
+The least supported .NET framework version is 4.6.1.
 
 # Usage
 The following example retrieves a list of all tradeable currencies:
@@ -23,7 +23,7 @@ try
   Console.WriteLine("Available currencies: ");
   var res = await client.GetAvailableCurrenciesAsync();
   Console.WriteLine(string.Join(Environment.NewLine, res.Currencies));
-  
+
   await client.CloseAsync();
 }
 catch (CurrencyCloud.Exception.ApiException ex)
@@ -193,7 +193,7 @@ Deprecation means that we discourage the use of a feature, design or practice be
 
 We remove deprecated features after **three months** from the time of announcement.
 
-The security of our customers' assets is of paramount importance to us and sometimes we have to deprecate features because they may pose a security threat or because new, more secure, ways are available. On such occasions we reserve the right to set a different deprecation period which may range from **immediate removal** to the standard **three months**. 
+The security of our customers' assets is of paramount importance to us and sometimes we have to deprecate features because they may pose a security threat or because new, more secure, ways are available. On such occasions we reserve the right to set a different deprecation period which may range from **immediate removal** to the standard **three months**.
 
 Once a feature has been marked as deprecated, we no longer develop the code or implement bug fixes. We only do security fixes.
 

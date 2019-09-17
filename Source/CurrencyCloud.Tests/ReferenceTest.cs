@@ -11,7 +11,7 @@ namespace CurrencyCloud.Tests
     class ReferenceTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Reference.json");
+        Player player = new Player("./Mock/Http/Recordings/Reference.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()

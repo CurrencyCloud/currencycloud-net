@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class BalancesTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Balances.json");
+        Player player = new Player("./Mock/Http/Recordings/Balances.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()

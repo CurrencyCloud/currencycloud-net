@@ -1,17 +1,9 @@
 sudo: false
 language: csharp
-mono:
-  - latest
-  - 5.20.1
-  - 5.16.0
-  - 5.14.0
-  - 5.12.0
-
-install:
-  - nuget restore ./Source/CurrencyCloud.sln
-  - nuget install NUnit.Console -Version 3.10.0
+mono: none
+dotnet: 2.2.401
 
 script:
-  - nuget restore ./Source/CurrencyCloud.sln
-  - msbuild /p:Configuration=Release ./Source/CurrencyCloud.sln
-  - mono ./NUnit.ConsoleRunner.3.10.0/tools/nunit3-console.exe ./Source/CurrencyCloud.Tests/bin/Release/CurrencyCloud.Tests.dll
+  - dotnet restore ./Source/CurrencyCloud.sln
+  - dotnet build ./Source/CurrencyCloud.sln
+  - dotnet test ./Source/CurrencyCloud.sln

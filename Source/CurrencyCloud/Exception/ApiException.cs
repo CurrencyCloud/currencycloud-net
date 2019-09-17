@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace CurrencyCloud.Exception
@@ -82,7 +84,10 @@ namespace CurrencyCloud.Exception
 
         protected ApiException(Request request, Response response, List<Error> errors)
         {
-            Platform = Environment.Platform.Version;
+            Platform = Assembly
+                .GetEntryAssembly()?
+                .GetCustomAttribute<TargetFrameworkAttribute>()?
+                .FrameworkName;
             Request = request;
             Response = response;
             Errors = errors;
