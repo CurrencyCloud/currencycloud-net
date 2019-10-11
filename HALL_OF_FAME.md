@@ -9,6 +9,7 @@ Many people have helped us along the way and we are sincerely grateful to all of
 |Name|Link/e-mail|
 |--|--|
 |myaron-cs|https://github.com/myaron-cs|
+|Tris|https://github.com/tristal|
 
  In our book, they have reached [**honorificabilitudinitatibus**][sesqui] :-)
 
