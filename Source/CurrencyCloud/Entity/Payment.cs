@@ -134,7 +134,13 @@ namespace CurrencyCloud.Entity
         /// </summary>
         [Param]
         public string FeeAmount { get; set; }
-            
+       
+        /// <summary>
+        /// ours or shared
+        /// </summary>
+        [Param]
+        public string ChargeType { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -208,7 +214,8 @@ namespace CurrencyCloud.Entity
                    UltimateBeneficiaryName == payment.UltimateBeneficiaryName &&
                    PurposeCode == payment.PurposeCode &&
                    FeeCurrency == payment.FeeCurrency &&
-                   FeeAmount == payment.FeeAmount;
+                   FeeAmount == payment.FeeAmount &&
+                   ChargeType == payment.ChargeType;
         }
 
         public override int GetHashCode()
