@@ -123,6 +123,12 @@ namespace CurrencyCloud.Entity
         [Param]
         public string UltimateBeneficiaryName { get; set; }
 
+        /// <summary>
+        /// ours or shared
+        /// </summary>
+        [Param]
+        public string ChargeType { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -153,7 +159,8 @@ namespace CurrencyCloud.Entity
                     UniqueRequestId,
                     FailureReturnedAmount,
                     UltimateBeneficiaryName,
-                    PurposeCode
+                    PurposeCode,
+                    ChargeType
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -192,7 +199,8 @@ namespace CurrencyCloud.Entity
                    FailureReturnedAmount == payment.FailureReturnedAmount &&
                    UniqueRequestId == payment.UniqueRequestId &&
                    UltimateBeneficiaryName == payment.UltimateBeneficiaryName &&
-                   PurposeCode == payment.PurposeCode;
+                   PurposeCode == payment.PurposeCode &&
+                   ChargeType == payment.ChargeType;
         }
 
         public override int GetHashCode()

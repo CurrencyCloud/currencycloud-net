@@ -139,5 +139,12 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string BulkUploadId { get; set; }
+        
+        
+        ///<summary>
+        ///  ours or shared
+        ///</summary>
+        [Param]
+        public string ChargeType { get; set; }
     }
 }
