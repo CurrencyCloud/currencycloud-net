@@ -137,5 +137,56 @@ namespace CurrencyCloud.Tests
                 Assert.That(bankDetails.Currency, Is.Null);
             });
         }
+        
+        /// <summary>
+        /// Successfully Get Payment Fee Rules.
+        /// </summary>
+        [Test]
+        public void GetPaymentFeeRules()
+        {
+            player.Play("GetPaymentFeeRules");
+
+            Assert.DoesNotThrowAsync(async () => {
+                PaymentFeeRulesList rules1 = await client.GetPaymentFeeRulesAsync();
+                Assert.That(rules1, Is.Not.Null);
+                Assert.That(rules1.PaymentFeeRules, Is.Not.Null);
+                Assert.AreEqual(3, rules1.PaymentFeeRules.Count);
+                PaymentFeeRulesList.PaymentFeeRule feeRule11 = rules1.PaymentFeeRules[0];
+                Assert.AreEqual("shared", feeRule11.ChargeType);
+                Assert.AreEqual(2.0, feeRule11.FeeAmount);
+                Assert.AreEqual("AED", feeRule11.FeeCurrency);
+                Assert.AreEqual("priority", feeRule11.PaymentType);
+                PaymentFeeRulesList.PaymentFeeRule feeRule12 = rules1.PaymentFeeRules[1];
+                Assert.AreEqual("shared", feeRule12.ChargeType);
+                Assert.AreEqual(12.0, feeRule12.FeeAmount);
+                Assert.AreEqual("USD", feeRule12.FeeCurrency);
+                Assert.AreEqual("regular", feeRule12.PaymentType);
+                PaymentFeeRulesList.PaymentFeeRule feeRule13 = rules1.PaymentFeeRules[2];
+                Assert.AreEqual("ours", feeRule13.ChargeType);
+                Assert.AreEqual(5.25, feeRule13.FeeAmount);
+                Assert.AreEqual("GBP", feeRule13.FeeCurrency);
+                Assert.AreEqual("priority", feeRule13.PaymentType);
+                
+                PaymentFeeRulesList rules2 = await client.GetPaymentFeeRulesAsync(null, "regular");
+                Assert.That(rules2, Is.Not.Null);
+                Assert.That(rules2.PaymentFeeRules, Is.Not.Null);
+                Assert.AreEqual(1, rules2.PaymentFeeRules.Count);
+                PaymentFeeRulesList.PaymentFeeRule feeRule21 = rules2.PaymentFeeRules[0];
+                Assert.AreEqual("shared", feeRule21.ChargeType);
+                Assert.AreEqual(12.0, feeRule21.FeeAmount);
+                Assert.AreEqual("USD", feeRule21.FeeCurrency);
+                Assert.AreEqual("regular", feeRule21.PaymentType);
+                
+                PaymentFeeRulesList rules3 = await client.GetPaymentFeeRulesAsync(null, null,"ours");
+                Assert.That(rules3, Is.Not.Null);
+                Assert.That(rules3.PaymentFeeRules, Is.Not.Null);
+                Assert.AreEqual(1, rules3.PaymentFeeRules.Count);
+                PaymentFeeRulesList.PaymentFeeRule feeRule31 = rules3.PaymentFeeRules[0];
+                Assert.AreEqual("ours", feeRule31.ChargeType);
+                Assert.AreEqual(5.25, feeRule31.FeeAmount);
+                Assert.AreEqual("GBP", feeRule31.FeeCurrency);
+                Assert.AreEqual("priority", feeRule31.PaymentType);
+            });
+        }
     }
 }

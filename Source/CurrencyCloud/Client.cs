@@ -1230,7 +1230,26 @@ namespace CurrencyCloud
 
             return await RequestAsync<BankDetails>("/v2/reference/bank_details", HttpMethod.Get, paramsObj);
         }
-        
+
+        /// <summary>
+        /// Gets Payment Fee Rules.
+        /// </summary>
+        /// <param name="accountId">AccountId</param>
+        /// <param name="paymentType">PaymentType</param>
+        /// <param name="chargeType">ChargeType</param>
+        /// <returns>Asynchronous task, which returns the Bank Details.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentFeeRulesList> GetPaymentFeeRulesAsync(string accountId=null, string paymentType=null, string chargeType=null)
+        {
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("AccountId", accountId);
+            paramsObj.AddNotNull("PaymentType", paymentType);
+            paramsObj.AddNotNull("ChargeType", chargeType);
+
+            return await RequestAsync<PaymentFeeRulesList>("/v2/reference/payment_fee_rules", HttpMethod.Get, paramsObj);
+        }
+
         #endregion
 
         #region Reports
