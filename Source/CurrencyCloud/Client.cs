@@ -1558,17 +1558,19 @@ namespace CurrencyCloud
 
             JObject errorObject = JObject.Parse(errorString);
 
-            var errors = from JProperty error in errorObject["error_messages"]
-                         select new Error(error.Name,
-                            (from errorMessage in error.Value
-                             select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
-                                                           errorMessage["message"].Value<string>(),
-                                                           (from JProperty param in errorMessage["params"]
-                                                            select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
-                                                           .ToDictionary(x => x.Key, x => x.Value)))
-                            .ToList()
-            );
-
+            var errors = from JProperty error in errorObject["error_messages"] 
+                select new Error(error.Name, 
+                    error.Value is JArray ? (from errorMessage in error.Value 
+                            select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
+                                errorMessage["message"].Value<string>(),
+                                (from JProperty param in errorMessage["params"]
+                                    select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
+                                .ToDictionary(x => x.Key, x => x.Value)))
+                        .ToList() : new List<Error.ErrorMessage>(){new Error.ErrorMessage(error.Value["code"].Value<string>(), 
+                            error.Value["message"].Value<string>(), (from JProperty param in error.Value["params"]
+                                select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
+                            .ToDictionary(x => x.Key, x => x.Value))}
+                );
             return errors.ToList();
         }
 
