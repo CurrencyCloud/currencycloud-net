@@ -471,6 +471,24 @@ namespace CurrencyCloud
             return await RequestAsync<PaginatedBalances>("/v2/balances/find", HttpMethod.Get, optional);
         }
 
+        /// <summary>
+        /// Top up the margin balance for a currency.
+        /// </summary>
+        /// <param name="currency">Currency to top up the balance with.</param>
+        /// <param name="amount">Amount to top up the balance with.</param>
+        /// <returns>Asynchronous task, which tops up the given margin balance.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<MarginBalanceTopUp> TopUpMarginBalanceAsync(string currency, decimal amount)
+        {
+            if (string.IsNullOrEmpty(currency))
+                throw new ArgumentException("Currency can not be null");
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("Currency", currency);
+            paramsObj.AddNotNull("Amount", amount);
+            return await RequestAsync<MarginBalanceTopUp>("/v2/balances/top_up_margin", HttpMethod.Post, paramsObj);
+        }
+        
         #endregion
 
         #region Beneficiaries
