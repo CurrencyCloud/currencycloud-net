@@ -61,23 +61,13 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// The particular routing code for this account number
         ///</summary>
-        public string RegularRoutingCode { get; set; }
+        public string RoutingCode { get; set; }
         
         ///<summary>
         /// The type of routing number
         ///</summary>
-        public string RegularRoutingCodeType { get; set; }
+        public string RoutingCodeType { get; set; }
         
-        ///<summary>
-        /// The particular priority routing card for this account number
-        ///</summary>
-        public string PriorityRoutingCode { get; set; }
-        
-        ///<summary>
-        /// The type of routing number
-        ///</summary>
-        public string PriorityRoutingCodeType { get; set; }
-
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
@@ -99,10 +89,8 @@ namespace CurrencyCloud.Entity
                     BankCountry,
                     Currency,
                     PaymentType,
-                    RegularRoutingCode,
-                    RegularRoutingCodeType,
-                    PriorityRoutingCode,
-                    PriorityRoutingCodeType,
+                    RoutingCode,
+                    RoutingCodeType,
                     CreatedAt,
                     UpdatedAt
                 }
@@ -129,10 +117,8 @@ namespace CurrencyCloud.Entity
                    BankCountry == account.BankCountry &&
                    Currency == account.Currency &&
                    PaymentType == account.PaymentType &&
-                   RegularRoutingCode == account.RegularRoutingCode &&
-                   RegularRoutingCodeType == account.RegularRoutingCodeType &&
-                   PriorityRoutingCode == account.PriorityRoutingCode &&
-                   PriorityRoutingCodeType == account.PriorityRoutingCodeType &&
+                   RoutingCode == account.RoutingCode &&
+                   RoutingCodeType == account.RoutingCodeType &&
                    CreatedAt == account.CreatedAt &&
                    UpdatedAt == account.UpdatedAt;
         }

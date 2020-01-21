@@ -64,10 +64,8 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual("UK", account.BankCountry);
             Assert.AreEqual("GBP", account.Currency);
             Assert.AreEqual("regular", account.PaymentType);
-            Assert.AreEqual("010203", account.RegularRoutingCode);
-            Assert.AreEqual("sort_code", account.RegularRoutingCodeType);
-            Assert.AreEqual("", account.PriorityRoutingCode);
-            Assert.AreEqual("", account.PriorityRoutingCodeType);
+            Assert.AreEqual("010203", account.RoutingCode);
+            Assert.AreEqual("sort_code", account.RoutingCodeType);
             Assert.AreEqual(DateTime.Parse("2018-05-14T14:18:30+00:00"), account.CreatedAt);
             Assert.AreEqual(DateTime.Parse("2018-05-14T14:19:30+00:00"), account.UpdatedAt);
         }
