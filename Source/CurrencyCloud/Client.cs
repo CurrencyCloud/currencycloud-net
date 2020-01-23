@@ -829,7 +829,25 @@ namespace CurrencyCloud
         }
 
         #endregion
+        
+        #region Funding
+        
+        /// <summary>
+        /// Returns an object that contains information related to Funding Accounts
+        /// </summary>
+        /// <param name="parameters">Find parameters</param>
+        /// <returns>Asynchronous task, which returns the list of the funding accounts, as well as pagination information.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaginatedFundingAccounts> FindFundingAccountsAsync(FundingAccountFindParameters parameters = null)
+        {
+            ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
+            return await RequestAsync<PaginatedFundingAccounts>("/v2/funding_accounts/find", HttpMethod.Get, optional);
+        }
+        
+        #endregion
+        
         #region Ibans
 
         /// <summary>
