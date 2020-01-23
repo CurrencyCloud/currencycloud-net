@@ -127,7 +127,7 @@
             "expiration_date": null,
             "report_url": "",
             "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
-            "contact_id": "ca717500-c1c2-46f1-996f-5.3.5a4c6db4",
+            "contact_id": "ca717500-c1c2-46f1-996f-5c282a4c6db4",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -274,7 +274,7 @@
                 "expiration_date": null,
                 "report_url": "",
                 "account_id": "e277c9f9-679f-454f-8367-274b3ff977ff",
-                "contact_id": "ca717500-c1c2-46f1-996f-5.3.5a4c6db4",
+                "contact_id": "ca717500-c1c2-46f1-996f-5c282a4c6db4",
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00"
               }
