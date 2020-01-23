@@ -434,6 +434,81 @@
     ]
   },
   {
+    "name": "FailWithMalformedError",
+    "requests": [
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/api",
+          "headers": {
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.2.2"
+          },
+          "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007469756093752"
+          },
+          "body": {
+            "auth_token": "034d23d24490718e8766853e14d480b7"
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/reference/bank_details",
+          "query": "?identifier_type=iban&identifier_value=123abc456xyz",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.2.2"
+          }
+        },
+        "response": {
+          "status": 400,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "error_code": "invalid_iban",
+            "error_messages": {
+              "base": {
+                "code": "invalid_iban",
+                "message": "IBAN is invalid.",
+                "params": {}
+              }
+            }
+          }
+        }
+      },
+      {
+        "request": {
+          "method": "POST",
+          "path": "/v2/authenticate/close_session",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.2.2"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+          }
+        }
+      }
+    ]
+  },
+  {
     "name": "RunOnbehalfof",
     "requests": [
       {

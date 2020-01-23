@@ -148,6 +148,47 @@ namespace CurrencyCloud.Tests
                 await client.CloseAsync();
             }
         }
+        
+        /// <summary>
+        /// Returns full error information.
+        /// </summary>
+        [Test]
+        public async Task FailWithMalFormedError()
+        {
+            player.Play("FailWithMalformedError");
+
+            try
+            {
+                await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
+                await client.GetBankDetailsAsync("iban", "123abc456xyz");
+
+                Assert.Fail();
+            }
+            catch (ApiException ex)
+            {
+                Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
+
+                Assert.That(ex.Request.Verb, Is.Not.Null.And.Not.Empty);
+                Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
+                Assert.AreEqual(2,ex.Request.Parameters.Count);
+                Assert.AreEqual("iban", ex.Request.Parameters["identifier_type"]);
+                Assert.AreEqual("123abc456xyz", ex.Request.Parameters["identifier_value"]);
+
+                Assert.AreEqual(400, ex.Response.StatusCode);
+                Assert.IsFalse(DateTime.Equals(ex.Response.Date, DateTime.MinValue));
+                Assert.That(ex.Response.RequestId, Is.Not.Null.And.Not.Empty);
+
+                Assert.IsNotEmpty(ex.Errors);
+                Assert.AreEqual(1,ex.Errors.Count);
+                Assert.AreEqual("base",ex.Errors[0].Field);
+                Assert.AreEqual(1,ex.Errors[0].ErrorMessages.Count);
+                Assert.AreEqual("invalid_iban",ex.Errors[0].ErrorMessages[0].Code);
+                Assert.AreEqual("IBAN is invalid.",ex.Errors[0].ErrorMessages[0].Message);
+                Assert.IsEmpty(ex.Errors[0].ErrorMessages[0].Params);
+
+                await client.CloseAsync();
+            }
+        }
 
         /// <summary>
         /// Executes API calls on behalf of specified id; once completed, resets the id.
