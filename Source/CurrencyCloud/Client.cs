@@ -1053,6 +1053,20 @@ namespace CurrencyCloud
             return await RequestAsync<PaymentDeliveryDates>("/v2/payments/payment_delivery_date", HttpMethod.Get, paramsObj);
         }
 
+        /// <summary>
+        /// Gets the calculated quote for the fee that will be applied against a payment
+        /// </summary>
+        /// <param name="quotePaymentFee">Quote Payment Fee Details</param>
+        /// <returns>Asynchronous task, which returns the Quote Payment Fee.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<QuotePaymentFee> GetQuotePaymentFee(QuotePaymentFee quotePaymentFee)
+        {
+            var paramsObj = ParamsObject.CreateFromStaticObject(quotePaymentFee);
+
+            return await RequestAsync<QuotePaymentFee>("/v2/payments/quote_payment_fee", HttpMethod.Get, paramsObj);
+        }
+        
         #endregion
 
         #region Rates

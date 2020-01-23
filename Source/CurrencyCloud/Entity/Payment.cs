@@ -122,7 +122,19 @@ namespace CurrencyCloud.Entity
         /// </summary>
         [Param]
         public string UltimateBeneficiaryName { get; set; }
+        
+        /// <summary>
+        /// Currency Fee is paid in
+        /// </summary>
+        [Param]
+        public decimal? FeeCurrency { get; set; }
 
+        /// <summary>
+        /// Fee Amount
+        /// </summary>
+        [Param]
+        public string FeeAmount { get; set; }
+       
         /// <summary>
         /// ours or shared
         /// </summary>
@@ -160,7 +172,8 @@ namespace CurrencyCloud.Entity
                     FailureReturnedAmount,
                     UltimateBeneficiaryName,
                     PurposeCode,
-                    ChargeType
+                    FeeCurrency,
+                    FeeAmount
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -200,6 +213,8 @@ namespace CurrencyCloud.Entity
                    UniqueRequestId == payment.UniqueRequestId &&
                    UltimateBeneficiaryName == payment.UltimateBeneficiaryName &&
                    PurposeCode == payment.PurposeCode &&
+                   FeeCurrency == payment.FeeCurrency &&
+                   FeeAmount == payment.FeeAmount &&
                    ChargeType == payment.ChargeType;
         }
 

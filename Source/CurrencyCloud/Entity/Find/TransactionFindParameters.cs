@@ -29,7 +29,8 @@ namespace CurrencyCloud.Entity
         public decimal? AmountTo { get; set; }
 
         ///<summary>
-        /// The action that caused the transaction to be created - funding, conversion, payment, payment_failure, manual_intervention
+        /// The action that caused the transaction to be created - funding, conversion, payment, payment_failure
+        /// manual_intervention, manual_transaction, top_up_fee, transfer, conversion_deposit, deposit_refund, payment_fee
         ///</summary>
         [Param]
         public string Action { get; set; }
