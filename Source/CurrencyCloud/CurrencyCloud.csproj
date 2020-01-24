@@ -94,6 +94,7 @@
     <Compile Include="Entity\List\PaymentChargesSettingsList.cs" />
     <Compile Include="Entity\List\PaymentFeeRulesList.cs" />
     <Compile Include="Entity\List\PaymentPurposeCodesList.cs" />
+    <Compile Include="Entity\MarginBalanceTopUp.cs" />
     <Compile Include="Entity\Pagination\PaginatedConversionProfitAndLosses.cs" />
     <Compile Include="Entity\Pagination\PaginatedFundingAccounts.cs" />
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
