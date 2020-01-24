@@ -92,7 +92,7 @@ namespace CurrencyCloud.Tests
             player.Play("TopUpMarginBalance");
 
             MarginBalanceTopUp topUp = await client.TopUpMarginBalanceAsync("GBP", 450);
-          
+            Assert.NotNull(topUp);
             Assert.AreEqual("GBP", topUp.Currency);
             Assert.AreEqual(450, topUp.TransferredAmount);
             Assert.AreEqual("6c046c51-2387-4004-8e87-4bf97102e36d", topUp.AccountId);
