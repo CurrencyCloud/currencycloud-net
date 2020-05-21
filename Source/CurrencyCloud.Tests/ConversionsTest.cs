@@ -335,5 +335,30 @@ namespace CurrencyCloud.Tests
             }
             Assert.AreEqual(profitAndLosses.ConversionProfitAndLosses.Count, profitAndLosses.Pagination.TotalEntries);
         }
+        
+        /// <summary>
+        /// Successfully creates a conversion with conversion date preference.
+        /// </summary>
+        [Test]
+        public async Task CreateWithConversionDatePreference()
+        {
+            player.Play("CreateWithConversionDatePreference");
+
+            var conversion =  new Conversion(
+                "EUR",
+                "GBP",
+                "buy",
+                1000.00m,
+                true
+            );
+            conversion.ConversionDatePreference = "earliest";
+
+            var created = await client.CreateConversionAsync(conversion);
+
+            Assert.That(created, Is.Not.Null);
+            Assert.AreEqual(805.90, created.ClientSellAmount);
+            Assert.AreEqual(DateTime.Parse("2020-05-19T00:00:00+00:00"), created.ConversionDate);
+
+        }
     }
 }

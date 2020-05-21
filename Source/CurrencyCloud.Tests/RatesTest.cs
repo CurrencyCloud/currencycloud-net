@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
@@ -44,6 +45,25 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrowAsync(async () => {
                 Rate gotten = await client.GetRateAsync(new DetailedRates("EUR", "GBP", "buy", 6700));
+            });
+        }
+
+        /// <summary>
+        /// Successfully gets a rate.
+        /// </summary>
+        [Test]
+        public void GetWithConversionDatePreference()
+        {
+            player.Play("GetWithConversionDatePreference");
+
+            Assert.DoesNotThrowAsync(async () =>
+            {
+                var request = new DetailedRates("GBP", "USD", "buy", 10000);
+                request.ConversionDatePreference = "optimize_liquidity";
+                var gotten = await client.GetRateAsync(request);
+                Assert.That(gotten, Is.Not.Null);
+                Assert.AreEqual(14081.0, gotten.ClientSellAmount);
+                Assert.AreEqual(DateTime.Parse("2020-05-21T14:00:00"), gotten.SettlementCutOffTime);
             });
         }
 
