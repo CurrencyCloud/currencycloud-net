@@ -140,6 +140,12 @@ namespace CurrencyCloud.Entity
         [Param]
         public string Reason { get; set; }
 
+        ///<summary>
+        /// The preferred strategy to follow to calculate the conversion date
+        ///</summary>
+        [Param]
+        public string ConversionDatePreference { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -175,7 +181,8 @@ namespace CurrencyCloud.Entity
                     UniqueRequestId,
                     CreatedAt,
                     UpdatedAt,
-                    MidMarketRate
+                    MidMarketRate,
+                    ConversionDatePreference
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -221,7 +228,8 @@ namespace CurrencyCloud.Entity
                    UpdatedAt == conversion.UpdatedAt &&
                    UniqueRequestId == conversion.UniqueRequestId &&
                    UnallocatedFunds == conversion.UnallocatedFunds &&
-                   Reason == conversion.Reason;
+                   Reason == conversion.Reason &&
+                   ConversionDatePreference == conversion.ConversionDatePreference;
         }
 
         public override int GetHashCode()

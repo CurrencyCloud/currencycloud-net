@@ -45,6 +45,12 @@ namespace CurrencyCloud.Entity
         [Param]
         public DateTime? ConversionDate { get; set; }
 
+        ///<summary>
+        /// The preferred strategy to follow to calculate the conversion date
+        ///</summary>
+        [Param]
+        public string ConversionDatePreference { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -55,7 +61,8 @@ namespace CurrencyCloud.Entity
                     SellCurrency,
                     FixedSide,
                     Amount,
-                    ConversionDate
+                    ConversionDate,
+                    ConversionDatePreference
                 }
             };
             return JsonConvert.SerializeObject(obj);
