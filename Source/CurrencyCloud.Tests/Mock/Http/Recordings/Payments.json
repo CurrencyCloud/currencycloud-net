@@ -1777,5 +1777,52 @@
         }
       }
     ]
+  },
+  {
+    "name": "GetWithFee",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103056",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.5.5"
+          }
+        },
+        "response": {
+          "status": 200,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "id": "855fa573-1ace-4da2-a55b-912f10103056",
+            "amount": "10000.00",
+            "beneficiary_id": "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            "currency": "EUR",
+            "reference": "INVOICE 9876",
+            "reason": "Salary for March",
+            "status": "ready_to_send",
+            "creator_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "payment_type": "regular",
+            "payment_date": "2015-10-29",
+            "transferred_at": "",
+            "authorisation_steps_required": "0",
+            "last_updater_contact_id": "8f639ab2-2b85-4327-9eb1-01ee4f0c77bc",
+            "short_reference": "151027-BZMLHF001",
+            "conversion_id": "5c4716dc-42dd-4571-b4bf-0aa299fff928",
+            "failure_reason": "",
+            "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
+            "payer_details_source": "payer",
+            "created_at": "2018-01-01T12:34:56+00:00",
+            "updated_at": "2018-01-01T12:34:56+00:00",
+            "fee_amount": "100.0",
+            "fee_currency": "GBP"
+          }
+        }
+      }
+    ]
   }
 ]
