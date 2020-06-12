@@ -127,13 +127,13 @@ namespace CurrencyCloud.Entity
         /// Currency Fee is paid in
         /// </summary>
         [Param]
-        public decimal? FeeCurrency { get; set; }
+        public string FeeCurrency { get; set; }
 
         /// <summary>
         /// Fee Amount
         /// </summary>
         [Param]
-        public string FeeAmount { get; set; }
+        public decimal? FeeAmount { get; set; }
        
         /// <summary>
         /// ours or shared
