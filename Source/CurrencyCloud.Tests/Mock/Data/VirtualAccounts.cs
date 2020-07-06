@@ -11,7 +11,8 @@
             BankInstitutionName = "Community Federal Savings Bank",
             BankInstitutionAddress = "Seventh Avenue, New York, NY 10019, US",
             BankInstitutionCountry = "United States",
-            RoutingCode = "026073150"
+            RoutingCode = "026073150",
+            WireRoutingCode = "026073008"
         };
     }
 }
