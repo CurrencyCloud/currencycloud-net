@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System;
 
 namespace CurrencyCloud.Entity
 {
@@ -25,7 +26,7 @@ namespace CurrencyCloud.Entity
         /// <summary>
         /// Account holder date of birth
         /// </summary>
-        public string AccountHolderDob { get; set; }
+        public DateTime? AccountHolderDob { get; set; }
 
         /// <summary>
         /// Routing Code
