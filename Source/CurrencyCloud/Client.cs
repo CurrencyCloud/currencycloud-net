@@ -1581,8 +1581,27 @@ namespace CurrencyCloud
         }
 
         #endregion
-    }
+        
+        #region WithdrawalAccounts
+        /// <summary>
+        /// Finds Withdrawal Accounts matching the accountId. If the account Id is omitted the withdrawal accounts
+        /// for the house account and all sub-accounts are returned
+        /// </summary>
+        /// <param name="accountId">AccountId</param>
+        /// <returns>Asynchronous task, which returns the list of the found Withdrawal Accounts, as well as pagination information.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaginatedWithdrawalAccounts> FindWithdrawalAccountsAsync(String accountId = null)
+        {
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("AccountId", accountId);
 
+            return await RequestAsync<PaginatedWithdrawalAccounts>("/v2/withdrawal_accounts/find", HttpMethod.Get, paramsObj);
+        }
+    }
+    
+    #endregion
+    
     internal static class ApiExceptionFactory
     {
         private static Request CreateRequest(HttpRequestMessage requestMessage)

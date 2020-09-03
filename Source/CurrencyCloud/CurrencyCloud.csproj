@@ -103,6 +103,7 @@
     <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
+    <Compile Include="Entity\Pagination\PaginatedWithdrawalAccounts.cs" />
     <Compile Include="Entity\PaymentChargesSettings.cs" />
     <Compile Include="Entity\PaymentConfirmation.cs" />
     <Compile Include="Entity\PaymentDeliveryDates.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Entity\Transaction.cs" />
     <Compile Include="Entity\Transfer.cs" />
     <Compile Include="Entity\VirtualAccount.cs" />
+    <Compile Include="Entity\WithdrawalAccount.cs" />
     <Compile Include="Environment\ApiServer.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Environment\Platform.cs" />
