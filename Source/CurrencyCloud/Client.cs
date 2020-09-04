@@ -1583,6 +1583,7 @@ namespace CurrencyCloud
         #endregion
         
         #region WithdrawalAccounts
+        
         /// <summary>
         /// Finds Withdrawal Accounts matching the accountId. If the account Id is omitted the withdrawal accounts
         /// for the house account and all sub-accounts are returned
@@ -1598,9 +1599,33 @@ namespace CurrencyCloud
 
             return await RequestAsync<PaginatedWithdrawalAccounts>("/v2/withdrawal_accounts/find", HttpMethod.Get, paramsObj);
         }
+        
+        /// <summary>
+        /// Pull funds from a withdrawal account
+        /// </summary>
+        /// <param name="withdrawalAccountId">Id of withdrawal account to pull funds from.</param>
+        /// <param name="amount">The amount of funds to pull</param>
+        /// <param name="reference">The reference seen on the statement for pulled funds</param>
+        /// <returns>Asynchronous task, which pulls funds from a withdrawal account.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<WithdrawalAccountFunds> WithdrawalAccountsPullFundsAsync(string withdrawalAccountId, decimal amount,
+            string reference)
+        {
+            if (string.IsNullOrEmpty(withdrawalAccountId))
+                throw new ArgumentException("WithdrawalAccountId can not be null");
+            if (string.IsNullOrEmpty(reference))
+                throw new ArgumentException("Reference can not be null");
+            var paramsObj = new ParamsObject();
+            paramsObj.AddNotNull("Reference", reference);
+            paramsObj.AddNotNull("Amount", amount);
+            return await RequestAsync<WithdrawalAccountFunds>("/v2/withdrawal_accounts/"+withdrawalAccountId+"/pull_funds", 
+                HttpMethod.Post, paramsObj);
+        }
+        
+        #endregion
     }
     
-    #endregion
     
     internal static class ApiExceptionFactory
     {

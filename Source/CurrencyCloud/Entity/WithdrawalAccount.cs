@@ -70,7 +70,7 @@ namespace CurrencyCloud.Entity
 
         public override bool Equals(object obj)
         {
-            if (!(obj is BankDetails))
+            if (!(obj is WithdrawalAccount))
             {
                 return false;
             }

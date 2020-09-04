@@ -139,6 +139,7 @@
     <Compile Include="Entity\Transfer.cs" />
     <Compile Include="Entity\VirtualAccount.cs" />
     <Compile Include="Entity\WithdrawalAccount.cs" />
+    <Compile Include="Entity\WithdrawalAccountFunds.cs" />
     <Compile Include="Environment\ApiServer.cs" />
     <Compile Include="Exception\ApiException.cs" />
     <Compile Include="Environment\Platform.cs" />
