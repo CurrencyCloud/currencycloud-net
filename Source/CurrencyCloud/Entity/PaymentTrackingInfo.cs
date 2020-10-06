@@ -115,6 +115,7 @@ namespace CurrencyCloud.Entity
             public string From { get; set; }
             public string To { get; set; }
             public string Originator { get; set; }
+            public SerialPartiesDef SerialParties { get; set; }
             public DateTime? SenderAcknowledgementReceipt { get; set; }
             public AmountDef InstructedAmount { get; set; }
             public AmountDef ConfirmedAmount { get; set; }
@@ -122,7 +123,8 @@ namespace CurrencyCloud.Entity
             public DateTime? InterbankSettlementDate { get; set; }
             public AmountDef ChargeAmount { get; set; }
             public string ChargeType { get; set; }
-            public SerialPartiesDef SerialParties { get; set; }
+            public ForeignExchangeDetailsDef ForeignExchangeDetails { get; set; }
+            public DateTime? LastUpdateTime { get; set; }
             
             public string ToJSON()
             {
@@ -140,12 +142,14 @@ namespace CurrencyCloud.Entity
                         Originator,
                         SerialParties,
                         SenderAcknowledgementReceipt,
-                        InstructedAmount = InstructedAmount,
-                        ConfirmedAmount = ConfirmedAmount,
-                        InterbankSettlementAmount = InterbankSettlementAmount,
+                        InstructedAmount,
+                        ConfirmedAmount,
+                        InterbankSettlementAmount,
                         InterbankSettlementDate,
-                        ChargeAmount = ChargeAmount,
-                        ChargeType
+                        ChargeAmount,
+                        ChargeType,
+                        ForeignExchangeDetails,
+                        LastUpdateTime
                     }
                 };
                 return JsonConvert.SerializeObject(obj);
@@ -175,7 +179,9 @@ namespace CurrencyCloud.Entity
                        Equals(InterbankSettlementAmount, paymentEvent.InterbankSettlementAmount) &&
                        InterbankSettlementDate == paymentEvent.InterbankSettlementDate &&
                        Equals(ChargeAmount, paymentEvent.ChargeAmount) &&
-                       ChargeType == paymentEvent.ChargeType;
+                       ChargeType == paymentEvent.ChargeType &&
+                       Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
+                       LastUpdateTime == paymentEvent.LastUpdateTime;
             }
         }
 
@@ -262,6 +268,46 @@ namespace CurrencyCloud.Entity
 
                 return Currency == amount.Currency &&
                        Amount == amount.Amount;
+            }
+        }
+        
+        public class ForeignExchangeDetailsDef
+        {
+            [JsonConstructor]
+            public ForeignExchangeDetailsDef()
+            {
+            }
+            
+            public string SourceCurrency { get; set; }
+            public string TargetCurrency { get; set; }
+            public decimal? Rate { get; set; }
+            
+            public string ToJSON()
+            {
+                var obj = new[]
+                {
+                    new
+                    {
+                        SourceCurrency,
+                        TargetCurrency,
+                        Rate
+                    }
+                };
+                return JsonConvert.SerializeObject(obj);
+            }
+            
+            public override bool Equals(object obj)
+            {
+                if (!(obj is ForeignExchangeDetailsDef))
+                {
+                    return false;
+                }
+
+                var amount = (ForeignExchangeDetailsDef) obj;
+
+                return SourceCurrency == amount.SourceCurrency &&
+                       TargetCurrency == amount.TargetCurrency &&
+                       Rate == amount.Rate;
             }
         }
     }

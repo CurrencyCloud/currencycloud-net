@@ -127,13 +127,16 @@ namespace CurrencyCloud.Tests.Mock.Data
                         Valid = true,
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
-                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T15:39:08+00:00")
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T15:39:08+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T15:39:08+00:00")
                     },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
                         Valid = true,
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
-                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00")},
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "credit_transfer_payment_cancellation_request",
                         Valid = true,
                         From = "BANABEBBXXX",
@@ -144,23 +147,30 @@ namespace CurrencyCloud.Tests.Mock.Data
                         InterbankSettlementAmount = new PaymentTrackingInfo.AmountDef() {
                             Currency = "USD",
                             Amount = 745437.57m
-                        }
+                        },
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
                     },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
                         Valid = true,
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
-                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00")},
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
                         Valid = true,
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
-                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00")},
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "credit_transfer_payment_cancellation_request",
                         Valid = true,
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
-                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:17:39+00:00")},
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:17:39+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment",
                         Valid = true, TransactionStatus = new Entity.PaymentTrackingInfo.TransactionStatusDef {
                             Status = "processing",
@@ -183,7 +193,8 @@ namespace CurrencyCloud.Tests.Mock.Data
                         InterbankSettlementAmount = new PaymentTrackingInfo.AmountDef() {
                             Currency = "USD",
                             Amount = 745437.57m
-                        }
+                        },
+                        LastUpdateTime =  DateTime.Parse("2019-07-09T13:20:50+00:00")
                     }
             }
         };
