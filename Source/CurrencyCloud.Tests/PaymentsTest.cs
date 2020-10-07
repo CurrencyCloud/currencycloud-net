@@ -286,6 +286,21 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(100, gotten.FeeAmount);
             Assert.AreEqual("GBP", gotten.FeeCurrency);
         }
+        
+        /// <summary>
+        /// Successfully gets a tracking info for a payment.
+        /// </summary>
+        [Test]
+        public async Task GetTrackingInfo()
+        {
+            player.Play("GetTrackingInfo");
+
+            var trackingInfo1 = Payments.TrackingInfo1;
+
+            PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
+            Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
+            Assert.AreEqual(trackingInfo1, received);
+        }
 
     }
 }

@@ -1085,6 +1085,18 @@ namespace CurrencyCloud
             return await RequestAsync<QuotePaymentFee>("/v2/payments/quote_payment_fee", HttpMethod.Get, paramsObj);
         }
         
+        /// <summary>
+        /// Returns an object containing the tracking information of a payment.
+        /// </summary>
+        /// <param name="id">Id of payment.</param>
+        /// <returns>Asynchronous task, which returns the tracking info of a payment.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentTrackingInfo> GetPaymentTrackingInfoAsync(string id)
+        {
+            return await RequestAsync<PaymentTrackingInfo>("/v2/payments/" + id + "/tracking_info", HttpMethod.Get, null);
+        }
+        
         #endregion
 
         #region Rates

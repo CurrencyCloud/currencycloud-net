@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using CurrencyCloud.Entity;
 
 namespace CurrencyCloud.Tests.Mock.Data
 {
@@ -109,6 +111,92 @@ namespace CurrencyCloud.Tests.Mock.Data
             CreatedAt = new DateTime(2018, 01, 01, 12, 34, 56),
             UpdatedAt = new DateTime(2018, 01, 01, 12, 34, 56),
             ExpiresAt = new DateTime(2018, 01, 03)
+        };
+
+        public static readonly PaymentTrackingInfo TrackingInfo1 = new Entity.PaymentTrackingInfo
+        {
+            Uetr = "46ed4827-7b6f-4491-a06f-b548d5a7512d",
+            InitiationTime = DateTime.Parse("2019-07-09T13:20:30+00:00"),
+            LastUpdateTime = DateTime.Parse("2019-07-10T15:39:08+00:00"),
+            TransactionStatus = new Entity.PaymentTrackingInfo.TransactionStatusDef {
+                Status = "processing",
+                Reason = "transferred_and_tracked"
+            },
+            PaymentEvents = new List<PaymentTrackingInfo.PaymentEvent>() {
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T15:39:08+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T15:39:08+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        Originator = "BANABEBBXXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        InterbankSettlementDate = DateTime.Parse("2019-07-09T00:00:00+00:00"),
+                        InterbankSettlementAmount = new PaymentTrackingInfo.AmountDef() {
+                            Currency = "USD",
+                            Amount = 745437.57m
+                        },
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:22:41+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "credit_transfer_payment_cancellation_request",
+                        Valid = true,
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T14:17:39+00:00"),
+                        LastUpdateTime =  DateTime.Parse("2019-07-10T14:22:41+00:00")
+                    },
+                    new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment",
+                        Valid = true, TransactionStatus = new Entity.PaymentTrackingInfo.TransactionStatusDef {
+                            Status = "processing",
+                            Reason = "transferred_and_tracked"
+                        },
+                        From = "BANABEBBXXX",
+                        To = "BANAUS33XXX",
+                        Originator = "BANABEBBXXX",
+                        SerialParties = new Entity.PaymentTrackingInfo.SerialPartiesDef {
+                           DebtorAgent = "GPMRCH30",
+                            CreditorAgent = "GPMRQAJ0"
+                        },
+                        SenderAcknowledgementReceipt = DateTime.Parse("2019-07-09T13:20:30+00:00"),
+                        InterbankSettlementDate = DateTime.Parse("2019-07-09T00:00:00+00:00"),
+                        ChargeType = "shared",
+                        InstructedAmount = new PaymentTrackingInfo.AmountDef() {
+                            Currency = "USD",
+                            Amount = 745437.57m
+                        },
+                        InterbankSettlementAmount = new PaymentTrackingInfo.AmountDef() {
+                            Currency = "USD",
+                            Amount = 745437.57m
+                        },
+                        LastUpdateTime =  DateTime.Parse("2019-07-09T13:20:50+00:00")
+                    }
+            }
         };
     }
 }
