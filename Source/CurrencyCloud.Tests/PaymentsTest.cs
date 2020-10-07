@@ -296,9 +296,8 @@ namespace CurrencyCloud.Tests
             player.Play("GetTrackingInfo");
 
             var trackingInfo1 = Payments.TrackingInfo1;
-            Assert.IsNotNull(trackingInfo1,"trackingInfo1");
-            var received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
-            Assert.IsNotNull(received,"received");
+            var received = await client.GetPaymentTrackingInfoAsync("46ed4827-7b6f-4491-a06f-b548d5a7512d");
+            Assert.IsNotNull(received,"Received trackingInfo should not be Null");
             Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
             Assert.AreEqual(trackingInfo1, received);
         }
