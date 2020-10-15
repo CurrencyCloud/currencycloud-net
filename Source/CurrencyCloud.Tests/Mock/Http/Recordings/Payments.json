@@ -1828,15 +1828,15 @@
   {
     "name": "GetTrackingInfo",
     "requests": [
-      {
+      { 
         "request": {
           "method": "GET",
-          "path": "/v2/payments/46ed4827-7b6f-4491-a06f-b548d5a7512d/tracking_info",
+          "path": "/v2/payments/tracking_info",
           "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.5.6"
-          }
-        },
+          "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+          "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.5.6"
+        }
+      },
         "response": {
           "status": 500,
           "headers": {

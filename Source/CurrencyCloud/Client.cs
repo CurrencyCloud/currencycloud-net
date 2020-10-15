@@ -1094,7 +1094,7 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<PaymentTrackingInfo> GetPaymentTrackingInfoAsync(string id)
         {
-            return await RequestAsync<PaymentTrackingInfo>("/v2/payments/" + id + "/tracking_info", HttpMethod.Get, null);
+            return await RequestAsync<PaymentTrackingInfo>("/v2/payments/tracking_info", HttpMethod.Get, null);
         }
         
         #endregion
