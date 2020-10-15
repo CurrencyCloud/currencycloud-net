@@ -1824,5 +1824,40 @@
         }
       }
     ]
+  },
+  {
+    "name": "GetTrackingInfo",
+    "requests": [
+      {
+        "request": {
+          "method": "GET",
+          "path": "/v2/payments/46ed4827-7b6f-4491-a06f-b548d5a7512d/tracking_info",
+          "headers": {
+            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.5.6"
+          }
+        },
+        "response": {
+          "status": 500,
+          "headers": {
+            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
+            "Content-Type": "application/json;charset=utf-8",
+            "X-Request-Id": "2910007472633409851"
+          },
+          "body": {
+            "error_code": "A_very_bad_problem",
+            "error_messages": {
+              "base": [
+                {
+                  "code": "A_very_bad_problem",
+                  "message": "You didn't expect this did you",
+                  "params": {}
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
   }
 ]
