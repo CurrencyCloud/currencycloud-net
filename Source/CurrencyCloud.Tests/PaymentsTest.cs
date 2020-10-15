@@ -290,17 +290,17 @@ namespace CurrencyCloud.Tests
         /// <summary>
         /// Successfully gets a tracking info for a payment.
         /// </summary>
-        [Test]
-        public async Task GetTrackingInfo()
-        {
-            player.Play("GetTrackingInfo");
+//        [Test]
+//        public async Task GetTrackingInfo()
+//        {
+//            player.Play("GetTrackingInfo");
 
-            var trackingInfo1 = Payments.TrackingInfo1;
-            var received = await client.GetPaymentTrackingInfoAsync("46ed4827-7b6f-4491-a06f-b548d5a7512d");
+//            var trackingInfo1 = Payments.TrackingInfo1;
+//            var received = await client.GetPaymentTrackingInfoAsync("46ed4827-7b6f-4491-a06f-b548d5a7512d");
         //    Assert.IsNotNull(received,"Received trackingInfo should not be Null");
         //    Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
         //    Assert.AreEqual(trackingInfo1, received);
-        }
+//        }
 
     }
 }
