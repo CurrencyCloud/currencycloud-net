@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.6.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.7.1"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.6.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.7.1"
 
           }
         },
@@ -61,7 +61,7 @@
           "query": "?account_id=72970a7c-7921-431c-b95f-3438724ba16f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.6.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.7.1"
           }
         },
         "response": {
@@ -108,7 +108,7 @@
           "path": "/v2/withdrawal_accounts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.6.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.7.1"
           }
         },
         "response": {
@@ -166,7 +166,7 @@
           "body": "?reference=PullFunds1&amount=100.0",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.6.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/5.7.1"
           }
         },
         "response": {
