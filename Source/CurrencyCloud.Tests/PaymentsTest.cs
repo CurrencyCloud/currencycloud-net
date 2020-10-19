@@ -295,9 +295,9 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetTrackingInfo");
 
-//            var trackingInfo1 = Payments.TrackingInfo1;
+            var trackingInfo1 = Payments.TrackingInfo1;
 
-//            PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
+            PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
 //            Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
 //            Assert.AreEqual(trackingInfo1, received);
         }
