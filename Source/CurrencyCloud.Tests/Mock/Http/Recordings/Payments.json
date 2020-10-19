@@ -1845,7 +1845,10 @@
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "uetr": "46ed4827-7b6f-4491-a06f-b548d5a7512d"
+            "uetr": "46ed4827-7b6f-4491-a06f-b548d5a7512d",
+            "initiation_time": "2019-07-09T13:20:30+00:00",
+            "completion_time": null,
+            "last_update_time": "2019-07-10T15:39:08+00:00"
           }
         }
       }

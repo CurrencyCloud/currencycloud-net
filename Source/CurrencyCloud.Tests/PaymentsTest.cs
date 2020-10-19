@@ -299,7 +299,7 @@ namespace CurrencyCloud.Tests
 
             PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync("46ed4827-7b6f-4491-a06f-b548d5a7512d");
             Assert.NotNull(received);
-    //        Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
+            Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
     //        Assert.AreEqual(trackingInfo1, received);
         }
 
