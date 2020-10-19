@@ -20,8 +20,7 @@ namespace CurrencyCloud.Entity
 
         public TransactionStatusDef TransactionStatus { get; set; }
 
-        public List<PaymentEvent> PaymentEvents { get; set; }
-        
+         
         public string ToJSON()
         {
             var obj = new[]
@@ -32,8 +31,7 @@ namespace CurrencyCloud.Entity
                     InitiationTime,
                     CompletionTime,
                     LastUpdateTime,
-                    TransactionStatus,
-                    PaymentEvents
+                    TransactionStatus
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -52,10 +50,7 @@ namespace CurrencyCloud.Entity
                    InitiationTime == paymentTrackingInfo.InitiationTime &&
                    CompletionTime == paymentTrackingInfo.CompletionTime &&
                    LastUpdateTime == paymentTrackingInfo.LastUpdateTime &&
-                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus) &&
-                   (PaymentEvents == paymentTrackingInfo.PaymentEvents ||
-                    (PaymentEvents != null && paymentTrackingInfo.PaymentEvents != null &&
-                     PaymentEvents.SequenceEqual(paymentTrackingInfo.PaymentEvents)));
+                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus);
         }
 
         public override int GetHashCode()
