@@ -15,7 +15,8 @@ namespace CurrencyCloud.Entity
         public DateTime? CompletionTime { get; set; }
 
         public DateTime? LastUpdateTime { get; set; }
-
+        
+        public TransactionStatusDef TransactionStatus { get; set; }
 
         public string ToJSON()
         {
@@ -26,7 +27,8 @@ namespace CurrencyCloud.Entity
                     Uetr,
                     InitiationTime,
                     CompletionTime,
-                    LastUpdateTime
+                    LastUpdateTime,
+                    TransactionStatus
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -44,7 +46,8 @@ namespace CurrencyCloud.Entity
             return Uetr == paymentTrackingInfo.Uetr &&
                    InitiationTime == paymentTrackingInfo.InitiationTime &&
                    CompletionTime == paymentTrackingInfo.CompletionTime &&
-                   LastUpdateTime == paymentTrackingInfo.LastUpdateTime;
+                   LastUpdateTime == paymentTrackingInfo.LastUpdateTime &&
+                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus);
         }
 
         public override int GetHashCode()
