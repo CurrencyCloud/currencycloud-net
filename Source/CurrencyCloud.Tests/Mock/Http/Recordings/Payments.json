@@ -1852,7 +1852,100 @@
             "transaction_status": {
               "status": "processing",
               "reason": "transferred_and_tracked"
-            }
+            },
+            "payment_events": [
+              {
+                "tracker_event_type": "customer_credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": null,
+                "sender_acknowledgement_receipt": "2019-07-10T15:39:08+00:00",
+                "interbank_settlement_date": null,
+                "charge_type": null,
+                "last_update_time": "2019-07-10T15:39:08+00:00"
+              },
+              {
+                "tracker_event_type": "customer_credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": null,
+                "sender_acknowledgement_receipt": "2019-07-10T14:22:41+00:00",
+                "interbank_settlement_date": null,
+                "charge_type": null,
+                "last_update_time": "2019-07-10T14:22:41+00:00"
+              },
+              {
+                "tracker_event_type": "credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": "BANABEBBXXX",
+                "sender_acknowledgement_receipt": "2019-07-10T14:22:41+00:00",
+                "interbank_settlement_date": "2019-07-09T00:00:00+00:00",
+                "charge_type": null,
+                "last_update_time": "2019-07-10T14:22:41+00:00"
+              },
+              {
+                "tracker_event_type": "customer_credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": null,
+                "sender_acknowledgement_receipt": "2019-07-10T14:22:41+00:00",
+                "interbank_settlement_date": null,
+                "charge_type": null,
+                "last_update_time": "2019-07-10T14:22:41+00:00"
+              },
+              {
+                "tracker_event_type": "customer_credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": null,
+                "sender_acknowledgement_receipt": "2019-07-10T14:22:41+00:00",
+                "interbank_settlement_date": null,
+                "charge_type": null,
+                "last_update_time": "2019-07-10T14:22:41+00:00"
+              },
+              {
+                "tracker_event_type": "credit_transfer_payment_cancellation_request",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": null,
+                "sender_acknowledgement_receipt": "2019-07-10T14:17:39+00:00",
+                "interbank_settlement_date": null,
+                "charge_type": null,
+                "last_update_time": "2019-07-10T14:22:41+00:00"
+              },
+              {
+                "tracker_event_type": "customer_credit_transfer_payment",
+                "valid": true,
+                "funds_available": null,
+                "forwarded_to_agent": null,
+                "from": "BANABEBBXXX",
+                "to": "BANAUS33XXX",
+                "originator": "BANABEBBXXX",
+                "sender_acknowledgement_receipt": "2019-07-09T13:20:30+00:00",
+                "interbank_settlement_date": "2019-07-09T00:00:00+00:00",
+                "charge_type": "shared",
+                "last_update_time": "2019-07-09T13:20:50+00:00"
+              }
+            ]
           }
         }
       }

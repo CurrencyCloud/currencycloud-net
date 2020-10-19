@@ -1,5 +1,7 @@
 using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CurrencyCloud.Entity
 {
@@ -17,7 +19,9 @@ namespace CurrencyCloud.Entity
         public DateTime? LastUpdateTime { get; set; }
         
         public TransactionStatusDef TransactionStatus { get; set; }
-
+        
+        public List<PaymentEvent> PaymentEvents { get; set; }
+        
         public string ToJSON()
         {
             var obj = new[]
@@ -28,7 +32,8 @@ namespace CurrencyCloud.Entity
                     InitiationTime,
                     CompletionTime,
                     LastUpdateTime,
-                    TransactionStatus
+                    TransactionStatus,
+                    PaymentEvents
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -47,7 +52,10 @@ namespace CurrencyCloud.Entity
                    InitiationTime == paymentTrackingInfo.InitiationTime &&
                    CompletionTime == paymentTrackingInfo.CompletionTime &&
                    LastUpdateTime == paymentTrackingInfo.LastUpdateTime &&
-                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus);
+                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus) &&
+                   (PaymentEvents == paymentTrackingInfo.PaymentEvents ||
+                    (PaymentEvents != null && paymentTrackingInfo.PaymentEvents != null &&
+                     PaymentEvents.SequenceEqual(paymentTrackingInfo.PaymentEvents)));
         }
 
         public override int GetHashCode()
@@ -101,21 +109,21 @@ namespace CurrencyCloud.Entity
         
             public string TrackerEventType { get; set; }
             public bool Valid { get; set; }
-            public TransactionStatusDef TransactionStatus { get; set; }
+//            public TransactionStatusDef TransactionStatus { get; set; }
             public DateTime? FundsAvailable { get; set; }
             public string ForwardedToAgent { get; set; }
             public string From { get; set; }
             public string To { get; set; }
             public string Originator { get; set; }
-            public SerialPartiesDef SerialParties { get; set; }
+//            public SerialPartiesDef SerialParties { get; set; }
             public DateTime? SenderAcknowledgementReceipt { get; set; }
-            public AmountDef InstructedAmount { get; set; }
-            public AmountDef ConfirmedAmount { get; set; }
-            public AmountDef InterbankSettlementAmount { get; set; }
+//            public AmountDef InstructedAmount { get; set; }
+//            public AmountDef ConfirmedAmount { get; set; }
+//            public AmountDef InterbankSettlementAmount { get; set; }
             public DateTime? InterbankSettlementDate { get; set; }
-            public AmountDef ChargeAmount { get; set; }
+//            public AmountDef ChargeAmount { get; set; }
             public string ChargeType { get; set; }
-            public ForeignExchangeDetailsDef ForeignExchangeDetails { get; set; }
+//            public ForeignExchangeDetailsDef ForeignExchangeDetails { get; set; }
             public DateTime? LastUpdateTime { get; set; }
             
             public string ToJSON()
@@ -126,21 +134,21 @@ namespace CurrencyCloud.Entity
                     {
                         TrackerEventType,
                         Valid,
-                        TransactionStatus,
+//                        TransactionStatus,
                         FundsAvailable,
                         ForwardedToAgent,
                         From,
                         To,
                         Originator,
-                        SerialParties,
+//                        SerialParties,
                         SenderAcknowledgementReceipt,
-                        InstructedAmount,
-                        ConfirmedAmount,
-                        InterbankSettlementAmount,
+//                        InstructedAmount,
+//                        ConfirmedAmount,
+//                        InterbankSettlementAmount,
                         InterbankSettlementDate,
-                        ChargeAmount,
+//                        ChargeAmount,
                         ChargeType,
-                        ForeignExchangeDetails,
+//                        ForeignExchangeDetails,
                         LastUpdateTime
                     }
                 };
@@ -158,21 +166,21 @@ namespace CurrencyCloud.Entity
 
                 return TrackerEventType == paymentEvent.TrackerEventType &&
                        Valid == paymentEvent.Valid &&
-                       Equals(TransactionStatus, paymentEvent.TransactionStatus) &&
+//                       Equals(TransactionStatus, paymentEvent.TransactionStatus) &&
                        FundsAvailable == paymentEvent.FundsAvailable &&
                        ForwardedToAgent == paymentEvent.ForwardedToAgent &&
                        From == paymentEvent.From &&
                        To == paymentEvent.To &&
                        Originator == paymentEvent.Originator &&
-                       Equals(SerialParties, paymentEvent.SerialParties) &&
+//                       Equals(SerialParties, paymentEvent.SerialParties) &&
                        SenderAcknowledgementReceipt == paymentEvent.SenderAcknowledgementReceipt &&
-                       Equals(InstructedAmount, paymentEvent.InstructedAmount) &&
-                       Equals(ConfirmedAmount, paymentEvent.ConfirmedAmount) &&
-                       Equals(InterbankSettlementAmount, paymentEvent.InterbankSettlementAmount) &&
+//                       Equals(InstructedAmount, paymentEvent.InstructedAmount) &&
+//                       Equals(ConfirmedAmount, paymentEvent.ConfirmedAmount) &&
+//                       Equals(InterbankSettlementAmount, paymentEvent.InterbankSettlementAmount) &&
                        InterbankSettlementDate == paymentEvent.InterbankSettlementDate &&
-                       Equals(ChargeAmount, paymentEvent.ChargeAmount) &&
+//                       Equals(ChargeAmount, paymentEvent.ChargeAmount) &&
                        ChargeType == paymentEvent.ChargeType &&
-                       Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
+//                       Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
                        LastUpdateTime == paymentEvent.LastUpdateTime;
             }
         }
