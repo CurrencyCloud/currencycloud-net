@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -18,9 +16,7 @@ namespace CurrencyCloud.Entity
 
         public DateTime? LastUpdateTime { get; set; }
 
-        public TransactionStatusDef TransactionStatus { get; set; }
 
-         
         public string ToJSON()
         {
             var obj = new[]
@@ -30,8 +26,7 @@ namespace CurrencyCloud.Entity
                     Uetr,
                     InitiationTime,
                     CompletionTime,
-                    LastUpdateTime,
-                    TransactionStatus
+                    LastUpdateTime
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -49,8 +44,7 @@ namespace CurrencyCloud.Entity
             return Uetr == paymentTrackingInfo.Uetr &&
                    InitiationTime == paymentTrackingInfo.InitiationTime &&
                    CompletionTime == paymentTrackingInfo.CompletionTime &&
-                   LastUpdateTime == paymentTrackingInfo.LastUpdateTime &&
-                   Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus);
+                   LastUpdateTime == paymentTrackingInfo.LastUpdateTime;
         }
 
         public override int GetHashCode()

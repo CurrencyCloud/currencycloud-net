@@ -117,11 +117,7 @@ namespace CurrencyCloud.Tests.Mock.Data
         {
             Uetr = "46ed4827-7b6f-4491-a06f-b548d5a7512d",
             InitiationTime = DateTime.Parse("2019-07-09T13:20:30+00:00"),
-            LastUpdateTime = DateTime.Parse("2019-07-10T15:39:08+00:00"),
-            TransactionStatus = new Entity.PaymentTrackingInfo.TransactionStatusDef {
-                Status = "processing",
-                Reason = "transferred_and_tracked"
-            }
+            LastUpdateTime = DateTime.Parse("2019-07-10T15:39:08+00:00")
         };
     }
 }
