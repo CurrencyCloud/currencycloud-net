@@ -17,18 +17,6 @@ namespace CurrencyCloud.Entity
         public string Description { get; set; }
 
         ///<summary>
-        /// ID of account
-        ///</summary>
-        [Param]
-        public string AccountId { get; set; }
-
-        ///<summary>
-        /// ID of contact
-        ///</summary>
-        [Param]
-        public string ContactId { get; set; }
-
-        ///<summary>
         /// Start date (for range) when the reports were created
         ///</summary>
         [Param]
