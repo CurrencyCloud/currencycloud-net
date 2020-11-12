@@ -100,7 +100,6 @@
     <Compile Include="Entity\Pagination\PaginatedIbans.cs" />
     <Compile Include="Entity\Pagination\PaginatedReportRequests.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransactions.cs" />
-    <Compile Include="Entity\Pagination\PaginatedSettlements.cs" />
     <Compile Include="Entity\Pagination\PaginatedTransfers.cs" />
     <Compile Include="Entity\Pagination\PaginatedVirtualAccounts.cs" />
     <Compile Include="Entity\Pagination\PaginatedWithdrawalAccounts.cs" />
@@ -135,7 +134,6 @@
     <Compile Include="Entity\Payer.cs" />
     <Compile Include="Entity\Payment.cs" />
     <Compile Include="Entity\Rate.cs" />
-    <Compile Include="Entity\Settlement.cs" />
     <Compile Include="Entity\Transaction.cs" />
     <Compile Include="Entity\Transfer.cs" />
     <Compile Include="Entity\VirtualAccount.cs" />
