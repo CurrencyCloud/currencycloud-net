@@ -1,4 +1,5 @@
-﻿using CurrencyCloud.Entity;
+﻿using System;
+using CurrencyCloud.Entity;
 using NUnit.Framework;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Tests.Mock.Http;
@@ -56,7 +57,12 @@ namespace CurrencyCloud.Tests
             player.Play("GetConversionDates");
 
             Assert.DoesNotThrowAsync(async () => {
-                ConversionDatesList gotten = await client.GetConversionDatesAsync("USDGBP");
+                ConversionDatesList conversionDates = await client.GetConversionDatesAsync("USDGBP");
+                Assert.AreEqual(DateTime.Parse("2020-11-12T00:00:00"), conversionDates.DefaultConversionDate);
+                Assert.AreEqual(DateTime.Parse("2020-11-10T00:00:00"), conversionDates.FirstConversionDate);
+                Assert.AreEqual(DateTime.Parse("2020-11-10T23:19:00+00:00"), conversionDates.FirstConversionCutoffDatetime);
+                Assert.AreEqual(DateTime.Parse("2020-11-12T00:00:00"), conversionDates.OptimizeLiquidityConversionDate);
+                Assert.AreEqual(241, conversionDates.InvalidConversionDates.Count);
             });
         }
 
