@@ -57,7 +57,6 @@
     <Compile Include="PaymentsTest.cs" />
     <Compile Include="ReportRequestsTest.cs" />
     <Compile Include="TransactionsTest.cs" />
-    <Compile Include="SettlementsTest.cs" />
     <Compile Include="ReferenceTest.cs" />
     <Compile Include="RatesTest.cs" />
     <Compile Include="Mock\Data\Payments.cs" />
@@ -82,7 +81,6 @@
   <ItemGroup>
     <None Include="Mock\Http\Recordings\Beneficiaries.json" />
     <None Include="Mock\Http\Recordings\Transactions.json" />
-    <None Include="Mock\Http\Recordings\Settlements.json" />
     <None Include="Mock\Http\Recordings\Reference.json" />
     <None Include="Mock\Http\Recordings\Rates.json" />
     <None Include="Mock\Http\Recordings\Payments.json" />
