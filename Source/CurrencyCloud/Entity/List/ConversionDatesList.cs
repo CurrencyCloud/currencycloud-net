@@ -13,6 +13,10 @@ namespace CurrencyCloud.Entity.List
         public DateTime FirstConversionDate { get; set; }
 
         public DateTime DefaultConversionDate { get; set; }
+        
+        public DateTime OptimizeLiquidityConversionDate { get; set; }
+
+        public DateTime FirstConversionCutoffDatetime { get; set; }
 
         public string ToJSON()
         {
@@ -22,7 +26,9 @@ namespace CurrencyCloud.Entity.List
                 {
                     InvalidConversionDates,
                     FirstConversionDate,
-                    DefaultConversionDate
+                    DefaultConversionDate,
+                    OptimizeLiquidityConversionDate,
+                    FirstConversionCutoffDatetime
                 }
             };
             return JsonConvert.SerializeObject(obj);
