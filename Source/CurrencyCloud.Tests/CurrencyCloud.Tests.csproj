@@ -1,127 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{051CB67F-AD6C-46B7-B038-0DA6C0F248BC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CurrencyCloud.Tests</RootNamespace>
-    <AssemblyName>CurrencyCloud.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <LangVersion>6</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="nunit.framework, Version=3.11.0.0, Culture=neutral, PublicKeyToken=2638cd05610744eb">
-      <HintPath>..\packages\NUnit.3.11.0\lib\net45\nunit.framework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Web" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="BackoffRetryTest.cs" />
-    <Compile Include="FundingTest.cs" />
-    <Compile Include="IbansTest.cs" />
-    <Compile Include="Mock\Data\Ibans.cs" />
-    <Compile Include="Mock\Data\ReportRequests.cs" />
-    <Compile Include="Mock\Data\Transactions.cs" />
-    <Compile Include="Mock\Data\Transfers.cs" />
-    <Compile Include="Mock\Data\VirtualAccounts.cs" />
-    <Compile Include="PaymentsTest.cs" />
-    <Compile Include="ReportRequestsTest.cs" />
-    <Compile Include="TransactionsTest.cs" />
-    <Compile Include="ReferenceTest.cs" />
-    <Compile Include="RatesTest.cs" />
-    <Compile Include="Mock\Data\Payments.cs" />
-    <Compile Include="PayersTest.cs" />
-    <Compile Include="ConversionsTest.cs" />
-    <Compile Include="ContactsTest.cs" />
-    <Compile Include="BeneficiariesTest.cs" />
-    <Compile Include="BalancesTest.cs" />
-    <Compile Include="ClientTest.cs" />
-    <Compile Include="AccountsTest.cs" />
-    <Compile Include="Mock\Data\Conversions.cs" />
-    <Compile Include="Mock\Data\Contacts.cs" />
-    <Compile Include="Mock\Data\Beneficiaries.cs" />
-    <Compile Include="Mock\Data\Accounts.cs" />
-    <Compile Include="Mock\Data\Authentication.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mock\Http\Player.cs" />
-    <Compile Include="TransfersTest.cs" />
-    <Compile Include="VirtualAccountsTest.cs" />
-    <Compile Include="WithdrawalAccountsTest.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Mock\Http\Recordings\Beneficiaries.json" />
-    <None Include="Mock\Http\Recordings\Transactions.json" />
-    <None Include="Mock\Http\Recordings\Reference.json" />
-    <None Include="Mock\Http\Recordings\Rates.json" />
-    <None Include="Mock\Http\Recordings\Payments.json" />
-    <None Include="Mock\Http\Recordings\Payers.json" />
-    <None Include="Mock\Http\Recordings\Conversions.json" />
-    <None Include="Mock\Http\Recordings\Contacts.json" />
-    <None Include="Mock\Http\Recordings\Balances.json" />
-    <None Include="Mock\Http\Recordings\Accounts.json" />
-    <None Include="Mock\Http\Recordings\Client.json" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CurrencyCloud\CurrencyCloud.csproj">
-      <Project>{e2c08eff-8a14-4c77-abd3-c9e193ae81e8}</Project>
-      <Name>CurrencyCloud</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Mock\Http\Recordings\BackoffRetry.json" />
-    <Content Include="Mock\Http\Recordings\Funding.json" />
-    <Content Include="Mock\Http\Recordings\Ibans.json" />
-    <Content Include="Mock\Http\Recordings\ReportRequests.json" />
-    <Content Include="Mock\Http\Recordings\Transfers.json" />
-    <Content Include="Mock\Http\Recordings\VirtualAccounts.json" />
-    <Content Include="Mock\Http\Recordings\WithdrawalAccounts.json" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105.The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.11.0\build\NUnit.props'))" />
-  </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<LangVersion>8</LangVersion>
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.1</TargetFramework>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<IsPackable>false</IsPackable>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="Mock\Http\Recordings\Beneficiaries.json" />
+		<None Include="Mock\Http\Recordings\Transactions.json" />
+		<None Include="Mock\Http\Recordings\Reference.json" />
+		<None Include="Mock\Http\Recordings\Rates.json" />
+		<None Include="Mock\Http\Recordings\Payments.json" />
+		<None Include="Mock\Http\Recordings\Payers.json" />
+		<None Include="Mock\Http\Recordings\Conversions.json" />
+		<None Include="Mock\Http\Recordings\Contacts.json" />
+		<None Include="Mock\Http\Recordings\Balances.json" />
+		<None Include="Mock\Http\Recordings\Accounts.json" />
+		<None Include="Mock\Http\Recordings\Client.json" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CurrencyCloud\CurrencyCloud.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+		<PackageReference Include="NUnit" Version="3.12.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+	</ItemGroup>
 </Project>

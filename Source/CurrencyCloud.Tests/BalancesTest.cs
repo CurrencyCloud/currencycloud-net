@@ -6,6 +6,7 @@ using CurrencyCloud.Environment;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Entity.Pagination;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace CurrencyCloud.Tests
 {
@@ -13,7 +14,7 @@ namespace CurrencyCloud.Tests
     class BalancesTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Balances.json");
+        Player player = new Player("./Mock/Http/Recordings/Balances.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -96,7 +97,7 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual("GBP", topUp.Currency);
             Assert.AreEqual(450, topUp.TransferredAmount);
             Assert.AreEqual("6c046c51-2387-4004-8e87-4bf97102e36d", topUp.AccountId);
-            Assert.AreEqual(DateTime.Parse("2007-11-19 14:37:48"), topUp.TransferCompletedAt);
+            Assert.AreEqual(DateTime.Parse("2007-11-19T08:37:48-06:00", CultureInfo.InvariantCulture), topUp.TransferCompletedAt);
 
 
         }
