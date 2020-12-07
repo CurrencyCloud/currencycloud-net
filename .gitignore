@@ -401,3 +401,9 @@ ASALocalRun/
 
 # MSBuild Binary and Structured Log
 *.binlog
+
+#Artefacts
+Artefacts/
+
+#Cake tools
+tools/

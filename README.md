@@ -5,11 +5,11 @@ This is the official .NET SDK for v2 of Currencycloud's API. Additional document
 ## Installation
 The library is distributed on `NuGet`. To install the latest version, run the following command in the Package Manager Console: 
 ```sh
-PM> Install-Package Currencycloud
+PM> Install-Package Currencycloud-core
 ```
 
 ## Supported .NET versions
-The least supported .NET framework version is 4.5.
+The least supported .NET Standard version is 2.1.
 
 # Usage
 The following example retrieves a list of all tradeable currencies:
