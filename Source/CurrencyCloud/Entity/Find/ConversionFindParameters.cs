@@ -17,12 +17,6 @@ namespace CurrencyCloud.Entity
         public string Status { get; set; }
 
         ///<summary>
-        /// The partner status of the Conversion
-        ///</summary>
-        [Param]
-        public string PartnerStatus { get; set; }
-
-        ///<summary>
         /// 3 character ISO 4217 currency code
         ///</summary>
         [Param]
