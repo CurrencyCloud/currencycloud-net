@@ -45,12 +45,7 @@ namespace CurrencyCloud.Entity
         /// The current status of the Conversion
         ///</summary>
         public string Status { get; set; }
-
-        ///<summary>
-        /// The partner status of the Conversion
-        ///</summary>
-        public string PartnerStatus { get; set; }
-
+        
         ///<summary>
         /// Currency pair
         ///</summary>
@@ -167,7 +162,6 @@ namespace CurrencyCloud.Entity
                     FixedSide,
                     CoreRate,
                     PartnerRate,
-                    PartnerStatus,
                     PartnerBuyAmount,
                     PartnerSellAmount,
                     ClientRate,
@@ -204,7 +198,6 @@ namespace CurrencyCloud.Entity
                    SettlementDate == conversion.SettlementDate &&
                    ConversionDate == conversion.ConversionDate &&
                    Status == conversion.Status &&
-                   PartnerStatus == conversion.PartnerStatus &&
                    CurrencyPair == conversion.CurrencyPair &&
                    BuyCurrency == conversion.BuyCurrency &&
                    AccountId == conversion.AccountId &&

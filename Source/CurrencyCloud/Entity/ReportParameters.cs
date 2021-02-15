@@ -124,11 +124,7 @@ namespace CurrencyCloud.Entity
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             [Param]
             public string ClientStatus { get; set; }
-
-            [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-            [Param]
-            public string PartnerStatus { get; set; }
-
+            
             [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
             [Param]
             public DateTime? ConversionDateFrom { get; set; }
@@ -182,7 +178,6 @@ namespace CurrencyCloud.Entity
                        PartnerSellAmountFrom == reportParameters.PartnerSellAmountFrom &&
                        PartnerSellAmountTo == reportParameters.PartnerSellAmountTo &&
                        ClientStatus == reportParameters.ClientStatus &&
-                       PartnerStatus == reportParameters.PartnerStatus &&
                        ConversionDateFrom == reportParameters.ConversionDateFrom &&
                        ConversionDateTo == reportParameters.ConversionDateTo &&
                        SettlementDateFrom == reportParameters.SettlementDateFrom &&
@@ -223,7 +218,6 @@ namespace CurrencyCloud.Entity
                     hashCode = (hashCode * 397) ^ PartnerSellAmountFrom.GetHashCode();
                     hashCode = (hashCode * 397) ^ PartnerSellAmountTo.GetHashCode();
                     hashCode = (hashCode * 397) ^ (ClientStatus != null ? ClientStatus.GetHashCode() : 0);
-                    hashCode = (hashCode * 397) ^ (PartnerStatus != null ? PartnerStatus.GetHashCode() : 0);
                     hashCode = (hashCode * 397) ^ ConversionDateFrom.GetHashCode();
                     hashCode = (hashCode * 397) ^ ConversionDateTo.GetHashCode();
                     hashCode = (hashCode * 397) ^ SettlementDateFrom.GetHashCode();
