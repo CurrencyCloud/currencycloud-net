@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace CurrencyCloud.Environment
 {
-    static class Platform
+    internal static class Platform
     {
         static Platform()
         {

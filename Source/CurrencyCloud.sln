@@ -1,8 +1,9 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyCloud", "CurrencyCloud\CurrencyCloud.csproj", "{E2C08EFF-8A14-4C77-ABD3-C9E193AE81E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CurrencyCloud", "CurrencyCloud\CurrencyCloud.csproj", "{E2C08EFF-8A14-4C77-ABD3-C9E193AE81E8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CurrencyCloud.Tests", "CurrencyCloud.Tests\CurrencyCloud.Tests.csproj", "{051CB67F-AD6C-46B7-B038-0DA6C0F248BC}"
 EndProject
@@ -23,5 +24,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A9D40999-5F06-4FCD-BA07-07000D5C2718}
 	EndGlobalSection
 EndGlobal
