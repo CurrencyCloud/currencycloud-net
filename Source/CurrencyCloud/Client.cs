@@ -1457,6 +1457,18 @@ namespace CurrencyCloud
             return await RequestAsync<PaginatedTransfers>("/v2/transfers/find", HttpMethod.Get, optional);
         }
 
+        /// <summary>
+        /// Cancels a transfer.
+        /// </summary>
+        /// <param name="id">Id of the transfer to be cancelled.</param>
+        /// <returns>Asynchronous task, which returns the cancelled conversion.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<Transfer> CancelTransferAsync(string id)
+        {
+            return await RequestAsync<Transfer>("/v2/transfers/" + id + "/cancel", HttpMethod.Post, null);
+        }
+        
         #endregion
 
         #region VirtualAccounts
