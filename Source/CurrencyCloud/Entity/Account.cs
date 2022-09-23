@@ -129,6 +129,11 @@ namespace CurrencyCloud.Entity
 
         public string SettlementType { get; set; }
 
+        ///<summary>
+        /// Account has accepted the required terms and conditions
+        ///</summary>
+        public bool? TermsAndConditionsAccepted { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -156,7 +161,8 @@ namespace CurrencyCloud.Entity
                     OnlineTrading,
                     PhoneTrading,
                     ProcessThirdPartyFunds,
-                    SettlementType
+                    SettlementType,
+                    TermsAndConditionsAccepted
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -192,7 +198,8 @@ namespace CurrencyCloud.Entity
                    OnlineTrading == account.OnlineTrading &&
                    PhoneTrading == account.PhoneTrading &&
                    ProcessThirdPartyFunds == account.ProcessThirdPartyFunds &&
-                   SettlementType == account.SettlementType;
+                   SettlementType == account.SettlementType &&
+                   TermsAndConditionsAccepted == account.TermsAndConditionsAccepted;
         }
 
         public override int GetHashCode()

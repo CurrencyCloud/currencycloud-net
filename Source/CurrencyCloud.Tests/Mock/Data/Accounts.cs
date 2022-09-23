@@ -18,7 +18,8 @@
                 Brand = "currencycloud",
                 ApiTrading = true,
                 OnlineTrading = true,
-                PhoneTrading = true
+                PhoneTrading = true,
+                TermsAndConditionsAccepted = true
         };
 
         public static readonly Entity.Account Account2 = new Entity.Account(
