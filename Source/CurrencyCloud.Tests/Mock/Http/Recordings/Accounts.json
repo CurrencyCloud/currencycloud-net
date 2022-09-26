@@ -57,7 +57,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/accounts/create",
-          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none",
+          "body": "?account_name=Acme%20Ltd.&legal_entity_type=company&your_reference=POS-UID-23523&status=enabled&street=12%20Steward%20St&city=London&state_or_province=London&postal_code=E1%206FQ&country=GB&spread_table=no_markup&identification_type=none&terms_and_conditions_accepted=true",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.2.0"
@@ -92,7 +92,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": true
           }
         }
       },
@@ -134,7 +135,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       }
@@ -182,7 +184,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       },
@@ -224,7 +227,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       }
@@ -272,7 +276,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       },
@@ -315,7 +320,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       },
@@ -357,7 +363,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       }
@@ -404,7 +411,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       },
@@ -449,7 +457,8 @@
                 "online_trading": true,
                 "phone_trading": true,
                 "process_third_party_funds": true,
-                "settlement_type": "net"
+                "settlement_type": "net",
+                "terms_and_conditions_accepted": null
               }
             ],
             "pagination": {
@@ -508,7 +517,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       },
@@ -552,7 +562,8 @@
                 "online_trading": true,
                 "phone_trading": true,
                 "process_third_party_funds": true,
-                "settlement_type": "net"
+                "settlement_type": "net",
+                "terms_and_conditions_accepted": null
               }
             ],
             "pagination": {
@@ -611,7 +622,8 @@
             "online_trading": true,
             "phone_trading": true,
             "process_third_party_funds": true,
-            "settlement_type": "net"
+            "settlement_type": "net",
+            "terms_and_conditions_accepted": null
           }
         }
       }

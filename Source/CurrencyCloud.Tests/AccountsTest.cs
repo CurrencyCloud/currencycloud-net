@@ -63,6 +63,7 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(account1.ApiTrading, created.ApiTrading);
             Assert.AreEqual(account1.OnlineTrading, created.OnlineTrading);
             Assert.AreEqual(account1.PhoneTrading, created.PhoneTrading);
+            Assert.AreEqual(account1.TermsAndConditionsAccepted, created.TermsAndConditionsAccepted);
         }
 
         /// <summary>
