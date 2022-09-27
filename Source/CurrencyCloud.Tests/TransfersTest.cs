@@ -115,5 +115,21 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(transfer3.Status, found.Transfers[0].Status);
             Assert.AreEqual(transfer3.Reason, found.Transfers[0].Reason);
         }
+        
+        /// <summary>
+        /// Successfully Cancels a transfer.
+        /// </summary>
+        [Test]
+        public async Task Cancel()
+        {
+            player.Play("Cancel");
+
+            var transfer2 = Transfers.Transfer2;
+
+            Transfer created = await client.CreateTransferAsync(transfer2);
+            Transfer gotten = await client.CancelTransferAsync(created.Id);
+
+            Assert.AreEqual(gotten, created);
+        }
     }
 }
