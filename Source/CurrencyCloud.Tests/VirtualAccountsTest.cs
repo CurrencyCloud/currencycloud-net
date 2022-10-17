@@ -55,6 +55,7 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(van.BankInstitutionAddress, found.VirtualAccounts[0].BankInstitutionAddress);
             Assert.AreEqual(van.BankInstitutionCountry, found.VirtualAccounts[0].BankInstitutionCountry);
             Assert.AreEqual(van.RoutingCode, found.VirtualAccounts[0].RoutingCode);
+            Assert.AreEqual(van.WireRoutingCode, found.VirtualAccounts[0].WireRoutingCode);
         }
 
     }
