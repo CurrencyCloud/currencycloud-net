@@ -459,9 +459,9 @@
       },
       {
         "request": {
-          "method": "GET",
-          "path": "/v2/reference/bank_details",
-          "query": "?identifier_type=iban&identifier_value=123abc456xyz",
+          "method": "POST",
+          "path": "/v2/reference/bank_details/find",
+          "body": "?identifier_type=iban&identifier_value=123abc456xyz",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"

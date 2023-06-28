@@ -510,9 +510,9 @@
       },
       {
         "request": {
-          "method": "GET",
+          "method": "POST",
           "path": "/v2/beneficiaries/find",
-          "query": "?name=Employee%20Funds&order=created_at&order_asc_desc=desc&per_page=5",
+          "body": "?name=Employee%20Funds&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
@@ -639,7 +639,7 @@
       },
       {
         "request": {
-          "method": "GET",
+          "method": "POST",
           "path": "/v2/beneficiaries/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",

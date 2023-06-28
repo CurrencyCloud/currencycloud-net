@@ -537,9 +537,9 @@
       },
       {
         "request": {
-          "method": "GET",
+          "method": "POST",
           "path": "/v2/contacts/find",
-          "query": "?login_id=development@currencycloud.com&order=created_at&order_asc_desc=desc&per_page=5",
+          "body": "?login_id=development@currencycloud.com&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
@@ -629,7 +629,7 @@
       },
       {
         "request": {
-          "method": "GET",
+          "method": "POST",
           "path": "/v2/contacts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
