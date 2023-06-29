@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -59,7 +59,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -97,7 +97,7 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -134,7 +134,7 @@
           "body": "?login_id=john",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -159,7 +159,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -197,7 +197,7 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -238,7 +238,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -276,7 +276,7 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -312,7 +312,7 @@
           "path": "/v2/contacts/38b2e976-60c3-416a-be2e-51c700aed246",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -353,7 +353,7 @@
           "path": "/v2/accounts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -391,7 +391,7 @@
           "body": "?account_id=78618e58-da3c-447f-ad59-1796accfeff9&first_name=John&last_name=Smith&email_address=john.smith@company.com&phone_number=06554%2087845&your_reference=ACME12345&mobile_phone_number=07564%20534%2054&login_id=john&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1980-01-22",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -428,7 +428,7 @@
           "body": "?first_name=Emmet&last_name=Brown&email_address=dr.emmet.brown@company.com&phone_number=073%20789%201661&your_reference=doc&mobile_phone_number=073%20789%201661&login_id=emmet&status=enabled&locale=en-US&timezone=Europe/London&date_of_birth=1960-01-29",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -464,7 +464,7 @@
           "path": "/v2/contacts/38b2e976-60c3-416a-be2e-51c700aed246",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -505,7 +505,7 @@
           "path": "/v2/contacts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -542,7 +542,7 @@
           "body": "?login_id=development@currencycloud.com&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -597,7 +597,7 @@
           "path": "/v2/contacts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -633,7 +633,7 @@
           "path": "/v2/contacts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -688,7 +688,7 @@
           "path": "/v2/contacts/current",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {

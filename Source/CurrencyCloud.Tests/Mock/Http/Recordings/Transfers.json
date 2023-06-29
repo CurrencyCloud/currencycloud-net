@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -61,7 +61,7 @@
           "body": "?source_account_id=a7117404-e150-11e6-a5af-080027a79e8f&destination_account_id=946f2d58-e150-11e6-a5af-080027a79e8f&currency=JPY&amount=98765.43&reason=Funding",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -100,7 +100,7 @@
           "body": "?source_account_id=1bd29e41-f019-0133-ed7e-0022194273c7&destination_account_id=d9c34271-b7a6-0133-9fe2-0022194273c7&currency=EUR&amount=1234.56",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -133,7 +133,7 @@
           "path": "/v2/transfers/b0c2df71-28db-42ef-b6b7-5710f22d2115",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -172,7 +172,7 @@
           "query": "?short_reference=BT-20170118-VMSCBS",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -224,7 +224,7 @@
           "path": "/v2/transfers/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -277,7 +277,7 @@
           "body": "?source_account_id=1bd29e41-f019-0133-ed7e-0022194273c7&destination_account_id=d9c34271-b7a6-0133-9fe2-0022194273c7&currency=EUR&amount=1234.56",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
@@ -310,7 +310,7 @@
           "path": "/v2/transfers/b0c2df71-28db-42ef-b6b7-5710f22d2116/cancel",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.3.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.4.0"
           }
         },
         "response": {
