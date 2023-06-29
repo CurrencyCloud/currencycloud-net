@@ -170,9 +170,8 @@ namespace CurrencyCloud.Tests
 
                 Assert.That(ex.Request.Verb, Is.Not.Null.And.Not.Empty);
                 Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
-                Assert.AreEqual(2,ex.Request.Parameters.Count);
-                Assert.AreEqual("iban", ex.Request.Parameters["identifier_type"]);
-                Assert.AreEqual("123abc456xyz", ex.Request.Parameters["identifier_value"]);
+                
+                Assert.AreEqual(0,ex.Request.Parameters.Count);
 
                 Assert.AreEqual(400, ex.Response.StatusCode);
                 Assert.IsFalse(DateTime.Equals(ex.Response.Date, DateTime.MinValue));

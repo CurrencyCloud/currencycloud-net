@@ -394,7 +394,7 @@ namespace CurrencyCloud
         {
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
-            return await RequestAsync<PaginatedAccounts>("/v2/accounts/find", HttpMethod.Get, optional);
+            return await RequestAsync<PaginatedAccounts>("/v2/accounts/find", HttpMethod.Post, optional);
         }
 
         /// <summary>
@@ -563,7 +563,7 @@ namespace CurrencyCloud
         {
             var optional = ParamsObject.CreateFromStaticObject(parameters);
 
-            return await RequestAsync<PaginatedBeneficiaries>("/v2/beneficiaries/find", HttpMethod.Get, optional);
+            return await RequestAsync<PaginatedBeneficiaries>("/v2/beneficiaries/find", HttpMethod.Post, optional);
         }
 
         /// <summary>
@@ -642,7 +642,7 @@ namespace CurrencyCloud
         {
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
-            return await RequestAsync<PaginatedContacts>("/v2/contacts/find", HttpMethod.Get, optional);
+            return await RequestAsync<PaginatedContacts>("/v2/contacts/find", HttpMethod.Post, optional);
         }
 
         /// <summary>
@@ -1290,7 +1290,7 @@ namespace CurrencyCloud
             paramsObj.AddNotNull("IdentifierType", identifierType);
             paramsObj.AddNotNull("IdentifierValue", identifierValue);
 
-            return await RequestAsync<BankDetails>("/v2/reference/bank_details", HttpMethod.Get, paramsObj);
+            return await RequestAsync<BankDetails>("/v2/reference/bank_details/find", HttpMethod.Post, paramsObj);
         }
 
         /// <summary>
