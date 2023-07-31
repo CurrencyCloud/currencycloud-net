@@ -141,6 +141,19 @@ namespace CurrencyCloud.Entity
         [Param]
         public string ChargeType { get; set; }
 
+        /// <summary>
+        /// The invoice number related to the payment
+        /// </summary>
+        [Param]
+        public string InvoiceNumber { get; set; }
+
+        /// <summary>
+        /// The date of the invoice related to the payment
+        /// </summary>
+        [Param]
+        public string InvoiceDate { get; set; }
+
+
         public string ToJSON()
         {
             var obj = new[]
@@ -173,7 +186,9 @@ namespace CurrencyCloud.Entity
                     UltimateBeneficiaryName,
                     PurposeCode,
                     FeeCurrency,
-                    FeeAmount
+                    FeeAmount,
+                    InvoiceNumber,
+                    InvoiceDate
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -215,7 +230,9 @@ namespace CurrencyCloud.Entity
                    PurposeCode == payment.PurposeCode &&
                    FeeCurrency == payment.FeeCurrency &&
                    FeeAmount == payment.FeeAmount &&
-                   ChargeType == payment.ChargeType;
+                   ChargeType == payment.ChargeType &&
+                   InvoiceNumber == payment.InvoiceNumber &&
+                   InvoiceDate == payment.InvoiceDate;
         }
 
         public override int GetHashCode()
