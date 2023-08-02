@@ -92,6 +92,8 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(beneficiary1.BeneficiaryStateOrProvince, created.BeneficiaryStateOrProvince);
             Assert.AreEqual(beneficiary1.BeneficiaryDateOfBirth, created.BeneficiaryDateOfBirth);
             Assert.AreEqual(beneficiary1.BeneficiaryIdentificationType, created.BeneficiaryIdentificationType);
+            Assert.AreEqual(beneficiary1.CompanyWebsite, created.CompanyWebsite);
+            Assert.AreEqual(beneficiary1.BusinessNature, created.BusinessNature);
         }
 
         /// <summary>
