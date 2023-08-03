@@ -240,5 +240,4 @@ namespace CurrencyCloud.Entity
             return Id.GetHashCode();
         }
     }
-    
 }
