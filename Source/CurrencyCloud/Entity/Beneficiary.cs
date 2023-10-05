@@ -204,6 +204,18 @@ namespace CurrencyCloud.Entity
         public string CreatorContactId { get; set; }
 
         ///<summary>
+        /// Business nature of beneficiary
+        ///</summary>
+        [Param]
+        public string BusinessNature { get; set; }
+
+        ///<summary>
+        /// Company Website
+        ///</summary>
+        [Param]
+        public string CompanyWebsite { get; set; }
+
+        ///<summary>
         /// Address of the bank
         ///</summary>
         [Param]
@@ -252,7 +264,9 @@ namespace CurrencyCloud.Entity
                     BankAddress,
                     CreatedAt,
                     UpdatedAt,
-                    BeneficiaryExternalReference
+                    BeneficiaryExternalReference,
+                    CompanyWebsite,
+                    BusinessNature
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -300,6 +314,8 @@ namespace CurrencyCloud.Entity
                    BankAddress.SequenceEqual(beneficiary.BankAddress) &&
                    CreatedAt == beneficiary.CreatedAt &&
                    UpdatedAt == beneficiary.UpdatedAt &&
+                   CompanyWebsite == beneficiary.CompanyWebsite &&
+                   BusinessNature == beneficiary.BusinessNature &&
                    BeneficiaryExternalReference == beneficiary.BeneficiaryExternalReference;
         }
 

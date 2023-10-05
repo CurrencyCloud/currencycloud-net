@@ -29,7 +29,9 @@ namespace CurrencyCloud.Tests.Mock.Data
                 BeneficiaryPostcode = "W11 2BQ",
                 BeneficiaryStateOrProvince = "TX",
                 BeneficiaryDateOfBirth = new DateTime(1990, 7, 20),
-                BeneficiaryIdentificationType = "none"
+                BeneficiaryIdentificationType = "none",
+                BusinessNature = "law",
+                CompanyWebsite = "test.com"
         };
 
         public static readonly Beneficiary Beneficiary2 = new Beneficiary(
