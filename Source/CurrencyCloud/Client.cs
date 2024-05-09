@@ -865,6 +865,22 @@ namespace CurrencyCloud
         }
         
         #endregion
+
+        #region FundingTransactions
+        
+        /// <summary>
+        /// Get Funding Transaction.
+        /// </summary>
+        /// <param name="id">Id of the requested transaction.</param>
+        /// <returns>Asynchronous task, which returns details of the funding transaction.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<FundingTransaction> GetFundingTransactionAsync(string id)
+        {
+            return await RequestAsync<FundingTransaction>("/v2/funding_transactions/" + id, HttpMethod.Get, null);
+        }
+        
+        #endregion
         
         #region Ibans
 
