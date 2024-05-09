@@ -48,7 +48,9 @@
   <ItemGroup>
     <Compile Include="BackoffRetryTest.cs" />
     <Compile Include="FundingTest.cs" />
+    <Compile Include="FundingTransactionsTest.cs" />
     <Compile Include="IbansTest.cs" />
+    <Compile Include="Mock\Data\FundingTransactions.cs" />
     <Compile Include="Mock\Data\Ibans.cs" />
     <Compile Include="Mock\Data\ReportRequests.cs" />
     <Compile Include="Mock\Data\Transactions.cs" />
@@ -81,6 +83,7 @@
   <ItemGroup>
     <None Include="Mock\Http\Recordings\Beneficiaries.json" />
     <None Include="Mock\Http\Recordings\Transactions.json" />
+    <None Include="Mock\Http\Recordings\FundingTransactions.json" />
     <None Include="Mock\Http\Recordings\Reference.json" />
     <None Include="Mock\Http\Recordings\Rates.json" />
     <None Include="Mock\Http\Recordings\Payments.json" />
@@ -104,6 +107,7 @@
   <ItemGroup>
     <Content Include="Mock\Http\Recordings\BackoffRetry.json" />
     <Content Include="Mock\Http\Recordings\Funding.json" />
+    <Content Include="Mock\Http\Recordings\FundingTransactions.json" />
     <Content Include="Mock\Http\Recordings\Ibans.json" />
     <Content Include="Mock\Http\Recordings\ReportRequests.json" />
     <Content Include="Mock\Http\Recordings\Transfers.json" />
