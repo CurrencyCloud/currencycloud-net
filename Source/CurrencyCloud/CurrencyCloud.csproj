@@ -88,6 +88,8 @@
     <Compile Include="Entity\Find\TransferFindParameters.cs" />
     <Compile Include="Entity\Find\VirtualAccountFindParameters.cs" />
     <Compile Include="Entity\FundingAccount.cs" />
+    <Compile Include="Entity\FundingTransaction.cs" />
+    <Compile Include="Entity\FundingTransactionSender.cs" />
     <Compile Include="Entity\Iban.cs" />
     <Compile Include="Entity\List\PayerDetailsList.cs" />
     <Compile Include="Entity\List\PaymentAuthorisationsList.cs" />
