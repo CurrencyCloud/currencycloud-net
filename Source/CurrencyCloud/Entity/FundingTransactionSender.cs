@@ -12,17 +12,17 @@ namespace CurrencyCloud.Entity
 
         public string SenderAddress { get; set; }
 
-        public string SenderCountry; { get; set; }
+        public string SenderCountry { get; set; }
 
-        public string SenderName; { get; set; }
+        public string SenderName { get; set; }
 
-        public string SenderBic; { get; set; }
+        public string SenderBic { get; set; }
 
-        public string SenderIban; { get; set; }
+        public string SenderIban { get; set; }
 
-        public string SenderAccountNumber; { get; set; }
+        public string SenderAccountNumber { get; set; }
 
-        public string SenderRoutingCode; { get; set; }
+        public string SenderRoutingCode { get; set; }
 
         public string ToJSON()
         {
