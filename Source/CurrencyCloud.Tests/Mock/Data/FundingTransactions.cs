@@ -20,7 +20,7 @@ namespace CurrencyCloud.Tests.Mock.Data
                 SenderAddress = "test",
                 SenderCountry = "GB",
                 SenderName = "test"
-            };
+            }
         };
     }
 }
