@@ -32,7 +32,7 @@ namespace CurrencyCloud.Entity
 
         public DateTime? CompletedAt { get; set; }
 
-        public FundingTransactionSender? Sender { get; set; }
+        public FundingTransactionSender Sender { get; set; }
 
         public string ToJSON()
         {
