@@ -45,7 +45,7 @@ namespace CurrencyCloud.Tests
 
             var fundingTransaction = FundingTransactions.FundingTransaction1;
 
-            FundingTransaction gotten = await client.GetFundingTransactionAsync(fundingTransaction.id);
+            FundingTransaction gotten = await client.GetFundingTransactionAsync(fundingTransaction.Id);
 
             Assert.AreEqual(fundingTransaction, gotten);
         }
