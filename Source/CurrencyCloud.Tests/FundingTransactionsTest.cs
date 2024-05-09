@@ -47,7 +47,20 @@ namespace CurrencyCloud.Tests
 
             FundingTransaction gotten = await client.GetFundingTransactionAsync(fundingTransaction.Id);
 
-            Assert.AreEqual(fundingTransaction, gotten);
+            Assert.IsNotNull(gotten);
+            Assert.AreEqual(fundingTransaction.Id, gotten.Id);
+            Assert.AreEqual(fundingTransaction.Amount, gotten.Amount);
+            Assert.AreEqual(fundingTransaction.Currency, gotten.Currency);
+            Assert.AreEqual(fundingTransaction.Rail, gotten.Rail);
+            Assert.AreEqual(fundingTransaction.AdditionalInformation, gotten.AdditionalInformation);
+            Assert.AreEqual(fundingTransaction.ValueDate, gotten.ValueDate);
+            Assert.AreEqual(fundingTransaction.ReceivingAccountNumber, gotten.ReceivingAccountNumber);
+            Assert.AreEqual(fundingTransaction.CreatedAt, gotten.CreatedAt);
+            Assert.AreEqual(fundingTransaction.UpdatedAt, gotten.UpdatedAt);
+            Assert.AreEqual(fundingTransaction.Sender.SenderId, gotten.Sender.SenderId);
+            Assert.AreEqual(fundingTransaction.Sender.SenderAddress, gotten.Sender.SenderAddress);
+            Assert.AreEqual(fundingTransaction.Sender.SenderCountry, gotten.Sender.SenderCountry);
+            Assert.AreEqual(fundingTransaction.Sender.SenderName, gotten.Sender.SenderName);
         }
     }
 }
