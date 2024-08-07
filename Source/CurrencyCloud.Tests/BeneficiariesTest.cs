@@ -60,6 +60,27 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully verifies a account.
+        /// </summary>
+        [Test]
+        public async Task AccountVerification()
+        {
+            player.Play("AccountVerification");
+
+            BeneficiaryAccountVerification accountVerification = await client.VerifyAccountAsync(new BeneficiaryAccountVerificationRequest
+            {
+                BankCountry = "GB",
+                AccountNumber = "1234567890",
+                RoutingCodeValue1 = "123456",
+                BeneficiaryEntityType = "individual",
+                BeneficiaryFirstName = "Test",
+                BeneficiaryLastName = "User"
+            });
+
+            Assert.AreEqual("", accountVerification.Answer);
+        }
+
+        /// <summary>
         /// Successfully creates a beneficiary.
         /// </summary>
         [Test]
