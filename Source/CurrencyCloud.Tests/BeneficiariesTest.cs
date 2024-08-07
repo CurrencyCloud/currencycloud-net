@@ -77,7 +77,7 @@ namespace CurrencyCloud.Tests
                 BeneficiaryLastName = "User"
             });
 
-            Assert.AreEqual("", accountVerification.Answer);
+            Assert.AreEqual("confirmed", accountVerification.Answer);
         }
 
         /// <summary>
