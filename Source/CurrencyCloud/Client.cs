@@ -494,20 +494,6 @@ namespace CurrencyCloud
         #region Beneficiaries
 
         /// <summary>
-        /// Verifies account details
-        /// </summary>
-        /// <param name="beneficiaryAccountVerification">Account data to be verified</param>
-        /// <returns>Asynchronous task, which returns the account verification response.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<BeneficiaryAccountVerification> VerifyAccountAsync(BeneficiaryAccountVerificationRequest beneficiaryAccountVerification)
-        {
-            var paramsObj = ParamsObject.CreateFromStaticObject(beneficiaryAccountVerification);
-
-            return await RequestAsync<Beneficiary>("/v2/beneficiaries/account_verification", HttpMethod.Post, paramsObj);
-        }
-
-        /// <summary>
         /// Validates beneficiary details without creating one.
         /// </summary>
         /// <param name="beneficiary">Beneficiary data to be validated</param>

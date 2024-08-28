@@ -102,36 +102,6 @@
     ]
   },
   {
-    "name": "AccountVerification",
-    "requests": [
-      {
-        "request": {
-          "method": "POST",
-          "path": "/v2/beneficiaries/account_verification",
-          "body": "?bank_country=GB&account_number=1234567890&routing_code_value_1=123456&beneficiary_entity_type=individual&beneficiary_first_name=Test&beneficiary_last_name=User",
-          "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.5.0"
-          }
-        },
-        "response": {
-          "status": 200,
-          "headers": {
-            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
-            "Content-Type": "application/json;charset=utf-8",
-            "X-Request-Id": "2910007469756093752"
-          },
-          "body": {
-            "answer":"confirmed",
-            "actual_name":"Test User",
-            "reason_code":"FMCH",
-            "reason":"Full match"
-          }
-        }
-      }
-    ]
-  },
-  {
     "name": "Create",
     "requests": [
       {
