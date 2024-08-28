@@ -504,7 +504,7 @@ namespace CurrencyCloud
         {
             var paramsObj = ParamsObject.CreateFromStaticObject(beneficiaryAccountVerification);
 
-            return await RequestAsync<Beneficiary>("/v2/beneficiaries/account_verification", HttpMethod.Post, paramsObj);
+            return await RequestAsync<BeneficiaryAccountVerification>("/v2/beneficiaries/account_verification", HttpMethod.Post, paramsObj);
         }
 
         /// <summary>
