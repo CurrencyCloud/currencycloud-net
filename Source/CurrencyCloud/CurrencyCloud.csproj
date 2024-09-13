@@ -128,6 +128,8 @@
     <Compile Include="Entity\Pagination\PaginatedAccounts.cs" />
     <Compile Include="Entity\Pagination\PaginatedBalances.cs" />
     <Compile Include="Entity\Beneficiary.cs" />
+    <Compile Include="Entity\BeneficiaryAccountVerification.cs" />
+    <Compile Include="Entity\BeneficiaryAccountVerificationRequest.cs" />
     <Compile Include="Entity\Contact.cs" />
     <Compile Include="Entity\Conversion.cs" />
     <Compile Include="Entity\Pagination\Pagination.cs" />
