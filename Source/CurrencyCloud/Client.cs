@@ -610,12 +610,15 @@ namespace CurrencyCloud
         public async Task<CollectionsScreening> CollectionsScreeningCompleteAsync(string transactionId, bool accepted,
             string reason)
         {
-            if (string.IsNullOrEmpty(transactionId))
+            if (string.IsNullOrEmpty(transactionId)) {
                 throw new ArgumentException("TransactionId can not be null");
-            if (string.IsNullOrEmpty(accepted))
+            }
+            if (string.IsNullOrEmpty(accepted)) {
                 throw new ArgumentException("Accepted can not be null");
-            if (string.IsNullOrEmpty(reason))
+            }
+            if (string.IsNullOrEmpty(reason)) {
                 throw new ArgumentException("Reason can not be null");
+            }
             var paramsObj = new ParamsObject();
             paramsObj.AddNotNull(true, accepted);
             paramsObj.AddNotNull("Accepted", reason);
