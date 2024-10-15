@@ -1,11 +1,9 @@
-using Newtonsoft.Json;
 using System;
 
 namespace CurrencyCloud.Entity
 {
     public class CollectionsScreening: Entity
     {
-        [JsonConstructor]
         public CollectionsScreening() { }
 
         /// <summary>
