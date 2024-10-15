@@ -49,6 +49,11 @@ namespace CurrencyCloud.Entity
         public string RoutingCode { get; set; }
 
         /// <summary>
+        /// Wire Routing Code
+        /// </summary>
+        public string WireRoutingCode { get; set; }
+
+        /// <summary>
         /// IBAN Created At
         /// </summary>
         public DateTime? CreatedAt { get; set; }
@@ -73,7 +78,8 @@ namespace CurrencyCloud.Entity
                     BankInstitutionCountry,
                     RoutingCode,
                     CreatedAt,
-                    UpdatedAt
+                    UpdatedAt,
+                    WireRoutingCode
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -96,6 +102,7 @@ namespace CurrencyCloud.Entity
                    BankInstitutionAddress == virtualAccountNumber.BankInstitutionAddress &&
                    BankInstitutionCountry == virtualAccountNumber.BankInstitutionCountry &&
                    RoutingCode == virtualAccountNumber.RoutingCode &&
+                   WireRoutingCode == virtualAccountNumber.WireRoutingCode &&
                    CreatedAt == virtualAccountNumber.CreatedAt &&
                    UpdatedAt == virtualAccountNumber.UpdatedAt;
         }
