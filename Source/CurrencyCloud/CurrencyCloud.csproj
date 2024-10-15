@@ -75,6 +75,8 @@
     <Compile Include="Entity\Find\AccountFindParameters.cs" />
     <Compile Include="Entity\Find\BalanceFindParameters.cs" />
     <Compile Include="Entity\Find\BeneficiaryFindParameters.cs" />
+    <Compile Include="Entity\CollectionsScreening.cs" />
+    <Compile Include="Entity\CollectionsScreeningResult.cs" />
     <Compile Include="Entity\Find\ContactFindParameters.cs" />
     <Compile Include="Entity\Find\ConversionFindParameters.cs" />
     <Compile Include="Entity\Find\ConversionProfitAndLossFindParameters.cs" />
