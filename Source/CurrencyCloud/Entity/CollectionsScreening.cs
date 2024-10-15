@@ -4,8 +4,6 @@ namespace CurrencyCloud.Entity
 {
     public class CollectionsScreening: Entity
     {
-        public CollectionsScreening() { }
-
         /// <summary>
         /// UUID of the Withdrawal Account Funding pull
         /// </summary>
