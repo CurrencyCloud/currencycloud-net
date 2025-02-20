@@ -68,6 +68,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Description of transactions - free form text
         ///</summary>
+        [ObsoleteAttribute("This filter is obsolete and should not be used.", false)]
         [Param]
         public string Reason { get; set; }
 
