@@ -199,7 +199,8 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 
 ### List of features being deprecated
 ```
-(No features are currently being deprecated)
+2025-02-28
+- 'reason' query parameter in transactions/find
 ```
 
 # Support
