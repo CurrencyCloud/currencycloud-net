@@ -1093,7 +1093,7 @@
         "request": {
           "method": "POST",
           "path": "/v2/reference/bank_details/find",
-          "body": "?identifier_type=iban&identifier_value=GB19TCCL00997901654515",
+          "body": "?identifier_type=iban&identifier_value=GB33BUKB20201555555555",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/6.7.0"
@@ -1107,9 +1107,9 @@
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "identifier_value": "GB19TCCL00997901654515",
+            "identifier_value": "GB33BUKB20201555555555",
             "identifier_type": "iban",
-            "account_number": "GB19TCCL00997901654515",
+            "account_number": "GB33BUKB20201555555555",
             "bic_swift": "TCCLGB22XXX",
             "bank_name": "THE CURRENCY CLOUD LIMITED",
             "bank_branch": "",

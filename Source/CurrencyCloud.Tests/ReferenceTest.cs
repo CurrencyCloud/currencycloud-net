@@ -127,11 +127,11 @@ namespace CurrencyCloud.Tests
             player.Play("GetBankDetails");
 
             Assert.DoesNotThrowAsync(async () => {
-                BankDetails bankDetails = await client.GetBankDetailsAsync("iban", "GB19TCCL00997901654515");
+                BankDetails bankDetails = await client.GetBankDetailsAsync("iban", "GB33BUKB20201555555555");
                 Assert.That(bankDetails, Is.Not.Null);
                 Assert.AreEqual("iban", bankDetails.IdentifierType);
-                Assert.AreEqual("GB19TCCL00997901654515", bankDetails.IdentifierValue);
-                Assert.AreEqual("GB19TCCL00997901654515", bankDetails.AccountNumber);
+                Assert.AreEqual("GB33BUKB20201555555555", bankDetails.IdentifierValue);
+                Assert.AreEqual("GB33BUKB20201555555555", bankDetails.AccountNumber);
                 Assert.AreEqual("12 STEWARD STREET  THE STEWARD BUILDING FLOOR 0", bankDetails.BankAddress);
                 Assert.AreEqual("", bankDetails.BankBranch);
                 Assert.AreEqual("LONDON", bankDetails.BankCity);
