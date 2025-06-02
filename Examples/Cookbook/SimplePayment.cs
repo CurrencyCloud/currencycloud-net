@@ -91,7 +91,7 @@ namespace Cookbook
                  * Germany. To do that, call the Get Beneficiary Requirements endpoint.
                  *
                  */
-                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync("EUR");
+                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync("EUR", "DE", "DE");
                 Console.WriteLine("Beneficiary Details: {0}\n", beneficiaryDetails.ToJSON());
 
                 /**

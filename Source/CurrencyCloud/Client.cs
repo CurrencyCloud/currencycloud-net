@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/6.7.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.0.0";
 
         internal string Token
         {
@@ -1155,26 +1155,19 @@ namespace CurrencyCloud
         /// Gets required beneficiary details and their basic validation formats.
         /// </summary>
         /// <param name="currency">Currency</param>
-        /// <param name="bankAccountCountry">Optional: Bank account country</param>
-        /// <param name="beneficiaryCountry">Optional: Beneficiary country</param>
+        /// <param name="bankAccountCountry">Bank account country</param>
+        /// <param name="beneficiaryCountry">Beneficiary country</param>
         /// <returns>Asynchronous task, which returns the list of the required beneficiary details.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<BeneficiaryDetailsList> GetBeneficiaryRequiredDetailsAsync(string currency = null, string bankAccountCountry = null, string beneficiaryCountry = null)
+        public async Task<BeneficiaryDetailsList> GetBeneficiaryRequiredDetailsAsync(string currency, string bankAccountCountry, string beneficiaryCountry)
         {
-            ParamsObject optional = null;
-            if (!string.IsNullOrEmpty(currency)
-                || !string.IsNullOrEmpty(bankAccountCountry)
-                || !string.IsNullOrEmpty(beneficiaryCountry)
-                )
-            {
-                optional = new ParamsObject();
-                optional.AddNotNull("Currency", currency);
-                optional.AddNotNull("BankAccountCountry", bankAccountCountry);
-                optional.AddNotNull("BeneficiaryCountry", beneficiaryCountry);
-            }
-
-            return await RequestAsync<BeneficiaryDetailsList>("/v2/reference/beneficiary_required_details", HttpMethod.Get, optional);
+            ParamsObject paramsObj = new ParamsObject();
+            paramsObj.Add("Currency", currency);
+            paramsObj.Add("BankAccountCountry", bankAccountCountry);
+            paramsObj.Add("BeneficiaryCountry", beneficiaryCountry);
+            
+            return await RequestAsync<BeneficiaryDetailsList>("/v2/reference/beneficiary_required_details", HttpMethod.Get, paramsObj);
         }
 
         /// <summary>
