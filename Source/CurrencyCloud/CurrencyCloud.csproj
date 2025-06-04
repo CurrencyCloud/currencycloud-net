@@ -107,6 +107,7 @@
     <Compile Include="Entity\PaymentConfirmation.cs" />
     <Compile Include="Entity\PaymentDeliveryDates.cs" />
     <Compile Include="Entity\PaymentSubmission.cs" />
+    <Compile Include="Entity\PaymentSubmissionInfo.cs" />
     <Compile Include="Entity\PaymentTrackingInfo.cs" />
     <Compile Include="Entity\QuotePaymentFee.cs" />
     <Compile Include="Entity\ReportParameters.cs" />
@@ -165,7 +166,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\NuGet.Build.Tasks.Pack.5.0.0\build\NuGet.Build.Tasks.Pack.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NuGet.Build.Tasks.Pack.5.0.0\build\NuGet.Build.Tasks.Pack.targets'))" />
   </Target>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

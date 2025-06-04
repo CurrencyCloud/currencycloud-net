@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.0.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.1.0";
 
         internal string Token
         {
@@ -488,7 +488,7 @@ namespace CurrencyCloud
             paramsObj.AddNotNull("Amount", amount);
             return await RequestAsync<MarginBalanceTopUp>("/v2/balances/top_up_margin", HttpMethod.Post, paramsObj);
         }
-        
+
         #endregion
 
         #region Beneficiaries
@@ -861,9 +861,9 @@ namespace CurrencyCloud
         }
 
         #endregion
-        
+
         #region Funding
-        
+
         /// <summary>
         /// Returns an object that contains information related to Funding Accounts
         /// </summary>
@@ -877,9 +877,9 @@ namespace CurrencyCloud
 
             return await RequestAsync<PaginatedFundingAccounts>("/v2/funding_accounts/find", HttpMethod.Get, optional);
         }
-        
+
         #endregion
-        
+
         #region Ibans
 
         /// <summary>
@@ -1033,6 +1033,18 @@ namespace CurrencyCloud
         }
 
         /// <summary>
+        /// Returns a hash containing the details of the submission information in a MT103 or PACS008 format.
+        /// </summary>
+        /// <param name="id">Id payment.</param>
+        /// <returns>Asynchronous task, which returns the MT103 information for a SWIFT payment.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentSubmissionInfo> GetPaymentSubmissionInfoAsync(string id)
+        {
+            return await RequestAsync<PaymentSubmissionInfo>("/v2/payments/" + id + "/submission_info", HttpMethod.Get, null);
+        }
+
+        /// <summary>
         /// Returns an array of PaymentAuthorisation Objects
         /// </summary>
         /// <param name="paymentIds">Array of Payment Ids to authorise</param>
@@ -1098,7 +1110,7 @@ namespace CurrencyCloud
 
             return await RequestAsync<QuotePaymentFee>("/v2/payments/quote_payment_fee", HttpMethod.Get, paramsObj);
         }
-        
+
         /// <summary>
         /// Returns an object containing the tracking information of a payment.
         /// </summary>
@@ -1110,7 +1122,7 @@ namespace CurrencyCloud
         {
             return await RequestAsync<PaymentTrackingInfo>("/v2/payments/" + id + "/tracking_info", HttpMethod.Get, null);
         }
-        
+
         #endregion
 
         #region Rates
@@ -1166,7 +1178,7 @@ namespace CurrencyCloud
             paramsObj.Add("Currency", currency);
             paramsObj.Add("BankAccountCountry", bankAccountCountry);
             paramsObj.Add("BeneficiaryCountry", beneficiaryCountry);
-            
+
             return await RequestAsync<BeneficiaryDetailsList>("/v2/reference/beneficiary_required_details", HttpMethod.Get, paramsObj);
         }
 
@@ -1378,7 +1390,7 @@ namespace CurrencyCloud
         }
 
         #endregion
-        
+
 
         #region Transactions
 
@@ -1475,7 +1487,7 @@ namespace CurrencyCloud
         {
             return await RequestAsync<Transfer>("/v2/transfers/" + id + "/cancel", HttpMethod.Post, null);
         }
-        
+
         #endregion
 
         #region VirtualAccounts
@@ -1495,9 +1507,9 @@ namespace CurrencyCloud
         }
 
         #endregion
-        
+
         #region WithdrawalAccounts
-        
+
         /// <summary>
         /// Finds Withdrawal Accounts matching the accountId. If the account Id is omitted the withdrawal accounts
         /// for the house account and all sub-accounts are returned
@@ -1513,7 +1525,7 @@ namespace CurrencyCloud
 
             return await RequestAsync<PaginatedWithdrawalAccounts>("/v2/withdrawal_accounts/find", HttpMethod.Get, paramsObj);
         }
-        
+
         /// <summary>
         /// Pull funds from a withdrawal account
         /// </summary>
@@ -1533,14 +1545,14 @@ namespace CurrencyCloud
             var paramsObj = new ParamsObject();
             paramsObj.AddNotNull("Reference", reference);
             paramsObj.AddNotNull("Amount", amount);
-            return await RequestAsync<WithdrawalAccountFunds>("/v2/withdrawal_accounts/"+withdrawalAccountId+"/pull_funds", 
+            return await RequestAsync<WithdrawalAccountFunds>("/v2/withdrawal_accounts/"+withdrawalAccountId+"/pull_funds",
                 HttpMethod.Post, paramsObj);
         }
-        
+
         #endregion
     }
-    
-    
+
+
     internal static class ApiExceptionFactory
     {
         private static Request CreateRequest(HttpRequestMessage requestMessage)
@@ -1585,15 +1597,15 @@ namespace CurrencyCloud
 
             JObject errorObject = JObject.Parse(errorString);
 
-            var errors = from JProperty error in errorObject["error_messages"] 
-                select new Error(error.Name, 
-                    error.Value is JArray ? (from errorMessage in error.Value 
+            var errors = from JProperty error in errorObject["error_messages"]
+                select new Error(error.Name,
+                    error.Value is JArray ? (from errorMessage in error.Value
                             select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
                                 errorMessage["message"].Value<string>(),
                                 (from JProperty param in errorMessage["params"]
                                     select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
                                 .ToDictionary(x => x.Key, x => x.Value)))
-                        .ToList() : new List<Error.ErrorMessage>(){new Error.ErrorMessage(error.Value["code"].Value<string>(), 
+                        .ToList() : new List<Error.ErrorMessage>(){new Error.ErrorMessage(error.Value["code"].Value<string>(),
                             error.Value["message"].Value<string>(), (from JProperty param in error.Value["params"]
                                 select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
                             .ToDictionary(x => x.Key, x => x.Value))}

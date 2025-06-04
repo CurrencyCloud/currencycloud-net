@@ -122,7 +122,7 @@ namespace Cookbook
                     BeneficiaryCountry = "DE",
                     BankCountry = "DE",
                     BicSwift = "COBADEFF",
-                    Iban = "DE89370400440532013000"
+                    Iban = "DE75512108001245126199"
                 });
                 Console.WriteLine("Create Beneficiary: {0}\n", createBeneficiary.ToJSON());
 

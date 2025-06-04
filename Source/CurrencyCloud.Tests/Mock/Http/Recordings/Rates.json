@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -60,7 +60,7 @@
           "query": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=6700",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -100,7 +100,7 @@
           "query": "?buy_currency=GBP&sell_currency=USD&fixed_side=buy&amount=10000&conversion_date_preference=optimize_liquidity",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -140,7 +140,7 @@
           "query": "?currency_pair=USDGBP",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
