@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -61,7 +61,7 @@
           "body": "description=New+Conversion+test+report?unique_request_id=1b3687dc-c779-4fe7-9515-00a6509632c4",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -103,7 +103,7 @@
           "body": "description=New+Payment+test+report?unique_request_id=2422a1ee-b376-4358-a4f2-560aa953c461",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -144,7 +144,7 @@
           "path": "/v2/reports/report_requests/de5c215d-93e2-4b24-bdc8-bffbcd80c60f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -187,7 +187,7 @@
           "path": "/v2/reports/report_requests/2d71d2de-bc17-4ffb-88f4-d644b327340f",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -229,7 +229,7 @@
           "query": "?report_type=conversion",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {
@@ -303,7 +303,7 @@
           "path": "/v2/reports/report_requests/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.0.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.1.0"
           }
         },
         "response": {

@@ -16,7 +16,7 @@ namespace CurrencyCloud.Tests.Mock.Data
                 BeneficiaryAddress = new List<string>(new string[] { "23 Acacia Road" }),
                 BeneficiaryCountry = "GB",
                 BicSwift = "COBADEFF",
-                Iban = "DE89370400440532013000",
+                Iban = "DE75512108001245126199",
                 DefaultBeneficiary = true,
                 BankAddress = new List<string>(new string[] { "KAISERSTRASSE 16" }),
                 BankName = "COMMERZBANK AG",
