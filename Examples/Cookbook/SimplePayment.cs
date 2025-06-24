@@ -91,7 +91,7 @@ namespace Cookbook
                  * Germany. To do that, call the Get Beneficiary Requirements endpoint.
                  *
                  */
-                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync("EUR");
+                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync("EUR", "DE", "DE");
                 Console.WriteLine("Beneficiary Details: {0}\n", beneficiaryDetails.ToJSON());
 
                 /**
@@ -113,7 +113,7 @@ namespace Cookbook
                     BeneficiaryCountry = "DE",
                     BankCountry = "DE",
                     BicSwift = "COBADEFF",
-                    Iban = "DE89370400440532013000"
+                    Iban = "GB33BUKB20201555555555"
                 });
                 Console.WriteLine("Create Beneficiary: {0}\n", createBeneficiary.ToJSON());
 
