@@ -100,7 +100,7 @@ namespace Cookbook
                  * to make a regular payment in Euros to a beneficiary with a bank account in Germany. To do that, call the
                  * Get Beneficiary Requirements endpoint.
                  */
-                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync();
+                var beneficiaryDetails = await client.GetBeneficiaryRequiredDetailsAsync("EUR", "DE", "DE");
                 Console.WriteLine("Beneficiary Details: {0}\n", beneficiaryDetails.ToJSON());
 
                 /**
@@ -122,7 +122,7 @@ namespace Cookbook
                     BeneficiaryCountry = "DE",
                     BankCountry = "DE",
                     BicSwift = "COBADEFF",
-                    Iban = "DE89370400440532013000"
+                    Iban = "DE75512108001245126199"
                 });
                 Console.WriteLine("Create Beneficiary: {0}\n", createBeneficiary.ToJSON());
 

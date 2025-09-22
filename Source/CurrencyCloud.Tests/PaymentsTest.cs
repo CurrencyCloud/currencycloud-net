@@ -127,6 +127,40 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
+        /// Successfully gets a payment submission info in MT103 format.
+        /// </summary>
+        [Test]
+        public async Task GetSubmissionInfoMT103()
+        {
+            player.Play("GetSubmissionInfoMT103");
+
+            var payment1 = Payments.Payment1;
+            var submissionInfo1 = Payments.SubmissionInfo1;
+
+            Payment created = await CreatePayment(payment1);
+            PaymentSubmissionInfo gotten = await client.GetPaymentSubmissionInfoAsync(created.Id);
+
+            Assert.AreEqual(gotten, submissionInfo1);
+        }
+
+        /// <summary>
+        /// Successfully gets a payment submission info in PACS008 format.
+        /// </summary>
+        [Test]
+        public async Task GetSubmissionInfoPACS008()
+        {
+            player.Play("GetSubmissionInfoPACS008");
+
+            var payment1 = Payments.Payment1;
+            var submissionInfo2 = Payments.SubmissionInfo2;
+
+            Payment created = await CreatePayment(payment1);
+            PaymentSubmissionInfo gotten = await client.GetPaymentSubmissionInfoAsync(created.Id);
+
+            Assert.AreEqual(gotten, submissionInfo2);
+        }
+
+        /// <summary>
         /// Successfully gets a confirmation for a payment.
         /// </summary>
         [Test]
@@ -286,7 +320,7 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(100, gotten.FeeAmount);
             Assert.AreEqual("GBP", gotten.FeeCurrency);
         }
-        
+
         /// <summary>
         /// Successfully gets a tracking info for a payment.
         /// </summary>

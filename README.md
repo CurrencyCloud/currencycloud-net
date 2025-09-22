@@ -199,8 +199,8 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 
 ### List of features being deprecated
 ```
-2025-02-28
-- 'reason' query parameter in transactions/find
+2025-05-13
+- GET /payments/{id}/submission (to be removed 2025-10-01)
 ```
 
 # Support
