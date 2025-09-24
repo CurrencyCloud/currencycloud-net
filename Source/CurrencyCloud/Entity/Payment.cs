@@ -1,4 +1,5 @@
 ﻿using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -83,7 +84,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// ISO 8601 Date when the payment should be paid
         ///</summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? PaymentDate { get; set; }
 
         public DateTime? TransferredAt { get; set; }

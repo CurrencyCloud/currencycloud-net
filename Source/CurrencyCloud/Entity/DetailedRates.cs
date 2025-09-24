@@ -1,4 +1,5 @@
 ﻿using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -42,7 +43,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// The date you want the bought currency to be available
         ///</summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? ConversionDate { get; set; }
 
         ///<summary>

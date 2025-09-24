@@ -1,7 +1,8 @@
-﻿using System;
+﻿using CurrencyCloud.Attributes;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
@@ -104,7 +105,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
