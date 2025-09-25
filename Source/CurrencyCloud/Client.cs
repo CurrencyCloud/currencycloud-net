@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.1.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.2.0";
 
         internal string Token
         {
@@ -145,7 +145,7 @@ namespace CurrencyCloud
             throw await ApiExceptionFactory.FromHttpResponse(res);
         }
 
-        private async Task<TResult> RequestAsync<TResult>(string path, HttpMethod method, ParamsObject obj = null)
+        private async Task<TResult> RequestAsync<TResult>(string path, HttpMethod method, ParamsObject obj = null, Dictionary<string, string> headers = null)
         {
             if (httpClient == null)
             {
@@ -184,6 +184,15 @@ namespace CurrencyCloud
                     };
                 }
 
+                // Add request headers
+                if (headers != null)
+                {
+                    foreach (var header in headers)
+                    {
+                        httpRequestMessage.Headers.Add(header.Key, header.Value);
+                    }
+                }
+
                 if (Retry.Enabled)
                     Debug.WriteLine("UTC: {0} - Retrying request - Retries: {1}, MinWait: {2}, MaxWait: {3}, Jitter: {4}]",
                         DateTime.UtcNow, Retry.NumRetries, Retry.MinWait, Retry.MaxWait, Retry.Jitter);
@@ -204,7 +213,19 @@ namespace CurrencyCloud
                         ContractResolver = new PascalContractResolver()
                     };
 
-                    return JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
+                    var result = JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
+
+                    // Set headers if the result implements ResponseAware interface
+                    var responseAware = result as CurrencyCloud.Entity.ResponseAware;
+                    if (responseAware != null)
+                    {
+                        foreach (var header in res.Headers)
+                        {
+                            responseAware.Headers[header.Key.ToLower()] = header.Value.FirstOrDefault();
+                        }
+                    }
+
+                    return result;
                 }
 
                 throw await ApiExceptionFactory.FromHttpResponse(res);
@@ -917,6 +938,25 @@ namespace CurrencyCloud
         #region Payments
 
         /// <summary>
+        /// Validates a payment.
+        /// </summary>
+        /// <param name="payment">Payment object to be validated</param>
+        /// <param name="scaToAuthenticatedUser">Optional flag to indicate if SCA should be sent to the authenticated user</param>
+        /// <returns>Asynchronous task, which returns the payment validation result.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<PaymentValidation> ValidatePaymentAsync(Payment payment, bool scaToAuthenticatedUser = false)
+        {
+            ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
+            var requestHeaders = new Dictionary<string, string>
+            {
+                { "x-sca-to-authenticated-user", scaToAuthenticatedUser.ToString().ToLower() }
+            };
+
+            return await RequestAsync<PaymentValidation>("/v2/payments/validate", HttpMethod.Post, paramsObj, requestHeaders);
+        }
+
+        /// <summary>
         /// Creates a new payment.
         /// </summary>
         /// <param name="payment">Payment object to be created</param>
@@ -925,7 +965,10 @@ namespace CurrencyCloud
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         /// <remarks>Payment.PayerDetailsSource not passed to server while creation</remarks>
-        public async Task<Payment> CreatePaymentAsync(Payment payment, Payer payer = null)
+        public async Task<Payment> CreatePaymentAsync(Payment payment, 
+                                                      Payer payer = null, 
+                                                      string scaId = null, 
+                                                      string scaToken = null)
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
             if (payer != null)
@@ -944,7 +987,17 @@ namespace CurrencyCloud
                 paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
             }
 
-            return await RequestAsync<Payment>("/v2/payments/create", HttpMethod.Post, paramsObj);
+            var requestHeaders = new Dictionary<string, string>();
+            if (!string.IsNullOrEmpty(scaId))
+            {
+                requestHeaders.Add("x-sca-id", scaId);
+            }
+            if (!string.IsNullOrEmpty(scaToken))
+            {
+                requestHeaders.Add("x-sca-token", scaToken);
+            }
+
+            return await RequestAsync<Payment>("/v2/payments/create", HttpMethod.Post, paramsObj, requestHeaders);
         }
 
         /// <summary>

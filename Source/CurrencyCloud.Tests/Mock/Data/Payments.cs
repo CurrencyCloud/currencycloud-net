@@ -42,6 +42,17 @@ namespace CurrencyCloud.Tests.Mock.Data
             PaymentType = "regular"
         };
 
+        public static readonly Entity.Payment ScaPayment = new Entity.Payment(
+            "GBP",
+            "c3dafe79-9394-4f43-a1a3-b7a518ab1cba",
+            1000,
+            "SCA Payment",
+            "SCA Payment"
+            )
+        {
+            PaymentType = "regular"
+        };
+
         public static readonly Entity.Payer Payer2 = new Entity.Payer
         {
             LegalEntityType = "individual",
