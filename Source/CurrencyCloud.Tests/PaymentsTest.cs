@@ -336,5 +336,30 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(trackingInfo1, received);
         }
 
+        /// <summary>
+        /// Successfully validates and creates a payment with SCA.
+        /// </summary>
+        [Test]
+        public async Task ValidateAndCreateWithSca()
+        {
+            player.Play("ValidateAndCreateWithSca");
+
+            var scaPayment = Payments.ScaPayment;
+
+            PaymentValidation validationResult = await client.ValidatePaymentAsync(scaPayment, true);
+
+            Assert.IsNotNull(validationResult);
+            Assert.AreEqual("success", validationResult.ValidationResult);
+            Assert.IsTrue(validationResult.XScaRequired);
+            Assert.IsNotNull(validationResult.XScaId);
+            Assert.AreEqual("SMS", validationResult.XScaType);
+
+
+            Payment created = await client.CreatePaymentAsync(scaPayment, scaId: validationResult.XScaId, scaToken: "123456");
+            Assert.AreEqual(scaPayment.Currency, created.Currency);
+            Assert.AreEqual(scaPayment.Reason, created.Reason);
+            Assert.AreEqual(scaPayment.Reference, created.Reference);
+        }
+
     }
 }

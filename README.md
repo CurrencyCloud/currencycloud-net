@@ -1,4 +1,4 @@
-[![NuGet version](https://img.shields.io/nuget/v/CurrencyCloud.svg)](https://www.nuget.org/packages/CurrencyCloud/) [![Travis](https://img.shields.io/travis/CurrencyCloud/currencycloud-net.svg)](https://travis-ci.org/CurrencyCloud/currencycloud-net)
+[![NuGet version](https://img.shields.io/nuget/v/CurrencyCloud.svg)](https://www.nuget.org/packages/CurrencyCloud/) [![CodeQL](https://github.com/CurrencyCloud/currencycloud-net/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/CurrencyCloud/currencycloud-net/actions/workflows/github-code-scanning/codeql)
 # Currencycloud
 This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our development team at development@currencycloud.com
 
@@ -213,8 +213,8 @@ We actively support the latest version of the SDK. We support the immediate prev
 # Copyright
 Copyright (c) 2015-2019 Currencycloud. See [LICENSE][license] for details.
 
-[introduction]: https://developer.currencycloud.com/documentation/getting-started/introduction
-[overview]:     https://developer.currencycloud.com/documentation/api-docs/overview/
+[introduction]: https://developer.currencycloud.com/guides/getting-started/introduction/
+[overview]:     https://developer.currencycloud.com/api-reference/
 [examples]:     Examples/Cookbook
 [utests]:       Source/CurrencyCloud.Tests
 [newtonsoft]:   https://www.nuget.org/packages/Newtonsoft.Json/
