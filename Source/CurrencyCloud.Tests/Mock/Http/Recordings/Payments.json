@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -60,7 +60,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -108,7 +108,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -170,7 +170,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -216,7 +216,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -264,7 +264,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -326,7 +326,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -366,7 +366,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -412,7 +412,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -460,7 +460,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -522,7 +522,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -563,7 +563,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=0.23&reason=Prepayment%20of%20salary%20for%20April&reference=INVOICE%20122&payment_type=regular&payer_entity_type=individual&payer_company_name=Jens%20enskild%20firma&payer_first_name=Jennifer&payer_last_name=Waylon&payer_city=Stockholm&payer_address=22%20Garvargatan&payer_postcode=12332&payer_state_or_province=Stockholm&payer_country=SE&payer_date_of_birth=1981-12-10&payer_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -603,7 +603,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -649,7 +649,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -697,7 +697,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -759,7 +759,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -792,29 +792,6 @@
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
         }
-      },
-      {
-        "request": {
-          "method": "GET",
-          "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055/submission",
-          "headers": {
-            "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
-          }
-        },
-        "response": {
-          "status": 200,
-          "headers": {
-            "Date": "Mon, 01 Jan 2018 12:34:56 GMT",
-            "Content-Type": "application/json;charset=utf-8",
-            "X-Request-Id": "2910007472633409851"
-          },
-          "body": {
-            "status": "pending",
-            "mt103": "{1:F01TCCLGB20AXXX0090000004}{2:I103BARCGB22XXXXN}{4: :20:20180101-ZSYWVY :23B:CRED :32A:160617GBP3000,0 :33B:GBP3000,0 :50K:/150618-00026 PCOMAPNY address New-York Province 555222 GB :53B:/20060513071472 :57C://SC200605 :59:/200605000 First Name Last Name e03036bf6c325dd12c58 London GB :70:test reference Test reason Payment group: 0160617-ZSYWVY :71A:SHA -}",
-            "submission_ref": "MXGGYAGJULIIQKDV"
-          }
-        }
       }
     ]
   },
@@ -828,7 +805,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -876,7 +853,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -938,7 +915,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -978,7 +955,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055/submission_info",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1008,7 +985,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1056,7 +1033,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1118,7 +1095,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1158,7 +1135,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055/submission_info",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1188,7 +1165,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1236,7 +1213,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1298,7 +1275,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1338,7 +1315,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055/confirmation",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1373,7 +1350,7 @@
           "body": "?payment_ids[]=8e3aeeb8-deeb-4665-96de-54b880a953ac&payment_ids[]=f16cafe4-1f8f-472e-99d9-8c828918d4f8&payment_ids[]=d025f90f-a23c-46f9-979a-35a9f98d9491",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1428,7 +1405,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1476,7 +1453,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1538,7 +1515,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1579,7 +1556,7 @@
           "query": "?beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928&order=created_at&order_asc_desc=desc&per_page=5",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1639,7 +1616,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1687,7 +1664,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1749,7 +1726,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1789,7 +1766,7 @@
           "path": "/v2/payments/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1849,7 +1826,7 @@
           "body": "?buy_currency=EUR&sell_currency=GBP&fixed_side=buy&amount=10000.23&reason=Settling%20invoices&term_agreement=true&unique_request_id=my-unique-id",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1897,7 +1874,7 @@
           "body": "?bank_account_holder_name=John%20Doe&bank_country=DE&currency=EUR&name=Employee%20Funds&beneficiary_address=23%20Acacia%20Road&beneficiary_country=GB&bic_swift=COBADEFF&iban=DE75512108001245126199&default_beneficiary=true&bank_address=KAISERSTRASSE%2016&bank_name=COMMERZBANK%20AG&bank_account_type=checking&beneficiary_entity_type=company&beneficiary_company_name=Some%20Company%20LLC&beneficiary_first_name=John&beneficiary_last_name=Doe&beneficiary_city=London&beneficiary_postcode=W11%202BQ&beneficiary_state_or_province=TX&beneficiary_date_of_birth=1990-07-20&beneficiary_identification_type=none",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1959,7 +1936,7 @@
           "body": "?currency=EUR&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=10000&reason=Salary%20for%20March&reference=INVOICE%209876&payment_type=regular&payer_entity_type=individual&payer_company_name=Some%20Company%20LLC&payer_first_name=John&payer_last_name=Doe&payer_city=London&payer_address=27%20Colmore%20Row&payer_postcode=W11%202BQ&payer_state_or_province=TX&payer_country=GB&payer_date_of_birth=1980-10-10&payer_identification_type=none&conversion_id=5c4716dc-42dd-4571-b4bf-0aa299fff928",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -1999,7 +1976,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055/delete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2039,7 +2016,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103055",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2075,7 +2052,7 @@
           "query": "?payment_date=2018-01-01&payment_type=regular&currency=EUR&bank_country=IT",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2107,7 +2084,7 @@
           "query": "?payment_currency=USD&payment_destination_country=US&payment_type=regular",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2139,7 +2116,7 @@
           "path": "/v2/payments/855fa573-1ace-4da2-a55b-912f10103056",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2186,7 +2163,7 @@
           "path": "/v2/payments/46ed4827-7b6f-4491-a06f-b548d5a7512d/tracking_info",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -2381,7 +2358,7 @@
           "body": "?currency=GBP&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=1000&reason=SCA%20Payment&reference=SCA%20Payment",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0",
             "x-sca-to-authenticated-user": "true"
           }
         },
@@ -2408,7 +2385,7 @@
           "body": "?currency=GBP&beneficiary_id=c3dafe79-9394-4f43-a1a3-b7a518ab1cba&amount=1000&reason=SCA%20Payment&reference=SCA%20Payment&payment_type=regular",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0",
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0",
             "x-sca-id": "123e4567-e89b-12d3-a456-426614174000",
             "x-sca-token": "123456"
           }
