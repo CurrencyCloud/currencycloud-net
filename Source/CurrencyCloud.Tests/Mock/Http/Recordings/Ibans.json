@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
 
           }
         },
@@ -61,7 +61,7 @@
           "query": "?currency=EUR",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -111,7 +111,7 @@
           "path": "/v2/ibans/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -161,7 +161,7 @@
           "path": "/v2/ibans/subaccounts/find",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {
@@ -211,7 +211,7 @@
           "path": "/v2/ibans/subaccounts/e12e108b-52e2-4f02-9477-048638af2bce",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/7.2.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/8.0.0"
           }
         },
         "response": {

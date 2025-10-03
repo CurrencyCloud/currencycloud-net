@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/7.2.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/8.0.0";
 
         internal string Token
         {
@@ -1071,18 +1071,6 @@ namespace CurrencyCloud
         public async Task<Payment> DeletePaymentAsync(string id)
         {
             return await RequestAsync<Payment>("/v2/payments/" + id + "/delete", HttpMethod.Post, null);
-        }
-
-        /// <summary>
-        /// Returns a hash containing the details of MT103 information for a SWIFT payments.
-        /// </summary>
-        /// <param name="id">Id payment.</param>
-        /// <returns>Asynchronous task, which returns the MT103 information for a SWIFT payment.</returns>
-        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
-        /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentSubmission> GetPaymentSubmissionAsync(string id)
-        {
-            return await RequestAsync<PaymentSubmission>("/v2/payments/" + id + "/submission", HttpMethod.Get, null);
         }
 
         /// <summary>

@@ -106,7 +106,6 @@
     <Compile Include="Entity\PaymentChargesSettings.cs" />
     <Compile Include="Entity\PaymentConfirmation.cs" />
     <Compile Include="Entity\PaymentDeliveryDates.cs" />
-    <Compile Include="Entity\PaymentSubmission.cs" />
     <Compile Include="Entity\PaymentSubmissionInfo.cs" />
     <Compile Include="Entity\PaymentTrackingInfo.cs" />
     <Compile Include="Entity\QuotePaymentFee.cs" />
