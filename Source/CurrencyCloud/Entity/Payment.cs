@@ -1,4 +1,5 @@
 ﻿using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -83,7 +84,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// ISO 8601 Date when the payment should be paid
         ///</summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? PaymentDate { get; set; }
 
         public DateTime? TransferredAt { get; set; }
@@ -142,6 +143,11 @@ namespace CurrencyCloud.Entity
         public string ChargeType { get; set; }
 
         /// <summary>
+        /// Compliance review status. Can be one of 'passed', 'in_review' or 'rejected'.
+        /// </summary>
+        public string ReviewStatus { get; set; }
+
+        /// <summary>
         /// The invoice number related to the payment
         /// </summary>
         [Param]
@@ -187,6 +193,7 @@ namespace CurrencyCloud.Entity
                     PurposeCode,
                     FeeCurrency,
                     FeeAmount,
+                    ReviewStatus,
                     InvoiceNumber,
                     InvoiceDate
                 }
@@ -231,6 +238,7 @@ namespace CurrencyCloud.Entity
                    FeeCurrency == payment.FeeCurrency &&
                    FeeAmount == payment.FeeAmount &&
                    ChargeType == payment.ChargeType &&
+                   ReviewStatus == payment.ReviewStatus &&
                    InvoiceNumber == payment.InvoiceNumber &&
                    InvoiceDate == payment.InvoiceDate;
         }

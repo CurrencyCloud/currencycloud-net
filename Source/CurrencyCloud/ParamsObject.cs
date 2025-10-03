@@ -1,9 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using CurrencyCloud.Extension;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Net.Http;
-using CurrencyCloud.Extension;
+using CurrencyCloud.Attributes;
+using CurrencyCloud.Types;
 
 namespace CurrencyCloud
 {
@@ -71,6 +74,14 @@ namespace CurrencyCloud
                         }
                         propValue = newValue;
                     }
+                    if (propValue is DateTime)
+                    {
+                        var dtOnly = Attribute.IsDefined(p, typeof(DateOnlyAttribute));
+
+                        if (dtOnly)
+                            propValue = new DateOnly((DateTime)propValue);
+                    }
+
                     ret.Add(p.Name, propValue);
                 }
             }
@@ -85,7 +96,7 @@ namespace CurrencyCloud
             {
                 if (param.Value is Array)
                 {
-                    foreach (var value in (string[]) param.Value)
+                    foreach (var value in (string[])param.Value)
                     {
                         KeyValuePair<string, object> entry = new KeyValuePair<string, object>(param.Key, value);
                         paramList.Add(new KeyValuePair<string, string>(param.Key + "[]", formatValue(entry)));
@@ -146,7 +157,13 @@ namespace CurrencyCloud
                 string value;
                 if (param.Value is DateTime)
                 {
-                    value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
+                    var dt = (DateTime)param.Value;
+                    var utc = (dt.Kind == DateTimeKind.Utc) ? dt : dt.ToUniversalTime();
+                    value = utc.ToString("O", CultureInfo.InvariantCulture);
+                }
+                else if (param.Value is DateOnly)
+                {
+                    value = param.Value.ToString();
                 }
                 else if (param.Value is bool)
                 {
@@ -180,7 +197,13 @@ namespace CurrencyCloud
             String value;
             if (param.Value is DateTime)
             {
-                value = ((DateTime)param.Value).ToString("yyyy-MM-dd");
+                var dt = (DateTime)param.Value;
+                var utc = (dt.Kind == DateTimeKind.Utc) ? dt : dt.ToUniversalTime();
+                value = utc.ToString("O", CultureInfo.InvariantCulture);
+            }
+            else if (param.Value is DateOnly)
+            {
+                value = param.Value.ToString();
             }
             else if (param.Value is bool)
             {

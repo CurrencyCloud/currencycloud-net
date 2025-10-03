@@ -139,12 +139,17 @@ namespace CurrencyCloud.Entity
         ///</summary>
         [Param]
         public string BulkUploadId { get; set; }
-        
-        
+
         ///<summary>
         ///  ours or shared
         ///</summary>
         [Param]
         public string ChargeType { get; set; }
+
+        ///<summary>
+        /// Compliance review status. Can be one of 'passed', 'in_review' or 'rejected'.
+        ///</summary>
+        [Param]
+        public string ReviewStatus { get; set; }
     }
 }

@@ -1,5 +1,6 @@
-using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
+using System;
 
 namespace CurrencyCloud.Entity
 {
@@ -25,7 +26,7 @@ namespace CurrencyCloud.Entity
         /// <summary>
         /// New conversion settlement date
         /// </summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? NewSettlementDate { get; set; }
 
         public DateTime? OldConversionDate { get; set; }
