@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.2.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.3.0";
 
         internal string Token
         {
@@ -991,12 +991,30 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="payment">Payment object to be validated</param>
         /// <param name="scaToAuthenticatedUser">Optional flag to indicate if SCA should be sent to the authenticated user</param>
+        /// <param name="payer">Optional payer info</param>
         /// <returns>Asynchronous task, which returns the payment validation result.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentValidation> ValidatePaymentAsync(Payment payment, bool? scaToAuthenticatedUser = null)
+        public async Task<PaymentValidation> ValidatePaymentAsync(Payment payment, bool? scaToAuthenticatedUser = null, Payer payer = null)
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
+            if (payer != null)
+            {
+                paramsObj.AddNotNull("PayerEntityType", payer.LegalEntityType);
+                paramsObj.AddNotNull("PayerCompanyName", payer.CompanyName);
+                paramsObj.AddNotNull("PayerFirstName", payer.FirstName);
+                paramsObj.AddNotNull("PayerLastName", payer.LastName);
+                paramsObj.AddNotNull("PayerCity", payer.City);
+                paramsObj.AddNotNull("PayerAddress", payer.Address);
+                paramsObj.AddNotNull("PayerPostcode", payer.Postcode);
+                paramsObj.AddNotNull("PayerStateOrProvince", payer.StateOrProvince);
+                paramsObj.AddNotNull("PayerCountry", payer.Country);
+                paramsObj.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
+                paramsObj.AddNotNull("PayerIdentificationType", payer.IdentificationType);
+                paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                paramsObj.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
+            }
+            
             var requestHeaders = scaToAuthenticatedUser.HasValue 
                 ? new Dictionary<string, string> { { "x-sca-to-authenticated-user", scaToAuthenticatedUser.Value.ToString().ToLower() } }
                 : new Dictionary<string, string>();
@@ -1033,6 +1051,7 @@ namespace CurrencyCloud
                 paramsObj.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
                 paramsObj.AddNotNull("PayerIdentificationType", payer.IdentificationType);
                 paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                paramsObj.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
             }
 
             var requestHeaders = new Dictionary<string, string>();
@@ -1091,6 +1110,7 @@ namespace CurrencyCloud
                 optional.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
                 optional.AddNotNull("PayerIdentificationType", payer.IdentificationType);
                 optional.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                optional.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
             }
             return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Post, optional);
         }
