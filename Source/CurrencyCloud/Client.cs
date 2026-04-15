@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.3.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.4.0";
 
         internal string Token
         {
@@ -946,6 +946,46 @@ namespace CurrencyCloud
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
             return await RequestAsync<PaginatedFundingAccounts>("/v2/funding_accounts/find", HttpMethod.Get, optional);
+        }
+
+        /// <summary>
+        /// Gets the details of an approved funding transaction with the given ID.
+        /// </summary>
+        /// <param name="id">The Related Entity UUID (related_entity_id) for the transaction.</param>
+        /// <returns>Asynchronous task, which returns the requested funding transaction.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<FundingTransaction> GetFundingTransactionAsync(string id)
+        {
+            return await RequestAsync<FundingTransaction>("/v2/funding_transactions/" + id, HttpMethod.Get, null);
+        }
+
+        #endregion
+
+        #region Collections
+
+        /// <summary>
+        /// Accept or reject an inbound transaction.
+        /// </summary>
+        /// <param name="transactionId">The transaction UUID.</param>
+        /// <param name="accepted">True to accept, false to reject.</param>
+        /// <param name="reason">Reason for the decision.</param>
+        /// <returns>Asynchronous task, which returns the collections screening result.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ArgumentException">Thrown when required parameters are null or empty.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<CollectionsScreeningResult> CompleteCollectionsScreeningAsync(string transactionId, bool accepted, string reason)
+        {
+            if (string.IsNullOrEmpty(transactionId))
+                throw new ArgumentException("Transaction ID cannot be null or empty");
+            if (string.IsNullOrEmpty(reason))
+                throw new ArgumentException("Reason cannot be null or empty");
+
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("Accepted", accepted);
+            paramsObj.Add("Reason", reason);
+
+            return await RequestAsync<CollectionsScreeningResult>("/v2/collections_screening/" + transactionId + "/complete", new HttpMethod("PUT"), paramsObj);
         }
 
         #endregion

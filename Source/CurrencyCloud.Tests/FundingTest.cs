@@ -69,5 +69,41 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual(DateTime.Parse("2018-05-14T14:18:30+00:00"), account.CreatedAt);
             Assert.AreEqual(DateTime.Parse("2018-05-14T14:19:30+00:00"), account.UpdatedAt);
         }
+
+        /// <summary>
+        /// Successfully gets a funding transaction.
+        /// </summary>
+        [Test]
+        public async Task GetFundingTransaction()
+        {
+            player.Play("GetFundingTransaction");
+
+            string fundingTransactionId = "4924919a-6c28-11ee-a3e3-63774946bad2";
+
+            FundingTransaction transaction = await client.GetFundingTransactionAsync(fundingTransactionId);
+
+            Assert.AreEqual(fundingTransactionId, transaction.Id);
+            Assert.AreEqual(1.11m, transaction.Amount);
+            Assert.AreEqual("USD", transaction.Currency);
+            Assert.AreEqual("SEPA", transaction.Rail);
+            Assert.AreEqual("ABCD20231016143117", transaction.AdditionalInformation);
+            Assert.AreEqual("123456789", transaction.ReceivingAccountRoutingCode);
+            Assert.AreEqual("32847346", transaction.ReceivingAccountNumber);
+            Assert.IsNull(transaction.ReceivingAccountIban);
+            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.CreatedAt);
+            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.UpdatedAt);
+            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.CompletedAt);
+            Assert.AreEqual(DateTime.Parse("2022-12-03T10:00:00+00:00"), transaction.ValueDate);
+
+            Assert.IsNotNull(transaction.Sender);
+            Assert.AreEqual("8119645406", transaction.Sender.AccountNumber);
+            Assert.AreEqual("Some street", transaction.Sender.Address);
+            Assert.IsNull(transaction.Sender.Bic);
+            Assert.AreEqual("GB", transaction.Sender.Country);
+            Assert.IsNull(transaction.Sender.Iban);
+            Assert.AreEqual("5c675fa4-fdf0-4ee6-b5bb-156b36765433", transaction.Sender.Id);
+            Assert.AreEqual("Test sender", transaction.Sender.Name);
+            Assert.IsNull(transaction.Sender.RoutingCode);
+        }
     }
 }
