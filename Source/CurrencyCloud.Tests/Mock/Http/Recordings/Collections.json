@@ -51,17 +51,17 @@
     ]
   },
   {
-    "name": "FindFundingAccounts",
+    "name": "CompleteCollectionsScreeningAccept",
     "requests": [
       {
         "request": {
-          "method": "GET",
-          "path": "/v2/funding_accounts/find",
-          "query": "?currency=GBP&order=created_at&order_asc_desc=desc&per_page=5",
+          "method": "PUT",
+          "path": "/v2/collections_screening/bdcca5e6-32fe-45f6-9476-6f8f518e6270/complete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.4.0"
-          }
+          },
+          "body": "?Accepted=True&Reason=accepted"
         },
         "response": {
           "status": 200,
@@ -71,33 +71,12 @@
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "funding_accounts": [
-              {
-                "id": "b7981972-8e29-485b-8a4a-9643fc6ae3sa",
-                "account_id": "8d98bdc8-e8e3-47dc-bd08-3dd0f4f7ea7b",
-                "account_number": "012345678",
-                "account_number_type":"account_number",
-                "account_holder_name": "Jon Doe",
-                "bank_name": "Starling",
-                "bank_address": "3rd floor, 2 Finsbury Avenue, London, EC2M 2PP, GB",
-                "bank_country": "UK",
-                "currency": "GBP",
-                "payment_type": "regular",
-                "routing_code": "010203",
-                "routing_code_type": "sort_code",
-                "created_at": "2018-05-14T14:18:30+00:00",
-                "updated_at": "2018-05-14T14:19:30+00:00"
-              }
-            ],
-            "pagination": {
-              "total_entries": 1,
-              "total_pages": 1,
-              "current_page": 1,
-              "per_page": 5,
-              "previous_page": -1,
-              "next_page": -1,
-              "order": "created_at",
-              "order_asc_desc": "desc"
+            "transaction_id": "bdcca5e6-32fe-45f6-9476-6f8f518e6270",
+            "account_id": "7a116d7d-6310-40ae-8d54-0ffbe41dc1c9",
+            "house_account_id": "7a116d7d-6310-40ae-8d54-0ffbe41dc1c9",
+            "result": {
+              "reason": "Accepted",
+              "accepted": true
             }
           }
         }
@@ -105,16 +84,17 @@
     ]
   },
   {
-    "name": "GetFundingTransaction",
+    "name": "CompleteCollectionsScreeningReject",
     "requests": [
       {
         "request": {
-          "method": "GET",
-          "path": "/v2/funding_transactions/4924919a-6c28-11ee-a3e3-63774946bad2",
+          "method": "PUT",
+          "path": "/v2/collections_screening/bdcca5e6-32fe-45f6-9476-6f8f518e6270/complete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
             "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.4.0"
-          }
+          },
+          "body": "?Accepted=False&Reason=suspected_fraud"
         },
         "response": {
           "status": 200,
@@ -124,32 +104,16 @@
             "X-Request-Id": "2910007472633409851"
           },
           "body": {
-            "additional_information": "ABCD20231016143117",
-            "amount": "1.11",
-            "completed_at": "2022-12-03T10:15:30+00:00",
-            "created_at": "2022-12-03T10:15:30+00:00",
-            "currency": "USD",
-            "id": "4924919a-6c28-11ee-a3e3-63774946bad2",
-            "rail": "SEPA",
-            "receiving_account_iban": null,
-            "receiving_account_number": "32847346",
-            "receiving_account_routing_code": "123456789",
-            "updated_at": "2022-12-03T10:15:30+00:00",
-            "value_date": "2022-12-03T10:00:00+00:00",
-            "sender": {
-              "sender_account_number": "8119645406",
-              "sender_address": "Some street",
-              "sender_bic": null,
-              "sender_country": "GB",
-              "sender_iban": null,
-              "sender_id": "5c675fa4-fdf0-4ee6-b5bb-156b36765433",
-              "sender_name": "Test sender",
-              "sender_routing_code": null
+            "transaction_id": "bdcca5e6-32fe-45f6-9476-6f8f518e6270",
+            "account_id": "7a116d7d-6310-40ae-8d54-0ffbe41dc1c9",
+            "house_account_id": "7a116d7d-6310-40ae-8d54-0ffbe41dc1c9",
+            "result": {
+              "reason": "suspected_fraud",
+              "accepted": false
             }
           }
         }
       }
     ]
   }
-
 ]
