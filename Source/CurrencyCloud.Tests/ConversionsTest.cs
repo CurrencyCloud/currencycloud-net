@@ -45,6 +45,7 @@ namespace CurrencyCloud.Tests
             player.Play("Create");
 
             var conversion1 = Conversions.Conversion1;
+            conversion1.QuoteId = "3c25ce4a-3552-45bb-869e-406c795052aa";
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 

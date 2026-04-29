@@ -62,6 +62,7 @@
     <Compile Include="RatesTest.cs" />
     <Compile Include="Mock\Data\Payments.cs" />
     <Compile Include="PayersTest.cs" />
+    <Compile Include="QuotesTest.cs" />
     <Compile Include="ConversionsTest.cs" />
     <Compile Include="ContactsTest.cs" />
     <Compile Include="BeneficiariesTest.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="ClientTest.cs" />
     <Compile Include="AccountsTest.cs" />
     <Compile Include="Mock\Data\Conversions.cs" />
+    <Compile Include="Mock\Data\Quotes.cs" />
     <Compile Include="Mock\Data\Contacts.cs" />
     <Compile Include="Mock\Data\Beneficiaries.cs" />
     <Compile Include="Mock\Data\Accounts.cs" />
@@ -87,6 +89,7 @@
     <None Include="Mock\Http\Recordings\Rates.json" />
     <None Include="Mock\Http\Recordings\Payments.json" />
     <None Include="Mock\Http\Recordings\Payers.json" />
+    <None Include="Mock\Http\Recordings\Quotes.json" />
     <None Include="Mock\Http\Recordings\Conversions.json" />
     <None Include="Mock\Http\Recordings\Contacts.json" />
     <None Include="Mock\Http\Recordings\Balances.json" />

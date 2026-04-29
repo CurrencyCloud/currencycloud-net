@@ -200,6 +200,7 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 ### List of features being deprecated
 ```
 .NET Framework 4.5 support (2026-01-21)
+Beneficiary 4-parameter constructor with bank_account_holder_name (2026-04-29)
 ```
 
 # Support
