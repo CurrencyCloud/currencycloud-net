@@ -7,9 +7,17 @@ namespace CurrencyCloud.Entity
 {
     public class Beneficiary : Entity
     {
+        [Obsolete("BankAccountHolderName is now optional. Use the constructor without this parameter.")]
         public Beneficiary(string bankAccountHolderName, string bankCountry, string currency, string name)
         {
             this.BankAccountHolderName = bankAccountHolderName;
+            this.BankCountry = bankCountry;
+            this.Currency = currency;
+            this.Name = name;
+        }
+
+        public Beneficiary(string bankCountry, string currency, string name)
+        {
             this.BankCountry = bankCountry;
             this.Currency = currency;
             this.Name = name;

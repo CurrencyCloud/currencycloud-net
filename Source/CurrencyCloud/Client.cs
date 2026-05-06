@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.4.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.5.0";
 
         internal string Token
         {
@@ -928,6 +928,35 @@ namespace CurrencyCloud
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
             return await RequestAsync<PaginatedConversionProfitAndLosses>("/v2/conversions/profit_and_loss", HttpMethod.Get, optional);
+        }
+
+        #endregion
+
+        #region Quotes
+
+        /// <summary>
+        /// Creates a new held rate quote.
+        /// </summary>
+        /// <param name="quote">Data object for new quote</param>
+        /// <returns>Asynchronous task, which returns newly created quote.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<Quote> CreateQuoteAsync(Quote quote)
+        {
+            if (string.IsNullOrEmpty(quote.BuyCurrency))
+                throw new ArgumentException("Buy Currency cannot be null");
+            if (string.IsNullOrEmpty(quote.SellCurrency))
+                throw new ArgumentException("Sell Currency cannot be null");
+            if (string.IsNullOrEmpty(quote.FixedSide))
+                throw new ArgumentException("Fixed Side cannot be null");
+            if (!quote.Amount.HasValue)
+                throw new ArgumentException("Amount cannot be null");
+            if (string.IsNullOrEmpty(quote.HoldPeriod))
+                throw new ArgumentException("Hold Period cannot be null");
+
+            var paramsObj = ParamsObject.CreateFromStaticObject(quote);
+
+            return await RequestAsync<Quote>("/v2/quotes/create", HttpMethod.Post, paramsObj);
         }
 
         #endregion

@@ -110,6 +110,7 @@
     <Compile Include="Entity\PaymentDeliveryDates.cs" />
     <Compile Include="Entity\PaymentSubmissionInfo.cs" />
     <Compile Include="Entity\PaymentTrackingInfo.cs" />
+    <Compile Include="Entity\Quote.cs" />
     <Compile Include="Entity\QuotePaymentFee.cs" />
     <Compile Include="Entity\ReportParameters.cs" />
     <Compile Include="Entity\ReportRequest.cs" />
