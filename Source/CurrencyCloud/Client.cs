@@ -33,6 +33,7 @@ namespace CurrencyCloud
     /// </summary>
     public class Client
     {
+        private string apiServerUrl;
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
@@ -319,10 +320,12 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
+            
             httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
 
             httpClient.BaseAddress = new Uri(apiServer.Url);
+            apiServerUrl = apiServer.Url;
 
             credentials = new Credentials(loginId,apiKey);
 
@@ -1747,6 +1750,29 @@ namespace CurrencyCloud
             paramsObj.AddNotNull("Amount", amount);
             return await RequestAsync<WithdrawalAccountFunds>("/v2/withdrawal_accounts/"+withdrawalAccountId+"/pull_funds",
                 HttpMethod.Post, paramsObj);
+        }
+
+        #endregion
+
+
+        #region Emulators
+
+        /// <summary>
+        /// Triggers a production-like flow for processing funds, topping up CM balance or rejecting the transaction without topping up CM balance.
+        /// This resource is only available in the Currencycloud Demo environment; it is not implemented in the Production environment.
+        /// </summary>
+        /// <param name="demoFunding">Demo Funding object to be created</param>
+        /// <returns>Asynchronous task, which returns newly created inbound funds.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<DemoFunding> EmulateFundingAsync(DemoFunding demoFunding)
+        {
+            if (apiServerUrl == ApiServer.Production.Url)
+                throw new InvalidOperationException("EmulateInboundFundsAsync is not available in the production environment.");
+
+            var paramsObj = ParamsObject.CreateFromStaticObject(demoFunding);
+
+            return await RequestAsync<DemoFunding>("/v2/demo/funding/create", HttpMethod.Post, paramsObj);
         }
 
         #endregion

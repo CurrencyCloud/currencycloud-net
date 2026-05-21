@@ -66,6 +66,7 @@
     <Compile Include="Attributes\DateOnlyAttribute.cs" />
     <Compile Include="Client.cs" />
     <Compile Include="Credentials.cs" />
+    <Compile Include="Entity\DemoFunding.cs" />
     <Compile Include="Types\DateOnly.cs" />
     <Compile Include="Entity\BankDetails.cs" />
     <Compile Include="Entity\ConversionDateChangeDetails.cs" />
