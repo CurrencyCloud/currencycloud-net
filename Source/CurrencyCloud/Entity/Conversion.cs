@@ -142,6 +142,12 @@ namespace CurrencyCloud.Entity
         [Param]
         public string ConversionDatePreference { get; set; }
 
+        /// <summary>
+        /// The UUID of a previously created conversion quote
+        /// </summary>
+        [Param]
+        public string QuoteId { get; set; }
+
         public string ToJSON()
         {
             var obj = new[]
@@ -177,7 +183,8 @@ namespace CurrencyCloud.Entity
                     CreatedAt,
                     UpdatedAt,
                     MidMarketRate,
-                    ConversionDatePreference
+                    ConversionDatePreference,
+                    QuoteId
                 }
             };
             return JsonConvert.SerializeObject(obj);
@@ -223,7 +230,8 @@ namespace CurrencyCloud.Entity
                    UniqueRequestId == conversion.UniqueRequestId &&
                    UnallocatedFunds == conversion.UnallocatedFunds &&
                    Reason == conversion.Reason &&
-                   ConversionDatePreference == conversion.ConversionDatePreference;
+                   ConversionDatePreference == conversion.ConversionDatePreference &&
+                   QuoteId == conversion.QuoteId;
         }
 
         public override int GetHashCode()

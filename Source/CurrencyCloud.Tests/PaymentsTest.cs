@@ -345,6 +345,23 @@ namespace CurrencyCloud.Tests
         }
         
         /// <summary>
+        /// Create Payment with Payer Ultimate Account Number.
+        /// </summary>
+        [Test]
+        public async Task CreateWithPayerUltimateAccountNumber()
+        {
+            player.Play("CreateWithPayerUltimateAccountNumber");
+
+            var payment = Payments.Payment1;
+            Payer payer = new Entity.Payer { UltimateAccountNumber = "12345678" };
+            
+            Payment created = await client.CreatePaymentAsync(payment, payer);
+            Assert.AreEqual(payment.Currency, created.Currency);
+            Assert.AreEqual(payment.Reason, created.Reason);
+            Assert.AreEqual(payment.Reference, created.Reference);
+        }
+        
+        /// <summary>
         /// Error response handling retrying payment notifications
         /// </summary>
         [Test]

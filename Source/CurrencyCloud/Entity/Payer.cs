@@ -75,6 +75,11 @@ namespace CurrencyCloud.Entity
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
+        
+        ///<summary>
+        /// Payer Ultimate Account Number
+        ///</summary>
+        public string UltimateAccountNumber { get; set; }
 
         public string ToJSON()
         {

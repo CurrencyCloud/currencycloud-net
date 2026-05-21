@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.2.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.5.0";
 
         internal string Token
         {
@@ -932,6 +932,35 @@ namespace CurrencyCloud
 
         #endregion
 
+        #region Quotes
+
+        /// <summary>
+        /// Creates a new held rate quote.
+        /// </summary>
+        /// <param name="quote">Data object for new quote</param>
+        /// <returns>Asynchronous task, which returns newly created quote.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<Quote> CreateQuoteAsync(Quote quote)
+        {
+            if (string.IsNullOrEmpty(quote.BuyCurrency))
+                throw new ArgumentException("Buy Currency cannot be null");
+            if (string.IsNullOrEmpty(quote.SellCurrency))
+                throw new ArgumentException("Sell Currency cannot be null");
+            if (string.IsNullOrEmpty(quote.FixedSide))
+                throw new ArgumentException("Fixed Side cannot be null");
+            if (!quote.Amount.HasValue)
+                throw new ArgumentException("Amount cannot be null");
+            if (string.IsNullOrEmpty(quote.HoldPeriod))
+                throw new ArgumentException("Hold Period cannot be null");
+
+            var paramsObj = ParamsObject.CreateFromStaticObject(quote);
+
+            return await RequestAsync<Quote>("/v2/quotes/create", HttpMethod.Post, paramsObj);
+        }
+
+        #endregion
+
         #region Funding
 
         /// <summary>
@@ -946,6 +975,46 @@ namespace CurrencyCloud
             ParamsObject optional = ParamsObject.CreateFromStaticObject(parameters);
 
             return await RequestAsync<PaginatedFundingAccounts>("/v2/funding_accounts/find", HttpMethod.Get, optional);
+        }
+
+        /// <summary>
+        /// Gets the details of an approved funding transaction with the given ID.
+        /// </summary>
+        /// <param name="id">The Related Entity UUID (related_entity_id) for the transaction.</param>
+        /// <returns>Asynchronous task, which returns the requested funding transaction.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<FundingTransaction> GetFundingTransactionAsync(string id)
+        {
+            return await RequestAsync<FundingTransaction>("/v2/funding_transactions/" + id, HttpMethod.Get, null);
+        }
+
+        #endregion
+
+        #region Collections
+
+        /// <summary>
+        /// Accept or reject an inbound transaction.
+        /// </summary>
+        /// <param name="transactionId">The transaction UUID.</param>
+        /// <param name="accepted">True to accept, false to reject.</param>
+        /// <param name="reason">Reason for the decision.</param>
+        /// <returns>Asynchronous task, which returns the collections screening result.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ArgumentException">Thrown when required parameters are null or empty.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<CollectionsScreeningResult> CompleteCollectionsScreeningAsync(string transactionId, bool accepted, string reason)
+        {
+            if (string.IsNullOrEmpty(transactionId))
+                throw new ArgumentException("Transaction ID cannot be null or empty");
+            if (string.IsNullOrEmpty(reason))
+                throw new ArgumentException("Reason cannot be null or empty");
+
+            var paramsObj = new ParamsObject();
+            paramsObj.Add("Accepted", accepted);
+            paramsObj.Add("Reason", reason);
+
+            return await RequestAsync<CollectionsScreeningResult>("/v2/collections_screening/" + transactionId + "/complete", new HttpMethod("PUT"), paramsObj);
         }
 
         #endregion
@@ -991,12 +1060,30 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="payment">Payment object to be validated</param>
         /// <param name="scaToAuthenticatedUser">Optional flag to indicate if SCA should be sent to the authenticated user</param>
+        /// <param name="payer">Optional payer info</param>
         /// <returns>Asynchronous task, which returns the payment validation result.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
-        public async Task<PaymentValidation> ValidatePaymentAsync(Payment payment, bool? scaToAuthenticatedUser = null)
+        public async Task<PaymentValidation> ValidatePaymentAsync(Payment payment, bool? scaToAuthenticatedUser = null, Payer payer = null)
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(payment);
+            if (payer != null)
+            {
+                paramsObj.AddNotNull("PayerEntityType", payer.LegalEntityType);
+                paramsObj.AddNotNull("PayerCompanyName", payer.CompanyName);
+                paramsObj.AddNotNull("PayerFirstName", payer.FirstName);
+                paramsObj.AddNotNull("PayerLastName", payer.LastName);
+                paramsObj.AddNotNull("PayerCity", payer.City);
+                paramsObj.AddNotNull("PayerAddress", payer.Address);
+                paramsObj.AddNotNull("PayerPostcode", payer.Postcode);
+                paramsObj.AddNotNull("PayerStateOrProvince", payer.StateOrProvince);
+                paramsObj.AddNotNull("PayerCountry", payer.Country);
+                paramsObj.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
+                paramsObj.AddNotNull("PayerIdentificationType", payer.IdentificationType);
+                paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                paramsObj.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
+            }
+            
             var requestHeaders = scaToAuthenticatedUser.HasValue 
                 ? new Dictionary<string, string> { { "x-sca-to-authenticated-user", scaToAuthenticatedUser.Value.ToString().ToLower() } }
                 : new Dictionary<string, string>();
@@ -1033,6 +1120,7 @@ namespace CurrencyCloud
                 paramsObj.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
                 paramsObj.AddNotNull("PayerIdentificationType", payer.IdentificationType);
                 paramsObj.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                paramsObj.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
             }
 
             var requestHeaders = new Dictionary<string, string>();
@@ -1091,6 +1179,7 @@ namespace CurrencyCloud
                 optional.AddNotNull("PayerDateOfBirth", payer.DateOfBirth);
                 optional.AddNotNull("PayerIdentificationType", payer.IdentificationType);
                 optional.AddNotNull("PayerIdentificationValue", payer.IdentificationValue);
+                optional.AddNotNull("PayerUltimateAccountNumber", payer.UltimateAccountNumber);
             }
             return await RequestAsync<Payment>("/v2/payments/" + id, HttpMethod.Post, optional);
         }

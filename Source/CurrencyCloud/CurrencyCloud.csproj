@@ -89,7 +89,9 @@
     <Compile Include="Entity\Find\TransactionFindParameters.cs" />
     <Compile Include="Entity\Find\TransferFindParameters.cs" />
     <Compile Include="Entity\Find\VirtualAccountFindParameters.cs" />
+    <Compile Include="Entity\CollectionsScreeningResult.cs" />
     <Compile Include="Entity\FundingAccount.cs" />
+    <Compile Include="Entity\FundingTransaction.cs" />
     <Compile Include="Entity\Iban.cs" />
     <Compile Include="Entity\List\PayerDetailsList.cs" />
     <Compile Include="Entity\List\PaymentAuthorisationsList.cs" />
@@ -110,6 +112,7 @@
     <Compile Include="Entity\PaymentDeliveryDates.cs" />
     <Compile Include="Entity\PaymentSubmissionInfo.cs" />
     <Compile Include="Entity\PaymentTrackingInfo.cs" />
+    <Compile Include="Entity\Quote.cs" />
     <Compile Include="Entity\QuotePaymentFee.cs" />
     <Compile Include="Entity\ReportParameters.cs" />
     <Compile Include="Entity\ReportRequest.cs" />
