@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity

@@ -1,4 +1,5 @@
 using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -16,7 +17,7 @@ namespace CurrencyCloud.Entity
             this.BankCountry = bankCountry;
         }
 
-        [Param]
+        [Param, DateOnly]
         public DateTime? PaymentDate { get; set; }
 
         [Param]
