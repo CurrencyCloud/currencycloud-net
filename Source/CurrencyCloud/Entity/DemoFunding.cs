@@ -5,19 +5,21 @@ namespace CurrencyCloud.Entity
 {
     public class DemoFunding : Entity
     {
-        public DemoFunding(string id
-                          , decimal amount
-                          , string currency
-                          , string receiverAccountNumber)
+        public DemoFunding(decimal amount
+                         , string currency
+                         , string receiverAccountNumber)
         {
-            this.Id = id;
+            // NOTE: IDs are client-side generated lowercase UUIDs for the demo funding endpoint so just generate one rather than requiring the user to provide it.
+            //       (they can be created with uppercase but any subsequent calls that use the ID will fail validation if not lowercase)
+            this.Id = Guid.NewGuid().ToString().ToLower(); 
             this.Amount = amount;
             this.Currency = currency;
             this.ReceiverAccountNumber = receiverAccountNumber;
         }
 
         [JsonConstructor]
-        public DemoFunding() { }
+        public DemoFunding()
+        { }
 
         /// <summary>
         /// The unique UUID for the simulated fund.

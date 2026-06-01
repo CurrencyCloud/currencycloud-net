@@ -43,12 +43,12 @@ namespace CurrencyCloud.Tests
             player.Play("EmulateInboundFunds");
 
             var funding = new DemoFunding(
-                              id: "8bd7ba19-eca0-425d-a3f0-968577ba2a81",
                               amount: 150.53m,
                               currency: "USD",
                               receiverAccountNumber: "0334273394"
                           )
             {
+                Id = "8bd7ba19-eca0-425d-a3f0-968577ba2a81", // Override for testing purposes
                 SenderName = "Test sender",
                 SenderAddress = "Some Street",
                 SenderCountry = "GB",
