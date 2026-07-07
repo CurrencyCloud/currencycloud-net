@@ -989,6 +989,20 @@ namespace CurrencyCloud
             return await RequestAsync<FundingTransaction>("/v2/funding_transactions/" + id, HttpMethod.Get, null);
         }
 
+        /// <summary>
+        /// Demo Only - Simulates funds of an approved or rejected funding transaction.
+        /// </summary>
+        /// <param name="simulateFunds">Data object for new funds simulation</param>
+        /// <returns>Asynchronous task, which returns the requested funding simulation transaction.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<SimulateFunds> SimulateFundingAsync(SimulateFunds simulateFunds)
+        {
+            var paramsObj = ParamsObject.CreateFromStaticObject(simulateFunds);
+
+            return await RequestAsync<SimulateFunds>("/v2/demo/funding/create", HttpMethod.Post, paramsObj);
+        }
+
         #endregion
 
         #region Collections

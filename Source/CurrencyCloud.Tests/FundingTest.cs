@@ -105,5 +105,60 @@ namespace CurrencyCloud.Tests
             Assert.AreEqual("Test sender", transaction.Sender.Name);
             Assert.IsNull(transaction.Sender.RoutingCode);
         }
+
+
+        /// <summary>
+        /// Successfully simulate an approved funding transaction.
+        /// </summary>
+        [Test]
+        public async Task SimulateApprovedFunding()
+        {
+            player.Play("SimulateFunding");
+
+            var simulation = FundsSimulations.ApprovedFundingSimulation;
+
+            SimulateFunds transaction = await client.SimulateFundingAsync(simulation);
+
+            Assert.AreEqual(simulation.Id, transaction.Id);
+            Assert.AreEqual(simulation.Amount, transaction.Amount);
+            Assert.AreEqual(simulation.Currency, transaction.Currency);
+            Assert.AreEqual(simulation.Action, transaction.Action);
+            Assert.AreEqual(simulation.SenderName, transaction.SenderName);
+            Assert.AreEqual(simulation.SenderCountry, transaction.SenderCountry);
+            Assert.AreEqual(simulation.SenderReference, transaction.SenderReference);
+            Assert.AreEqual(simulation.SenderAccountNumber, transaction.SenderAccountNumber);
+            Assert.AreEqual(simulation.SenderRoutingCode, transaction.SenderRoutingCode);
+            Assert.AreEqual(simulation.ReceiverAccountNumber, transaction.ReceiverAccountNumber);
+            Assert.AreEqual(simulation.ReceiverRoutingCode, transaction.ReceiverRoutingCode);
+            Assert.NotNull(transaction.CreatedAt);
+            Assert.NotNull(transaction.UpdatedAt);
+        }
+
+        /// <summary>
+        /// Successfully simulate a rejected funding transaction.
+        /// <summary>
+        [Test]
+        public async Task SimulateRejectedFunding()
+        {
+            player.Play("SimulateFunding");
+
+            var simulation = FundsSimulations.RejectFundingSimulation;
+
+            SimulateFunds transaction = await client.SimulateFundingAsync(simulation);
+
+            Assert.AreEqual(simulation.Id, transaction.Id);
+            Assert.AreEqual(simulation.Amount, transaction.Amount);
+            Assert.AreEqual(simulation.Currency, transaction.Currency);
+            Assert.AreEqual(simulation.Action, transaction.Action);
+            Assert.AreEqual(simulation.SenderName, transaction.SenderName);
+            Assert.AreEqual(simulation.SenderCountry, transaction.SenderCountry);
+            Assert.AreEqual(simulation.SenderReference, transaction.SenderReference);
+            Assert.AreEqual(simulation.SenderAccountNumber, transaction.SenderAccountNumber);
+            Assert.AreEqual(simulation.SenderRoutingCode, transaction.SenderRoutingCode);
+            Assert.AreEqual(simulation.ReceiverAccountNumber, transaction.ReceiverAccountNumber);
+            Assert.AreEqual(simulation.ReceiverRoutingCode, transaction.ReceiverRoutingCode);
+            Assert.NotNull(transaction.CreatedAt);
+            Assert.NotNull(transaction.UpdatedAt);
+        }
     }
 }
