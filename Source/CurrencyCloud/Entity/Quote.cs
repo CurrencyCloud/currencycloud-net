@@ -1,4 +1,5 @@
 using System;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -50,7 +51,7 @@ namespace CurrencyCloud.Entity
         /// <summary>
         /// Earliest delivery date in UTC time zone. Format YYYY-MM-DD
         /// </summary>
-        [Param]
+        [Param, DateOnly]
         public DateTime? ConversionDate { get; set; }
 
         /// <summary>

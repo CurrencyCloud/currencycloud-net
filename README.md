@@ -116,6 +116,25 @@ retrieveBalance = await client.GetBalanceAsync("EUR");
 Console.WriteLine("Retrieve Balance with custom Retry Parameters: {0}\n", retrieveBalance.ToJSON());
 ```
 
+## DateTime Handling
+By default, `DateTime` values returned by the API are deserialized using Json.NET's `RoundtripKind` behaviour: values carrying an explicit UTC offset (e.g. `2020-11-10T23:19:00+00:00`) are converted to the local time zone of the machine (`Kind = Local`), while date-only values (e.g. `2020-11-10`) come back with `Kind = Unspecified`.
+
+This can be surprising, because the API works in UTC. A cutoff the API reports as `14:30` UTC is returned as `15:30` on a machine running in British Summer Time. And since `DateTime` comparison ignores `Kind` and compares the underlying ticks, comparing such a value against `DateTime.UtcNow` is skewed by the machine's UTC offset.
+
+To have every `DateTime` returned as UTC (`Kind = Utc`), matching the values the API sends, set `Serialization.DateTimeZoneHandling` to `DateTimeZoneHandling.Utc` once at start-up. This is recommended if you compare returned values against `DateTime.UtcNow`:
+```C#
+using Newtonsoft.Json;
+
+Serialization.DateTimeZoneHandling = DateTimeZoneHandling.Utc;
+
+var client = new Client();
+await client.InitializeAsync(ApiServer.Demo, "loginId", "ApiKey");
+
+var conversionDates = await client.GetConversionDatesAsync("USDGBP");
+// FirstConversionCutoffDatetime is now Kind=Utc and safe to compare against DateTime.UtcNow
+```
+The default remains `DateTimeZoneHandling.RoundtripKind` for backwards compatibility.
+
 ## On Behalf Of
 Some API calls can be executed on behalf of another user (e.g. someone who has a sub-account with the logged in user). To achieve this, the `optional` argument of the SDK function should include `OnBehalfOf` parameter with a value of corresponding contact id:
 `OnBehalfOf(string id, Func<Task> function)` method is used to run many API calls for the given contact id:

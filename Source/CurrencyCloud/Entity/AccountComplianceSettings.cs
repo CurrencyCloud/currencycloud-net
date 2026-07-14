@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -23,7 +24,7 @@ namespace CurrencyCloud.Entity
         [Param]
         public string CountryOfIncorporation { get; set; }
 
-        [Param]
+        [Param, DateOnly]
         public DateTime? DateOfIncorporation { get; set; }
 
         [Param]

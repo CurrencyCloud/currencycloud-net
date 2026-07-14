@@ -162,6 +162,7 @@
     <Compile Include="Entity\ConversionDateChange.cs" />
     <Compile Include="Entity\ConversionSplit.cs" />
     <Compile Include="Retry.cs" />
+    <Compile Include="Serialization.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="package.nuspec" />

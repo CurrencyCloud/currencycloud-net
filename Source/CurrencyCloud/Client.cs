@@ -211,6 +211,7 @@ namespace CurrencyCloud
                     var serializerSettings = new JsonSerializerSettings
                     {
                         NullValueHandling = NullValueHandling.Ignore,
+                        DateTimeZoneHandling = Serialization.DateTimeZoneHandling,
                         ContractResolver = new PascalContractResolver()
                     };
 

@@ -142,47 +142,14 @@ namespace CurrencyCloud
 
         internal string ToQueryString()
         {
-            return string.Join("&", storage.Select(param =>
-            {
-                string key = param.Key;
+            var values = storage
+               .Select(param =>
+                    param.Value is Array
+                        ? formatValue(param)
+                        : param.Key + "=" + formatValue(param))
+               .ToArray();
 
-                if (param.Value is Array)
-                {
-                    var values = from object item in param.Value as Array
-                                 select key + "[]=" + item.ToString();
-
-                    return string.Join("&", values.ToList());
-                }
-
-                string value;
-                if (param.Value is DateTime)
-                {
-                    var dt = (DateTime)param.Value;
-                    var utc = (dt.Kind == DateTimeKind.Utc) ? dt : dt.ToUniversalTime();
-                    value = utc.ToString("O", CultureInfo.InvariantCulture);
-                }
-                else if (param.Value is DateOnly)
-                {
-                    value = param.Value.ToString();
-                }
-                else if (param.Value is bool)
-                {
-                    value = param.Value.ToString().ToLower();
-                }
-                else if (param.Value is decimal)
-                {
-                    value = ((decimal)param.Value).ToString(System.Globalization.CultureInfo.InvariantCulture);
-                }
-                else if (param.Value is Enum)
-                {
-                    value = param.Value.ToString().ToLower();
-                }
-                else
-                {
-                    value = param.Value.ToString();
-                }
-                return key + "=" + value;
-            }));
+            return string.Join("&", values);
         }
 
         internal string formatValue(KeyValuePair<string, object> param)
@@ -198,7 +165,9 @@ namespace CurrencyCloud
             if (param.Value is DateTime)
             {
                 var dt = (DateTime)param.Value;
-                var utc = (dt.Kind == DateTimeKind.Utc) ? dt : dt.ToUniversalTime();
+                var utc = dt.Kind == DateTimeKind.Local
+                    ? dt.ToUniversalTime()
+                    : DateTime.SpecifyKind(dt, DateTimeKind.Utc);
                 value = utc.ToString("O", CultureInfo.InvariantCulture);
             }
             else if (param.Value is DateOnly)
