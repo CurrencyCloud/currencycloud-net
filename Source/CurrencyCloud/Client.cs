@@ -1822,22 +1822,62 @@ namespace CurrencyCloud
         {
             string errorString = await content.ReadAsStringAsync();
 
-            JObject errorObject = JObject.Parse(errorString);
+            try
+            {
+                JObject errorObject = JObject.Parse(errorString);
 
-            var errors = from JProperty error in errorObject["error_messages"]
-                select new Error(error.Name,
-                    error.Value is JArray ? (from errorMessage in error.Value
-                            select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
-                                errorMessage["message"].Value<string>(),
-                                (from JProperty param in errorMessage["params"]
-                                    select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
-                                .ToDictionary(x => x.Key, x => x.Value)))
-                        .ToList() : new List<Error.ErrorMessage>(){new Error.ErrorMessage(error.Value["code"].Value<string>(),
-                            error.Value["message"].Value<string>(), (from JProperty param in error.Value["params"]
-                                select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
-                            .ToDictionary(x => x.Key, x => x.Value))}
-                );
-            return errors.ToList();
+                JObject errorMessages = errorObject["error_messages"] as JObject;
+
+                if (errorMessages == null)
+                {
+                    return FallbackErrors(errorObject.Value<string>("error_code"), errorString);
+                }
+
+                var errors = from error in errorMessages.Properties()
+                             select new Error(error.Name,
+                                 (error.Value is JArray ? (IEnumerable<JToken>)error.Value : new[] { error.Value })
+                                 .Select(CreateErrorMessage)
+                                 .ToList());
+
+                return errors.ToList();
+            }
+            catch (System.Exception)
+            {
+                return FallbackErrors(null, errorString);
+            }
+        }
+
+        private static Error.ErrorMessage CreateErrorMessage(JToken message)
+        {
+            JObject messageObject = message as JObject;
+
+            if (messageObject == null)
+            {
+                return new Error.ErrorMessage(null, message?.ToString(), new Dictionary<string, string>());
+            }
+
+            JObject paramsObject = messageObject["params"] as JObject;
+
+            var parameters = paramsObject == null
+                ? new Dictionary<string, string>()
+                : paramsObject.Properties().ToDictionary(x => x.Name, x => x.Value.ToString());
+
+            return new Error.ErrorMessage(messageObject.Value<string>("code"),
+                                          messageObject.Value<string>("message"),
+                                          parameters);
+        }
+
+        private static List<Error> FallbackErrors(string errorCode, string rawBody)
+        {
+            return new List<Error>
+            {
+                new Error("base", new List<Error.ErrorMessage>
+                {
+                    new Error.ErrorMessage(errorCode ?? "unparseable_error_response",
+                                           rawBody,
+                                           new Dictionary<string, string>())
+                })
+            };
         }
 
         public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
