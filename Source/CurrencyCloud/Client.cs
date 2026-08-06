@@ -35,9 +35,28 @@ namespace CurrencyCloud
     {
         private string apiServerUrl;
         private HttpClient httpClient;
+        private readonly HttpMessageHandler httpMessageHandler;
         private Credentials credentials;
         private string onBehalfOf;
         private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.5.0";
+
+        /// <summary>
+        /// Initializes a new instance of the API client using the default HTTP message handler.
+        /// </summary>
+        public Client()
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the API client that sends its requests through the given
+        /// HTTP message handler (e.g. a DelegatingHandler for logging or metrics). The client takes
+        /// ownership of the handler: it is disposed together with the underlying HttpClient when
+        /// <see cref="CloseAsync"/> is called.
+        /// </summary>
+        /// <param name="httpMessageHandler">Handler the underlying HttpClient will send requests through.</param>
+        public Client(HttpMessageHandler httpMessageHandler)
+        {
+            this.httpMessageHandler = httpMessageHandler;
+        }
 
         internal string Token
         {
@@ -321,8 +340,10 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
-            
-            httpClient = new HttpClient();
+
+            httpClient = httpMessageHandler == null
+                ? new HttpClient()
+                : new HttpClient(httpMessageHandler);
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
 
             httpClient.BaseAddress = new Uri(apiServer.Url);
