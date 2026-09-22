@@ -109,11 +109,11 @@ namespace CurrencyCloud.Tests.Mock.Http
                         responseStream.Write(responseBuffer, 0, responseBuffer.Length);
                         responseStream.Close();
                     }
-                    catch (System.Exception ex)
+                    catch (System.Exception)
                     {
                         Close();
 
-                        throw ex;
+                        throw;
                     }
                 }
             });

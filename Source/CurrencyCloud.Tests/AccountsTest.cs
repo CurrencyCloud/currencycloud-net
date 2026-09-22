@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     class AccountsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Accounts.json");
+        Player player = new Player("Mock/Http/Recordings/Accounts.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -49,21 +49,21 @@ namespace CurrencyCloud.Tests
             Account created = await client.CreateAccountAsync(account1);
 
             Assert.That(created.Status, Is.Not.Null.And.Not.Empty);
-            Assert.AreEqual(account1.AccountName, created.AccountName);
-            Assert.AreEqual(account1.LegalEntityType, created.LegalEntityType);
-            Assert.AreEqual(account1.YourReference, created.YourReference);
-            Assert.AreEqual(account1.Street, created.Street);
-            Assert.AreEqual(account1.City, created.City);
-            Assert.AreEqual(account1.StateOrProvince, created.StateOrProvince);
-            Assert.AreEqual(account1.PostalCode, created.PostalCode);
-            Assert.AreEqual(account1.Country, created.Country);
-            Assert.AreEqual(account1.SpreadTable, created.SpreadTable);
-            Assert.AreEqual(account1.IdentificationType, created.IdentificationType);
-            Assert.AreEqual(account1.Brand, created.Brand);
-            Assert.AreEqual(account1.ApiTrading, created.ApiTrading);
-            Assert.AreEqual(account1.OnlineTrading, created.OnlineTrading);
-            Assert.AreEqual(account1.PhoneTrading, created.PhoneTrading);
-            Assert.AreEqual(account1.TermsAndConditionsAccepted, created.TermsAndConditionsAccepted);
+            Assert.That(created.AccountName, Is.EqualTo(account1.AccountName));
+            Assert.That(created.LegalEntityType, Is.EqualTo(account1.LegalEntityType));
+            Assert.That(created.YourReference, Is.EqualTo(account1.YourReference));
+            Assert.That(created.Street, Is.EqualTo(account1.Street));
+            Assert.That(created.City, Is.EqualTo(account1.City));
+            Assert.That(created.StateOrProvince, Is.EqualTo(account1.StateOrProvince));
+            Assert.That(created.PostalCode, Is.EqualTo(account1.PostalCode));
+            Assert.That(created.Country, Is.EqualTo(account1.Country));
+            Assert.That(created.SpreadTable, Is.EqualTo(account1.SpreadTable));
+            Assert.That(created.IdentificationType, Is.EqualTo(account1.IdentificationType));
+            Assert.That(created.Brand, Is.EqualTo(account1.Brand));
+            Assert.That(created.ApiTrading, Is.EqualTo(account1.ApiTrading));
+            Assert.That(created.OnlineTrading, Is.EqualTo(account1.OnlineTrading));
+            Assert.That(created.PhoneTrading, Is.EqualTo(account1.PhoneTrading));
+            Assert.That(created.TermsAndConditionsAccepted, Is.EqualTo(account1.TermsAndConditionsAccepted));
         }
 
         /// <summary>
@@ -79,24 +79,24 @@ namespace CurrencyCloud.Tests
 
             Assert.That(created.Status, Is.Not.Null.And.Not.Empty);
 
-            Assert.AreEqual(createRequest.AccountName, created.AccountName);
-            Assert.AreEqual(createRequest.LegalEntityType, created.LegalEntityType);
-            Assert.AreEqual(createRequest.LegalEntitySubType, created.LegalEntitySubType);
-            Assert.AreEqual(createRequest.YourReference, created.YourReference);
-            Assert.AreEqual(createRequest.Street, created.Street);
-            Assert.AreEqual(createRequest.City, created.City);
-            Assert.AreEqual(createRequest.StateOrProvince, created.StateOrProvince);
-            Assert.AreEqual(createRequest.PostalCode, created.PostalCode);
-            Assert.AreEqual(createRequest.Country, created.Country);
-            Assert.AreEqual(createRequest.SpreadTable, created.SpreadTable);
-            Assert.AreEqual(createRequest.IdentificationType, created.IdentificationType);
-            Assert.AreEqual(createRequest.IdentificationExpiration, created.IdentificationExpiration);
-            Assert.AreEqual(createRequest.IdentificationIssuer, created.IdentificationIssuer);
-            Assert.AreEqual(createRequest.Brand, created.Brand);
-            Assert.AreEqual(createRequest.ApiTrading, created.ApiTrading);
-            Assert.AreEqual(createRequest.OnlineTrading, created.OnlineTrading);
-            Assert.AreEqual(createRequest.PhoneTrading, created.PhoneTrading);
-            Assert.AreEqual(createRequest.TermsAndConditionsAccepted, created.TermsAndConditionsAccepted);
+            Assert.That(created.AccountName, Is.EqualTo(createRequest.AccountName));
+            Assert.That(created.LegalEntityType, Is.EqualTo(createRequest.LegalEntityType));
+            Assert.That(created.LegalEntitySubType, Is.EqualTo(createRequest.LegalEntitySubType));
+            Assert.That(created.YourReference, Is.EqualTo(createRequest.YourReference));
+            Assert.That(created.Street, Is.EqualTo(createRequest.Street));
+            Assert.That(created.City, Is.EqualTo(createRequest.City));
+            Assert.That(created.StateOrProvince, Is.EqualTo(createRequest.StateOrProvince));
+            Assert.That(created.PostalCode, Is.EqualTo(createRequest.PostalCode));
+            Assert.That(created.Country, Is.EqualTo(createRequest.Country));
+            Assert.That(created.SpreadTable, Is.EqualTo(createRequest.SpreadTable));
+            Assert.That(created.IdentificationType, Is.EqualTo(createRequest.IdentificationType));
+            Assert.That(created.IdentificationExpiration, Is.EqualTo(createRequest.IdentificationExpiration));
+            Assert.That(created.IdentificationIssuer, Is.EqualTo(createRequest.IdentificationIssuer));
+            Assert.That(created.Brand, Is.EqualTo(createRequest.Brand));
+            Assert.That(created.ApiTrading, Is.EqualTo(createRequest.ApiTrading));
+            Assert.That(created.OnlineTrading, Is.EqualTo(createRequest.OnlineTrading));
+            Assert.That(created.PhoneTrading, Is.EqualTo(createRequest.PhoneTrading));
+            Assert.That(created.TermsAndConditionsAccepted, Is.EqualTo(createRequest.TermsAndConditionsAccepted));
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace CurrencyCloud.Tests
             Account created = await client.CreateAccountAsync(account1);
             Account gotten = await client.GetAccountAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace CurrencyCloud.Tests
             Account updated = await client.UpdateAccountAsync(account2);
             Account gotten = await client.GetAccountAsync(created.Id);
 
-            Assert.AreEqual(gotten, updated);
+            Assert.That(updated, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.Contains(current, found.Accounts);
+            Assert.That(found.Accounts, Does.Contain(current));
         }
 
         /// <summary>
@@ -165,7 +165,7 @@ namespace CurrencyCloud.Tests
             Account current = await client.GetCurrentAccountAsync();
             PaginatedAccounts found = await client.FindAccountsAsync();
 
-            Assert.Contains(current, found.Accounts);
+            Assert.That(found.Accounts, Does.Contain(current));
         }
 
         /// <summary>
@@ -192,8 +192,8 @@ namespace CurrencyCloud.Tests
             var settings = Accounts.PaymentCharges;
 
             PaymentChargesSettingsList charges = await client.GetPaymentChargesSettingsAsync(settings.AccountId);
-            Assert.AreEqual(charges.PaymentChargesSettings[0].AccountId, settings.AccountId);
-            Assert.AreEqual(charges.PaymentChargesSettings[0].ChargeSettingsId, settings.ChargeSettingsId);
+            Assert.That(settings.AccountId, Is.EqualTo(charges.PaymentChargesSettings[0].AccountId));
+            Assert.That(settings.ChargeSettingsId, Is.EqualTo(charges.PaymentChargesSettings[0].ChargeSettingsId));
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace CurrencyCloud.Tests
             var settings = Accounts.PaymentCharges;
 
             PaymentChargesSettings charges = await client.ManageAccountPaymentChargesSettingsAsync(settings);
-            Assert.AreEqual(settings, charges);
+            Assert.That(charges, Is.EqualTo(settings));
         }
         /// <summary>
         /// Successfully gets payment charges settings for given account.
@@ -221,24 +221,24 @@ namespace CurrencyCloud.Tests
 
             AccountComplianceSettings actual = await client.GetComplianceSettingsAsync(expected.AccountId);
 
-            Assert.AreEqual(actual.AccountId, expected.AccountId);
-            Assert.AreEqual(actual.IndustryType, expected.IndustryType);
-            Assert.AreEqual(actual.CountryOfIncorporation, expected.CountryOfIncorporation);
-            Assert.AreEqual(actual.DateOfIncorporation, expected.DateOfIncorporation);
-            Assert.AreEqual(actual.BusinessWebsiteUrl, expected.BusinessWebsiteUrl);
-            Assert.AreEqual(actual.ExpectedTransactionCountries, expected.ExpectedTransactionCountries);
-            Assert.AreEqual(actual.ExpectedTransactionCurrencies, expected.ExpectedTransactionCurrencies);
-            Assert.AreEqual(actual.ExpectedMonthlyActivityVolume, expected.ExpectedMonthlyActivityVolume);
-            Assert.AreEqual(actual.ExpectedMonthlyActivityValue, expected.ExpectedMonthlyActivityValue);
-            Assert.AreEqual(actual.TaxIdentification, expected.TaxIdentification);
-            Assert.AreEqual(actual.NationalIdentification, expected.NationalIdentification);
-            Assert.AreEqual(actual.CountryOfCitizenship, expected.CountryOfCitizenship);
-            Assert.AreEqual(actual.TradingAddressStreet, expected.TradingAddressStreet);
-            Assert.AreEqual(actual.TradingAddressCity, expected.TradingAddressCity);
-            Assert.AreEqual(actual.TradingAddressState, expected.TradingAddressState);
-            Assert.AreEqual(actual.TradingAddressPostalcode, expected.TradingAddressPostalcode);
-            Assert.AreEqual(actual.TradingAddressCountry, expected.TradingAddressCountry);
-            Assert.AreEqual(actual.CustomerRisk, expected.CustomerRisk);
+            Assert.That(actual.AccountId, Is.EqualTo(expected.AccountId));
+            Assert.That(actual.IndustryType, Is.EqualTo(expected.IndustryType));
+            Assert.That(actual.CountryOfIncorporation, Is.EqualTo(expected.CountryOfIncorporation));
+            Assert.That(actual.DateOfIncorporation, Is.EqualTo(expected.DateOfIncorporation));
+            Assert.That(actual.BusinessWebsiteUrl, Is.EqualTo(expected.BusinessWebsiteUrl));
+            Assert.That(actual.ExpectedTransactionCountries, Is.EqualTo(expected.ExpectedTransactionCountries));
+            Assert.That(actual.ExpectedTransactionCurrencies, Is.EqualTo(expected.ExpectedTransactionCurrencies));
+            Assert.That(actual.ExpectedMonthlyActivityVolume, Is.EqualTo(expected.ExpectedMonthlyActivityVolume));
+            Assert.That(actual.ExpectedMonthlyActivityValue, Is.EqualTo(expected.ExpectedMonthlyActivityValue));
+            Assert.That(actual.TaxIdentification, Is.EqualTo(expected.TaxIdentification));
+            Assert.That(actual.NationalIdentification, Is.EqualTo(expected.NationalIdentification));
+            Assert.That(actual.CountryOfCitizenship, Is.EqualTo(expected.CountryOfCitizenship));
+            Assert.That(actual.TradingAddressStreet, Is.EqualTo(expected.TradingAddressStreet));
+            Assert.That(actual.TradingAddressCity, Is.EqualTo(expected.TradingAddressCity));
+            Assert.That(actual.TradingAddressState, Is.EqualTo(expected.TradingAddressState));
+            Assert.That(actual.TradingAddressPostalcode, Is.EqualTo(expected.TradingAddressPostalcode));
+            Assert.That(actual.TradingAddressCountry, Is.EqualTo(expected.TradingAddressCountry));
+            Assert.That(actual.CustomerRisk, Is.EqualTo(expected.CustomerRisk));
         }
 
         /// <summary>
@@ -253,24 +253,24 @@ namespace CurrencyCloud.Tests
 
             AccountComplianceSettings actual = await client.ManageComplianceSettingsAsync(expected);
 
-            Assert.AreEqual(actual.AccountId, expected.AccountId);
-            Assert.AreEqual(actual.IndustryType, expected.IndustryType);
-            Assert.AreEqual(actual.CountryOfIncorporation, expected.CountryOfIncorporation);
-            Assert.AreEqual(actual.DateOfIncorporation, expected.DateOfIncorporation);
-            Assert.AreEqual(actual.BusinessWebsiteUrl, expected.BusinessWebsiteUrl);
-            Assert.AreEqual(actual.ExpectedTransactionCountries, expected.ExpectedTransactionCountries);
-            Assert.AreEqual(actual.ExpectedTransactionCurrencies, expected.ExpectedTransactionCurrencies);
-            Assert.AreEqual(actual.ExpectedMonthlyActivityVolume, expected.ExpectedMonthlyActivityVolume);
-            Assert.AreEqual(actual.ExpectedMonthlyActivityValue, expected.ExpectedMonthlyActivityValue);
-            Assert.AreEqual(actual.TaxIdentification, expected.TaxIdentification);
-            Assert.AreEqual(actual.NationalIdentification, expected.NationalIdentification);
-            Assert.AreEqual(actual.CountryOfCitizenship, expected.CountryOfCitizenship);
-            Assert.AreEqual(actual.TradingAddressStreet, expected.TradingAddressStreet);
-            Assert.AreEqual(actual.TradingAddressCity, expected.TradingAddressCity);
-            Assert.AreEqual(actual.TradingAddressState, expected.TradingAddressState);
-            Assert.AreEqual(actual.TradingAddressPostalcode, expected.TradingAddressPostalcode);
-            Assert.AreEqual(actual.TradingAddressCountry, expected.TradingAddressCountry);
-            Assert.AreEqual(actual.CustomerRisk, expected.CustomerRisk);
+            Assert.That(actual.AccountId, Is.EqualTo(expected.AccountId));
+            Assert.That(actual.IndustryType, Is.EqualTo(expected.IndustryType));
+            Assert.That(actual.CountryOfIncorporation, Is.EqualTo(expected.CountryOfIncorporation));
+            Assert.That(actual.DateOfIncorporation, Is.EqualTo(expected.DateOfIncorporation));
+            Assert.That(actual.BusinessWebsiteUrl, Is.EqualTo(expected.BusinessWebsiteUrl));
+            Assert.That(actual.ExpectedTransactionCountries, Is.EqualTo(expected.ExpectedTransactionCountries));
+            Assert.That(actual.ExpectedTransactionCurrencies, Is.EqualTo(expected.ExpectedTransactionCurrencies));
+            Assert.That(actual.ExpectedMonthlyActivityVolume, Is.EqualTo(expected.ExpectedMonthlyActivityVolume));
+            Assert.That(actual.ExpectedMonthlyActivityValue, Is.EqualTo(expected.ExpectedMonthlyActivityValue));
+            Assert.That(actual.TaxIdentification, Is.EqualTo(expected.TaxIdentification));
+            Assert.That(actual.NationalIdentification, Is.EqualTo(expected.NationalIdentification));
+            Assert.That(actual.CountryOfCitizenship, Is.EqualTo(expected.CountryOfCitizenship));
+            Assert.That(actual.TradingAddressStreet, Is.EqualTo(expected.TradingAddressStreet));
+            Assert.That(actual.TradingAddressCity, Is.EqualTo(expected.TradingAddressCity));
+            Assert.That(actual.TradingAddressState, Is.EqualTo(expected.TradingAddressState));
+            Assert.That(actual.TradingAddressPostalcode, Is.EqualTo(expected.TradingAddressPostalcode));
+            Assert.That(actual.TradingAddressCountry, Is.EqualTo(expected.TradingAddressCountry));
+            Assert.That(actual.CustomerRisk, Is.EqualTo(expected.CustomerRisk));
         }
     }
 }

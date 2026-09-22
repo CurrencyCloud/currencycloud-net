@@ -16,11 +16,18 @@ namespace CurrencyCloud.Entity
             this.Name = name;
         }
 
+        [Obsolete("Name is now optional. Use the constructor without this parameter.")]
         public Beneficiary(string bankCountry, string currency, string name)
         {
             this.BankCountry = bankCountry;
             this.Currency = currency;
             this.Name = name;
+        }
+
+        public Beneficiary(string bankCountry, string currency)
+        {
+            this.BankCountry = bankCountry;
+            this.Currency = currency;
         }
 
         [JsonConstructor]

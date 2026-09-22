@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class TransactionsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Transactions.json");
+        Player player = new Player("Mock/Http/Recordings/Transactions.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -53,8 +53,8 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
-            Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);
+            Assert.That(found.Transactions[0].RelatedEntityType, Is.EqualTo("conversion"));
+            Assert.That(found.Transactions[0].RelatedEntityId, Is.EqualTo(conversion.Id));
         }
 
         /// <summary>
@@ -70,8 +70,8 @@ namespace CurrencyCloud.Tests
             Conversion conversion = await client.CreateConversionAsync(conversion1);
             PaginatedTransactions found = await client.FindTransactionsAsync();
 
-            Assert.AreEqual("conversion", found.Transactions[0].RelatedEntityType);
-            Assert.AreEqual(conversion.Id, found.Transactions[0].RelatedEntityId);
+            Assert.That(found.Transactions[0].RelatedEntityType, Is.EqualTo("conversion"));
+            Assert.That(found.Transactions[0].RelatedEntityId, Is.EqualTo(conversion.Id));
         }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace CurrencyCloud.Tests
             });
             Transaction gotten = await client.GetTransactionAsync(found.Transactions[0].Id);
 
-            Assert.AreEqual(found.Transactions[0].ToJSON(), gotten.ToJSON());
+            Assert.That(gotten.ToJSON, Is.EqualTo(found.Transactions[0].ToJSON()));
         }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace CurrencyCloud.Tests
             });
             SenderDetails gotten = await client.GetSenderDetailsAsync(found.Transactions[0].Id);
 
-            Assert.AreEqual(senderDetails, gotten);
+            Assert.That(gotten, Is.EqualTo(senderDetails));
         }
     }
 }

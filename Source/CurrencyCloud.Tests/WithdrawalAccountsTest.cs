@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests.Mock
     class WithdrawalAccountsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/WithdrawalAccounts.json");
+        Player player = new Player("Mock/Http/Recordings/WithdrawalAccounts.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -47,14 +47,14 @@ namespace CurrencyCloud.Tests.Mock
 
             PaginatedWithdrawalAccounts found =
                 await client.FindWithdrawalAccountsAsync("72970a7c-7921-431c-b95f-3438724ba16f");
-            Assert.AreEqual("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2", found.WithdrawalAccounts[0].Id);
-            Assert.AreEqual("currencycloud", found.WithdrawalAccounts[0].AccountName);
-            Assert.AreEqual("The Currency Cloud", found.WithdrawalAccounts[0].AccountHolderName);
-            Assert.Null(found.WithdrawalAccounts[0].AccountHolderDob);
-            Assert.AreEqual("123456789", found.WithdrawalAccounts[0].RoutingCode);
-            Assert.AreEqual("01234567890", found.WithdrawalAccounts[0].AccountNumber);
-            Assert.AreEqual("USD", found.WithdrawalAccounts[0].Currency);
-            Assert.AreEqual("72970a7c-7921-431c-b95f-3438724ba16f", found.WithdrawalAccounts[0].AccountId);
+            Assert.That(found.WithdrawalAccounts[0].Id, Is.EqualTo("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2"));
+            Assert.That(found.WithdrawalAccounts[0].AccountName, Is.EqualTo("currencycloud"));
+            Assert.That(found.WithdrawalAccounts[0].AccountHolderName, Is.EqualTo("The Currency Cloud"));
+            Assert.That(found.WithdrawalAccounts[0].AccountHolderDob, Is.Null);
+            Assert.That(found.WithdrawalAccounts[0].RoutingCode, Is.EqualTo("123456789"));
+            Assert.That(found.WithdrawalAccounts[0].AccountNumber, Is.EqualTo("01234567890"));
+            Assert.That(found.WithdrawalAccounts[0].Currency, Is.EqualTo("USD"));
+            Assert.That(found.WithdrawalAccounts[0].AccountId, Is.EqualTo("72970a7c-7921-431c-b95f-3438724ba16f"));
 
         }
 
@@ -69,24 +69,24 @@ namespace CurrencyCloud.Tests.Mock
 
             PaginatedWithdrawalAccounts found = await client.FindWithdrawalAccountsAsync();
 
-            Assert.AreEqual("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2", found.WithdrawalAccounts[0].Id);
-            Assert.AreEqual("currencycloud", found.WithdrawalAccounts[0].AccountName);
-            Assert.AreEqual("The Currency Cloud", found.WithdrawalAccounts[0].AccountHolderName);
-            Assert.Null(found.WithdrawalAccounts[0].AccountHolderDob);
-            Assert.AreEqual("123456789", found.WithdrawalAccounts[0].RoutingCode);
-            Assert.AreEqual("01234567890", found.WithdrawalAccounts[0].AccountNumber);
-            Assert.AreEqual("USD", found.WithdrawalAccounts[0].Currency);
-            Assert.AreEqual("72970a7c-7921-431c-b95f-3438724ba16f", found.WithdrawalAccounts[0].AccountId);
+            Assert.That(found.WithdrawalAccounts[0].Id, Is.EqualTo("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2"));
+            Assert.That(found.WithdrawalAccounts[0].AccountName, Is.EqualTo("currencycloud"));
+            Assert.That(found.WithdrawalAccounts[0].AccountHolderName, Is.EqualTo("The Currency Cloud"));
+            Assert.That(found.WithdrawalAccounts[0].AccountHolderDob, Is.Null);
+            Assert.That(found.WithdrawalAccounts[0].RoutingCode, Is.EqualTo("123456789"));
+            Assert.That(found.WithdrawalAccounts[0].AccountNumber, Is.EqualTo("01234567890"));
+            Assert.That(found.WithdrawalAccounts[0].Currency, Is.EqualTo("USD"));
+            Assert.That(found.WithdrawalAccounts[0].AccountId, Is.EqualTo("72970a7c-7921-431c-b95f-3438724ba16f"));
 
 
-            Assert.AreEqual("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de3", found.WithdrawalAccounts[1].Id);
-            Assert.AreEqual("currencycloud2", found.WithdrawalAccounts[1].AccountName);
-            Assert.AreEqual("The Currency Cloud 2", found.WithdrawalAccounts[1].AccountHolderName);
-            Assert.AreEqual(DateTime.Parse("1990-07-20"), found.WithdrawalAccounts[1].AccountHolderDob);
-            Assert.AreEqual("223456789", found.WithdrawalAccounts[1].RoutingCode);
-            Assert.AreEqual("01234567892", found.WithdrawalAccounts[1].AccountNumber);
-            Assert.AreEqual("GBP", found.WithdrawalAccounts[1].Currency);
-            Assert.AreEqual("72970a7c-7921-431c-b95f-3438724ba16g", found.WithdrawalAccounts[1].AccountId);
+            Assert.That(found.WithdrawalAccounts[1].Id, Is.EqualTo("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de3"));
+            Assert.That(found.WithdrawalAccounts[1].AccountName, Is.EqualTo("currencycloud2"));
+            Assert.That(found.WithdrawalAccounts[1].AccountHolderName, Is.EqualTo("The Currency Cloud 2"));
+            Assert.That(found.WithdrawalAccounts[1].AccountHolderDob, Is.EqualTo(DateTime.Parse("1990-07-20")));
+            Assert.That(found.WithdrawalAccounts[1].RoutingCode, Is.EqualTo("223456789"));
+            Assert.That(found.WithdrawalAccounts[1].AccountNumber, Is.EqualTo("01234567892"));
+            Assert.That(found.WithdrawalAccounts[1].Currency, Is.EqualTo("GBP"));
+            Assert.That(found.WithdrawalAccounts[1].AccountId, Is.EqualTo("72970a7c-7921-431c-b95f-3438724ba16g"));
         }
 
         /// <summary>
@@ -99,11 +99,11 @@ namespace CurrencyCloud.Tests.Mock
             WithdrawalAccountFunds funds = await client.WithdrawalAccountsPullFundsAsync("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2",
                 100.0m, "PullFunds1");
             
-            Assert.AreEqual("e2e6b7aa-c9e8-4625-96a6-b97d4baab758", funds.Id);
-            Assert.AreEqual("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2", funds.WithdrawalAccountId);
-            Assert.AreEqual("PullFunds1", funds.Reference);
-            Assert.AreEqual(100, funds.Amount);
-            Assert.AreEqual(DateTime.Parse("2020-06-29T08:02:31+00:00"), funds.CreatedAt);
+            Assert.That(funds.Id, Is.EqualTo("e2e6b7aa-c9e8-4625-96a6-b97d4baab758"));
+            Assert.That(funds.WithdrawalAccountId, Is.EqualTo("0886ac00-6ab6-41a6-b0e1-8d3faf2e0de2"));
+            Assert.That(funds.Reference, Is.EqualTo("PullFunds1"));
+            Assert.That(funds.Amount, Is.EqualTo(100));
+            Assert.That(funds.CreatedAt, Is.EqualTo(DateTime.Parse("2020-06-29T08:02:31+00:00")));
         }
     }
 }
