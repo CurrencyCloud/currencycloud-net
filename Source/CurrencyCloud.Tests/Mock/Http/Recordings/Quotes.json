@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           }
         },
         "response": {
@@ -61,7 +61,7 @@
           "body": "?buy_currency=USD&sell_currency=EUR&fixed_side=sell&amount=100.00&hold_period=3m",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           }
         },
         "response": {

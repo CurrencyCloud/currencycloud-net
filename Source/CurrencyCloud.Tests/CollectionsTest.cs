@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     public class CollectionsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Collections.json");
+        Player player = new Player("Mock/Http/Recordings/Collections.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -48,12 +48,12 @@ namespace CurrencyCloud.Tests
 
             CollectionsScreeningResult result = await client.CompleteCollectionsScreeningAsync(transactionId, accepted, reason);
 
-            Assert.AreEqual(transactionId, result.TransactionId);
-            Assert.AreEqual("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9", result.AccountId);
-            Assert.AreEqual("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9", result.HouseAccountId);
-            Assert.IsNotNull(result.Result);
-            Assert.AreEqual("Accepted", result.Result.Reason);
-            Assert.IsTrue(result.Result.Accepted);
+            Assert.That(result.TransactionId, Is.EqualTo(transactionId));
+            Assert.That(result.AccountId, Is.EqualTo("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9"));
+            Assert.That(result.HouseAccountId, Is.EqualTo("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9"));
+            Assert.That(result.Result, Is.Not.Null);
+            Assert.That(result.Result.Reason, Is.EqualTo("Accepted"));
+            Assert.That(result.Result.Accepted, Is.True);
         }
 
         /// <summary>
@@ -70,12 +70,12 @@ namespace CurrencyCloud.Tests
 
             CollectionsScreeningResult result = await client.CompleteCollectionsScreeningAsync(transactionId, accepted, reason);
 
-            Assert.AreEqual(transactionId, result.TransactionId);
-            Assert.AreEqual("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9", result.AccountId);
-            Assert.AreEqual("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9", result.HouseAccountId);
-            Assert.IsNotNull(result.Result);
-            Assert.AreEqual("suspected_fraud", result.Result.Reason);
-            Assert.IsFalse(result.Result.Accepted);
+            Assert.That(result.TransactionId, Is.EqualTo(transactionId));
+            Assert.That(result.AccountId, Is.EqualTo("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9"));
+            Assert.That(result.HouseAccountId, Is.EqualTo("7a116d7d-6310-40ae-8d54-0ffbe41dc1c9"));
+            Assert.That(result.Result, Is.Not.Null);
+            Assert.That(result.Result.Reason, Is.EqualTo("suspected_fraud"));
+            Assert.That(result.Result.Accepted, Is.False);
         }
     }
 }

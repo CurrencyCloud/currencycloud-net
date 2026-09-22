@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class IbansTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Ibans.json");
+        Player player = new Player("Mock/Http/Recordings/Ibans.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -50,15 +50,15 @@ namespace CurrencyCloud.Tests
                 Currency = iban.Currency
             });
 
-            Assert.AreEqual(iban.Id, found.Ibans[0].Id);
-            Assert.AreEqual(iban.IbanCode, found.Ibans[0].IbanCode);
-            Assert.AreEqual(iban.AccountId, found.Ibans[0].AccountId);
-            Assert.AreEqual(iban.Currency, found.Ibans[0].Currency);
-            Assert.AreEqual(iban.AccountHolderName, found.Ibans[0].AccountHolderName);
-            Assert.AreEqual(iban.BankInstitutionName, found.Ibans[0].BankInstitutionName);
-            Assert.AreEqual(iban.BankInstitutionAddress, found.Ibans[0].BankInstitutionAddress);
-            Assert.AreEqual(iban.BankInstitutionCountry, found.Ibans[0].BankInstitutionCountry);
-            Assert.AreEqual(iban.BicSwift, found.Ibans[0].BicSwift);
+            Assert.That(found.Ibans[0].Id, Is.EqualTo(iban.Id));
+            Assert.That(found.Ibans[0].IbanCode, Is.EqualTo(iban.IbanCode));
+            Assert.That(found.Ibans[0].AccountId, Is.EqualTo(iban.AccountId));
+            Assert.That(found.Ibans[0].Currency, Is.EqualTo(iban.Currency));
+            Assert.That(found.Ibans[0].AccountHolderName, Is.EqualTo(iban.AccountHolderName));
+            Assert.That(found.Ibans[0].BankInstitutionName, Is.EqualTo(iban.BankInstitutionName));
+            Assert.That(found.Ibans[0].BankInstitutionAddress, Is.EqualTo(iban.BankInstitutionAddress));
+            Assert.That(found.Ibans[0].BankInstitutionCountry, Is.EqualTo(iban.BankInstitutionCountry));
+            Assert.That(found.Ibans[0].BicSwift, Is.EqualTo(iban.BicSwift));
         }
 
         /// <summary>
@@ -73,15 +73,15 @@ namespace CurrencyCloud.Tests
 
             PaginatedIbans found = await client.FindIbansAsync();
 
-            Assert.AreEqual(iban.Id, found.Ibans[0].Id);
-            Assert.AreEqual(iban.IbanCode, found.Ibans[0].IbanCode);
-            Assert.AreEqual(iban.AccountId, found.Ibans[0].AccountId);
-            Assert.AreEqual(iban.Currency, found.Ibans[0].Currency);
-            Assert.AreEqual(iban.AccountHolderName, found.Ibans[0].AccountHolderName);
-            Assert.AreEqual(iban.BankInstitutionName, found.Ibans[0].BankInstitutionName);
-            Assert.AreEqual(iban.BankInstitutionAddress, found.Ibans[0].BankInstitutionAddress);
-            Assert.AreEqual(iban.BankInstitutionCountry, found.Ibans[0].BankInstitutionCountry);
-            Assert.AreEqual(iban.BicSwift, found.Ibans[0].BicSwift);
+            Assert.That(found.Ibans[0].Id, Is.EqualTo(iban.Id));
+            Assert.That(found.Ibans[0].IbanCode, Is.EqualTo(iban.IbanCode));
+            Assert.That(found.Ibans[0].AccountId, Is.EqualTo(iban.AccountId));
+            Assert.That(found.Ibans[0].Currency, Is.EqualTo(iban.Currency));
+            Assert.That(found.Ibans[0].AccountHolderName, Is.EqualTo(iban.AccountHolderName));
+            Assert.That(found.Ibans[0].BankInstitutionName, Is.EqualTo(iban.BankInstitutionName));
+            Assert.That(found.Ibans[0].BankInstitutionAddress, Is.EqualTo(iban.BankInstitutionAddress));
+            Assert.That(found.Ibans[0].BankInstitutionCountry, Is.EqualTo(iban.BankInstitutionCountry));
+            Assert.That(found.Ibans[0].BicSwift, Is.EqualTo(iban.BicSwift));
         }
 
     }

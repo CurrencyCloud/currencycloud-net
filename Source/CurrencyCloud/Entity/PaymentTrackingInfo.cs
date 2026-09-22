@@ -98,6 +98,12 @@ namespace CurrencyCloud.Entity
                 return Status == transactionStatus2.Status &&
                        Reason == transactionStatus2.Reason ;
             }
+            
+            public override int GetHashCode()
+            {
+                return (Status, Reason).GetHashCode();
+            }
+            
         }
 
         public class PaymentEvent
@@ -183,6 +189,30 @@ namespace CurrencyCloud.Entity
                        Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
                        LastUpdateTime == paymentEvent.LastUpdateTime;
             }
+            
+            public override int GetHashCode()
+            {
+                return (
+                    TrackerEventType,
+                    Valid,
+                    TransactionStatus,
+                    FundsAvailable,
+                    ForwardedToAgent,
+                    From,
+                    To,
+                    Originator,
+                    SerialParties,
+                    SenderAcknowledgementReceipt,
+                    InstructedAmount,
+                    ConfirmedAmount,
+                    InterbankSettlementAmount,
+                    InterbankSettlementDate,
+                    ChargeAmount,
+                    ChargeType,
+                    ForeignExchangeDetails,
+                    LastUpdateTime
+                ).GetHashCode();
+            }
         }
 
         public class SerialPartiesDef
@@ -232,6 +262,18 @@ namespace CurrencyCloud.Entity
                        CreditorAgent == serialParties.CreditorAgent &&
                        Creditor == serialParties.Creditor;
             }
+            public override int GetHashCode()
+            {
+                return (
+                    Debtor,
+                    DebtorAgent,
+                    IntermediaryAgent1,
+                    InstructingReimbursementAgent,
+                    CreditorAgent,
+                    Creditor
+                ).GetHashCode();
+            }
+            
         }
         
         public class AmountDef
@@ -268,6 +310,11 @@ namespace CurrencyCloud.Entity
 
                 return Currency == amount.Currency &&
                        Amount == amount.Amount;
+            }
+            
+            public override int GetHashCode()
+            {
+                return (Currency, Amount).GetHashCode();
             }
         }
         
@@ -309,6 +356,12 @@ namespace CurrencyCloud.Entity
                        TargetCurrency == amount.TargetCurrency &&
                        Rate == amount.Rate;
             }
+            
+            public override int GetHashCode()
+            {
+                return (SourceCurrency, TargetCurrency, Rate).GetHashCode();
+            }
+            
         }
     }
 }

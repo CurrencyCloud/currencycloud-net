@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.5.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/10.0.0";
 
         internal string Token
         {
@@ -84,9 +84,16 @@ namespace CurrencyCloud
             }
 
             clone.Version = req.Version;
-
+            
+#if NET5_0_OR_GREATER
+            foreach (var option in req.Options)
+            {
+                clone.Options.Set(new HttpRequestOptionsKey<object>(option.Key), option.Value);
+            }
+#else
             foreach (KeyValuePair<string, object> prop in req.Properties)
                 clone.Properties.Add(prop);
+#endif            
 
             foreach (KeyValuePair<string, IEnumerable<string>> header in req.Headers)
                 clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
@@ -1096,6 +1103,8 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="payment">Payment object to be created</param>
         /// <param name="payer">Optional payer info</param>
+        /// <param name="scaId">Optional UUID returned by the Validate Payment request</param>
+        /// <param name="scaToken">Optional OTP received following the Validate Payment request</param>
         /// <returns>Asynchronous task, which returns newly created payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -1255,7 +1264,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Returns an object containing the expected payment delivery date.
         /// </summary>
-        /// <param name="paymentDeliveryDate">paymentDeliveryDate to query.</param>
+        /// <param name="paymentDeliveryDates">paymentDeliveryDate to query.</param>
         /// <returns>Asynchronous task, which returns the confirmation details of a payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>

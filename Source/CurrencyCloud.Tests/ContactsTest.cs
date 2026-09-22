@@ -14,7 +14,7 @@ namespace CurrencyCloud.Tests
     class ContactsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Contacts.json");
+        Player player = new Player("Mock/Http/Recordings/Contacts.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -61,17 +61,17 @@ namespace CurrencyCloud.Tests
                 contact1.LoginId = RandomString(10);
             Contact created = await client.CreateContactAsync(contact1);
 
-            Assert.AreEqual(contact1.FirstName, created.FirstName);
-            Assert.AreEqual(contact1.LastName, created.LastName);
-            Assert.AreEqual(contact1.EmailAddress, created.EmailAddress);
-            Assert.AreEqual(contact1.PhoneNumber, created.PhoneNumber);
-            Assert.AreEqual(contact1.YourReference, created.YourReference);
-            Assert.AreEqual(contact1.MobilePhoneNumber, created.MobilePhoneNumber);
-            Assert.AreEqual(contact1.LoginId, created.LoginId);
-            Assert.AreEqual(contact1.Status, created.Status);
-            Assert.AreEqual(contact1.Locale, created.Locale);
-            Assert.AreEqual(contact1.Timezone, created.Timezone);
-            Assert.AreEqual(contact1.DateOfBirth, created.DateOfBirth);
+            Assert.That(created.FirstName, Is.EqualTo(contact1.FirstName));
+            Assert.That(created.LastName, Is.EqualTo(contact1.LastName));
+            Assert.That(created.EmailAddress, Is.EqualTo(contact1.EmailAddress));
+            Assert.That(created.PhoneNumber, Is.EqualTo(contact1.PhoneNumber));
+            Assert.That(created.YourReference, Is.EqualTo(contact1.YourReference));
+            Assert.That(created.MobilePhoneNumber, Is.EqualTo(contact1.MobilePhoneNumber));
+            Assert.That(created.LoginId, Is.EqualTo(contact1.LoginId));
+            Assert.That(created.Status, Is.EqualTo(contact1.Status));
+            Assert.That(created.Locale, Is.EqualTo(contact1.Locale));
+            Assert.That(created.Timezone, Is.EqualTo(contact1.Timezone));
+            Assert.That(created.DateOfBirth, Is.EqualTo(contact1.DateOfBirth));
         }
 
         /// <summary>
@@ -91,7 +91,7 @@ namespace CurrencyCloud.Tests
             Contact created = await client.CreateContactAsync(contact1);
             Contact gotten = await client.GetContactAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace CurrencyCloud.Tests
             Contact updated = await client.UpdateContactAsync(contact2);
             Contact gotten = await client.GetContactAsync(created.Id);
 
-            Assert.AreEqual(gotten, updated);
+            Assert.That(updated, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -138,7 +138,7 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.Contains(current, found.Contacts);
+            Assert.That(found.Contacts, Does.Contain(current));
         }
 
         /// <summary>
@@ -152,7 +152,7 @@ namespace CurrencyCloud.Tests
             Contact current = await client.GetCurrentContactAsync();
             PaginatedContacts found = await client.FindContactsAsync();
 
-            Assert.Contains(current, found.Contacts);
+            Assert.That(found.Contacts, Does.Contain(current));
         }
 
         /// <summary>

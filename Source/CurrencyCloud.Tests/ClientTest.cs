@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     class ClientTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Client.json");
+        Player player = new Player("Mock/Http/Recordings/Client.json");
 
         Credentials credentials = Authentication.Credentials;
 
@@ -48,7 +48,7 @@ namespace CurrencyCloud.Tests
 
             var token = await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
 
-            Assert.IsNotEmpty(token);
+            Assert.That(token, Is.Not.Empty);
 
             await client.CloseAsync();
         }
@@ -81,7 +81,7 @@ namespace CurrencyCloud.Tests
 
             await client.GetCurrentAccountAsync();
 
-            Assert.AreNotEqual(expired, client.Token);
+            Assert.That(client.Token, Is.Not.EqualTo(expired));
 
             await client.CloseAsync();
         }
@@ -97,7 +97,7 @@ namespace CurrencyCloud.Tests
             await client.InitializeAsync(Authentication.ApiServer, credentials.LoginId, credentials.ApiKey);
             await client.CloseAsync();
 
-            Assert.IsFalse(client.IsInitialized);
+            Assert.That(client.IsInitialized, Is.False);
         }
 
         /// <summary>
@@ -137,13 +137,13 @@ namespace CurrencyCloud.Tests
 
                 Assert.That(ex.Request.Verb, Is.Not.Null.And.Not.Empty);
                 Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
-                Assert.IsEmpty(ex.Request.Parameters);
+                Assert.That(ex.Request.Parameters, Is.Empty);
 
-                Assert.AreEqual(ex.Response.StatusCode, 400);
-                Assert.IsFalse(DateTime.Equals(ex.Response.Date, DateTime.MinValue));
+                Assert.That(ex.Response.StatusCode, Is.EqualTo(400));
+                Assert.That(DateTime.Equals(ex.Response.Date, DateTime.MinValue), Is.False);
                 Assert.That(ex.Response.RequestId, Is.Not.Null.And.Not.Empty);
 
-                Assert.IsNotEmpty(ex.Errors);
+                Assert.That(ex.Errors, Is.Not.Empty);
 
                 await client.CloseAsync();
             }
@@ -171,19 +171,19 @@ namespace CurrencyCloud.Tests
                 Assert.That(ex.Request.Verb, Is.Not.Null.And.Not.Empty);
                 Assert.That(ex.Platform, Is.Not.Null.And.Not.Empty);
                 
-                Assert.AreEqual(0,ex.Request.Parameters.Count);
+                Assert.That(ex.Request.Parameters.Count, Is.EqualTo(0));
 
-                Assert.AreEqual(400, ex.Response.StatusCode);
-                Assert.IsFalse(DateTime.Equals(ex.Response.Date, DateTime.MinValue));
+                Assert.That(ex.Response.StatusCode, Is.EqualTo(400));
+                Assert.That(DateTime.Equals(ex.Response.Date, DateTime.MinValue), Is.False);
                 Assert.That(ex.Response.RequestId, Is.Not.Null.And.Not.Empty);
 
-                Assert.IsNotEmpty(ex.Errors);
-                Assert.AreEqual(1,ex.Errors.Count);
-                Assert.AreEqual("base",ex.Errors[0].Field);
-                Assert.AreEqual(1,ex.Errors[0].ErrorMessages.Count);
-                Assert.AreEqual("invalid_iban",ex.Errors[0].ErrorMessages[0].Code);
-                Assert.AreEqual("IBAN is invalid.",ex.Errors[0].ErrorMessages[0].Message);
-                Assert.IsEmpty(ex.Errors[0].ErrorMessages[0].Params);
+                Assert.That(ex.Errors, Is.Not.Empty);
+                Assert.That(ex.Errors.Count, Is.EqualTo(1));
+                Assert.That(ex.Errors[0].Field, Is.EqualTo("base"));
+                Assert.That(ex.Errors[0].ErrorMessages.Count, Is.EqualTo(1));
+                Assert.That(ex.Errors[0].ErrorMessages[0].Code, Is.EqualTo("invalid_iban"));
+                Assert.That(ex.Errors[0].ErrorMessages[0].Message, Is.EqualTo("IBAN is invalid."));
+                Assert.That(ex.Errors[0].ErrorMessages[0].Params, Is.Empty);
 
                 await client.CloseAsync();
             }
@@ -213,13 +213,13 @@ namespace CurrencyCloud.Tests
             {
                 beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams);
 
-                Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
+                Assert.That(beneficiary.CreatorContactId, Is.EqualTo(contact.Id));
             });
 
             contact = await client.GetCurrentContactAsync();
             beneficiary = await client.CreateBeneficiaryAsync(beneficiaryParams);
 
-            Assert.AreEqual(contact.Id, beneficiary.CreatorContactId);
+            Assert.That(beneficiary.CreatorContactId, Is.EqualTo(contact.Id));
 
             await client.CloseAsync();
         }

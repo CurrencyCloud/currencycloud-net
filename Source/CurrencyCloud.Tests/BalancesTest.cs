@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     class BalancesTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Balances.json");
+        Player player = new Player("Mock/Http/Recordings/Balances.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -66,7 +66,7 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.Contains(balance, found.Balances);
+            Assert.That(found.Balances, Does.Contain(balance));
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace CurrencyCloud.Tests
             Balance balance = await client.GetBalanceAsync("GBP");
             PaginatedBalances found = await client.FindBalancesAsync();
 
-            Assert.Contains(balance, found.Balances);
+            Assert.That(found.Balances, Does.Contain(balance));
         }
         
         /// <summary>
@@ -92,11 +92,11 @@ namespace CurrencyCloud.Tests
             player.Play("TopUpMarginBalance");
 
             MarginBalanceTopUp topUp = await client.TopUpMarginBalanceAsync("GBP", 450);
-            Assert.NotNull(topUp);
-            Assert.AreEqual("GBP", topUp.Currency);
-            Assert.AreEqual(450, topUp.TransferredAmount);
-            Assert.AreEqual("6c046c51-2387-4004-8e87-4bf97102e36d", topUp.AccountId);
-            Assert.AreEqual(DateTime.Parse("2007-11-19 14:37:48"), topUp.TransferCompletedAt);
+            Assert.That(topUp, Is.Not.Null);
+            Assert.That(topUp.Currency, Is.EqualTo("GBP"));
+            Assert.That(topUp.TransferredAmount, Is.EqualTo(450));
+            Assert.That(topUp.AccountId, Is.EqualTo("6c046c51-2387-4004-8e87-4bf97102e36d"));
+            Assert.That(topUp.TransferCompletedAt, Is.EqualTo(DateTime.Parse("2007-11-19 14:37:48")));
 
 
         }

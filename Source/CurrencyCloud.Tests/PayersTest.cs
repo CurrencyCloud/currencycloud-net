@@ -11,7 +11,7 @@ namespace CurrencyCloud.Tests
     class PayersTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Payers.json");
+        Player player = new Player("Mock/Http/Recordings/Payers.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -55,16 +55,16 @@ namespace CurrencyCloud.Tests
             Payment payment = await client.CreatePaymentAsync(payment1,Payments.Payer1);
             Payer gotten = await client.GetPayerAsync(payment.PayerId);
 
-            Assert.AreEqual(Payments.Payer1.CompanyName, gotten.CompanyName);
-            Assert.AreEqual(Payments.Payer1.FirstName, gotten.FirstName);
-            Assert.AreEqual(Payments.Payer1.LastName, gotten.LastName);
-            Assert.AreEqual(Payments.Payer1.City, gotten.City);
-            Assert.AreEqual(Payments.Payer1.Address, gotten.Address);
-            Assert.AreEqual(Payments.Payer1.Postcode, gotten.Postcode);
-            Assert.AreEqual(Payments.Payer1.StateOrProvince, gotten.StateOrProvince);
-            Assert.AreEqual(Payments.Payer1.Country, gotten.Country);
-            Assert.AreEqual(Payments.Payer1.DateOfBirth, gotten.DateOfBirth);
-            Assert.AreEqual(Payments.Payer1.IdentificationType, gotten.IdentificationType);
+            Assert.That(gotten.CompanyName, Is.EqualTo(Payments.Payer1.CompanyName));
+            Assert.That(gotten.FirstName, Is.EqualTo(Payments.Payer1.FirstName));
+            Assert.That(gotten.LastName, Is.EqualTo(Payments.Payer1.LastName));
+            Assert.That(gotten.City, Is.EqualTo(Payments.Payer1.City));
+            Assert.That(gotten.Address, Is.EqualTo(Payments.Payer1.Address));
+            Assert.That(gotten.Postcode, Is.EqualTo(Payments.Payer1.Postcode));
+            Assert.That(gotten.StateOrProvince, Is.EqualTo(Payments.Payer1.StateOrProvince));
+            Assert.That(gotten.Country, Is.EqualTo(Payments.Payer1.Country));
+            Assert.That(gotten.DateOfBirth, Is.EqualTo(Payments.Payer1.DateOfBirth));
+            Assert.That(gotten.IdentificationType, Is.EqualTo(Payments.Payer1.IdentificationType));
         }
     }
 }
