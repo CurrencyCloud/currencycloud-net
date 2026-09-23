@@ -51,12 +51,11 @@ namespace CurrencyCloud
 
             Type t = obj.GetType();
             ParamsObject ret = new ParamsObject();
-            foreach (var p in t.GetProperties())
-            {
-                var r = Attribute.IsDefined(p, typeof(ParamAttribute));
-                if (!r)
-                    continue;
 
+            var properties = t.GetProperties().Where(p => Attribute.IsDefined(p, typeof(ParamAttribute)));
+
+            foreach (var p in properties)
+            {
                 object propValue = p.GetValue(obj);
                 if (propValue != null)
                 {
