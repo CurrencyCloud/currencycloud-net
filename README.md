@@ -2,6 +2,51 @@
 # Currencycloud
 This is the official .NET SDK for v2 of Currencycloud's API. Additional documentation for each API endpoint can be found at [Currencycloud API documentation][introduction]. If you have any queries or you require support, please contact our development team at development@currencycloud.com
 
+## Differences from upstream (Flowbrite fork)
+This is Flowbrite's fork of [CurrencyCloud/currencycloud-net](https://github.com/CurrencyCloud/currencycloud-net), currently based on upstream **10.0.0**. The changes below are deliberate. Keep them when merging future upstream releases. Most were offered upstream in [CurrencyCloud/currencycloud-net#108](https://github.com/CurrencyCloud/currencycloud-net/pull/108) (open since March 2025).
+
+### Breaking changes
+- **Targets .NET 6, 8 and 10 only.** Upstream also targets .NET Standard 2.0. Dropping it makes `System.DateOnly` available on every target.
+- **Date-only fields are `DateOnly?` instead of `DateTime?`.** A date of birth or a payment date has no time or time zone, and representing it as a `DateTime` let time-zone conversion move it to a different day. Affected properties:
+  - `Account.IdentificationExpiration`
+  - `AccountCreateRequest.IdentificationExpiration` and `DateOfIncorporation`
+  - `AccountComplianceSettings.DateOfIncorporation`
+  - `Beneficiary.BeneficiaryDateOfBirth`
+  - `BeneficiaryFindParameters.BeneficiaryDateOfBirth`
+  - `Contact.DateOfBirth`
+  - `Conversion.ConversionDate`
+  - `ConversionDateChange.NewSettlementDate`
+  - `DetailedRates.ConversionDate`
+  - `Payment.PaymentDate`
+  - `PaymentDeliveryDates.PaymentDate`
+  - `Quote.ConversionDate`
+
+  The `ConversionDateChange` and `PaymentDeliveryDates` constructors take a `DateOnly` too.
+
+  These are sent as `yyyy-MM-dd`. When reading responses, the API sometimes sends these fields as timestamps (e.g. `conversion_date` comes back as `"2026-06-04T00:00:00+00:00"`), so `DateOnlyConverter` reads them as their UTC date. Json.NET cannot read a timestamp into a `DateOnly` by itself.
+
+### Behaviour changes
+- **`DateTime` parameters keep their time.** Upstream sends every `DateTime` parameter as `yyyy-MM-dd`, which throws away the time and makes search filters such as `CreatedAtFrom`, `UpdatedAtTo` or `PaymentDateFrom` accurate only to the day. This fork sends them as ISO 8601 UTC timestamps (e.g. `2026-06-04T09:30:00.0000000Z`). `Local` values are converted to UTC, and `Unspecified` values are treated as UTC. So pass `DateTime.UtcNow.Date`, not `DateTime.Today`, to mean "start of today in UTC". In BST, `DateTime.Today` becomes 23:00 UTC the previous day.
+- **Optional UTC deserialization.** `Serialization.DateTimeZoneHandling` can be set to `DateTimeZoneHandling.Utc` so returned `DateTime` values are UTC, not converted to the machine's local time zone. The default matches upstream. See [DateTime Handling](#datetime-handling).
+- **Tolerant error parsing.** Upstream throws while building the `ApiException` when an error body isn't in the expected shape. Here, unexpected error responses become a single `base` error that carries the raw body.
+- **`CloseAsync` always releases the `HttpClient`.** Upstream only disposes it when the close-session call succeeds, so closing an already-expired session leaked the `HttpClient` and its message handler. The API error is still thrown.
+
+### Additions
+- **`Client(HttpMessageHandler)` constructor**, so requests can go through a custom handler, e.g. for logging or metrics. The client owns the handler and disposes it in `CloseAsync`, so create a new handler for each `Client`.
+- **`Payment.ReviewStatus`**, and a `ReviewStatus` search filter on `PaymentFindParameters`.
+- **`EmulateFundingAsync` / `DemoFunding`**, which emulate inbound funds in the Demo environment. The call throws against Production.
+
+### Fixes
+- `PaymentDeliveryDates.Equals` compared `PaymentDeliveryDate` against the other object's `PaymentDate`.
+
+### Build
+- **Dependencies are copied to the build output** (`CopyLocalLockFileAssemblies`). Flowbrite references `CurrencyCloud.dll` directly rather than through NuGet, so `bin` includes `Polly.dll` and `Newtonsoft.Json.dll` alongside it.
+
+### Merging upstream releases
+- **Upstream is the `upstream` remote.** Run `git fetch upstream`, then `git merge upstream/master`.
+- **Upstream bumps the SDK version in the `User-Agent` header of every test recording.** Recordings added in this fork (e.g. `GetConversionDatesWithUtcHandling` in `Reference.json`) have to be bumped to match, or the mock server rejects the request.
+- **Run the tests one framework at a time**, e.g. `dotnet test -f net8.0`. Running all frameworks together fails because every run's mock server tries to use port 5555.
+
 ## Installation
 The library is distributed on `NuGet`. To install the latest version, run the following command in the Package Manager Console: 
 ```sh

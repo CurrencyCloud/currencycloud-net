@@ -5,7 +5,7 @@ namespace CurrencyCloud
     /// <summary>
     /// Global settings controlling how API responses are deserialized.
     /// </summary>
-    public struct Serialization
+    public static class Serialization
     {
         /// <summary>
         /// Controls how <see cref="System.DateTime"/> values received from the API are treated during

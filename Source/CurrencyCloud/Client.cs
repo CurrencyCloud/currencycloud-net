@@ -375,17 +375,22 @@ namespace CurrencyCloud
                 throw new InvalidOperationException("Client is not initialized.");
             }
 
-            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
-            if (res.IsSuccessStatusCode)
+            try
             {
+                HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
+                if (!res.IsSuccessStatusCode)
+                {
+                    throw await ApiExceptionFactory.FromHttpResponse(res);
+                }
+            }
+            finally
+            {
+                // Reset even when closing the session fails (e.g. it has already expired), so the
+                // HttpClient and its message handler are never leaked.
                 credentials = null;
 
                 httpClient.Dispose();
                 httpClient = null;
-            }
-            else
-            {
-                throw await ApiExceptionFactory.FromHttpResponse(res);
             }
         }
 
@@ -1800,7 +1805,7 @@ namespace CurrencyCloud
         public async Task<DemoFunding> EmulateFundingAsync(DemoFunding demoFunding)
         {
             if (apiServerUrl == ApiServer.Production.Url)
-                throw new InvalidOperationException("EmulateInboundFundsAsync is not available in the production environment.");
+                throw new InvalidOperationException("EmulateFundingAsync is not available in the production environment.");
 
             var paramsObj = ParamsObject.CreateFromStaticObject(demoFunding);
 
