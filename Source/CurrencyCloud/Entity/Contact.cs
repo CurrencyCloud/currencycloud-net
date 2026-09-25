@@ -1,4 +1,3 @@
-﻿using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 using System;
 
@@ -97,8 +96,8 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Date of birth
         ///</summary>
-        [Param, DateOnly]
-        public DateTime? DateOfBirth { get; set; }
+        [Param]
+        public DateOnly? DateOfBirth { get; set; }
 
         public DateTime? CreatedAt { get; set; }
 

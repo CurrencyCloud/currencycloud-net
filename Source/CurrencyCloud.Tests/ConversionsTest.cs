@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     class ConversionsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Conversions.json");
+        Player player = new Player("Mock/Http/Recordings/Conversions.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -49,9 +49,9 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            Assert.AreEqual(conversion1.BuyCurrency, created.BuyCurrency);
-            Assert.AreEqual(conversion1.SellCurrency, created.SellCurrency);
-            Assert.AreEqual(conversion1.FixedSide, created.FixedSide);
+            Assert.That(created.BuyCurrency, Is.EqualTo(conversion1.BuyCurrency));
+            Assert.That(created.SellCurrency, Is.EqualTo(conversion1.SellCurrency));
+            Assert.That(created.FixedSide, Is.EqualTo(conversion1.FixedSide));
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace CurrencyCloud.Tests
             Conversion created = await client.CreateConversionAsync(conversion1);
             Conversion gotten = await client.GetConversionAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.Contains(created, found.Conversions);
+            Assert.That(found.Conversions, Does.Contain(created));
         }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace CurrencyCloud.Tests
             Conversion created = await client.CreateConversionAsync(conversion1);
             PaginatedConversions found = await client.FindConversionsAsync();
 
-            Assert.Contains(created, found.Conversions);
+            Assert.That(found.Conversions, Does.Contain(created));
         }
 
         /// <summary>
@@ -126,16 +126,16 @@ namespace CurrencyCloud.Tests
                 ConversionId = created.Id
             });
 
-            Assert.AreEqual(cancelQuoted.Currency, created.BuyCurrency);
-            Assert.IsNull(cancelQuoted.ConversionId);
-            Assert.IsNull(cancelQuoted.ContactId);
-            Assert.IsNull(cancelQuoted.AccountId);
-            Assert.NotZero((decimal)cancelQuoted.Amount);
-            Assert.IsNull(cancelQuoted.Notes);
-            Assert.NotNull(cancelQuoted.EventDateTime);
-            Assert.IsNull(cancelQuoted.EventAccountId);
-            Assert.IsNull(cancelQuoted.EventContactId);
-            Assert.IsNull(cancelQuoted.EventType);
+            Assert.That(created.BuyCurrency, Is.EqualTo(cancelQuoted.Currency));
+            Assert.That(cancelQuoted.ConversionId, Is.Null);
+            Assert.That(cancelQuoted.ContactId, Is.Null);
+            Assert.That(cancelQuoted.AccountId, Is.Null);
+            Assert.That(cancelQuoted.Amount, Is.Not.Zero);
+            Assert.That(cancelQuoted.Notes, Is.Null);
+            Assert.That(cancelQuoted.EventDateTime, Is.Not.Null);
+            Assert.That(cancelQuoted.EventAccountId, Is.Null);
+            Assert.That(cancelQuoted.EventContactId, Is.Null);
+            Assert.That(cancelQuoted.EventType, Is.Null);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace CurrencyCloud.Tests
                 Notes = "some notes"
             });
 
-            Assert.AreEqual(cancelled.ConversionId, created.Id);
+            Assert.That(created.Id, Is.EqualTo(cancelled.ConversionId));
         }
 
         /// <summary>
@@ -168,20 +168,20 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            DateOnly newSettlementDate = new DateOnly(2018, 2, 2);
             ConversionDateChange dateChangeQuoted = await client.QuoteDateChangeConversionAsync(new ConversionDateChange {
                 ConversionId = created.Id,
                 NewSettlementDate = newSettlementDate
             });
 
-            Assert.AreEqual(dateChangeQuoted.ConversionId, created.Id);
-            Assert.AreEqual(dateChangeQuoted.Currency, created.SellCurrency);
-            Assert.NotZero((decimal)dateChangeQuoted.Amount);
-            Assert.AreEqual(dateChangeQuoted.NewSettlementDate, newSettlementDate);
-            Assert.NotNull(dateChangeQuoted.NewConversionDate);
-            Assert.NotNull(dateChangeQuoted.OldConversionDate);
-            Assert.NotNull(dateChangeQuoted.OldSettlementDate);
-            Assert.NotNull(dateChangeQuoted.EventDateTime);
+            Assert.That(created.Id, Is.EqualTo(dateChangeQuoted.ConversionId));
+            Assert.That(created.SellCurrency, Is.EqualTo(dateChangeQuoted.Currency));
+            Assert.That(dateChangeQuoted.Amount, Is.Not.Zero);
+            Assert.That(newSettlementDate, Is.EqualTo(dateChangeQuoted.NewSettlementDate));
+            Assert.That(dateChangeQuoted.NewConversionDate, Is.Not.Null);
+            Assert.That(dateChangeQuoted.OldConversionDate, Is.Not.Null);
+            Assert.That(dateChangeQuoted.OldSettlementDate, Is.Not.Null);
+            Assert.That(dateChangeQuoted.EventDateTime, Is.Not.Null);
         }
 
         /// <summary>
@@ -195,20 +195,20 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            DateOnly newSettlementDate = new DateOnly(2018, 2, 2);
             ConversionDateChange dateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
                 ConversionId = created.Id,
                 NewSettlementDate = newSettlementDate
             });
 
-            Assert.AreEqual(dateChanged.ConversionId, created.Id);
-            Assert.AreEqual(dateChanged.Currency, created.SellCurrency);
-            Assert.NotZero((decimal)dateChanged.Amount);
-            Assert.AreEqual(dateChanged.NewSettlementDate, newSettlementDate);
-            Assert.NotNull(dateChanged.NewConversionDate);
-            Assert.NotNull(dateChanged.OldConversionDate);
-            Assert.NotNull(dateChanged.OldSettlementDate);
-            Assert.NotNull(dateChanged.EventDateTime);
+            Assert.That(created.Id, Is.EqualTo(dateChanged.ConversionId));
+            Assert.That(created.SellCurrency, Is.EqualTo(dateChanged.Currency));
+            Assert.That(dateChanged.Amount, Is.Not.Zero);
+            Assert.That(newSettlementDate, Is.EqualTo(dateChanged.NewSettlementDate));
+            Assert.That(dateChanged.NewConversionDate, Is.Not.Null);
+            Assert.That(dateChanged.OldConversionDate, Is.Not.Null);
+            Assert.That(dateChanged.OldSettlementDate, Is.Not.Null);
+            Assert.That(dateChanged.EventDateTime, Is.Not.Null);
         }
 
         /// <summary>
@@ -227,19 +227,19 @@ namespace CurrencyCloud.Tests
                 Amount = 9370
             });
 
-            Assert.AreEqual(splitPreviewed.ParentConversion.Id, created.Id);
-            Assert.IsNull(splitPreviewed.ChildConversion.Id);
-            Assert.NotNull(splitPreviewed.ParentConversion.ShortReference);
-            Assert.IsNull(splitPreviewed.ChildConversion.ShortReference);
-            Assert.AreEqual(splitPreviewed.ParentConversion.SellCurrency, created.SellCurrency);
-            Assert.AreEqual(splitPreviewed.ParentConversion.BuyCurrency, created.BuyCurrency);
-            Assert.AreEqual(splitPreviewed.ChildConversion.BuyCurrency, splitPreviewed.ParentConversion.BuyCurrency);
-            Assert.AreEqual(splitPreviewed.ChildConversion.SellCurrency, splitPreviewed.ParentConversion.SellCurrency);
-            Assert.AreEqual(splitPreviewed.ParentConversion.ConversionDate, splitPreviewed.ChildConversion.ConversionDate);
-            Assert.AreEqual(splitPreviewed.ParentConversion.SettlementDate, splitPreviewed.ChildConversion.SettlementDate);
-            Assert.AreEqual(splitPreviewed.ParentConversion.Status, splitPreviewed.ChildConversion.Status);
-            Assert.AreEqual(created.ClientBuyAmount, splitPreviewed.ParentConversion.BuyAmount + splitPreviewed.ChildConversion.BuyAmount);
-            Assert.AreEqual(created.ClientSellAmount, splitPreviewed.ParentConversion.SellAmount + splitPreviewed.ChildConversion.SellAmount);
+            Assert.That(created.Id, Is.EqualTo(splitPreviewed.ParentConversion.Id));
+            Assert.That(splitPreviewed.ChildConversion.Id, Is.Null);
+            Assert.That(splitPreviewed.ParentConversion.ShortReference, Is.Not.Null);
+            Assert.That(splitPreviewed.ChildConversion.ShortReference, Is.Null);
+            Assert.That(created.SellCurrency, Is.EqualTo(splitPreviewed.ParentConversion.SellCurrency));
+            Assert.That(created.BuyCurrency, Is.EqualTo(splitPreviewed.ParentConversion.BuyCurrency));
+            Assert.That(splitPreviewed.ParentConversion.BuyCurrency, Is.EqualTo(splitPreviewed.ChildConversion.BuyCurrency));
+            Assert.That(splitPreviewed.ParentConversion.SellCurrency, Is.EqualTo(splitPreviewed.ChildConversion.SellCurrency));
+            Assert.That(splitPreviewed.ChildConversion.ConversionDate, Is.EqualTo(splitPreviewed.ParentConversion.ConversionDate));
+            Assert.That(splitPreviewed.ChildConversion.SettlementDate, Is.EqualTo(splitPreviewed.ParentConversion.SettlementDate));
+            Assert.That(splitPreviewed.ChildConversion.Status, Is.EqualTo(splitPreviewed.ParentConversion.Status));
+            Assert.That(splitPreviewed.ParentConversion.BuyAmount + splitPreviewed.ChildConversion.BuyAmount, Is.EqualTo(created.ClientBuyAmount));
+            Assert.That(splitPreviewed.ParentConversion.SellAmount + splitPreviewed.ChildConversion.SellAmount, Is.EqualTo(created.ClientSellAmount));
         }
 
         /// <summary>
@@ -258,18 +258,18 @@ namespace CurrencyCloud.Tests
                 Amount = 9370
             });
 
-            Assert.AreEqual(split.ParentConversion.Id, created.Id);
-            Assert.NotNull(split.ChildConversion.Id);
-            Assert.NotNull(split.ParentConversion.ShortReference);
-            Assert.NotNull(split.ChildConversion.ShortReference);
-            Assert.AreEqual(split.ParentConversion.SellCurrency, created.SellCurrency);
-            Assert.AreEqual(split.ParentConversion.BuyCurrency, created.BuyCurrency);
-            Assert.AreEqual(split.ChildConversion.BuyCurrency, split.ParentConversion.BuyCurrency);
-            Assert.AreEqual(split.ChildConversion.SellCurrency, split.ParentConversion.SellCurrency);
-            Assert.AreEqual(split.ParentConversion.SettlementDate, split.ChildConversion.SettlementDate);
-            Assert.AreEqual(split.ParentConversion.Status, split.ChildConversion.Status);
-            Assert.AreEqual(created.ClientBuyAmount, split.ParentConversion.BuyAmount + split.ChildConversion.BuyAmount);
-            Assert.AreEqual(created.ClientSellAmount, split.ParentConversion.SellAmount + split.ChildConversion.SellAmount);
+            Assert.That(created.Id, Is.EqualTo(split.ParentConversion.Id));
+            Assert.That(split.ChildConversion.Id, Is.Not.Null);
+            Assert.That(split.ParentConversion.ShortReference, Is.Not.Null);
+            Assert.That(split.ChildConversion.ShortReference, Is.Not.Null);
+            Assert.That(created.SellCurrency, Is.EqualTo(split.ParentConversion.SellCurrency));
+            Assert.That(created.BuyCurrency, Is.EqualTo(split.ParentConversion.BuyCurrency));
+            Assert.That(split.ParentConversion.BuyCurrency, Is.EqualTo(split.ChildConversion.BuyCurrency));
+            Assert.That(split.ParentConversion.SellCurrency, Is.EqualTo(split.ChildConversion.SellCurrency));
+            Assert.That(split.ChildConversion.SettlementDate, Is.EqualTo(split.ParentConversion.SettlementDate));
+            Assert.That(split.ChildConversion.Status, Is.EqualTo(split.ParentConversion.Status));
+            Assert.That(split.ParentConversion.BuyAmount + split.ChildConversion.BuyAmount, Is.EqualTo(created.ClientBuyAmount));
+            Assert.That(split.ParentConversion.SellAmount + split.ChildConversion.SellAmount, Is.EqualTo(created.ClientSellAmount));
         }
 
         /// <summary>
@@ -301,16 +301,16 @@ namespace CurrencyCloud.Tests
                 Id = splitChild.ChildConversion.Id
             });
 
-            Assert.AreEqual(splitConversion.ParentConversion.Id, created.Id);
-            Assert.AreEqual(splitChild.ParentConversion.Id, splitConversion.ChildConversion.Id);
-            Assert.AreEqual(splitConversion.ChildConversion.BuyAmount, splitChild.ParentConversion.BuyAmount + splitChild.ChildConversion.BuyAmount);
-            Assert.NotNull(splitHistoryParent.ParentConversion);
-            Assert.Null(splitHistoryParent.OriginConversion);
-            Assert.IsNotEmpty(splitHistoryParent.ChildConversions);
-            Assert.NotNull(splitHistoryChildChild.ParentConversion);
-            Assert.NotNull(splitHistoryChildChild.OriginConversion);
-            Assert.IsEmpty(splitHistoryChildChild.ChildConversions);
-            Assert.AreEqual(splitHistoryChildChild.OriginConversion.Id, splitHistoryParent.ParentConversion.Id);
+            Assert.That(created.Id, Is.EqualTo(splitConversion.ParentConversion.Id));
+            Assert.That(splitConversion.ChildConversion.Id, Is.EqualTo(splitChild.ParentConversion.Id));
+            Assert.That(splitChild.ParentConversion.BuyAmount + splitChild.ChildConversion.BuyAmount, Is.EqualTo(splitConversion.ChildConversion.BuyAmount));
+            Assert.That(splitHistoryParent.ParentConversion, Is.Not.Null);
+            Assert.That(splitHistoryParent.OriginConversion, Is.Null);
+            Assert.That(splitHistoryParent.ChildConversions, Is.Not.Empty);
+            Assert.That(splitHistoryChildChild.ParentConversion, Is.Not.Null);
+            Assert.That(splitHistoryChildChild.OriginConversion, Is.Not.Null);
+            Assert.That(splitHistoryChildChild.ChildConversions, Is.Empty);
+            Assert.That(splitHistoryParent.ParentConversion.Id, Is.EqualTo(splitHistoryChildChild.OriginConversion.Id));
         }
 
         /// <summary>
@@ -325,16 +325,16 @@ namespace CurrencyCloud.Tests
 
             foreach (ConversionProfitAndLoss element in profitAndLosses.ConversionProfitAndLosses)
             {
-                Assert.NotNull(element.AccountId);
-                Assert.NotNull(element.ContactId);
-                Assert.NotNull(element.EventAccountId);
-                Assert.NotNull(element.EventContactId);
-                Assert.AreEqual(element.EventType, "self_service_roll");
-                Assert.NotZero(element.Amount ?? 0);
-                Assert.NotNull(element.Currency);
-                Assert.NotNull(element.EventDateTime);
+                Assert.That(element.AccountId, Is.Not.Null);
+                Assert.That(element.ContactId, Is.Not.Null);
+                Assert.That(element.EventAccountId, Is.Not.Null);
+                Assert.That(element.EventContactId, Is.Not.Null);
+                Assert.That(element.EventType, Is.EqualTo("self_service_roll"));
+                Assert.That(element.Amount ?? 0, Is.Not.Zero);
+                Assert.That(element.Currency, Is.Not.Null);
+                Assert.That(element.EventDateTime, Is.Not.Null);
             }
-            Assert.AreEqual(profitAndLosses.ConversionProfitAndLosses.Count, profitAndLosses.Pagination.TotalEntries);
+            Assert.That(profitAndLosses.Pagination.TotalEntries, Is.EqualTo(profitAndLosses.ConversionProfitAndLosses.Count));
         }
         
         /// <summary>
@@ -357,8 +357,8 @@ namespace CurrencyCloud.Tests
             var created = await client.CreateConversionAsync(conversion);
 
             Assert.That(created, Is.Not.Null);
-            Assert.AreEqual(805.90, created.ClientSellAmount);
-            Assert.AreEqual(DateTime.Parse("2020-05-19T00:00:00+00:00"), created.ConversionDate);
+            Assert.That(created.ClientSellAmount, Is.EqualTo(805.90));
+            Assert.That(created.ConversionDate, Is.EqualTo(new DateOnly(2020, 5, 19)));
 
         }
     }

@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class VirtualAccountsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/VirtualAccounts.json");
+        Player player = new Player("Mock/Http/Recordings/VirtualAccounts.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -47,14 +47,14 @@ namespace CurrencyCloud.Tests
 
             PaginatedVirtualAccounts found = await client.FindVirtualAccountsAsync();
 
-            Assert.AreEqual(van.Id, found.VirtualAccounts[0].Id);
-            Assert.AreEqual(van.VirtualAccountNumber, found.VirtualAccounts[0].VirtualAccountNumber);
-            Assert.AreEqual(van.AccountId, found.VirtualAccounts[0].AccountId);
-            Assert.AreEqual(van.AccountHolderName, found.VirtualAccounts[0].AccountHolderName);
-            Assert.AreEqual(van.BankInstitutionName, found.VirtualAccounts[0].BankInstitutionName);
-            Assert.AreEqual(van.BankInstitutionAddress, found.VirtualAccounts[0].BankInstitutionAddress);
-            Assert.AreEqual(van.BankInstitutionCountry, found.VirtualAccounts[0].BankInstitutionCountry);
-            Assert.AreEqual(van.RoutingCode, found.VirtualAccounts[0].RoutingCode);
+            Assert.That(found.VirtualAccounts[0].Id, Is.EqualTo(van.Id));
+            Assert.That(found.VirtualAccounts[0].VirtualAccountNumber, Is.EqualTo(van.VirtualAccountNumber));
+            Assert.That(found.VirtualAccounts[0].AccountId, Is.EqualTo(van.AccountId));
+            Assert.That(found.VirtualAccounts[0].AccountHolderName, Is.EqualTo(van.AccountHolderName));
+            Assert.That(found.VirtualAccounts[0].BankInstitutionName, Is.EqualTo(van.BankInstitutionName));
+            Assert.That(found.VirtualAccounts[0].BankInstitutionAddress, Is.EqualTo(van.BankInstitutionAddress));
+            Assert.That(found.VirtualAccounts[0].BankInstitutionCountry, Is.EqualTo(van.BankInstitutionCountry));
+            Assert.That(found.VirtualAccounts[0].RoutingCode, Is.EqualTo(van.RoutingCode));
         }
 
     }

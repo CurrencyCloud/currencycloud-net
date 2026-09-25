@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -56,8 +55,8 @@ namespace CurrencyCloud.Entity
         public bool? PhoneTrading { get; set; }
         [Param]
         public string LegalEntitySubType { get; set; }
-        [Param, DateOnly]
-        public DateTime? IdentificationExpiration { get; set; }
+        [Param]
+        public DateOnly? IdentificationExpiration { get; set; }
         [Param]
         public string IdentificationIssuer { get; set; }
         [Param]
@@ -68,8 +67,8 @@ namespace CurrencyCloud.Entity
         public string CountryOfIncorporation { get; set; }
         [Param]
         public string CountryOfCitizenship { get; set; }
-        [Param, DateOnly]
-        public DateTime? DateOfIncorporation { get; set; }
+        [Param]
+        public DateOnly? DateOfIncorporation { get; set; }
         [Param]
         public string TradingAddressStreet { get; set; }
         [Param]

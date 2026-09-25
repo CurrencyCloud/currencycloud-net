@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using CurrencyCloud.Entity;
@@ -15,7 +15,7 @@ namespace CurrencyCloud.Tests
     class PaymentsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Payments.json");
+        Player player = new Player("Mock/Http/Recordings/Payments.json");
 
         private async Task<Payment> CreatePayment(Entity.Payment payment)
         {
@@ -65,10 +65,10 @@ namespace CurrencyCloud.Tests
 
             Payment created = await CreatePayment(payment1);
 
-            Assert.AreEqual(payment1.Currency, created.Currency);
-            Assert.AreEqual(payment1.Amount, created.Amount);
-            Assert.AreEqual(payment1.Reason, created.Reason);
-            Assert.AreEqual(payment1.Reference, created.Reference);
+            Assert.That(created.Currency, Is.EqualTo(payment1.Currency));
+            Assert.That(created.Amount, Is.EqualTo(payment1.Amount));
+            Assert.That(created.Reason, Is.EqualTo(payment1.Reason));
+            Assert.That(created.Reference, Is.EqualTo(payment1.Reference));
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             Payment gotten = await client.GetPaymentAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace CurrencyCloud.Tests
             Payment updated = await client.UpdatePaymentAsync(payment2, Payments.Payer2);
             Payment gotten = await client.GetPaymentAsync(created.Id);
 
-            Assert.AreEqual(gotten, updated);
+            Assert.That(updated, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -123,7 +123,7 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             PaymentSubmissionInfo gotten = await client.GetPaymentSubmissionInfoAsync(created.Id);
 
-            Assert.AreEqual(gotten, submissionInfo1);
+            Assert.That(submissionInfo1, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             PaymentSubmissionInfo gotten = await client.GetPaymentSubmissionInfoAsync(created.Id);
 
-            Assert.AreEqual(gotten, submissionInfo2);
+            Assert.That(submissionInfo2, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -157,7 +157,7 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             PaymentConfirmation gotten = await client.GetPaymentConfirmationAsync(created.Id);
 
-            Assert.AreEqual(gotten, confirmation1);
+            Assert.That(confirmation1, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -175,9 +175,9 @@ namespace CurrencyCloud.Tests
                 "d025f90f-a23c-46f9-979a-35a9f98d9491"
             });
 
-            Assert.AreEqual(gotten.Authorisations[0], Payments.Authorisation1);
-            Assert.AreEqual(gotten.Authorisations[1], Payments.Authorisation2);
-            Assert.AreEqual(gotten.Authorisations[2], Payments.Authorisation3);
+            Assert.That(Payments.Authorisation1, Is.EqualTo(gotten.Authorisations[0]));
+            Assert.That(Payments.Authorisation2, Is.EqualTo(gotten.Authorisations[1]));
+            Assert.That(Payments.Authorisation3, Is.EqualTo(gotten.Authorisations[2]));
         }
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace CurrencyCloud.Tests
                 PerPage = 5
             });
 
-            Assert.Contains(created, found.Payments);
+            Assert.That(found.Payments, Does.Contain(created));
         }
 
         /// <summary>
@@ -216,7 +216,7 @@ namespace CurrencyCloud.Tests
             Payment created = await CreatePayment(payment1);
             PaginatedPayments found = await client.FindPaymentsAsync();
 
-            Assert.Contains(created, found.Payments);
+            Assert.That(found.Payments, Does.Contain(created));
         }
 
         /// <summary>
@@ -235,7 +235,7 @@ namespace CurrencyCloud.Tests
             //Temporary fix while server side does not return PayerDetailsSource for deletion.
             deleted.PayerDetailsSource = "payer";
 
-            Assert.AreEqual(created, deleted);
+            Assert.That(deleted, Is.EqualTo(created));
 
             try
             {
@@ -245,7 +245,7 @@ namespace CurrencyCloud.Tests
             }
             catch (System.Exception ex)
             {
-                Assert.IsInstanceOf(typeof(NotFoundException), ex);
+                Assert.That(ex, Is.InstanceOf(typeof(NotFoundException)));
             }
         }
 
@@ -257,14 +257,14 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetPaymentDeliveryDates");
 
-            var paymentDeliveryDates = new PaymentDeliveryDates(new DateTime(2018, 1, 1), "regular", "EUR", "IT");
+            var paymentDeliveryDates = new PaymentDeliveryDates(new DateOnly(2018, 1, 1), "regular", "EUR", "IT");
 
             PaymentDeliveryDates created = await client.GetPaymentDeliveryDatesAsync(paymentDeliveryDates);
 
-            Assert.NotNull(created);
-            Assert.AreEqual(created.Currency, "EUR");
-            Assert.AreEqual(created.BankCountry, "IT");
-            Assert.AreEqual(created.PaymentType, "regular");
+            Assert.That(created, Is.Not.Null);
+            Assert.That(created.Currency, Is.EqualTo("EUR"));
+            Assert.That(created.BankCountry, Is.EqualTo("IT"));
+            Assert.That(created.PaymentType, Is.EqualTo("regular"));
         }
 
         /// <summary>
@@ -279,14 +279,14 @@ namespace CurrencyCloud.Tests
 
             QuotePaymentFee created = await client.GetQuotePaymentFee(quotePaymentFee);
 
-            Assert.NotNull(created);
-            Assert.AreEqual("0534aaf2-2egg-0134-2f36-10b11cd33cfb", created.AccountId);
-            Assert.AreEqual("USD", created.PaymentCurrency);
-            Assert.AreEqual("US", created.PaymentDestinationCountry);
-            Assert.AreEqual("regular", created.PaymentType);
-            Assert.Null(created.ChargeType);
-            Assert.AreEqual("EUR", created.FeeCurrency);
-            Assert.AreEqual(10.0, created.FeeAmount);
+            Assert.That(created, Is.Not.Null);
+            Assert.That(created.AccountId, Is.EqualTo("0534aaf2-2egg-0134-2f36-10b11cd33cfb"));
+            Assert.That(created.PaymentCurrency, Is.EqualTo("USD"));
+            Assert.That(created.PaymentDestinationCountry, Is.EqualTo("US"));
+            Assert.That(created.PaymentType, Is.EqualTo("regular"));
+            Assert.That(created.ChargeType, Is.Null);
+            Assert.That(created.FeeCurrency, Is.EqualTo("EUR"));
+            Assert.That(created.FeeAmount, Is.EqualTo(10.0));
         }
 
 
@@ -300,8 +300,8 @@ namespace CurrencyCloud.Tests
 
             Payment gotten = await client.GetPaymentAsync("855fa573-1ace-4da2-a55b-912f10103056");
 
-            Assert.AreEqual(100, gotten.FeeAmount);
-            Assert.AreEqual("GBP", gotten.FeeCurrency);
+            Assert.That(gotten.FeeAmount, Is.EqualTo(100));
+            Assert.That(gotten.FeeCurrency, Is.EqualTo("GBP"));
         }
 
         /// <summary>
@@ -315,8 +315,8 @@ namespace CurrencyCloud.Tests
             var trackingInfo1 = Payments.TrackingInfo1;
 
             PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
-            Assert.AreEqual(trackingInfo1.ToJSON(), received.ToJSON());
-            Assert.AreEqual(trackingInfo1, received);
+            Assert.That(received.ToJSON, Is.EqualTo(trackingInfo1.ToJSON()));
+            Assert.That(received, Is.EqualTo(trackingInfo1));
         }
 
         /// <summary>
@@ -331,17 +331,17 @@ namespace CurrencyCloud.Tests
 
             PaymentValidation validationResult = await client.ValidatePaymentAsync(scaPayment, true);
 
-            Assert.IsNotNull(validationResult);
-            Assert.AreEqual("success", validationResult.ValidationResult);
-            Assert.IsTrue(validationResult.XScaRequired);
-            Assert.IsNotNull(validationResult.XScaId);
-            Assert.AreEqual("SMS", validationResult.XScaType);
+            Assert.That(validationResult, Is.Not.Null);
+            Assert.That(validationResult.ValidationResult, Is.EqualTo("success"));
+            Assert.That(validationResult.XScaRequired, Is.True);
+            Assert.That(validationResult.XScaId, Is.Not.Null);
+            Assert.That(validationResult.XScaType, Is.EqualTo("SMS"));
 
 
             Payment created = await client.CreatePaymentAsync(scaPayment, scaId: validationResult.XScaId, scaToken: "123456");
-            Assert.AreEqual(scaPayment.Currency, created.Currency);
-            Assert.AreEqual(scaPayment.Reason, created.Reason);
-            Assert.AreEqual(scaPayment.Reference, created.Reference);
+            Assert.That(created.Currency, Is.EqualTo(scaPayment.Currency));
+            Assert.That(created.Reason, Is.EqualTo(scaPayment.Reason));
+            Assert.That(created.Reference, Is.EqualTo(scaPayment.Reference));
         }
         
         /// <summary>
@@ -356,9 +356,9 @@ namespace CurrencyCloud.Tests
             Payer payer = new Entity.Payer { UltimateAccountNumber = "12345678" };
             
             Payment created = await client.CreatePaymentAsync(payment, payer);
-            Assert.AreEqual(payment.Currency, created.Currency);
-            Assert.AreEqual(payment.Reason, created.Reason);
-            Assert.AreEqual(payment.Reference, created.Reference);
+            Assert.That(created.Currency, Is.EqualTo(payment.Currency));
+            Assert.That(created.Reason, Is.EqualTo(payment.Reason));
+            Assert.That(created.Reference, Is.EqualTo(payment.Reference));
         }
         
         /// <summary>
@@ -406,7 +406,7 @@ namespace CurrencyCloud.Tests
                 id: "855fa573-1ace-4da2-a55b-912f10103055", 
                 notificationType: "payment_released_notification"
             );
-            Assert.IsNotNull(result);
+            Assert.That(result, Is.Not.Null);
         }
     }
 }

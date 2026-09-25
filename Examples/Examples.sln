@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cookbook", "Cookbook\Cookbook.csproj", "{7BE7EEEF-0E72-4E39-AE61-180A878B6769}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cookbook", "Cookbook\Cookbook.csproj", "{7BE7EEEF-0E72-4E39-AE61-180A878B6769}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,4 @@
 using System;
-using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -9,7 +8,7 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public PaymentDeliveryDates() { }
 
-        public PaymentDeliveryDates(DateTime paymentDate, string paymentType, string currency, string bankCountry)
+        public PaymentDeliveryDates(DateOnly paymentDate, string paymentType, string currency, string bankCountry)
         {
             this.PaymentDate = paymentDate;
             this.PaymentType = paymentType;
@@ -17,8 +16,8 @@ namespace CurrencyCloud.Entity
             this.BankCountry = bankCountry;
         }
 
-        [Param, DateOnly]
-        public DateTime? PaymentDate { get; set; }
+        [Param]
+        public DateOnly? PaymentDate { get; set; }
 
         [Param]
         public string PaymentType { get; set; }
@@ -60,7 +59,7 @@ namespace CurrencyCloud.Entity
             var paymentDeliveryDates = obj as PaymentDeliveryDates;
 
             return PaymentDate == paymentDeliveryDates.PaymentDate &&
-                   PaymentDeliveryDate == paymentDeliveryDates.PaymentDate &&
+                   PaymentDeliveryDate == paymentDeliveryDates.PaymentDeliveryDate &&
                    PaymentCutoffTime == paymentDeliveryDates.PaymentCutoffTime &&
                    PaymentType == paymentDeliveryDates.PaymentType &&
                    Currency == paymentDeliveryDates.Currency &&

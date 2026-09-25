@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class QuotesTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Quotes.json");
+        Player player = new Player("Mock/Http/Recordings/Quotes.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -47,10 +47,10 @@ namespace CurrencyCloud.Tests
 
             Quote created = await client.CreateQuoteAsync(quote1);
 
-            Assert.AreEqual(quote1.BuyCurrency, created.BuyCurrency);
-            Assert.AreEqual(quote1.SellCurrency, created.SellCurrency);
-            Assert.AreEqual(quote1.FixedSide, created.FixedSide);
-            Assert.IsNotNull(created.QuoteId);
+            Assert.That(created.BuyCurrency, Is.EqualTo(quote1.BuyCurrency));
+            Assert.That(created.SellCurrency, Is.EqualTo(quote1.SellCurrency));
+            Assert.That(created.FixedSide, Is.EqualTo(quote1.FixedSide));
+            Assert.That(created.QuoteId, Is.Not.Null);
         }
     }
 }

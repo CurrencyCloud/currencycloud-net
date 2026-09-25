@@ -7,7 +7,7 @@
           "method": "POST",
           "path": "/v2/authenticate/api",
           "headers": {
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           },
           "body": "?login_id=development@currencycloud.com&api_key=deadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef"
         },
@@ -34,7 +34,7 @@
           "path": "/v2/authenticate/close_session",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           }
         },
         "response": {
@@ -59,7 +59,7 @@
           "path": "/v2/collections_screening/bdcca5e6-32fe-45f6-9476-6f8f518e6270/complete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           },
           "body": "?Accepted=True&Reason=accepted"
         },
@@ -92,7 +92,7 @@
           "path": "/v2/collections_screening/bdcca5e6-32fe-45f6-9476-6f8f518e6270/complete",
           "headers": {
             "X-Auth-Token": "034d23d24490718e8766853e14d480b7",
-            "User-Agent": "CurrencyCloudSDK/2.0 .NET/9.5.0"
+            "User-Agent": "CurrencyCloudSDK/2.0 .NET/10.0.0"
           },
           "body": "?Accepted=False&Reason=suspected_fraud"
         },

@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using CurrencyCloud.Attributes;
-using CurrencyCloud.Types;
 
 namespace CurrencyCloud
 {
@@ -74,14 +72,6 @@ namespace CurrencyCloud
                         }
                         propValue = newValue;
                     }
-                    if (propValue is DateTime)
-                    {
-                        var dtOnly = Attribute.IsDefined(p, typeof(DateOnlyAttribute));
-
-                        if (dtOnly)
-                            propValue = new DateOnly((DateTime)propValue);
-                    }
-
                     ret.Add(p.Name, propValue);
                 }
             }
@@ -172,7 +162,7 @@ namespace CurrencyCloud
             }
             else if (param.Value is DateOnly)
             {
-                value = param.Value.ToString();
+                value = ((DateOnly)param.Value).ToString(DateOnlyConverter.Format, CultureInfo.InvariantCulture);
             }
             else if (param.Value is bool)
             {

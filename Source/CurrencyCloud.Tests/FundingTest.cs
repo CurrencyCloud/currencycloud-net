@@ -13,7 +13,7 @@ namespace CurrencyCloud.Tests
     public class FundingTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Funding.json");
+        Player player = new Player("Mock/Http/Recordings/Funding.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -52,22 +52,22 @@ namespace CurrencyCloud.Tests
                 OrderAscDesc = FindParameters.OrderDirection.Desc,
                 PerPage = 5
             });
-            Assert.AreEqual(1, found.FundingAccounts.Count);
+            Assert.That(found.FundingAccounts.Count, Is.EqualTo(1));
             FundingAccount account = found.FundingAccounts[0];
-            Assert.AreEqual("b7981972-8e29-485b-8a4a-9643fc6ae3sa", account.Id);
-            Assert.AreEqual("8d98bdc8-e8e3-47dc-bd08-3dd0f4f7ea7b", account.AccountId);
-            Assert.AreEqual("012345678", account.AccountNumber);
-            Assert.AreEqual("account_number", account.AccountNumberType);
-            Assert.AreEqual("Jon Doe", account.AccountHolderName);
-            Assert.AreEqual("Starling", account.BankName);
-            Assert.AreEqual("3rd floor, 2 Finsbury Avenue, London, EC2M 2PP, GB", account.BankAddress);
-            Assert.AreEqual("UK", account.BankCountry);
-            Assert.AreEqual("GBP", account.Currency);
-            Assert.AreEqual("regular", account.PaymentType);
-            Assert.AreEqual("010203", account.RoutingCode);
-            Assert.AreEqual("sort_code", account.RoutingCodeType);
-            Assert.AreEqual(DateTime.Parse("2018-05-14T14:18:30+00:00"), account.CreatedAt);
-            Assert.AreEqual(DateTime.Parse("2018-05-14T14:19:30+00:00"), account.UpdatedAt);
+            Assert.That(account.Id, Is.EqualTo("b7981972-8e29-485b-8a4a-9643fc6ae3sa"));
+            Assert.That(account.AccountId, Is.EqualTo("8d98bdc8-e8e3-47dc-bd08-3dd0f4f7ea7b"));
+            Assert.That(account.AccountNumber, Is.EqualTo("012345678"));
+            Assert.That(account.AccountNumberType, Is.EqualTo("account_number"));
+            Assert.That(account.AccountHolderName, Is.EqualTo("Jon Doe"));
+            Assert.That(account.BankName, Is.EqualTo("Starling"));
+            Assert.That(account.BankAddress, Is.EqualTo("3rd floor, 2 Finsbury Avenue, London, EC2M 2PP, GB"));
+            Assert.That(account.BankCountry, Is.EqualTo("UK"));
+            Assert.That(account.Currency, Is.EqualTo("GBP"));
+            Assert.That(account.PaymentType, Is.EqualTo("regular"));
+            Assert.That(account.RoutingCode, Is.EqualTo("010203"));
+            Assert.That(account.RoutingCodeType, Is.EqualTo("sort_code"));
+            Assert.That(account.CreatedAt, Is.EqualTo(DateTime.Parse("2018-05-14T14:18:30+00:00")));
+            Assert.That(account.UpdatedAt, Is.EqualTo(DateTime.Parse("2018-05-14T14:19:30+00:00")));
         }
 
         /// <summary>
@@ -82,28 +82,28 @@ namespace CurrencyCloud.Tests
 
             FundingTransaction transaction = await client.GetFundingTransactionAsync(fundingTransactionId);
 
-            Assert.AreEqual(fundingTransactionId, transaction.Id);
-            Assert.AreEqual(1.11m, transaction.Amount);
-            Assert.AreEqual("USD", transaction.Currency);
-            Assert.AreEqual("SEPA", transaction.Rail);
-            Assert.AreEqual("ABCD20231016143117", transaction.AdditionalInformation);
-            Assert.AreEqual("123456789", transaction.ReceivingAccountRoutingCode);
-            Assert.AreEqual("32847346", transaction.ReceivingAccountNumber);
-            Assert.IsNull(transaction.ReceivingAccountIban);
-            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.CreatedAt);
-            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.UpdatedAt);
-            Assert.AreEqual(DateTime.Parse("2022-12-03T10:15:30+00:00"), transaction.CompletedAt);
-            Assert.AreEqual(DateTime.Parse("2022-12-03T10:00:00+00:00"), transaction.ValueDate);
+            Assert.That(transaction.Id, Is.EqualTo(fundingTransactionId));
+            Assert.That(transaction.Amount, Is.EqualTo(1.11m));
+            Assert.That(transaction.Currency, Is.EqualTo("USD"));
+            Assert.That(transaction.Rail, Is.EqualTo("SEPA"));
+            Assert.That(transaction.AdditionalInformation, Is.EqualTo("ABCD20231016143117"));
+            Assert.That(transaction.ReceivingAccountRoutingCode, Is.EqualTo("123456789"));
+            Assert.That(transaction.ReceivingAccountNumber, Is.EqualTo("32847346"));
+            Assert.That(transaction.ReceivingAccountIban, Is.Null);
+            Assert.That(transaction.CreatedAt, Is.EqualTo(DateTime.Parse("2022-12-03T10:15:30+00:00")));
+            Assert.That(transaction.UpdatedAt, Is.EqualTo(DateTime.Parse("2022-12-03T10:15:30+00:00")));
+            Assert.That(transaction.CompletedAt, Is.EqualTo(DateTime.Parse("2022-12-03T10:15:30+00:00")));
+            Assert.That(transaction.ValueDate, Is.EqualTo(DateTime.Parse("2022-12-03T10:00:00+00:00")));
 
-            Assert.IsNotNull(transaction.Sender);
-            Assert.AreEqual("8119645406", transaction.Sender.AccountNumber);
-            Assert.AreEqual("Some street", transaction.Sender.Address);
-            Assert.IsNull(transaction.Sender.Bic);
-            Assert.AreEqual("GB", transaction.Sender.Country);
-            Assert.IsNull(transaction.Sender.Iban);
-            Assert.AreEqual("5c675fa4-fdf0-4ee6-b5bb-156b36765433", transaction.Sender.Id);
-            Assert.AreEqual("Test sender", transaction.Sender.Name);
-            Assert.IsNull(transaction.Sender.RoutingCode);
+            Assert.That(transaction.Sender, Is.Not.Null);
+            Assert.That(transaction.Sender.AccountNumber, Is.EqualTo("8119645406"));
+            Assert.That(transaction.Sender.Address, Is.EqualTo("Some street"));
+            Assert.That(transaction.Sender.Bic, Is.Null);
+            Assert.That(transaction.Sender.Country, Is.EqualTo("GB"));
+            Assert.That(transaction.Sender.Iban, Is.Null);
+            Assert.That(transaction.Sender.Id, Is.EqualTo("5c675fa4-fdf0-4ee6-b5bb-156b36765433"));
+            Assert.That(transaction.Sender.Name, Is.EqualTo("Test sender"));
+            Assert.That(transaction.Sender.RoutingCode, Is.Null);
         }
     }
 }

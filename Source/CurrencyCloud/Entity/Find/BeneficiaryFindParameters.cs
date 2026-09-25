@@ -1,5 +1,4 @@
-﻿using System;
-using CurrencyCloud.Attributes;
+using System;
 
 namespace CurrencyCloud.Entity
 {
@@ -68,8 +67,8 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
-        [Param, DateOnly]
-        public DateTime? BeneficiaryDateOfBirth { get; set; }
+        [Param]
+        public DateOnly? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
         /// Name of the bank

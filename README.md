@@ -9,7 +9,10 @@ PM> Install-Package Currencycloud
 ```
 
 ## Supported .NET versions
-The least supported .NET framework version is 4.5.
+
+- .NET 6.0
+- .NET 8.0
+- .NET 10.0
 
 # Usage
 The following example retrieves a list of all tradeable currencies:
@@ -176,7 +179,7 @@ catch (ApiException ex)
 /* outputs
 BadRequestException
 ---
-platform: .NET 4.6 or later
+platform: .NET 8.0.4
 request:
   parameters: {}
   verb: GET
@@ -218,8 +221,8 @@ Once a feature has been marked as deprecated, we no longer develop the code or i
 
 ### List of features being deprecated
 ```
-.NET Framework 4.5 support (2026-01-21)
-Beneficiary 4-parameter constructor with bank_account_holder_name (2026-04-29)
+2026-09-21
+Beneficiary(string bankCountry, string currency, string name)
 ```
 
 # Support

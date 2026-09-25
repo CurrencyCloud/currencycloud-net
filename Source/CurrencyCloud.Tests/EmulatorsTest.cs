@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Environment;
@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     public class EmulatorsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Emulators.json");
+        Player player = new Player("Mock/Http/Recordings/Emulators.json");
 
         [OneTimeSetUp]
         public void SetUp()
@@ -59,21 +59,21 @@ namespace CurrencyCloud.Tests
 
             DemoFunding result = await client.EmulateFundingAsync(funding);
 
-            Assert.AreEqual("8bd7ba19-eca0-425d-a3f0-968577ba2a81", result.Id);
-            Assert.AreEqual("72970a7c-7921-431c-b95f-3438724ba16f", result.AccountId);
-            Assert.AreEqual("approved", result.State);
-            Assert.AreEqual("Test sender", result.SenderName);
-            Assert.AreEqual("Some Street", result.SenderAddress);
-            Assert.AreEqual("GB", result.SenderCountry);
-            Assert.AreEqual("sender-ref", result.SenderReference);
-            Assert.AreEqual("0334273394", result.ReceiverAccountNumber);
-            Assert.AreEqual("026073150", result.ReceiverRoutingCode);
-            Assert.AreEqual(150.53m, result.Amount);
-            Assert.AreEqual("USD", result.Currency);
-            Assert.AreEqual("approve", result.Action);
-            Assert.AreEqual("IF-20210917-17HB4L", result.ShortReference);
-            Assert.AreEqual(DateTime.Parse("2021-09-17T15:35:17+00:00"), result.CreatedAt);
-            Assert.AreEqual(DateTime.Parse("2021-09-17T15:35:18+00:00"), result.UpdatedAt);
+            Assert.That(result.Id, Is.EqualTo("8bd7ba19-eca0-425d-a3f0-968577ba2a81"));
+            Assert.That(result.AccountId, Is.EqualTo("72970a7c-7921-431c-b95f-3438724ba16f"));
+            Assert.That(result.State, Is.EqualTo("approved"));
+            Assert.That(result.SenderName, Is.EqualTo("Test sender"));
+            Assert.That(result.SenderAddress, Is.EqualTo("Some Street"));
+            Assert.That(result.SenderCountry, Is.EqualTo("GB"));
+            Assert.That(result.SenderReference, Is.EqualTo("sender-ref"));
+            Assert.That(result.ReceiverAccountNumber, Is.EqualTo("0334273394"));
+            Assert.That(result.ReceiverRoutingCode, Is.EqualTo("026073150"));
+            Assert.That(result.Amount, Is.EqualTo(150.53m));
+            Assert.That(result.Currency, Is.EqualTo("USD"));
+            Assert.That(result.Action, Is.EqualTo("approve"));
+            Assert.That(result.ShortReference, Is.EqualTo("IF-20210917-17HB4L"));
+            Assert.That(result.CreatedAt, Is.EqualTo(DateTime.Parse("2021-09-17T15:35:17+00:00")));
+            Assert.That(result.UpdatedAt, Is.EqualTo(DateTime.Parse("2021-09-17T15:35:18+00:00")));
         }
     }
 }

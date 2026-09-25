@@ -1,4 +1,3 @@
-﻿using CurrencyCloud.Attributes;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -17,11 +16,18 @@ namespace CurrencyCloud.Entity
             this.Name = name;
         }
 
+        [Obsolete("Name is now optional. Use the constructor without this parameter.")]
         public Beneficiary(string bankCountry, string currency, string name)
         {
             this.BankCountry = bankCountry;
             this.Currency = currency;
             this.Name = name;
+        }
+
+        public Beneficiary(string bankCountry, string currency)
+        {
+            this.BankCountry = bankCountry;
+            this.Currency = currency;
         }
 
         [JsonConstructor]
@@ -113,8 +119,8 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
-        [Param, DateOnly]
-        public DateTime? BeneficiaryDateOfBirth { get; set; }
+        [Param]
+        public DateOnly? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
         /// Type of the identification document. One of 'none', 'drivers_license', 'social_security_number', 'green_card', 'passport', 'visa', 'matricula_consular', 'registro_federal_de_contribuyentes', 'credential_de_elector', 'social_insurance_number', 'citizenship_papers', 'drivers_license_canadian', 'existing_credit_card_details', 'employer_identification_number', 'national_id', 'others' or 'incorporation_number'

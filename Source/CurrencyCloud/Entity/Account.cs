@@ -1,5 +1,4 @@
-﻿using System;
-using CurrencyCloud.Attributes;
+using System;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -117,8 +116,8 @@ namespace CurrencyCloud.Entity
         /// Identification expiration date
         ///</summary>
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-        [Param, DateOnly]
-        public DateTime? IdentificationExpiration { get; set; }
+        [Param]
+        public DateOnly? IdentificationExpiration { get; set; }
 
         ///<summary>
         /// Identification issuer

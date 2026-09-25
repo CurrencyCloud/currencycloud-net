@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     public class ReportRequestsTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/ReportRequests.json");
+        Player player = new Player("Mock/Http/Recordings/ReportRequests.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -52,21 +52,21 @@ namespace CurrencyCloud.Tests
                 }
             );
 
-            Assert.IsNotNull(gotten);
-            Assert.AreEqual(report.Status, gotten.Status);
-            Assert.AreEqual(report.Description, gotten.Description);
-            Assert.AreEqual(report.Id, gotten.Id);
-            Assert.AreEqual(report.AccountId, gotten.AccountId);
-            Assert.AreEqual(report.ContactId, gotten.ContactId);
-            Assert.AreEqual(report.CreatedAt, gotten.CreatedAt);
-            Assert.AreEqual(report.ExpirationDate, gotten.ExpirationDate);
-            Assert.AreEqual(report.FailureReason, gotten.FailureReason);
-            Assert.AreEqual(report.ReportType, gotten.ReportType);
-            Assert.AreEqual(report.ReportUrl, gotten.ReportUrl);
-            Assert.AreEqual(report.SearchParams.Description, gotten.SearchParams.Description);
-            Assert.AreEqual(report.SearchParams.Scope, gotten.SearchParams.Scope);
-            Assert.AreEqual(report.ShortReference, gotten.ShortReference);
-            Assert.AreEqual(report.UpdatedAt, gotten.UpdatedAt);
+            Assert.That(gotten, Is.Not.Null);
+            Assert.That(gotten.Status, Is.EqualTo(report.Status));
+            Assert.That(gotten.Description, Is.EqualTo(report.Description));
+            Assert.That(gotten.Id, Is.EqualTo(report.Id));
+            Assert.That(gotten.AccountId, Is.EqualTo(report.AccountId));
+            Assert.That(gotten.ContactId, Is.EqualTo(report.ContactId));
+            Assert.That(gotten.CreatedAt, Is.EqualTo(report.CreatedAt));
+            Assert.That(gotten.ExpirationDate, Is.EqualTo(report.ExpirationDate));
+            Assert.That(gotten.FailureReason, Is.EqualTo(report.FailureReason));
+            Assert.That(gotten.ReportType, Is.EqualTo(report.ReportType));
+            Assert.That(gotten.ReportUrl, Is.EqualTo(report.ReportUrl));
+            Assert.That(gotten.SearchParams.Description, Is.EqualTo(report.SearchParams.Description));
+            Assert.That(gotten.SearchParams.Scope, Is.EqualTo(report.SearchParams.Scope));
+            Assert.That(gotten.ShortReference, Is.EqualTo(report.ShortReference));
+            Assert.That(gotten.UpdatedAt, Is.EqualTo(report.UpdatedAt));
         }
 
         /// <summary>
@@ -81,20 +81,20 @@ namespace CurrencyCloud.Tests
 
             ReportRequest gotten = await client.GetReportRequestAsync(report.Id);
 
-            Assert.IsNotNull(gotten);
-            Assert.AreEqual(report.Status, gotten.Status);
-            Assert.AreEqual(report.Description, gotten.Description);
-            Assert.AreEqual(report.Id, gotten.Id);
-            Assert.AreEqual(report.AccountId, gotten.AccountId);
-            Assert.AreEqual(report.ContactId, gotten.ContactId);
-            Assert.AreEqual(report.CreatedAt, gotten.CreatedAt);
-            Assert.AreEqual(report.ExpirationDate, gotten.ExpirationDate);
-            Assert.AreEqual(report.FailureReason, gotten.FailureReason);
-            Assert.AreEqual(report.ReportType, gotten.ReportType);
-            Assert.AreEqual(report.ReportUrl, gotten.ReportUrl);
-            Assert.AreEqual(report.SearchParams, gotten.SearchParams);
-            Assert.AreEqual(report.ShortReference, gotten.ShortReference);
-            Assert.AreEqual(report.UpdatedAt, gotten.UpdatedAt);
+            Assert.That(gotten, Is.Not.Null);
+            Assert.That(gotten.Status, Is.EqualTo(report.Status));
+            Assert.That(gotten.Description, Is.EqualTo(report.Description));
+            Assert.That(gotten.Id, Is.EqualTo(report.Id));
+            Assert.That(gotten.AccountId, Is.EqualTo(report.AccountId));
+            Assert.That(gotten.ContactId, Is.EqualTo(report.ContactId));
+            Assert.That(gotten.CreatedAt, Is.EqualTo(report.CreatedAt));
+            Assert.That(gotten.ExpirationDate, Is.EqualTo(report.ExpirationDate));
+            Assert.That(gotten.FailureReason, Is.EqualTo(report.FailureReason));
+            Assert.That(gotten.ReportType, Is.EqualTo(report.ReportType));
+            Assert.That(gotten.ReportUrl, Is.EqualTo(report.ReportUrl));
+            Assert.That(gotten.SearchParams, Is.EqualTo(report.SearchParams));
+            Assert.That(gotten.ShortReference, Is.EqualTo(report.ShortReference));
+            Assert.That(gotten.UpdatedAt, Is.EqualTo(report.UpdatedAt));
         }
 
         /// <summary>
@@ -114,21 +114,21 @@ namespace CurrencyCloud.Tests
                 }
             );
 
-            Assert.IsNotNull(gotten);
-            Assert.AreEqual(report.Status, gotten.Status);
-            Assert.AreEqual(report.Description, gotten.Description);
-            Assert.AreEqual(report.Id, gotten.Id);
-            Assert.AreEqual(report.AccountId, gotten.AccountId);
-            Assert.AreEqual(report.ContactId, gotten.ContactId);
-            Assert.AreEqual(report.CreatedAt, gotten.CreatedAt);
-            Assert.AreEqual(report.ExpirationDate, gotten.ExpirationDate);
-            Assert.AreEqual(report.FailureReason, gotten.FailureReason);
-            Assert.AreEqual(report.ReportType, gotten.ReportType);
-            Assert.AreEqual(report.ReportUrl, gotten.ReportUrl);
-            Assert.AreEqual(report.SearchParams.Description, gotten.SearchParams.Description);
-            Assert.AreEqual(report.SearchParams.Scope, gotten.SearchParams.Scope);
-            Assert.AreEqual(report.ShortReference, gotten.ShortReference);
-            Assert.AreEqual(report.UpdatedAt, gotten.UpdatedAt);
+            Assert.That(gotten, Is.Not.Null);
+            Assert.That(gotten.Status, Is.EqualTo(report.Status));
+            Assert.That(gotten.Description, Is.EqualTo(report.Description));
+            Assert.That(gotten.Id, Is.EqualTo(report.Id));
+            Assert.That(gotten.AccountId, Is.EqualTo(report.AccountId));
+            Assert.That(gotten.ContactId, Is.EqualTo(report.ContactId));
+            Assert.That(gotten.CreatedAt, Is.EqualTo(report.CreatedAt));
+            Assert.That(gotten.ExpirationDate, Is.EqualTo(report.ExpirationDate));
+            Assert.That(gotten.FailureReason, Is.EqualTo(report.FailureReason));
+            Assert.That(gotten.ReportType, Is.EqualTo(report.ReportType));
+            Assert.That(gotten.ReportUrl, Is.EqualTo(report.ReportUrl));
+            Assert.That(gotten.SearchParams.Description, Is.EqualTo(report.SearchParams.Description));
+            Assert.That(gotten.SearchParams.Scope, Is.EqualTo(report.SearchParams.Scope));
+            Assert.That(gotten.ShortReference, Is.EqualTo(report.ShortReference));
+            Assert.That(gotten.UpdatedAt, Is.EqualTo(report.UpdatedAt));
         }
 
         /// <summary>
@@ -143,20 +143,20 @@ namespace CurrencyCloud.Tests
 
             ReportRequest gotten = await client.GetReportRequestAsync(report.Id);
 
-            Assert.IsNotNull(gotten);
-            Assert.AreEqual(report.Status, gotten.Status);
-            Assert.AreEqual(report.Description, gotten.Description);
-            Assert.AreEqual(report.Id, gotten.Id);
-            Assert.AreEqual(report.AccountId, gotten.AccountId);
-            Assert.AreEqual(report.ContactId, gotten.ContactId);
-            Assert.AreEqual(report.CreatedAt, gotten.CreatedAt);
-            Assert.AreEqual(report.ExpirationDate, gotten.ExpirationDate);
-            Assert.AreEqual(report.FailureReason, gotten.FailureReason);
-            Assert.AreEqual(report.ReportType, gotten.ReportType);
-            Assert.AreEqual(report.ReportUrl, gotten.ReportUrl);
-            Assert.AreEqual(report.SearchParams, gotten.SearchParams);
-            Assert.AreEqual(report.ShortReference, gotten.ShortReference);
-            Assert.AreEqual(report.UpdatedAt, gotten.UpdatedAt);
+            Assert.That(gotten, Is.Not.Null);
+            Assert.That(gotten.Status, Is.EqualTo(report.Status));
+            Assert.That(gotten.Description, Is.EqualTo(report.Description));
+            Assert.That(gotten.Id, Is.EqualTo(report.Id));
+            Assert.That(gotten.AccountId, Is.EqualTo(report.AccountId));
+            Assert.That(gotten.ContactId, Is.EqualTo(report.ContactId));
+            Assert.That(gotten.CreatedAt, Is.EqualTo(report.CreatedAt));
+            Assert.That(gotten.ExpirationDate, Is.EqualTo(report.ExpirationDate));
+            Assert.That(gotten.FailureReason, Is.EqualTo(report.FailureReason));
+            Assert.That(gotten.ReportType, Is.EqualTo(report.ReportType));
+            Assert.That(gotten.ReportUrl, Is.EqualTo(report.ReportUrl));
+            Assert.That(gotten.SearchParams, Is.EqualTo(report.SearchParams));
+            Assert.That(gotten.ShortReference, Is.EqualTo(report.ShortReference));
+            Assert.That(gotten.UpdatedAt, Is.EqualTo(report.UpdatedAt));
         }
 
         /// <summary>
@@ -172,35 +172,35 @@ namespace CurrencyCloud.Tests
 
             PaginatedReportRequests found = await client.FindReportRequestsAsync();
 
-            Assert.IsNotEmpty(found.ReportRequests);
-            Assert.AreEqual(found.ReportRequests.Count, found.Pagination.TotalEntries);
-            Assert.AreEqual(report1.Status, found.ReportRequests[0].Status);
-            Assert.AreEqual(report1.Description, found.ReportRequests[0].Description);
-            Assert.AreEqual(report1.Id, found.ReportRequests[0].Id);
-            Assert.AreEqual(report1.AccountId, found.ReportRequests[0].AccountId);
-            Assert.AreEqual(report1.ContactId, found.ReportRequests[0].ContactId);
-            Assert.AreEqual(report1.CreatedAt, found.ReportRequests[0].CreatedAt);
-            Assert.AreEqual(report1.ExpirationDate, found.ReportRequests[0].ExpirationDate);
-            Assert.AreEqual(report1.FailureReason, found.ReportRequests[0].FailureReason);
-            Assert.AreEqual(report1.ReportType, found.ReportRequests[0].ReportType);
-            Assert.AreEqual(report1.ReportUrl, found.ReportRequests[0].ReportUrl);
-            Assert.AreEqual(report1.SearchParams, found.ReportRequests[0].SearchParams);
-            Assert.AreEqual(report1.ShortReference, found.ReportRequests[0].ShortReference);
-            Assert.AreEqual(report1.UpdatedAt, found.ReportRequests[0].UpdatedAt);
+            Assert.That(found.ReportRequests, Is.Not.Empty);
+            Assert.That(found.Pagination.TotalEntries, Is.EqualTo(found.ReportRequests.Count));
+            Assert.That(found.ReportRequests[0].Status, Is.EqualTo(report1.Status));
+            Assert.That(found.ReportRequests[0].Description, Is.EqualTo(report1.Description));
+            Assert.That(found.ReportRequests[0].Id, Is.EqualTo(report1.Id));
+            Assert.That(found.ReportRequests[0].AccountId, Is.EqualTo(report1.AccountId));
+            Assert.That(found.ReportRequests[0].ContactId, Is.EqualTo(report1.ContactId));
+            Assert.That(found.ReportRequests[0].CreatedAt, Is.EqualTo(report1.CreatedAt));
+            Assert.That(found.ReportRequests[0].ExpirationDate, Is.EqualTo(report1.ExpirationDate));
+            Assert.That(found.ReportRequests[0].FailureReason, Is.EqualTo(report1.FailureReason));
+            Assert.That(found.ReportRequests[0].ReportType, Is.EqualTo(report1.ReportType));
+            Assert.That(found.ReportRequests[0].ReportUrl, Is.EqualTo(report1.ReportUrl));
+            Assert.That(found.ReportRequests[0].SearchParams, Is.EqualTo(report1.SearchParams));
+            Assert.That(found.ReportRequests[0].ShortReference, Is.EqualTo(report1.ShortReference));
+            Assert.That(found.ReportRequests[0].UpdatedAt, Is.EqualTo(report1.UpdatedAt));
 
-            Assert.AreEqual(report2.Status, found.ReportRequests[1].Status);
-            Assert.AreEqual(report2.Description, found.ReportRequests[1].Description);
-            Assert.AreEqual(report2.Id, found.ReportRequests[1].Id);
-            Assert.AreEqual(report2.AccountId, found.ReportRequests[1].AccountId);
-            Assert.AreEqual(report2.ContactId, found.ReportRequests[1].ContactId);
-            Assert.AreEqual(report2.CreatedAt, found.ReportRequests[1].CreatedAt);
-            Assert.AreEqual(report2.ExpirationDate, found.ReportRequests[1].ExpirationDate);
-            Assert.AreEqual(report2.FailureReason, found.ReportRequests[1].FailureReason);
-            Assert.AreEqual(report2.ReportType, found.ReportRequests[1].ReportType);
-            Assert.AreEqual(report2.ReportUrl, found.ReportRequests[1].ReportUrl);
-            Assert.AreEqual(report2.SearchParams, found.ReportRequests[1].SearchParams);
-            Assert.AreEqual(report2.ShortReference, found.ReportRequests[1].ShortReference);
-            Assert.AreEqual(report2.UpdatedAt, found.ReportRequests[1].UpdatedAt);
+            Assert.That(found.ReportRequests[1].Status, Is.EqualTo(report2.Status));
+            Assert.That(found.ReportRequests[1].Description, Is.EqualTo(report2.Description));
+            Assert.That(found.ReportRequests[1].Id, Is.EqualTo(report2.Id));
+            Assert.That(found.ReportRequests[1].AccountId, Is.EqualTo(report2.AccountId));
+            Assert.That(found.ReportRequests[1].ContactId, Is.EqualTo(report2.ContactId));
+            Assert.That(found.ReportRequests[1].CreatedAt, Is.EqualTo(report2.CreatedAt));
+            Assert.That(found.ReportRequests[1].ExpirationDate, Is.EqualTo(report2.ExpirationDate));
+            Assert.That(found.ReportRequests[1].FailureReason, Is.EqualTo(report2.FailureReason));
+            Assert.That(found.ReportRequests[1].ReportType, Is.EqualTo(report2.ReportType));
+            Assert.That(found.ReportRequests[1].ReportUrl, Is.EqualTo(report2.ReportUrl));
+            Assert.That(found.ReportRequests[1].SearchParams, Is.EqualTo(report2.SearchParams));
+            Assert.That(found.ReportRequests[1].ShortReference, Is.EqualTo(report2.ShortReference));
+            Assert.That(found.ReportRequests[1].UpdatedAt, Is.EqualTo(report2.UpdatedAt));
         }
 
         /// <summary>
@@ -217,21 +217,21 @@ namespace CurrencyCloud.Tests
                 new ReportRequestFindParameters { ReportType = "conversion"}
                 );
 
-            Assert.IsNotEmpty(found.ReportRequests);
-            Assert.AreEqual(found.ReportRequests.Count, found.Pagination.TotalEntries);
-            Assert.AreEqual(report1.Status, found.ReportRequests[0].Status);
-            Assert.AreEqual(report1.Description, found.ReportRequests[0].Description);
-            Assert.AreEqual(report1.Id, found.ReportRequests[0].Id);
-            Assert.AreEqual(report1.AccountId, found.ReportRequests[0].AccountId);
-            Assert.AreEqual(report1.ContactId, found.ReportRequests[0].ContactId);
-            Assert.AreEqual(report1.CreatedAt, found.ReportRequests[0].CreatedAt);
-            Assert.AreEqual(report1.ExpirationDate, found.ReportRequests[0].ExpirationDate);
-            Assert.AreEqual(report1.FailureReason, found.ReportRequests[0].FailureReason);
-            Assert.AreEqual(report1.ReportType, found.ReportRequests[0].ReportType);
-            Assert.AreEqual(report1.ReportUrl, found.ReportRequests[0].ReportUrl);
-            Assert.AreEqual(report1.SearchParams, found.ReportRequests[0].SearchParams);
-            Assert.AreEqual(report1.ShortReference, found.ReportRequests[0].ShortReference);
-            Assert.AreEqual(report1.UpdatedAt, found.ReportRequests[0].UpdatedAt);
+            Assert.That(found.ReportRequests, Is.Not.Empty);
+            Assert.That(found.Pagination.TotalEntries, Is.EqualTo(found.ReportRequests.Count));
+            Assert.That(found.ReportRequests[0].Status, Is.EqualTo(report1.Status));
+            Assert.That(found.ReportRequests[0].Description, Is.EqualTo(report1.Description));
+            Assert.That(found.ReportRequests[0].Id, Is.EqualTo(report1.Id));
+            Assert.That(found.ReportRequests[0].AccountId, Is.EqualTo(report1.AccountId));
+            Assert.That(found.ReportRequests[0].ContactId, Is.EqualTo(report1.ContactId));
+            Assert.That(found.ReportRequests[0].CreatedAt, Is.EqualTo(report1.CreatedAt));
+            Assert.That(found.ReportRequests[0].ExpirationDate, Is.EqualTo(report1.ExpirationDate));
+            Assert.That(found.ReportRequests[0].FailureReason, Is.EqualTo(report1.FailureReason));
+            Assert.That(found.ReportRequests[0].ReportType, Is.EqualTo(report1.ReportType));
+            Assert.That(found.ReportRequests[0].ReportUrl, Is.EqualTo(report1.ReportUrl));
+            Assert.That(found.ReportRequests[0].SearchParams, Is.EqualTo(report1.SearchParams));
+            Assert.That(found.ReportRequests[0].ShortReference, Is.EqualTo(report1.ShortReference));
+            Assert.That(found.ReportRequests[0].UpdatedAt, Is.EqualTo(report1.UpdatedAt));
         }
     }
 }

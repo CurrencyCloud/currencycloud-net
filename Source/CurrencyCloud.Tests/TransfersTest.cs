@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class TransfersTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Transfers.json");
+        Player player = new Player("Mock/Http/Recordings/Transfers.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -47,12 +47,12 @@ namespace CurrencyCloud.Tests
 
             Transfer created = await client.CreateTransferAsync(transfer1);
 
-            Assert.AreEqual(transfer1.SourceAccountId, created.SourceAccountId);
-            Assert.AreEqual(transfer1.DestinationAccountId, created.DestinationAccountId);
-            Assert.AreEqual(transfer1.Currency, created.Currency);
-            Assert.AreEqual(transfer1.Amount, created.Amount);
-            Assert.AreEqual(transfer1.Status, created.Status);
-            Assert.AreEqual(transfer1.Reason, created.Reason);
+            Assert.That(created.SourceAccountId, Is.EqualTo(transfer1.SourceAccountId));
+            Assert.That(created.DestinationAccountId, Is.EqualTo(transfer1.DestinationAccountId));
+            Assert.That(created.Currency, Is.EqualTo(transfer1.Currency));
+            Assert.That(created.Amount, Is.EqualTo(transfer1.Amount));
+            Assert.That(created.Status, Is.EqualTo(transfer1.Status));
+            Assert.That(created.Reason, Is.EqualTo(transfer1.Reason));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace CurrencyCloud.Tests
             Transfer created = await client.CreateTransferAsync(transfer2);
             Transfer gotten = await client.GetTransferAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
 
         /// <summary>
@@ -87,12 +87,12 @@ namespace CurrencyCloud.Tests
                 ShortReference = "BT-20170118-VMSCBS"
             });
 
-            Assert.AreEqual(transfer3.SourceAccountId, found.Transfers[0].SourceAccountId);
-            Assert.AreEqual(transfer3.DestinationAccountId, found.Transfers[0].DestinationAccountId);
-            Assert.AreEqual(transfer3.Currency, found.Transfers[0].Currency);
-            Assert.AreEqual(transfer3.Amount, found.Transfers[0].Amount);
-            Assert.AreEqual(transfer3.Status, found.Transfers[0].Status);
-            Assert.AreEqual(transfer3.Reason, found.Transfers[0].Reason);
+            Assert.That(found.Transfers[0].SourceAccountId, Is.EqualTo(transfer3.SourceAccountId));
+            Assert.That(found.Transfers[0].DestinationAccountId, Is.EqualTo(transfer3.DestinationAccountId));
+            Assert.That(found.Transfers[0].Currency, Is.EqualTo(transfer3.Currency));
+            Assert.That(found.Transfers[0].Amount, Is.EqualTo(transfer3.Amount));
+            Assert.That(found.Transfers[0].Status, Is.EqualTo(transfer3.Status));
+            Assert.That(found.Transfers[0].Reason, Is.EqualTo(transfer3.Reason));
         }
 
         /// <summary>
@@ -108,12 +108,12 @@ namespace CurrencyCloud.Tests
             //Transfer created = await client.CreateTransferAsync(transfer3);
             PaginatedTransfers found = await client.FindTransfersAsync();
 
-            Assert.AreEqual(transfer3.SourceAccountId, found.Transfers[0].SourceAccountId);
-            Assert.AreEqual(transfer3.DestinationAccountId, found.Transfers[0].DestinationAccountId);
-            Assert.AreEqual(transfer3.Currency, found.Transfers[0].Currency);
-            Assert.AreEqual(transfer3.Amount, found.Transfers[0].Amount);
-            Assert.AreEqual(transfer3.Status, found.Transfers[0].Status);
-            Assert.AreEqual(transfer3.Reason, found.Transfers[0].Reason);
+            Assert.That(found.Transfers[0].SourceAccountId, Is.EqualTo(transfer3.SourceAccountId));
+            Assert.That(found.Transfers[0].DestinationAccountId, Is.EqualTo(transfer3.DestinationAccountId));
+            Assert.That(found.Transfers[0].Currency, Is.EqualTo(transfer3.Currency));
+            Assert.That(found.Transfers[0].Amount, Is.EqualTo(transfer3.Amount));
+            Assert.That(found.Transfers[0].Status, Is.EqualTo(transfer3.Status));
+            Assert.That(found.Transfers[0].Reason, Is.EqualTo(transfer3.Reason));
         }
         
         /// <summary>
@@ -129,7 +129,7 @@ namespace CurrencyCloud.Tests
             Transfer created = await client.CreateTransferAsync(transfer2);
             Transfer gotten = await client.CancelTransferAsync(created.Id);
 
-            Assert.AreEqual(gotten, created);
+            Assert.That(created, Is.EqualTo(gotten));
         }
     }
 }

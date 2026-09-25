@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CurrencyCloud.Entity;
 using NUnit.Framework;
 using CurrencyCloud.Tests.Mock.Data;
@@ -12,7 +12,7 @@ namespace CurrencyCloud.Tests
     class ReferenceTest
     {
         Client client = new Client();
-        Player player = new Player("/../../Mock/Http/Recordings/Reference.json");
+        Player player = new Player("Mock/Http/Recordings/Reference.json");
 
         [OneTimeSetUpAttribute]
         public void SetUp()
@@ -58,11 +58,11 @@ namespace CurrencyCloud.Tests
 
             Assert.DoesNotThrowAsync(async () => {
                 ConversionDatesList conversionDates = await client.GetConversionDatesAsync("USDGBP");
-                Assert.AreEqual(DateTime.Parse("2020-11-12T00:00:00"), conversionDates.DefaultConversionDate);
-                Assert.AreEqual(DateTime.Parse("2020-11-10T00:00:00"), conversionDates.FirstConversionDate);
-                Assert.AreEqual(DateTime.Parse("2020-11-10T23:19:00+00:00"), conversionDates.FirstConversionCutoffDatetime);
-                Assert.AreEqual(DateTime.Parse("2020-11-12T00:00:00"), conversionDates.OptimizeLiquidityConversionDate);
-                Assert.AreEqual(241, conversionDates.InvalidConversionDates.Count);
+                Assert.That(conversionDates.DefaultConversionDate, Is.EqualTo(DateTime.Parse("2020-11-12T00:00:00")));
+                Assert.That(conversionDates.FirstConversionDate, Is.EqualTo(DateTime.Parse("2020-11-10T00:00:00")));
+                Assert.That(conversionDates.FirstConversionCutoffDatetime, Is.EqualTo(DateTime.Parse("2020-11-10T23:19:00+00:00")));
+                Assert.That(conversionDates.OptimizeLiquidityConversionDate, Is.EqualTo(DateTime.Parse("2020-11-12T00:00:00")));
+                Assert.That(conversionDates.InvalidConversionDates.Count, Is.EqualTo(241));
             });
         }
 
@@ -87,13 +87,13 @@ namespace CurrencyCloud.Tests
                     // With DateTimeZoneHandling.Utc, API dates come back as UTC (Kind = Utc), matching the
                     // values the API returns, regardless of the machine's local time zone. DateTime.Equals
                     // ignores Kind, so the explicit Kind asserts are what guard against a local-time regression.
-                    Assert.AreEqual(new DateTime(2020, 11, 10, 23, 19, 0, DateTimeKind.Utc), conversionDates.FirstConversionCutoffDatetime);
-                    Assert.AreEqual(DateTimeKind.Utc, conversionDates.FirstConversionCutoffDatetime.Kind);
-                    Assert.AreEqual(new DateTime(2020, 11, 10, 0, 0, 0, DateTimeKind.Utc), conversionDates.FirstConversionDate);
-                    Assert.AreEqual(DateTimeKind.Utc, conversionDates.FirstConversionDate.Kind);
-                    Assert.AreEqual(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc), conversionDates.DefaultConversionDate);
-                    Assert.AreEqual(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc), conversionDates.OptimizeLiquidityConversionDate);
-                    Assert.AreEqual(241, conversionDates.InvalidConversionDates.Count);
+                    Assert.That(conversionDates.FirstConversionCutoffDatetime, Is.EqualTo(new DateTime(2020, 11, 10, 23, 19, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.FirstConversionCutoffDatetime.Kind, Is.EqualTo(DateTimeKind.Utc));
+                    Assert.That(conversionDates.FirstConversionDate, Is.EqualTo(new DateTime(2020, 11, 10, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.FirstConversionDate.Kind, Is.EqualTo(DateTimeKind.Utc));
+                    Assert.That(conversionDates.DefaultConversionDate, Is.EqualTo(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.OptimizeLiquidityConversionDate, Is.EqualTo(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.InvalidConversionDates.Count, Is.EqualTo(241));
                 });
             }
             finally
@@ -165,17 +165,17 @@ namespace CurrencyCloud.Tests
             Assert.DoesNotThrowAsync(async () => {
                 BankDetails bankDetails = await client.GetBankDetailsAsync("iban", "GB33BUKB20201555555555");
                 Assert.That(bankDetails, Is.Not.Null);
-                Assert.AreEqual("iban", bankDetails.IdentifierType);
-                Assert.AreEqual("GB33BUKB20201555555555", bankDetails.IdentifierValue);
-                Assert.AreEqual("GB33BUKB20201555555555", bankDetails.AccountNumber);
-                Assert.AreEqual("12 STEWARD STREET  THE STEWARD BUILDING FLOOR 0", bankDetails.BankAddress);
-                Assert.AreEqual("", bankDetails.BankBranch);
-                Assert.AreEqual("LONDON", bankDetails.BankCity);
-                Assert.AreEqual("UNITED KINGDOM", bankDetails.BankCountry);
-                Assert.AreEqual("THE CURRENCY CLOUD LIMITED", bankDetails.BankName);
-                Assert.AreEqual("LONDON", bankDetails.BankState);
-                Assert.AreEqual("TCCLGB22XXX", bankDetails.BicSwift);
-                Assert.AreEqual("GB", bankDetails.BankCountryISO);
+                Assert.That(bankDetails.IdentifierType, Is.EqualTo("iban"));
+                Assert.That(bankDetails.IdentifierValue, Is.EqualTo("GB33BUKB20201555555555"));
+                Assert.That(bankDetails.AccountNumber, Is.EqualTo("GB33BUKB20201555555555"));
+                Assert.That(bankDetails.BankAddress, Is.EqualTo("12 STEWARD STREET  THE STEWARD BUILDING FLOOR 0"));
+                Assert.That(bankDetails.BankBranch, Is.EqualTo(""));
+                Assert.That(bankDetails.BankCity, Is.EqualTo("LONDON"));
+                Assert.That(bankDetails.BankCountry, Is.EqualTo("UNITED KINGDOM"));
+                Assert.That(bankDetails.BankName, Is.EqualTo("THE CURRENCY CLOUD LIMITED"));
+                Assert.That(bankDetails.BankState, Is.EqualTo("LONDON"));
+                Assert.That(bankDetails.BicSwift, Is.EqualTo("TCCLGB22XXX"));
+                Assert.That(bankDetails.BankCountryISO, Is.EqualTo("GB"));
                 Assert.That(bankDetails.Currency, Is.Null);
             });
         }
@@ -192,42 +192,42 @@ namespace CurrencyCloud.Tests
                 PaymentFeeRulesList rules1 = await client.GetPaymentFeeRulesAsync();
                 Assert.That(rules1, Is.Not.Null);
                 Assert.That(rules1.PaymentFeeRules, Is.Not.Null);
-                Assert.AreEqual(3, rules1.PaymentFeeRules.Count);
+                Assert.That(rules1.PaymentFeeRules.Count, Is.EqualTo(3));
                 PaymentFeeRulesList.PaymentFeeRule feeRule11 = rules1.PaymentFeeRules[0];
-                Assert.AreEqual("shared", feeRule11.ChargeType);
-                Assert.AreEqual(2.0, feeRule11.FeeAmount);
-                Assert.AreEqual("AED", feeRule11.FeeCurrency);
-                Assert.AreEqual("priority", feeRule11.PaymentType);
+                Assert.That(feeRule11.ChargeType, Is.EqualTo("shared"));
+                Assert.That(feeRule11.FeeAmount, Is.EqualTo(2.0));
+                Assert.That(feeRule11.FeeCurrency, Is.EqualTo("AED"));
+                Assert.That(feeRule11.PaymentType, Is.EqualTo("priority"));
                 PaymentFeeRulesList.PaymentFeeRule feeRule12 = rules1.PaymentFeeRules[1];
-                Assert.AreEqual("shared", feeRule12.ChargeType);
-                Assert.AreEqual(12.0, feeRule12.FeeAmount);
-                Assert.AreEqual("USD", feeRule12.FeeCurrency);
-                Assert.AreEqual("regular", feeRule12.PaymentType);
+                Assert.That(feeRule12.ChargeType, Is.EqualTo("shared"));
+                Assert.That(feeRule12.FeeAmount, Is.EqualTo(12.0));
+                Assert.That(feeRule12.FeeCurrency, Is.EqualTo("USD"));
+                Assert.That(feeRule12.PaymentType, Is.EqualTo("regular"));
                 PaymentFeeRulesList.PaymentFeeRule feeRule13 = rules1.PaymentFeeRules[2];
-                Assert.AreEqual("ours", feeRule13.ChargeType);
-                Assert.AreEqual(5.25, feeRule13.FeeAmount);
-                Assert.AreEqual("GBP", feeRule13.FeeCurrency);
-                Assert.AreEqual("priority", feeRule13.PaymentType);
+                Assert.That(feeRule13.ChargeType, Is.EqualTo("ours"));
+                Assert.That(feeRule13.FeeAmount, Is.EqualTo(5.25));
+                Assert.That(feeRule13.FeeCurrency, Is.EqualTo("GBP"));
+                Assert.That(feeRule13.PaymentType, Is.EqualTo("priority"));
                 
                 PaymentFeeRulesList rules2 = await client.GetPaymentFeeRulesAsync(null, "regular");
                 Assert.That(rules2, Is.Not.Null);
                 Assert.That(rules2.PaymentFeeRules, Is.Not.Null);
-                Assert.AreEqual(1, rules2.PaymentFeeRules.Count);
+                Assert.That(rules2.PaymentFeeRules.Count, Is.EqualTo(1));
                 PaymentFeeRulesList.PaymentFeeRule feeRule21 = rules2.PaymentFeeRules[0];
-                Assert.AreEqual("shared", feeRule21.ChargeType);
-                Assert.AreEqual(12.0, feeRule21.FeeAmount);
-                Assert.AreEqual("USD", feeRule21.FeeCurrency);
-                Assert.AreEqual("regular", feeRule21.PaymentType);
+                Assert.That(feeRule21.ChargeType, Is.EqualTo("shared"));
+                Assert.That(feeRule21.FeeAmount, Is.EqualTo(12.0));
+                Assert.That(feeRule21.FeeCurrency, Is.EqualTo("USD"));
+                Assert.That(feeRule21.PaymentType, Is.EqualTo("regular"));
                 
                 PaymentFeeRulesList rules3 = await client.GetPaymentFeeRulesAsync(null, null,"ours");
                 Assert.That(rules3, Is.Not.Null);
                 Assert.That(rules3.PaymentFeeRules, Is.Not.Null);
-                Assert.AreEqual(1, rules3.PaymentFeeRules.Count);
+                Assert.That(rules3.PaymentFeeRules.Count, Is.EqualTo(1));
                 PaymentFeeRulesList.PaymentFeeRule feeRule31 = rules3.PaymentFeeRules[0];
-                Assert.AreEqual("ours", feeRule31.ChargeType);
-                Assert.AreEqual(5.25, feeRule31.FeeAmount);
-                Assert.AreEqual("GBP", feeRule31.FeeCurrency);
-                Assert.AreEqual("priority", feeRule31.PaymentType);
+                Assert.That(feeRule31.ChargeType, Is.EqualTo("ours"));
+                Assert.That(feeRule31.FeeAmount, Is.EqualTo(5.25));
+                Assert.That(feeRule31.FeeCurrency, Is.EqualTo("GBP"));
+                Assert.That(feeRule31.PaymentType, Is.EqualTo("priority"));
             });
         }
     }

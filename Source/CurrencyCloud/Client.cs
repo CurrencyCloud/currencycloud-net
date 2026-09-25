@@ -38,7 +38,7 @@ namespace CurrencyCloud
         private readonly HttpMessageHandler httpMessageHandler;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/9.5.0";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/10.0.0";
 
         /// <summary>
         /// Initializes a new instance of the API client using the default HTTP message handler.
@@ -104,9 +104,16 @@ namespace CurrencyCloud
             }
 
             clone.Version = req.Version;
-
+            
+#if NET5_0_OR_GREATER
+            foreach (var option in req.Options)
+            {
+                clone.Options.Set(new HttpRequestOptionsKey<object>(option.Key), option.Value);
+            }
+#else
             foreach (KeyValuePair<string, object> prop in req.Properties)
                 clone.Properties.Add(prop);
+#endif            
 
             foreach (KeyValuePair<string, IEnumerable<string>> header in req.Headers)
                 clone.Headers.TryAddWithoutValidation(header.Key, header.Value);
@@ -231,7 +238,8 @@ namespace CurrencyCloud
                     {
                         NullValueHandling = NullValueHandling.Ignore,
                         DateTimeZoneHandling = Serialization.DateTimeZoneHandling,
-                        ContractResolver = new PascalContractResolver()
+                        ContractResolver = new PascalContractResolver(),
+                        Converters = { new DateOnlyConverter() }
                     };
 
                     var result = JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
@@ -852,7 +860,7 @@ namespace CurrencyCloud
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
             string id = conversionDateChange.ConversionId;
-            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+            DateOnly? newSettlementDate = conversionDateChange.NewSettlementDate;
 
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentException("Conversion Id cannot be null");
@@ -873,7 +881,7 @@ namespace CurrencyCloud
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
             string id = conversionDateChange.ConversionId;
-            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+            DateOnly? newSettlementDate = conversionDateChange.NewSettlementDate;
 
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentException("Conversion Id cannot be null");
@@ -1121,6 +1129,8 @@ namespace CurrencyCloud
         /// </summary>
         /// <param name="payment">Payment object to be created</param>
         /// <param name="payer">Optional payer info</param>
+        /// <param name="scaId">Optional UUID returned by the Validate Payment request</param>
+        /// <param name="scaToken">Optional OTP received following the Validate Payment request</param>
         /// <returns>Asynchronous task, which returns newly created payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
@@ -1280,7 +1290,7 @@ namespace CurrencyCloud
         /// <summary>
         /// Returns an object containing the expected payment delivery date.
         /// </summary>
-        /// <param name="paymentDeliveryDate">paymentDeliveryDate to query.</param>
+        /// <param name="paymentDeliveryDates">paymentDeliveryDate to query.</param>
         /// <returns>Asynchronous task, which returns the confirmation details of a payment.</returns>
         /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
