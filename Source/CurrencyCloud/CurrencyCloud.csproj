@@ -89,6 +89,14 @@
     </PropertyGroup>
 
     <!-- ============================================ -->
+    <!-- Build Output                                 -->
+    <!-- ============================================ -->
+    <PropertyGroup>
+        <!-- Copy package dependencies (Polly, Newtonsoft.Json) into bin so the output folder is self-contained -->
+        <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    </PropertyGroup>
+
+    <!-- ============================================ -->
     <!-- Package Dependencies (All Frameworks)        -->
     <!-- ============================================ -->
     <ItemGroup>
