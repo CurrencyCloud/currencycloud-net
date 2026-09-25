@@ -51,7 +51,7 @@ namespace CurrencyCloud.Entity
         /// Earliest delivery date in UTC time zone. Format YYYY-MM-DD
         /// </summary>
         [Param]
-        public DateTime? ConversionDate { get; set; }
+        public DateOnly? ConversionDate { get; set; }
 
         /// <summary>
         /// The preferred strategy to follow to calculate the conversion date

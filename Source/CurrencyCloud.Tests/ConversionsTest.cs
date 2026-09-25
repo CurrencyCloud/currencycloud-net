@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using CurrencyCloud.Entity;
 using CurrencyCloud.Tests.Mock.Data;
 using CurrencyCloud.Entity.Pagination;
@@ -168,7 +168,7 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            DateOnly newSettlementDate = new DateOnly(2018, 2, 2);
             ConversionDateChange dateChangeQuoted = await client.QuoteDateChangeConversionAsync(new ConversionDateChange {
                 ConversionId = created.Id,
                 NewSettlementDate = newSettlementDate
@@ -195,7 +195,7 @@ namespace CurrencyCloud.Tests
 
             Conversion created = await client.CreateConversionAsync(conversion1);
 
-            DateTime newSettlementDate = DateTime.Parse("2018-02-02T12:34:56+00:00");
+            DateOnly newSettlementDate = new DateOnly(2018, 2, 2);
             ConversionDateChange dateChanged = await client.DateChangeConversionAsync(new ConversionDateChange {
                 ConversionId = created.Id,
                 NewSettlementDate = newSettlementDate
@@ -358,7 +358,7 @@ namespace CurrencyCloud.Tests
 
             Assert.That(created, Is.Not.Null);
             Assert.That(created.ClientSellAmount, Is.EqualTo(805.90));
-            Assert.That(created.ConversionDate, Is.EqualTo(DateTime.Parse("2020-05-19T00:00:00+00:00")));
+            Assert.That(created.ConversionDate, Is.EqualTo(new DateOnly(2020, 5, 19)));
 
         }
     }

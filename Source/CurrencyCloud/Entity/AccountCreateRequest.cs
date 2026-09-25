@@ -56,7 +56,7 @@ namespace CurrencyCloud.Entity
         [Param]
         public string LegalEntitySubType { get; set; }
         [Param]
-        public DateTime? IdentificationExpiration { get; set; }
+        public DateOnly? IdentificationExpiration { get; set; }
         [Param]
         public string IdentificationIssuer { get; set; }
         [Param]
@@ -68,7 +68,7 @@ namespace CurrencyCloud.Entity
         [Param]
         public string CountryOfCitizenship { get; set; }
         [Param]
-        public DateTime? DateOfIncorporation { get; set; }
+        public DateOnly? DateOfIncorporation { get; set; }
         [Param]
         public string TradingAddressStreet { get; set; }
         [Param]

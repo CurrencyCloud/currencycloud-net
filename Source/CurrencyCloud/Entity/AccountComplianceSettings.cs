@@ -24,7 +24,7 @@ namespace CurrencyCloud.Entity
         public string CountryOfIncorporation { get; set; }
 
         [Param]
-        public DateTime? DateOfIncorporation { get; set; }
+        public DateOnly? DateOfIncorporation { get; set; }
 
         [Param]
         public string BusinessWebsiteUrl { get; set; }

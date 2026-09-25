@@ -199,6 +199,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -355,6 +356,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -395,6 +397,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -551,6 +554,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -592,6 +596,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -632,6 +637,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -788,6 +794,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -1304,6 +1311,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -1544,6 +1552,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -1587,6 +1596,7 @@
                 "failure_reason": "",
                 "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
                 "payer_details_source": "payer",
+                "review_status": "passed",
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00"
               }
@@ -1755,6 +1765,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -1797,6 +1808,7 @@
                 "failure_reason": "",
                 "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
                 "payer_details_source": "payer",
+                "review_status": "passed",
                 "created_at": "2018-01-01T12:34:56+00:00",
                 "updated_at": "2018-01-01T12:34:56+00:00"
               }
@@ -1965,6 +1977,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -2005,6 +2018,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00"
           }
@@ -2145,6 +2159,7 @@
             "failure_reason": "",
             "payer_id": "9a234e2f-7d25-46f5-8fcf-b473e2b5b36d",
             "payer_details_source": "payer",
+            "review_status": "passed",
             "created_at": "2018-01-01T12:34:56+00:00",
             "updated_at": "2018-01-01T12:34:56+00:00",
             "fee_amount": "100.0",

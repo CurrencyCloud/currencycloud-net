@@ -1,7 +1,7 @@
-﻿using System;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
@@ -39,7 +39,7 @@ namespace CurrencyCloud.Entity
         /// if nothing passed then default uses first_conversion_date
         ///</summary>
         [Param]
-        public DateTime? ConversionDate { get; set; }
+        public DateOnly? ConversionDate { get; set; }
 
         ///<summary>
         /// The current status of the Conversion

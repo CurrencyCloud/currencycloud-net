@@ -1,7 +1,7 @@
-﻿using System;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
 {
@@ -120,7 +120,7 @@ namespace CurrencyCloud.Entity
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
         [Param]
-        public DateTime? BeneficiaryDateOfBirth { get; set; }
+        public DateOnly? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
         /// Type of the identification document. One of 'none', 'drivers_license', 'social_security_number', 'green_card', 'passport', 'visa', 'matricula_consular', 'registro_federal_de_contribuyentes', 'credential_de_elector', 'social_insurance_number', 'citizenship_papers', 'drivers_license_canadian', 'existing_credit_card_details', 'employer_identification_number', 'national_id', 'others' or 'incorporation_number'
