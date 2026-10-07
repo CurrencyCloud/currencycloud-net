@@ -119,6 +119,16 @@ namespace CurrencyCloud.Exception
         public AuthenticationException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
     }
 
+    /// <summary>
+    /// A 401 caused by strong customer authentication: the request needs a one-time code, or the code it carried
+    /// (<c>x-sca-token</c>) was refused. Unlike <see cref="AuthenticationException"/> it is never answered by
+    /// re-authenticating and re-sending the request, because a one-time code must not be replayed.
+    /// </summary>
+    public class StrongCustomerAuthenticationException : ApiException
+    {
+        public StrongCustomerAuthenticationException(Request request, Response response, List<Error> errors): base(request, response, errors) { }
+    }
+
     public class ForbiddenException : ApiException
     {
         public ForbiddenException(Request request, Response response, List<Error> errors): base(request, response, errors) { }

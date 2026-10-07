@@ -273,6 +273,8 @@ namespace CurrencyCloud
                 }
                 catch (AuthenticationException)
                 {
+                    // A StrongCustomerAuthenticationException is deliberately not caught here: re-logging in and
+                    // re-sending would replay a one-time code, or ask for another one, on a request that already failed.
                     if (attempts == 3)
                     {
                         throw;
@@ -1903,6 +1905,18 @@ namespace CurrencyCloud
                                           parameters);
         }
 
+        private static async Task<string> ReadErrorCode(HttpContent content)
+        {
+            try
+            {
+                return JObject.Parse(await content.ReadAsStringAsync()).Value<string>("error_code");
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
         private static List<Error> FallbackErrors(string errorCode, string rawBody)
         {
             return new List<Error>
@@ -1916,6 +1930,35 @@ namespace CurrencyCloud
             };
         }
 
+        private static readonly string[] ScaRequestHeaders = { "x-sca-token", "x-sca-id" };
+
+        private static readonly Regex ScaErrorCode = new Regex(@"(^|_)sca(_|$)|strong_customer_authentication", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        private static readonly Regex ScaErrorMessage = new Regex(@"\bsca\b|strong customer authentication", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        /// <summary>
+        /// A 401 is treated as a strong customer authentication failure when the request carried an SCA header (a code
+        /// was offered, so the refusal is about it) or when the error says so. The exact shape of the API's SCA 401 is
+        /// not documented, so this errs towards SCA: a one-time code must never be re-sent after an automatic re-login.
+        /// </summary>
+        internal static bool IsStrongCustomerAuthenticationFailure(HttpRequestMessage request, string errorCode, List<Error> errors)
+        {
+            if (request != null && ScaRequestHeaders.Any(header => request.Headers.Contains(header)))
+            {
+                return true;
+            }
+
+            if (errorCode != null && ScaErrorCode.IsMatch(errorCode))
+            {
+                return true;
+            }
+
+            return (errors ?? new List<Error>())
+                .SelectMany(error => error.ErrorMessages ?? new List<Error.ErrorMessage>())
+                .Any(message => (message.Code != null && ScaErrorCode.IsMatch(message.Code))
+                             || (message.Message != null && ScaErrorMessage.IsMatch(message.Message)));
+        }
+
         public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
         {
             var request = CreateRequest(res.RequestMessage);
@@ -1927,7 +1970,9 @@ namespace CurrencyCloud
                 case 400:
                     return new BadRequestException(request, response, errors);
                 case 401:
-                    return new AuthenticationException(request, response, errors);
+                    return IsStrongCustomerAuthenticationFailure(res.RequestMessage, await ReadErrorCode(res.Content), errors)
+                        ? new StrongCustomerAuthenticationException(request, response, errors)
+                        : new AuthenticationException(request, response, errors);
                 case 403:
                     return new ForbiddenException(request, response, errors);
                 case 404:

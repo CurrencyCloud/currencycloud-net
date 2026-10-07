@@ -5,6 +5,8 @@ This is the official .NET SDK for v2 of Currencycloud's API. Additional document
 ## Differences from upstream (Flowbrite fork)
 This is Flowbrite's fork of [CurrencyCloud/currencycloud-net](https://github.com/CurrencyCloud/currencycloud-net), currently based on upstream **10.0.0**. The changes below are deliberate. Keep them when merging future upstream releases. Most were offered upstream in [CurrencyCloud/currencycloud-net#108](https://github.com/CurrencyCloud/currencycloud-net/pull/108) (open since March 2025).
 
+Fork releases are versioned `<upstream base>-flowbrite.<n>` (e.g. `10.0.0-flowbrite.1`) and tagged `v<version>`. `AssemblyVersion` stays the upstream one; `FileVersion` carries the fork release as its fourth part.
+
 ### Breaking changes
 - **Targets .NET 6, 8 and 10 only.** Upstream also targets .NET Standard 2.0. Dropping it makes `System.DateOnly` available on every target.
 - **Date-only fields are `DateOnly?` instead of `DateTime?`.** A date of birth or a payment date has no time or time zone, and representing it as a `DateTime` let time-zone conversion move it to a different day. Affected properties:
@@ -29,11 +31,13 @@ This is Flowbrite's fork of [CurrencyCloud/currencycloud-net](https://github.com
 - **`DateTime` parameters keep their time.** Upstream sends every `DateTime` parameter as `yyyy-MM-dd`, which throws away the time and makes search filters such as `CreatedAtFrom`, `UpdatedAtTo` or `PaymentDateFrom` accurate only to the day. This fork sends them as ISO 8601 UTC timestamps (e.g. `2026-06-04T09:30:00.0000000Z`). `Local` values are converted to UTC, and `Unspecified` values are treated as UTC. So pass `DateTime.UtcNow.Date`, not `DateTime.Today`, to mean "start of today in UTC". In BST, `DateTime.Today` becomes 23:00 UTC the previous day.
 - **Optional UTC deserialization.** `Serialization.DateTimeZoneHandling` can be set to `DateTimeZoneHandling.Utc` so returned `DateTime` values are UTC, not converted to the machine's local time zone. The default matches upstream. See [DateTime Handling](#datetime-handling).
 - **Tolerant error parsing.** Upstream throws while building the `ApiException` when an error body isn't in the expected shape. Here, unexpected error responses become a single `base` error that carries the raw body.
+- **A strong customer authentication 401 is never retried.** Upstream answers every 401 by re-authenticating and re-sending the request, up to three times. When the 401 is about SCA, that replays a one-time code, or asks the user for another one, on a request that has already failed. This fork throws `StrongCustomerAuthenticationException` instead, straight away. A 401 counts as SCA when the request carried `x-sca-token` or `x-sca-id`, or when the top-level `error_code`, an error message code or an error message text mentions SCA or strong customer authentication. The API's exact SCA 401 is undocumented, so the rule leans towards SCA. Every other 401 is still an `AuthenticationException` and still re-authenticates. Catch `ApiException` or both types if you handle 401s.
 - **`CloseAsync` always releases the `HttpClient`.** Upstream only disposes it when the close-session call succeeds, so closing an already-expired session leaked the `HttpClient` and its message handler. The API error is still thrown.
 
 ### Additions
 - **`Client(HttpMessageHandler)` constructor**, so requests can go through a custom handler, e.g. for logging or metrics. The client owns the handler and disposes it in `CloseAsync`, so create a new handler for each `Client`.
 - **`Payment.ReviewStatus`**, and a `ReviewStatus` search filter on `PaymentFindParameters`.
+- **`PaymentChargeSetting.ChargeType`** (`ours` or `shared`). The API returns one setting per charge type, and without it there was no way to tell which entry was which.
 - **`EmulateFundingAsync` / `DemoFunding`**, which emulate inbound funds in the Demo environment. The call throws against Production.
 
 ### Fixes
