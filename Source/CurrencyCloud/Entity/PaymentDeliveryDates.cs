@@ -8,7 +8,7 @@ namespace CurrencyCloud.Entity
         [JsonConstructor]
         public PaymentDeliveryDates() { }
 
-        public PaymentDeliveryDates(DateTime paymentDate, string paymentType, string currency, string bankCountry)
+        public PaymentDeliveryDates(DateOnly paymentDate, string paymentType, string currency, string bankCountry)
         {
             this.PaymentDate = paymentDate;
             this.PaymentType = paymentType;
@@ -17,7 +17,7 @@ namespace CurrencyCloud.Entity
         }
 
         [Param]
-        public DateTime? PaymentDate { get; set; }
+        public DateOnly? PaymentDate { get; set; }
 
         [Param]
         public string PaymentType { get; set; }
@@ -59,7 +59,7 @@ namespace CurrencyCloud.Entity
             var paymentDeliveryDates = obj as PaymentDeliveryDates;
 
             return PaymentDate == paymentDeliveryDates.PaymentDate &&
-                   PaymentDeliveryDate == paymentDeliveryDates.PaymentDate &&
+                   PaymentDeliveryDate == paymentDeliveryDates.PaymentDeliveryDate &&
                    PaymentCutoffTime == paymentDeliveryDates.PaymentCutoffTime &&
                    PaymentType == paymentDeliveryDates.PaymentType &&
                    Currency == paymentDeliveryDates.Currency &&

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using CurrencyCloud.Entity;
 
@@ -28,7 +28,7 @@ namespace CurrencyCloud.Tests.Mock.Data
                 BeneficiaryCity = "London",
                 BeneficiaryPostcode = "W11 2BQ",
                 BeneficiaryStateOrProvince = "TX",
-                BeneficiaryDateOfBirth = new DateTime(1990, 7, 20),
+                BeneficiaryDateOfBirth = new DateOnly(1990, 7, 20),
                 BeneficiaryIdentificationType = "none",
                 BusinessNature = "law",
                 CompanyWebsite = "test.com"
@@ -61,7 +61,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             BeneficiaryCity = "Hill Valley",
             BeneficiaryPostcode = "91331",
             BeneficiaryStateOrProvince = "CA",
-            BeneficiaryDateOfBirth = new DateTime(1968, 6, 9),
+            BeneficiaryDateOfBirth = new DateOnly(1968, 6, 9),
             BeneficiaryIdentificationType = "none"
         };
     }

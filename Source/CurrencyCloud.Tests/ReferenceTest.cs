@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using CurrencyCloud.Entity;
 using NUnit.Framework;
 using CurrencyCloud.Tests.Mock.Data;
@@ -49,7 +49,7 @@ namespace CurrencyCloud.Tests
         }
 
         /// <summary>
-        /// Successfully gets conversion dates.
+        /// Successfully gets conversion dates using the default (RoundtripKind) DateTime handling.
         /// </summary>
         [Test]
         public void GetConversionDates()
@@ -64,6 +64,42 @@ namespace CurrencyCloud.Tests
                 Assert.That(conversionDates.OptimizeLiquidityConversionDate, Is.EqualTo(DateTime.Parse("2020-11-12T00:00:00")));
                 Assert.That(conversionDates.InvalidConversionDates.Count, Is.EqualTo(241));
             });
+        }
+
+        /// <summary>
+        /// Successfully gets conversion dates with Serialization.DateTimeZoneHandling set to Utc, so API dates are
+        /// deserialized as UTC (Kind = Utc) rather than being converted to the machine's local time zone.
+        /// </summary>
+        [Test]
+        public void GetConversionDatesWithUtcHandling()
+        {
+            player.Play("GetConversionDatesWithUtcHandling");
+
+            // Opt into UTC deserialization for this test, then restore the default so other fixtures
+            // continue to see the SDK's historical (RoundtripKind) behaviour.
+            var previous = Serialization.DateTimeZoneHandling;
+            Serialization.DateTimeZoneHandling = Newtonsoft.Json.DateTimeZoneHandling.Utc;
+            try
+            {
+                Assert.DoesNotThrowAsync(async () => {
+                    ConversionDatesList conversionDates = await client.GetConversionDatesAsync("USDGBP");
+
+                    // With DateTimeZoneHandling.Utc, API dates come back as UTC (Kind = Utc), matching the
+                    // values the API returns, regardless of the machine's local time zone. DateTime.Equals
+                    // ignores Kind, so the explicit Kind asserts are what guard against a local-time regression.
+                    Assert.That(conversionDates.FirstConversionCutoffDatetime, Is.EqualTo(new DateTime(2020, 11, 10, 23, 19, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.FirstConversionCutoffDatetime.Kind, Is.EqualTo(DateTimeKind.Utc));
+                    Assert.That(conversionDates.FirstConversionDate, Is.EqualTo(new DateTime(2020, 11, 10, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.FirstConversionDate.Kind, Is.EqualTo(DateTimeKind.Utc));
+                    Assert.That(conversionDates.DefaultConversionDate, Is.EqualTo(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.OptimizeLiquidityConversionDate, Is.EqualTo(new DateTime(2020, 11, 12, 0, 0, 0, DateTimeKind.Utc)));
+                    Assert.That(conversionDates.InvalidConversionDates.Count, Is.EqualTo(241));
+                });
+            }
+            finally
+            {
+                Serialization.DateTimeZoneHandling = previous;
+            }
         }
 
         /// <summary>

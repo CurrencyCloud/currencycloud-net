@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using static CurrencyCloud.Extension.EnumerableExtensions;
 
 namespace CurrencyCloud.Entity
 {
@@ -120,7 +120,7 @@ namespace CurrencyCloud.Entity
         /// Beneficiary date of birth(company creation date when beneficiary_entity_type is company)
         ///</summary>
         [Param]
-        public DateTime? BeneficiaryDateOfBirth { get; set; }
+        public DateOnly? BeneficiaryDateOfBirth { get; set; }
 
         ///<summary>
         /// Type of the identification document. One of 'none', 'drivers_license', 'social_security_number', 'green_card', 'passport', 'visa', 'matricula_consular', 'registro_federal_de_contribuyentes', 'credential_de_elector', 'social_insurance_number', 'citizenship_papers', 'drivers_license_canadian', 'existing_credit_card_details', 'employer_identification_number', 'national_id', 'others' or 'incorporation_number'
@@ -300,8 +300,8 @@ namespace CurrencyCloud.Entity
                    BankAccountHolderName == beneficiary.BankAccountHolderName &&
                    Name == beneficiary.Name &&
                    Email == beneficiary.Email &&
-                   PaymentTypes.SequenceEqual(beneficiary.PaymentTypes) &&
-                   BeneficiaryAddress.SequenceEqual(beneficiary.BeneficiaryAddress) &&
+                   SequenceEquals(PaymentTypes, beneficiary.PaymentTypes) &&
+                   SequenceEquals(BeneficiaryAddress, beneficiary.BeneficiaryAddress) &&
                    BeneficiaryCountry == beneficiary.BeneficiaryCountry &&
                    BeneficiaryEntityType == beneficiary.BeneficiaryEntityType &&
                    BeneficiaryCompanyName == beneficiary.BeneficiaryCompanyName &&
@@ -326,7 +326,7 @@ namespace CurrencyCloud.Entity
                    Iban == beneficiary.Iban &&
                    DefaultBeneficiary == beneficiary.DefaultBeneficiary &&
                    CreatorContactId == beneficiary.CreatorContactId &&
-                   BankAddress.SequenceEqual(beneficiary.BankAddress) &&
+                   SequenceEquals(BankAddress, beneficiary.BankAddress) &&
                    CreatedAt == beneficiary.CreatedAt &&
                    UpdatedAt == beneficiary.UpdatedAt &&
                    CompanyWebsite == beneficiary.CompanyWebsite &&

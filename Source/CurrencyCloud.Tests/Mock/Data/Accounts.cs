@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace CurrencyCloud.Tests.Mock.Data
@@ -64,7 +64,7 @@ namespace CurrencyCloud.Tests.Mock.Data
             PhoneTrading = true,
             LegalEntitySubType = "limited_liability_company",
             IdentificationIssuer = "US",
-            IdentificationExpiration = new DateTime(2100, 2, 2)
+            IdentificationExpiration = new DateOnly(2100, 2, 2)
         };
 
 
@@ -82,7 +82,7 @@ namespace CurrencyCloud.Tests.Mock.Data
         {
             IndustryType = "some-type",
             CountryOfIncorporation = "US",
-            DateOfIncorporation = new DateTime(2020, 1, 30),
+            DateOfIncorporation = new DateOnly(2020, 1, 30),
             BusinessWebsiteUrl = "https://currencycloud.com",
             ExpectedTransactionCurrencies = new List<string> { "GBP" },
             ExpectedTransactionCountries = new List<string> { "US", "GB" },

@@ -33,10 +33,30 @@ namespace CurrencyCloud
     /// </summary>
     public class Client
     {
+        private string apiServerUrl;
         private HttpClient httpClient;
+        private readonly HttpMessageHandler httpMessageHandler;
         private Credentials credentials;
         private string onBehalfOf;
         private const string userAgent = "CurrencyCloudSDK/2.0 .NET/10.0.0";
+
+        /// <summary>
+        /// Initializes a new instance of the API client using the default HTTP message handler.
+        /// </summary>
+        public Client()
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the API client that sends its requests through the given
+        /// HTTP message handler (e.g. a DelegatingHandler for logging or metrics). The client takes
+        /// ownership of the handler: it is disposed together with the underlying HttpClient when
+        /// <see cref="CloseAsync"/> is called.
+        /// </summary>
+        /// <param name="httpMessageHandler">Handler the underlying HttpClient will send requests through.</param>
+        public Client(HttpMessageHandler httpMessageHandler)
+        {
+            this.httpMessageHandler = httpMessageHandler;
+        }
 
         internal string Token
         {
@@ -217,7 +237,9 @@ namespace CurrencyCloud
                     var serializerSettings = new JsonSerializerSettings
                     {
                         NullValueHandling = NullValueHandling.Ignore,
-                        ContractResolver = new PascalContractResolver()
+                        DateTimeZoneHandling = Serialization.DateTimeZoneHandling,
+                        ContractResolver = new PascalContractResolver(),
+                        Converters = { new DateOnlyConverter() }
                     };
 
                     var result = JsonConvert.DeserializeObject<TResult>(resString, serializerSettings);
@@ -251,6 +273,8 @@ namespace CurrencyCloud
                 }
                 catch (AuthenticationException)
                 {
+                    // A StrongCustomerAuthenticationException is deliberately not caught here: re-logging in and
+                    // re-sending would replay a one-time code, or ask for another one, on a request that already failed.
                     if (attempts == 3)
                     {
                         throw;
@@ -326,10 +350,14 @@ namespace CurrencyCloud
         /// <exception cref="ApiException">Thrown when API call fails.</exception>
         public async Task<string> InitializeAsync(ApiServer apiServer, string loginId, string apiKey)
         {
-            httpClient = new HttpClient();
+
+            httpClient = httpMessageHandler == null
+                ? new HttpClient()
+                : new HttpClient(httpMessageHandler);
             httpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
 
             httpClient.BaseAddress = new Uri(apiServer.Url);
+            apiServerUrl = apiServer.Url;
 
             credentials = new Credentials(loginId,apiKey);
 
@@ -349,17 +377,22 @@ namespace CurrencyCloud
                 throw new InvalidOperationException("Client is not initialized.");
             }
 
-            HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
-            if (res.IsSuccessStatusCode)
+            try
             {
+                HttpResponseMessage res = await httpClient.SendAsync(new HttpRequestMessage(HttpMethod.Post, "/v2/authenticate/close_session"));
+                if (!res.IsSuccessStatusCode)
+                {
+                    throw await ApiExceptionFactory.FromHttpResponse(res);
+                }
+            }
+            finally
+            {
+                // Reset even when closing the session fails (e.g. it has already expired), so the
+                // HttpClient and its message handler are never leaked.
                 credentials = null;
 
                 httpClient.Dispose();
                 httpClient = null;
-            }
-            else
-            {
-                throw await ApiExceptionFactory.FromHttpResponse(res);
             }
         }
 
@@ -834,7 +867,7 @@ namespace CurrencyCloud
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
             string id = conversionDateChange.ConversionId;
-            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+            DateOnly? newSettlementDate = conversionDateChange.NewSettlementDate;
 
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentException("Conversion Id cannot be null");
@@ -855,7 +888,7 @@ namespace CurrencyCloud
         {
             ParamsObject paramsObj = ParamsObject.CreateFromStaticObject(conversionDateChange);
             string id = conversionDateChange.ConversionId;
-            DateTime? newSettlementDate = conversionDateChange.NewSettlementDate;
+            DateOnly? newSettlementDate = conversionDateChange.NewSettlementDate;
 
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentException("Conversion Id cannot be null");
@@ -1759,6 +1792,29 @@ namespace CurrencyCloud
         }
 
         #endregion
+
+
+        #region Emulators
+
+        /// <summary>
+        /// Triggers a production-like flow for processing funds, topping up CM balance or rejecting the transaction without topping up CM balance.
+        /// This resource is only available in the Currencycloud Demo environment; it is not implemented in the Production environment.
+        /// </summary>
+        /// <param name="demoFunding">Demo Funding object to be created</param>
+        /// <returns>Asynchronous task, which returns newly created inbound funds.</returns>
+        /// <exception cref="InvalidOperationException">Thrown when client is not initialized.</exception>
+        /// <exception cref="ApiException">Thrown when API call fails.</exception>
+        public async Task<DemoFunding> EmulateFundingAsync(DemoFunding demoFunding)
+        {
+            if (apiServerUrl == ApiServer.Production.Url)
+                throw new InvalidOperationException("EmulateFundingAsync is not available in the production environment.");
+
+            var paramsObj = ParamsObject.CreateFromStaticObject(demoFunding);
+
+            return await RequestAsync<DemoFunding>("/v2/demo/funding/create", HttpMethod.Post, paramsObj);
+        }
+
+        #endregion
     }
 
 
@@ -1804,22 +1860,103 @@ namespace CurrencyCloud
         {
             string errorString = await content.ReadAsStringAsync();
 
-            JObject errorObject = JObject.Parse(errorString);
+            try
+            {
+                JObject errorObject = JObject.Parse(errorString);
 
-            var errors = from JProperty error in errorObject["error_messages"]
-                select new Error(error.Name,
-                    error.Value is JArray ? (from errorMessage in error.Value
-                            select new Error.ErrorMessage(errorMessage["code"].Value<string>(),
-                                errorMessage["message"].Value<string>(),
-                                (from JProperty param in errorMessage["params"]
-                                    select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
-                                .ToDictionary(x => x.Key, x => x.Value)))
-                        .ToList() : new List<Error.ErrorMessage>(){new Error.ErrorMessage(error.Value["code"].Value<string>(),
-                            error.Value["message"].Value<string>(), (from JProperty param in error.Value["params"]
-                                select new KeyValuePair<string, string>(param.Name, param.Value.ToString()))
-                            .ToDictionary(x => x.Key, x => x.Value))}
-                );
-            return errors.ToList();
+                JObject errorMessages = errorObject["error_messages"] as JObject;
+
+                if (errorMessages == null)
+                {
+                    return FallbackErrors(errorObject.Value<string>("error_code"), errorString);
+                }
+
+                var errors = from error in errorMessages.Properties()
+                             select new Error(error.Name,
+                                 (error.Value is JArray ? (IEnumerable<JToken>)error.Value : new[] { error.Value })
+                                 .Select(CreateErrorMessage)
+                                 .ToList());
+
+                return errors.ToList();
+            }
+            catch (System.Exception)
+            {
+                return FallbackErrors(null, errorString);
+            }
+        }
+
+        private static Error.ErrorMessage CreateErrorMessage(JToken message)
+        {
+            JObject messageObject = message as JObject;
+
+            if (messageObject == null)
+            {
+                return new Error.ErrorMessage(null, message?.ToString(), new Dictionary<string, string>());
+            }
+
+            JObject paramsObject = messageObject["params"] as JObject;
+
+            var parameters = paramsObject == null
+                ? new Dictionary<string, string>()
+                : paramsObject.Properties().ToDictionary(x => x.Name, x => x.Value.ToString());
+
+            return new Error.ErrorMessage(messageObject.Value<string>("code"),
+                                          messageObject.Value<string>("message"),
+                                          parameters);
+        }
+
+        private static async Task<string> ReadErrorCode(HttpContent content)
+        {
+            try
+            {
+                return JObject.Parse(await content.ReadAsStringAsync()).Value<string>("error_code");
+            }
+            catch (System.Exception)
+            {
+                return null;
+            }
+        }
+
+        private static List<Error> FallbackErrors(string errorCode, string rawBody)
+        {
+            return new List<Error>
+            {
+                new Error("base", new List<Error.ErrorMessage>
+                {
+                    new Error.ErrorMessage(errorCode ?? "unparseable_error_response",
+                                           rawBody,
+                                           new Dictionary<string, string>())
+                })
+            };
+        }
+
+        private static readonly string[] ScaRequestHeaders = { "x-sca-token", "x-sca-id" };
+
+        private static readonly Regex ScaErrorCode = new Regex(@"(^|_)sca(_|$)|strong_customer_authentication", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        private static readonly Regex ScaErrorMessage = new Regex(@"\bsca\b|strong customer authentication", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+
+        /// <summary>
+        /// A 401 is treated as a strong customer authentication failure when the request carried an SCA header (a code
+        /// was offered, so the refusal is about it) or when the error says so. The exact shape of the API's SCA 401 is
+        /// not documented, so this errs towards SCA: a one-time code must never be re-sent after an automatic re-login.
+        /// </summary>
+        internal static bool IsStrongCustomerAuthenticationFailure(HttpRequestMessage request, string errorCode, List<Error> errors)
+        {
+            if (request != null && ScaRequestHeaders.Any(header => request.Headers.Contains(header)))
+            {
+                return true;
+            }
+
+            if (errorCode != null && ScaErrorCode.IsMatch(errorCode))
+            {
+                return true;
+            }
+
+            return (errors ?? new List<Error>())
+                .SelectMany(error => error.ErrorMessages ?? new List<Error.ErrorMessage>())
+                .Any(message => (message.Code != null && ScaErrorCode.IsMatch(message.Code))
+                             || (message.Message != null && ScaErrorMessage.IsMatch(message.Message)));
         }
 
         public static async Task<ApiException> FromHttpResponse(HttpResponseMessage res)
@@ -1833,7 +1970,9 @@ namespace CurrencyCloud
                 case 400:
                     return new BadRequestException(request, response, errors);
                 case 401:
-                    return new AuthenticationException(request, response, errors);
+                    return IsStrongCustomerAuthenticationFailure(res.RequestMessage, await ReadErrorCode(res.Content), errors)
+                        ? new StrongCustomerAuthenticationException(request, response, errors)
+                        : new AuthenticationException(request, response, errors);
                 case 403:
                     return new ForbiddenException(request, response, errors);
                 case 404:

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using CurrencyCloud.Entity;
@@ -257,7 +257,7 @@ namespace CurrencyCloud.Tests
         {
             player.Play("GetPaymentDeliveryDates");
 
-            var paymentDeliveryDates = new PaymentDeliveryDates(new DateTime(2018, 1, 1), "regular", "EUR", "IT");
+            var paymentDeliveryDates = new PaymentDeliveryDates(new DateOnly(2018, 1, 1), "regular", "EUR", "IT");
 
             PaymentDeliveryDates created = await client.GetPaymentDeliveryDatesAsync(paymentDeliveryDates);
 

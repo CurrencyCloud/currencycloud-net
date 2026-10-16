@@ -11,6 +11,7 @@ namespace CurrencyCloud.Entity.List
         {
             public string AccountId { get; set; }
             public string ChargeSettingsId { get; set; }
+            public string ChargeType { get; set; }
             public bool Enabled { get; set; }
             public bool Default { get; set; }
         }
