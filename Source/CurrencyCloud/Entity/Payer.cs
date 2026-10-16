@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace CurrencyCloud.Entity
@@ -120,7 +119,7 @@ namespace CurrencyCloud.Entity
                    CompanyName == payer.CompanyName &&
                    FirstName == payer.FirstName &&
                    LastName == payer.LastName &&
-                   Address.SequenceEqual(payer.Address) &&
+                   Address == payer.Address &&
                    City == payer.City &&
                    StateOrProvince == payer.StateOrProvince &&
                    IdentificationType == payer.IdentificationType &&

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
+using static CurrencyCloud.Extension.EnumerableExtensions;
 
 namespace CurrencyCloud.Entity
 {
@@ -53,9 +53,7 @@ namespace CurrencyCloud.Entity
                    CompletionTime == paymentTrackingInfo.CompletionTime &&
                    LastUpdateTime == paymentTrackingInfo.LastUpdateTime &&
                    Equals(TransactionStatus, paymentTrackingInfo.TransactionStatus) &&
-                   (PaymentEvents == paymentTrackingInfo.PaymentEvents ||
-                    (PaymentEvents != null && paymentTrackingInfo.PaymentEvents != null &&
-                     PaymentEvents.SequenceEqual(paymentTrackingInfo.PaymentEvents)));
+                   SequenceEquals(PaymentEvents, paymentTrackingInfo.PaymentEvents);
         }
 
         public override int GetHashCode()
@@ -127,7 +125,7 @@ namespace CurrencyCloud.Entity
             public AmountDef ConfirmedAmount { get; set; }
             public AmountDef InterbankSettlementAmount { get; set; }
             public DateTime? InterbankSettlementDate { get; set; }
-            public AmountDef ChargeAmount { get; set; }
+            public List<AmountDef> ChargeAmount { get; set; }
             public string ChargeType { get; set; }
             public ForeignExchangeDetailsDef ForeignExchangeDetails { get; set; }
             public DateTime? LastUpdateTime { get; set; }
@@ -184,7 +182,7 @@ namespace CurrencyCloud.Entity
                        Equals(ConfirmedAmount, paymentEvent.ConfirmedAmount) &&
                        Equals(InterbankSettlementAmount, paymentEvent.InterbankSettlementAmount) &&
                        InterbankSettlementDate == paymentEvent.InterbankSettlementDate &&
-                       Equals(ChargeAmount, paymentEvent.ChargeAmount) &&
+                       SequenceEquals(ChargeAmount, paymentEvent.ChargeAmount) &&
                        ChargeType == paymentEvent.ChargeType &&
                        Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
                        LastUpdateTime == paymentEvent.LastUpdateTime;
@@ -207,7 +205,7 @@ namespace CurrencyCloud.Entity
                     ConfirmedAmount,
                     InterbankSettlementAmount,
                     InterbankSettlementDate,
-                    ChargeAmount,
+                    ChargeAmount?.Count,
                     ChargeType,
                     ForeignExchangeDetails,
                     LastUpdateTime
@@ -327,7 +325,7 @@ namespace CurrencyCloud.Entity
             
             public string SourceCurrency { get; set; }
             public string TargetCurrency { get; set; }
-            public decimal? Rate { get; set; }
+            public decimal? ExchangeRate { get; set; }
             
             public string ToJSON()
             {
@@ -337,7 +335,7 @@ namespace CurrencyCloud.Entity
                     {
                         SourceCurrency,
                         TargetCurrency,
-                        Rate
+                        ExchangeRate
                     }
                 };
                 return JsonConvert.SerializeObject(obj);
@@ -354,12 +352,12 @@ namespace CurrencyCloud.Entity
 
                 return SourceCurrency == amount.SourceCurrency &&
                        TargetCurrency == amount.TargetCurrency &&
-                       Rate == amount.Rate;
+                       ExchangeRate == amount.ExchangeRate;
             }
             
             public override int GetHashCode()
             {
-                return (SourceCurrency, TargetCurrency, Rate).GetHashCode();
+                return (SourceCurrency, TargetCurrency, ExchangeRate).GetHashCode();
             }
             
         }

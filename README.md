@@ -24,6 +24,8 @@ Fork releases are versioned `<upstream base>-flowbrite.<n>` (e.g. `10.0.0-flowbr
   - `Quote.ConversionDate`
 
   The `ConversionDateChange` and `PaymentDeliveryDates` constructors take a `DateOnly` too.
+- **`PaymentTrackingInfo.PaymentEvent.ChargeAmount` is a `List<AmountDef>`.** The API sends `charge_amount` as a list (`[]` when nothing was charged), so upstream's single `AmountDef` failed to read any real `tracking_info` response.
+- **`PaymentTrackingInfo.ForeignExchangeDetailsDef.Rate` is `ExchangeRate`.** The API's field is `exchange_rate`, so `Rate` was never filled. An empty `exchange_rate` (no exchange) reads as null.
 
   These are sent as `yyyy-MM-dd`. When reading responses, the API sometimes sends these fields as timestamps (e.g. `conversion_date` comes back as `"2026-06-04T00:00:00+00:00"`), so `DateOnlyConverter` reads them as their UTC date. Json.NET cannot read a timestamp into a `DateOnly` by itself.
 
@@ -32,6 +34,7 @@ Fork releases are versioned `<upstream base>-flowbrite.<n>` (e.g. `10.0.0-flowbr
 - **Optional UTC deserialization.** `Serialization.DateTimeZoneHandling` can be set to `DateTimeZoneHandling.Utc` so returned `DateTime` values are UTC, not converted to the machine's local time zone. The default matches upstream. See [DateTime Handling](#datetime-handling).
 - **Tolerant error parsing.** Upstream throws while building the `ApiException` when an error body isn't in the expected shape. Here, unexpected error responses become a single `base` error that carries the raw body.
 - **A strong customer authentication 401 is never retried.** Upstream answers every 401 by re-authenticating and re-sending the request, up to three times. When the 401 is about SCA, that replays a one-time code, or asks the user for another one, on a request that has already failed. This fork throws `StrongCustomerAuthenticationException` instead, straight away. A 401 counts as SCA when the request carried `x-sca-token` or `x-sca-id`, or when the top-level `error_code`, an error message code or an error message text mentions SCA or strong customer authentication. The API's exact SCA 401 is undocumented, so the rule leans towards SCA. Every other 401 is still an `AuthenticationException` and still re-authenticates. Catch `ApiException` or both types if you handle 401s.
+- **Entity `Equals` compares lists null-safely.** Upstream's `Equals` on `Beneficiary`, `Conversion` and `SettlementAccount` called `SequenceEqual` on list properties, and `Payer`'s on its `Address` string, which throws `ArgumentNullException` when either side is null. Here two null lists are equal and one null list is not: they and `PaymentTrackingInfo` compare lists through `EnumerableExtensions.SequenceEquals`, and `Payer` compares `Address` with `==`.
 - **`CloseAsync` always releases the `HttpClient`.** Upstream only disposes it when the close-session call succeeds, so closing an already-expired session leaked the `HttpClient` and its message handler. The API error is still thrown.
 
 ### Additions

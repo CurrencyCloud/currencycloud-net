@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using static CurrencyCloud.Extension.EnumerableExtensions;
 
 namespace CurrencyCloud.Entity
 {
@@ -223,7 +223,7 @@ namespace CurrencyCloud.Entity
                    DepositCurrency == conversion.DepositCurrency &&
                    DepositStatus == conversion.DepositStatus &&
                    DepositRequiredAt == conversion.DepositRequiredAt &&
-                   PaymentIds.SequenceEqual(conversion.PaymentIds) &&
+                   SequenceEquals(PaymentIds, conversion.PaymentIds) &&
                    CreatedAt == conversion.CreatedAt &&
                    UpdatedAt == conversion.UpdatedAt &&
                    UniqueRequestId == conversion.UniqueRequestId &&

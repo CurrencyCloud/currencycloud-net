@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
+using static CurrencyCloud.Extension.EnumerableExtensions;
 
 namespace CurrencyCloud.Entity
 {
@@ -300,8 +300,8 @@ namespace CurrencyCloud.Entity
                    BankAccountHolderName == beneficiary.BankAccountHolderName &&
                    Name == beneficiary.Name &&
                    Email == beneficiary.Email &&
-                   PaymentTypes.SequenceEqual(beneficiary.PaymentTypes) &&
-                   BeneficiaryAddress.SequenceEqual(beneficiary.BeneficiaryAddress) &&
+                   SequenceEquals(PaymentTypes, beneficiary.PaymentTypes) &&
+                   SequenceEquals(BeneficiaryAddress, beneficiary.BeneficiaryAddress) &&
                    BeneficiaryCountry == beneficiary.BeneficiaryCountry &&
                    BeneficiaryEntityType == beneficiary.BeneficiaryEntityType &&
                    BeneficiaryCompanyName == beneficiary.BeneficiaryCompanyName &&
@@ -326,7 +326,7 @@ namespace CurrencyCloud.Entity
                    Iban == beneficiary.Iban &&
                    DefaultBeneficiary == beneficiary.DefaultBeneficiary &&
                    CreatorContactId == beneficiary.CreatorContactId &&
-                   BankAddress.SequenceEqual(beneficiary.BankAddress) &&
+                   SequenceEquals(BankAddress, beneficiary.BankAddress) &&
                    CreatedAt == beneficiary.CreatedAt &&
                    UpdatedAt == beneficiary.UpdatedAt &&
                    CompanyWebsite == beneficiary.CompanyWebsite &&

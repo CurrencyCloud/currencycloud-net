@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
+using static CurrencyCloud.Extension.EnumerableExtensions;
 
 namespace CurrencyCloud.Entity
 {
@@ -75,10 +75,10 @@ namespace CurrencyCloud.Entity
             var settlementAccount = obj as SettlementAccount;
 
             return BankAccountHolderName == settlementAccount.BankAccountHolderName &&
-                   BeneficiaryAddress.SequenceEqual(settlementAccount.BeneficiaryAddress) &&
+                   SequenceEquals(BeneficiaryAddress, settlementAccount.BeneficiaryAddress) &&
                    BeneficiaryCountry == settlementAccount.BeneficiaryCountry &&
                    BankName == settlementAccount.BankName &&
-                   BankAddress.SequenceEqual(settlementAccount.BankAddress) &&
+                   SequenceEquals(BankAddress, settlementAccount.BankAddress) &&
                    BankCountry == settlementAccount.BankCountry &&
                    Currency == settlementAccount.Currency &&
                    BicSwift == settlementAccount.BicSwift &&
