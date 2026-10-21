@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using System.Net.Http;
+using System.Reflection;
 using CurrencyCloud.Extension;
 
 namespace CurrencyCloud
@@ -53,23 +54,19 @@ namespace CurrencyCloud
             ParamsObject ret = new ParamsObject();
             foreach (var p in t.GetProperties())
             {
-                var r = Attribute.IsDefined(p, typeof(ParamAttribute));
-                if (!r)
+                var paramAttribute = p.GetCustomAttribute<ParamAttribute>();
+                if (paramAttribute == null)
                     continue;
 
                 object propValue = p.GetValue(obj);
                 if (propValue != null)
                 {
-                    if (propValue.GetType() == typeof(List<string>))
+                    var strings = propValue as IEnumerable<string>;
+                    if (strings != null && !(propValue is string) && !(propValue is Array))
                     {
-                        string newValue = "";
-                        foreach (object item in (IList)propValue)
-                        {
-                            if (newValue.Length > 0)
-                                newValue += " \r\n";
-                            newValue += item.ToString();
-                        }
-                        propValue = newValue;
+                        propValue = paramAttribute.JoinLines
+                            ? (object)string.Join(" \r\n", strings)
+                            : strings.ToArray();
                     }
                     ret.Add(p.Name, propValue);
                 }
