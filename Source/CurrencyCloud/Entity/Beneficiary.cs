@@ -65,7 +65,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Address of beneficiary
         ///</summary>
-        [Param]
+        [Param(JoinLines = true)]
         public List<string> BeneficiaryAddress { get; set; }
 
         ///<summary>
@@ -233,7 +233,7 @@ namespace CurrencyCloud.Entity
         ///<summary>
         /// Address of the bank
         ///</summary>
-        [Param]
+        [Param(JoinLines = true)]
         public List<string> BankAddress { get; set; }
 
         public DateTime? CreatedAt { get; set; }
