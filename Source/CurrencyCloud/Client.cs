@@ -36,7 +36,7 @@ namespace CurrencyCloud
         private HttpClient httpClient;
         private Credentials credentials;
         private string onBehalfOf;
-        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/10.0.1";
+        private const string userAgent = "CurrencyCloudSDK/2.0 .NET/10.1.0";
 
         internal string Token
         {

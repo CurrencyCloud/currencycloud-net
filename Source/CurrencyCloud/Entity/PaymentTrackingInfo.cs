@@ -130,8 +130,9 @@ namespace CurrencyCloud.Entity
             public AmountDef ChargeAmount { get; set; }
             public string ChargeType { get; set; }
             public ForeignExchangeDetailsDef ForeignExchangeDetails { get; set; }
+            public string InstructionIdentification { get; set; }
             public DateTime? LastUpdateTime { get; set; }
-            
+
             public string ToJSON()
             {
                 var obj = new[]
@@ -155,12 +156,13 @@ namespace CurrencyCloud.Entity
                         ChargeAmount,
                         ChargeType,
                         ForeignExchangeDetails,
+                        InstructionIdentification,
                         LastUpdateTime
                     }
                 };
                 return JsonConvert.SerializeObject(obj);
             }
-            
+
             public override bool Equals(object obj)
             {
                 if (!(obj is PaymentEvent))
@@ -187,9 +189,10 @@ namespace CurrencyCloud.Entity
                        Equals(ChargeAmount, paymentEvent.ChargeAmount) &&
                        ChargeType == paymentEvent.ChargeType &&
                        Equals(ForeignExchangeDetails, paymentEvent.ForeignExchangeDetails) &&
+                       InstructionIdentification == paymentEvent.InstructionIdentification &&
                        LastUpdateTime == paymentEvent.LastUpdateTime;
             }
-            
+
             public override int GetHashCode()
             {
                 return (
@@ -210,6 +213,7 @@ namespace CurrencyCloud.Entity
                     ChargeAmount,
                     ChargeType,
                     ForeignExchangeDetails,
+                    InstructionIdentification,
                     LastUpdateTime
                 ).GetHashCode();
             }
