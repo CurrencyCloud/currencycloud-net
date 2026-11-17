@@ -317,6 +317,8 @@ namespace CurrencyCloud.Tests
             PaymentTrackingInfo received = await client.GetPaymentTrackingInfoAsync(trackingInfo1.Uetr);
             Assert.That(received.ToJSON, Is.EqualTo(trackingInfo1.ToJSON()));
             Assert.That(received, Is.EqualTo(trackingInfo1));
+            Assert.That(received.PaymentEvents[0].InstructionIdentification, Is.EqualTo("ABC123"));
+            Assert.That(received.PaymentEvents[1].InstructionIdentification, Is.Null);
         }
 
         /// <summary>

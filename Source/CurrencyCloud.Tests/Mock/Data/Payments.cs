@@ -148,6 +148,7 @@ namespace CurrencyCloud.Tests.Mock.Data
                         From = "BANABEBBXXX",
                         To = "BANAUS33XXX",
                         SenderAcknowledgementReceipt = DateTime.Parse("2019-07-10T15:39:08+00:00"),
+                        InstructionIdentification = "ABC123",
                         LastUpdateTime =  DateTime.Parse("2019-07-10T15:39:08+00:00")
                     },
                     new PaymentTrackingInfo.PaymentEvent(){ TrackerEventType = "customer_credit_transfer_payment_cancellation_request",
